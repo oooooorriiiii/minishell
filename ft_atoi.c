@@ -6,9 +6,11 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:46:07 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/20 00:32:53 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/23 01:16:01 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int		ft_atoi(const char *nptr)
 {
@@ -29,10 +31,11 @@ int		ft_atoi(const char *nptr)
 	}
 	else if (*s == '+')
 		s++;
-	while (*s++ != '\0')
+	while ((*s >= '0' && *s <= '9') && *s != '\0')
 	{
 		out *= 10;
 		out += *s - '0';
+		s++;
 	}
-	return (neg ? out : -out);
+	return (neg ? -out : out);
 }
