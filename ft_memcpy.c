@@ -6,22 +6,22 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 23:05:32 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/20 00:21:33 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/25 16:33:30 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst0, const void *src0, size_t n)
-{
-	char		*dst;
-	const char	*src;
+#include "libft.h"
 
-	dst = (char *)dst0;
-	src = (const char *)src0;
-	while (n-- > 0)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	return (dst0);
+void	*ft_memcpy(void *d, const void *s, size_t length)
+{
+	unsigned char		*dst;
+	const unsigned char	*src;
+
+	dst = (unsigned char *)d;
+	src = (const unsigned char *)s;
+	if (length == 0 || d == s)
+		return (d);
+	while (length-- > 0)
+		*dst++ = *src++;
+	return (d);
 }
