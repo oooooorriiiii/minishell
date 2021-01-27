@@ -6,7 +6,7 @@
 #    By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 00:46:37 by ymori             #+#    #+#              #
-#    Updated: 2021/01/25 23:48:19 by ymori            ###   ########.fr        #
+#    Updated: 2021/01/27 21:22:04 by ymori            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,10 @@ SRCS =	ft_atoi.c	\
 		ft_toupper.c	\
 		ft_substr.c		\
 		ft_strjoin.c	\
-		ft_strmapi.c	\
+		ft_strtrim.c	\
+		ft_split.c	\
 		ft_itoa.c		\
+		ft_strmapi.c	\
 		ft_putchar_fd.c	\
 		ft_putstr_fd.c	\
 		ft_putendl_fd.c	\

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:46:07 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/23 01:16:01 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 01:54:31 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int		ft_atoi(const char *nptr)
 {
 	const char	*s;
-	long	out;
-	int		neg;
+	long		out;
+	int			neg;
 
 	s = nptr;
 	out = 0;

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:41:25 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/25 19:57:02 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 17:50:30 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s_i;
 	size_t	p_i;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	p_i = 0;
 	s_i = 0;
 	p = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);

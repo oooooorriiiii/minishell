@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 03:13:02 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/24 14:11:19 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 02:00:50 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ size_t	ft_strlcat(char *d, const char *s, size_t max_dstsize)
 	while (*src != '\0')
 	{
 		if (cnt_tmp > 1)
-			{
-				*dst++ = *src;
-				cnt_tmp--;
-			}
-			src++;
+		{
+			*dst++ = *src;
+			cnt_tmp--;
+		}
+		src++;
 	}
 	*dst = '\0';
 	return (dstlen + (src - s));

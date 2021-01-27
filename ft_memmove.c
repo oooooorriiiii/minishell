@@ -6,13 +6,13 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 00:08:31 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/24 02:54:48 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 01:57:47 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove (void *dst0, void const *src0, size_t length)
+void	*ft_memmove(void *dst0, void const *src0, size_t length)
 {
 	char		*dst;
 	char const	*src;

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:20:28 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/25 19:39:48 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 17:51:32 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	s_i;
 	size_t	p_i;
 
+	if (s == NULL)
+		return (NULL);
 	s_i = start;
 	p_i = 0;
 	p = (char *)malloc(len + 1);

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:55:24 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/25 00:42:46 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 02:02:30 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_strrchr(const char *s, int c)
 	i = 0;
 	if (c == '\0')
 	{
-		while (s[i] != '\0') i++;
+		while (s[i] != '\0')
+			i++;
 		return ((char *)&s[i]);
 	}
 	while (s[i] != '\0')

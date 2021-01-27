@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 22:14:12 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/25 22:24:44 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/27 17:57:59 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	i;
 
+	if (s == NULL)
+		return ;
 	i = 0;
 	while (s[i] != '\0')
 	{
