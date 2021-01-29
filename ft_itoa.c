@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 23:33:36 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/26 13:49:38 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/29 00:44:57 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_itoa(int n)
 	d = (long)n;
 	re_tmp_push(tmp, d);
 	tmp_len = ft_strlen(tmp);
-	p = (char *)malloc(tmp_len + 1);
+	p = (char *)malloc((tmp_len + 1) * sizeof(char));
 	if (p == NULL)
 		return (NULL);
 	i = 0;

@@ -6,17 +6,17 @@
 #    By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 00:46:37 by ymori             #+#    #+#              #
-#    Updated: 2021/01/27 21:22:04 by ymori            ###   ########.fr        #
+#    Updated: 2021/01/29 00:54:32 by ymori            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-LIBS = ar r
+LIBS = ar rcs
 NAME = libft.a
-SRCS =	ft_atoi.c	\
-		ft_bzero.c	\
-		ft_calloc.c	\
+SRCS =	ft_atoi.c		\
+		ft_bzero.c		\
+		ft_calloc.c		\
 		ft_isalnum.c	\
 		ft_isalpha.c	\
 		ft_isascii.c	\
@@ -41,7 +41,7 @@ SRCS =	ft_atoi.c	\
 		ft_substr.c		\
 		ft_strjoin.c	\
 		ft_strtrim.c	\
-		ft_split.c	\
+		ft_split.c		\
 		ft_itoa.c		\
 		ft_strmapi.c	\
 		ft_putchar_fd.c	\
@@ -53,7 +53,7 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar r $@ $^
+	$(LIBS) $@ $^
 
 $(OBJS): $(SRCS)
 

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 14:46:15 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 17:55:15 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/28 22:06:07 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
-	if (dst == NULL || src == NULL)
+	if (src == NULL)
 		return (0);
 	if (dstsize <= 0)
 		return (ft_strlen(src));

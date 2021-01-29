@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:57:38 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 17:19:58 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/29 00:52:09 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (is_element(s1[tail_i - 1], set) && head_i < tail_i)
 		tail_i--;
 	p_len = tail_i - head_i;
-	p = (char *)malloc(p_len + 1);
+	p = (char *)malloc((p_len + 1) * sizeof(char));
 	if (p == NULL)
 		return (NULL);
 	while (p_i < p_len)

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:41:25 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 17:50:30 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/29 00:47:51 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	p_i = 0;
 	s_i = 0;
-	p = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	p = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (p == NULL)
 		return (NULL);
 	while (s1[s_i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:16:31 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 02:01:50 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/28 23:00:29 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t length)
 		while (haystack[h_i + n_i] != '\0' && \
 				haystack[h_i + n_i] == needle[n_i] && h_i + n_i < length)
 		{
+			// n_i + 1
 			if (needle[n_i + 1] == '\0')
 				return ((char *)&haystack[h_i]);
 			n_i++;

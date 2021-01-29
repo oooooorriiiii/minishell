@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 18:02:41 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 21:48:12 by ymori            ###   ########.fr       */
+/*   Updated: 2021/01/29 00:46:47 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ char	**ft_split(char const *s, char c)
 	p_i = 0;
 	while (s[s_i] != '\0')
 	{
-		while (s[s_i] == c && s[s_i] != '\0')
+		while (s[s_i] == c)
 			s_i++;
-		word_head = s_i;
 		if (s[s_i] == '\0')
 			break ;
+		word_head = s_i;
 		while (s[s_i] != c && s[s_i] != '\0')
 			s_i++;
-		p[p_i] = (char *)malloc(s_i - word_head + 1);
+		p[p_i] = (char *)malloc((s_i - word_head + 1) * sizeof(char));
 		fill_word(p[p_i++], s, word_head, s_i);
 	}
 	p[p_i] = NULL;
