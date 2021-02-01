@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 20:43:38 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/01 17:01:57 by ymori            ###   ########.fr       */
+/*   Created: 2021/01/29 21:16:42 by ymori             #+#    #+#             */
+/*   Updated: 2021/02/02 01:54:29 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char	*c;
-	size_t	i;
-	size_t	max;
-
-	c = (char *)s;
-	i = 0;
-	max = n;
-	while (i < max)
-	{
-		c[i] = '\0';
-		i++;
-	}
+	if (lst == NULL || new == NULL)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

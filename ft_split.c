@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 18:02:41 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/29 00:46:47 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/02 02:13:02 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ char	**ft_split(char const *s, char c)
 	size_t	p_i;
 	size_t	word_head;
 
-	p = (char **)malloc((count_words(s, c) + 1) * sizeof(char*));
-	if (p == NULL)
+	if (s == NULL)
+		return (NULL);
+	if (!(p = (char **)malloc((count_words(s, c) + 1) * sizeof(char*))))
 		return (NULL);
 	s_i = 0;
 	p_i = 0;
