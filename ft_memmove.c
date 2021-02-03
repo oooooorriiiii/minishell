@@ -6,19 +6,19 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 00:08:31 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 01:57:47 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/03 21:28:17 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst0, void const *src0, size_t length)
+void	*ft_memmove(void *d, void const *s, size_t length)
 {
 	char		*dst;
 	char const	*src;
 
-	dst = (char *)dst0;
-	src = (const char *)src0;
+	dst = (char *)d;
+	src = (const char *)s;
 	if (src < dst)
 	{
 		src += length;
@@ -31,5 +31,5 @@ void	*ft_memmove(void *dst0, void const *src0, size_t length)
 		while (length-- > 0)
 			*dst++ = *src++;
 	}
-	return (dst0);
+	return (d);
 }
