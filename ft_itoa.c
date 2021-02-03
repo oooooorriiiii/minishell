@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 23:33:36 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/03 17:47:54 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/03 18:13:42 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*re_tmp_push(char *tmp, long d)
 	return (tmp);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	long	d;
 	char	*p;
