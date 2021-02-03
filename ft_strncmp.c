@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:29:07 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/27 02:01:36 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/03 17:50:43 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char us1;
-	unsigned char us2;
+	unsigned char	us1;
+	unsigned char	us2;
 
 	while ((*s1 != '\0' || *s2 != '\0') && n > 0)
 	{

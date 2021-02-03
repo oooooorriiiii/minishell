@@ -6,13 +6,13 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 22:28:10 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/29 16:20:12 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/03 17:49:21 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_nbr_printer(unsigned int un, int fd)
+static void	ft_nbr_printer(unsigned int un, int fd)
 {
 	if (un < 10)
 		ft_putchar_fd(un + '0', fd);
@@ -23,7 +23,7 @@ void	ft_nbr_printer(unsigned int un, int fd)
 	}
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void		ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	un;
 

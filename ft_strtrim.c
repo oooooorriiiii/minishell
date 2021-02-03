@@ -6,13 +6,13 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 19:57:38 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/29 00:52:09 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/03 17:51:21 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		is_element(char c, const char *set)
+static int		is_element(char c, const char *set)
 {
 	while (*set != '\0')
 	{
@@ -22,7 +22,7 @@ int		is_element(char c, const char *set)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char			*ft_strtrim(char const *s1, char const *set)
 {
 	char	*p;
 	size_t	head_i;

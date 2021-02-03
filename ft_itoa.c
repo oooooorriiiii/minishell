@@ -6,13 +6,13 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 23:33:36 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/29 00:44:57 by ymori            ###   ########.fr       */
+/*   Updated: 2021/02/03 17:47:54 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*re_tmp_push(char *tmp, long d)
+static char	*re_tmp_push(char *tmp, long d)
 {
 	int		neg;
 	int		i;
