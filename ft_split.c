@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 18:02:41 by ymori             #+#    #+#             */
-/*   Updated: 2021/05/02 13:37:07 by ymori            ###   ########.fr       */
+/*   Updated: 2021/05/02 14:19:31 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,12 @@ static void	fill_word(char *p, char const *s, size_t head, size_t tail)
 	p[i] = '\0';
 }
 
-char	**ft_split(char const *s, char c)
+static char **set_str(char **p, char const *s, char c)
 {
-	char	**p;
-	size_t	s_i;
-	size_t	p_i;
-	size_t	word_head;
+	size_t s_i;
+	size_t p_i;
+	size_t word_head;
 
-	if (s == NULL)
-		return (NULL);
-	if (!(p = (char **)malloc((count_words(s, c) + 1) * sizeof(char*))))
-		return (NULL);
 	s_i = 0;
 	p_i = 0;
 	while (s[s_i] != '\0')
@@ -67,4 +62,16 @@ char	**ft_split(char const *s, char c)
 	}
 	p[p_i] = NULL;
 	return (&p[0]);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**p;
+
+	if (s == NULL)
+		return (NULL);
+	p = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!p)
+		return (NULL);
+	return (set_str(p, s, c));
 }
