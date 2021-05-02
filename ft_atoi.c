@@ -6,13 +6,13 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:46:07 by ymori             #+#    #+#             */
-/*   Updated: 2021/01/29 00:43:51 by ymori            ###   ########.fr       */
+/*   Updated: 2021/05/02 13:49:14 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	const char	*s;
 	long		out;
@@ -34,8 +34,9 @@ int		ft_atoi(const char *nptr)
 	while ((*s >= '0' && *s <= '9') && *s != '\0')
 	{
 		out *= 10;
-		out += *s - '0';
-		s++;
+		out += *s++ - '0';
 	}
-	return (neg ? -out : out);
+	if (neg)
+		return (-out);
+	return (out);
 }

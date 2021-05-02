@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 18:02:41 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/03 17:50:09 by ymori            ###   ########.fr       */
+/*   Updated: 2021/05/02 13:37:07 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static size_t	count_words(char const *s, char c)
 	return (word_i);
 }
 
-static void		fill_word(char *p, char const *s, size_t head, size_t tail)
+static void	fill_word(char *p, char const *s, size_t head, size_t tail)
 {
 	size_t	i;
 
@@ -40,7 +40,7 @@ static void		fill_word(char *p, char const *s, size_t head, size_t tail)
 	p[i] = '\0';
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**p;
 	size_t	s_i;
