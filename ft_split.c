@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 18:02:41 by ymori             #+#    #+#             */
-/*   Updated: 2021/05/02 14:19:31 by ymori            ###   ########.fr       */
+/*   Updated: 2021/05/02 14:36:31 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static void	fill_word(char *p, char const *s, size_t head, size_t tail)
 	p[i] = '\0';
 }
 
-static char **set_str(char **p, char const *s, char c)
+static char	**set_str(char **p, char const *s, char c)
 {
-	size_t s_i;
-	size_t p_i;
-	size_t word_head;
+	size_t	s_i;
+	size_t	p_i;
+	size_t	word_head;
 
 	s_i = 0;
 	p_i = 0;
