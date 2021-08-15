@@ -12,7 +12,9 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <limits.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include <unistd.h>
 
 int				ft_atoi(const char *nptr);
@@ -31,7 +33,7 @@ size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *d, const char *s, size_t max_dstsize);
 size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*ft_strnstr(const char *haystack, const char *needle,
+char			*ft_strnstr(const char *haystack, const char *needle, \
 							size_t length);
 int				ft_isalpha(int c);
 int				ft_isalnum(int c);
@@ -50,7 +52,7 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -63,6 +65,7 @@ void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
 							void (*del)(void *));
+int				get_next_line(int fd, char **line);
 #endif
