@@ -35,7 +35,7 @@ size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *haystack, const char *needle, \
 							size_t length);
-void			str_free(char **p);
+void			ft_strfree(char **p);
 int				ft_isalpha(int c);
 int				ft_isalnum(int c);
 int				ft_isdigit(int c);

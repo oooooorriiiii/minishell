@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	str_free(char **p)
+void	ft_strfree(char **p)
 {
 	if (p != NULL && *p != NULL)
 	{

@@ -16,12 +16,12 @@ static int	set_up_line(ssize_t read_size, char **loaded_str, \
 		free(loaded_str[fd]);
 		loaded_str[fd] = tmp;
 		if (loaded_str[fd][0] == '\0')
-			str_free(&loaded_str[fd]);
+			ft_strfree(&loaded_str[fd]);
 	}
 	else
 	{
 		*line = ft_strdup(loaded_str[fd]);
-		str_free(&loaded_str[fd]);
+		ft_strfree(&loaded_str[fd]);
 		if (read_size == 0 && loaded_str[fd] == NULL)
 			return (0);
 	}
