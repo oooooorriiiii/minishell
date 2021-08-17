@@ -1,14 +1,5 @@
 #include "get_next_line.h"
 
-void	str_free(char **p)
-{
-	if (p != NULL && *p != NULL)
-	{
-		free(*p);
-		*p = NULL;
-	}
-}
-
 static int	set_up_line(ssize_t read_size, char **loaded_str, \
 						char **line, int fd)
 {
