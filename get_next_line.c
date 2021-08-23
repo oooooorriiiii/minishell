@@ -34,7 +34,10 @@ static int	end_process(ssize_t read_size, char **loaded_str, \
 	if (read_size < 0)
 		return (-1);
 	else if (read_size == 0 && loaded_str[fd] == NULL)
+	{
+		*line = ft_strdup("");
 		return (0);
+	}
 	else
 		return (set_up_line(read_size, loaded_str, line, fd));
 }
