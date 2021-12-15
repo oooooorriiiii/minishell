@@ -50,4 +50,4 @@ jobs:
           python3 -m pip install norminette==3.3.2
           
       - name: Run Norminette.
-        run:  make norm
+        run: norminette $(find . -type d -name test -prune -o -type f -regextype posix-basic -regex ".*\.\(c\|h\)" -print)
