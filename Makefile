@@ -1,22 +1,31 @@
-NAME	=	a.out
+NAME	=	minishell
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 
-SRCSDER		=	.
-INCLUDES	=	.
-TEST		=	test_main.c
-SRCS		=	main.c $(TEST)
+SRCS_DIR		=	srcs
+INCLUDES_DIR	=	-Iincludes \
+					-Ilibft
+
+INCLUDES	=	$(INCLUDES_DIR)
+SRCS		=	$(SRCS_DIR)/main.c
+
 OBJS		=	$(SRCS:.c=.o)
+
+LIBFT_DIR			=	libft
+LIBFT				=	$(LIBFT_DIR)/libft.a
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(OBJS) -lft -o $(NAME)
 
 .PHONY: clean
 clean:
-	rm -rf *.o
+	rm -rf $(OBJS)
 
 .PHONY: fclean
 fclean: clean
@@ -25,24 +34,37 @@ fclean: clean
 .PHONY: re
 re: fclean all
 
-## TEST ##
+$(LIBFT):	$(LIBFT_DIR)/*.c
+	make -C $(LIBFT_DIR)
 
-.PHONY: debug
-debug: CFLAGS += -g -fsanitize=ingeger -fsanitize=address -DDEBUG
-debug: re
+.PHONY: libft_clean
+libft_clean:
+	make clean -C $(LIBFT_DIR)
 
-GTESTDIR	=	../test
-GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
+.PHONY: libft_fclean
+libft_fclean:
+	make fclean -C $(LIBFT_DIR)
 
-TESTDIR		=	.
+# ## TEST ##
+# TEST		=	test_main.c
+# SRCS		=	main.c $(TEST)
 
-$(GTEST):
-	mkdir -p $(dir ../test)
-	curl -OL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.tar.gz
-	tar -xvzf release-1.11.0.tar.gz googletest-release-1.11.0
-	python3 googletest-release-1.11.0/googletest/scripts/fuse_gtest_files.py $(GTESTDIR)
-	mv googletest-release-1.11.0 $(GTESTDIR)
+# .PHONY: debug
+# debug: CFLAGS += -g -fsanitize=ingeger -fsanitize=address -DDEBUG
+# debug: re
 
-.PHONY: test
-test: $(GTEST)
-	gcc
+# GTESTDIR	=	../test
+# GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
+
+# TESTDIR		=	.
+
+# $(GTEST):
+# 	mkdir -p $(dir ../test)
+# 	curl -OL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.tar.gz
+# 	tar -xvzf release-1.11.0.tar.gz googletest-release-1.11.0
+# 	python3 googletest-release-1.11.0/googletest/scripts/fuse_gtest_files.py $(GTESTDIR)
+# 	mv googletest-release-1.11.0 $(GTESTDIR)
+
+# .PHONY: test
+# test: $(GTEST)
+# 	gcc
