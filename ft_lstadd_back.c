@@ -6,25 +6,25 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 21:26:53 by ymori             #+#    #+#             */
-/*   Updated: 2021/02/02 01:54:13 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/05 01:35:20 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new_lst)
 {
 	t_list	*lst_last;
 
-	if (lst == NULL || new == NULL)
+	if (lst == NULL || new_lst == NULL)
 		return ;
 	if (*lst == NULL)
 	{
-		*lst = new;
-		new->next = NULL;
+		*lst = new_lst;
+		new_lst->next = NULL;
 		return ;
 	}
 	lst_last = ft_lstlast(*lst);
-	lst_last->next = new;
-	new->next = NULL;
+	lst_last->next = new_lst;
+	new_lst->next = NULL;
 }
