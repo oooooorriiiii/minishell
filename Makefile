@@ -53,6 +53,10 @@ libft_fclean:
 # debug: CFLAGS += -g -fsanitize=ingeger -fsanitize=address -DDEBUG
 # debug: re
 
+##########
+## TEST ##
+##########
+
 GTESTDIR	=	./test/gtest
 GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
 
@@ -74,11 +78,12 @@ $(GTEST):
 
 .PHONY: test
 test: $(GTEST)
-	g++ -std=c++11 $(TESTDIR)/$(TEST_SCRIPTS) \
+	g++ -std=c++11 \
 	$(GTESTDIR)/googletest-release-1.11.0/googletest/src/gtest_main.cc \
 	$(GTESTDIR)/gtest/gtest-all.cc \
-	-I$(GTESTDIR) srcs/$(TEST_SRCS) \
-	-Iincludes \
+	-I$(GTESTDIR) -Iincludes \
+	$(TESTDIR)/$(TEST_SCRIPTS) \
+	srcs/$(TEST_SRCS) \
 	-lgtest_main -lgtest -lpthread \
 	-o tester
 	./tester
