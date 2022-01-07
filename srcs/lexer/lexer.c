@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/02 01:07:14 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/07 12:08:47 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@ void	lexer(char **line, t_lexer **lex_list)
 {
 	int	i;
 	int	lex_end;
-
 
 }
