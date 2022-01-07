@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
+extern "C" {
 #include "lexer.h"
+}
 
 TEST(IsQuote, TrueCase)
 {

@@ -66,6 +66,10 @@ TESTDIR		=	./test
 TEST_SRCS	=	srcs/lexer/is_quote.c \
 				srcs/lexer/insert_spaces.c
 
+TEST_SRCS_OBJS	=	$(TEST_SRCS:.c=.o)
+
+%.o: %.c
+	$(CC) $(INCLUDES) -c $< -o $@
 # ADD the test code files
 TEST_SCRIPTS	=	$(TESTDIR)/is_quote_test.cpp \
 					$(TESTDIR)/between_quotes_test.cpp
@@ -79,15 +83,15 @@ $(GTEST):
 	mv googletest-release-1.11.0 $(GTESTDIR)
 
 .PHONY: test
-test: $(GTEST)
+test: $(GTEST) $(TEST_SRCS_OBJS)
 	g++ -std=c++11 \
 	-fsanitize=address \
 	$(GTESTDIR)/googletest-release-1.11.0/googletest/src/gtest_main.cc \
 	$(GTESTDIR)/gtest/gtest-all.cc \
 	-I$(GTESTDIR) -Iincludes \
 	$(TEST_SCRIPTS) \
-	$(TEST_SRCS) \
-	-lgtest_main -lgtest -lpthread \
+	$(TEST_SRCS_OBJS) \
+	-lgtest_main -lgtest -L$(LIBFT_DIR) -lft -lpthread \
 	-o tester
 	./tester
 	rm tester
