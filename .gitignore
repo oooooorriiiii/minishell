@@ -56,3 +56,7 @@ minishell
 
 # test
 gtest/
+tester
+
+# editor
+.vscode

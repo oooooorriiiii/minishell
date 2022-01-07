@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:39:13 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/07 14:55:25 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/07 23:44:06 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,27 @@ static bool	exist_closing_token(char **line, char token)
 	return (false);
 }
 
+int		ft_isblank(int c)
+{
+	if (c == ' ' || c == '\t')
+	{
+		return (1);
+	}
+	return (0);
+}
+
+static bool	is_operator(char *value)
+{
+	if (!ft_strncmp(value, "|", 1) || !ft_strncmp(value, ">>", 2) || !ft_strncmp(value, "<<", 2) || !ft_strncmp(value, ">", 1) || !ft_strncmp(value, "<", 1))
+		return (true);
+	return (false);
+}
+
 bool	between_quotes(char **line)
 {
 	char	*current_char;
 
 	current_char = *line;
-	// TODO: is only operator ??
 	if (is_quote(*current_char) && exist_closing_token(line, *current_char))
 		return (true);
 	return (false);
@@ -55,10 +70,6 @@ void	insert_spaces(char **line)
 	copied_init_lint = *line;
 	while (current_line && *current_line)
 	{
-		if (between_quotes(&current_line))
-		{
-			current_line++;
-			continue ;
-		}
+		// TODO: Ignore if it is between quotes.
 	}
 }
