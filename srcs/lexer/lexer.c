@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/07 12:09:42 by ymori            ###   ########.fr       */
+/*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
+/*   Updated: 2022/01/07 12:08:47 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "minishell.h"
-
-int	main(void)
+void	lexer(char **line, t_lexer **lex_list)
 {
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	ft_putstr_fd("Hello, libft\n", STDOUT_FILENO);
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	return (0);
+	int	i;
+	int	lex_end;
+
 }

@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/07 12:09:42 by ymori            ###   ########.fr       */
+/*   Created: 2022/01/07 12:09:20 by ymori             #+#    #+#             */
+/*   Updated: 2022/01/07 12:09:23 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "minishell.h"
 
-int	main(void)
+bool	is_quote(char c)
 {
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	ft_putstr_fd("Hello, libft\n", STDOUT_FILENO);
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	return (0);
+	if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE)
+		return (true);
+	return (false);
 }

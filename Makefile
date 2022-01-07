@@ -53,18 +53,38 @@ libft_fclean:
 # debug: CFLAGS += -g -fsanitize=ingeger -fsanitize=address -DDEBUG
 # debug: re
 
-# GTESTDIR	=	../test
-# GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
+##########
+## TEST ##
+##########
 
-# TESTDIR		=	.
+GTESTDIR	=	./test/gtest
+GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
 
-# $(GTEST):
-# 	mkdir -p $(dir ../test)
-# 	curl -OL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.tar.gz
-# 	tar -xvzf release-1.11.0.tar.gz googletest-release-1.11.0
-# 	python3 googletest-release-1.11.0/googletest/scripts/fuse_gtest_files.py $(GTESTDIR)
-# 	mv googletest-release-1.11.0 $(GTESTDIR)
+TESTDIR		=	./test
 
-# .PHONY: test
-# test: $(GTEST)
-# 	gcc
+# Add the file to be tested
+TEST_SRCS	=	is_quote.c
+
+# ADD the test code files
+TEST_SCRIPTS	=	is_quote_test.cpp
+
+$(GTEST):
+	mkdir -p $(dir $(GTESTDIR))
+	curl -OL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.tar.gz
+	tar -xvzf release-1.11.0.tar.gz googletest-release-1.11.0
+	rm -rf release-1.11.0.tar.gz
+	python3 googletest-release-1.11.0/googletest/scripts/fuse_gtest_files.py $(GTESTDIR)
+	mv googletest-release-1.11.0 $(GTESTDIR)
+
+.PHONY: test
+test: $(GTEST)
+	g++ -std=c++11 \
+	$(GTESTDIR)/googletest-release-1.11.0/googletest/src/gtest_main.cc \
+	$(GTESTDIR)/gtest/gtest-all.cc \
+	-I$(GTESTDIR) -Iincludes \
+	$(TESTDIR)/$(TEST_SCRIPTS) \
+	srcs/$(TEST_SRCS) \
+	-lgtest_main -lgtest -lpthread \
+	-o tester
+	./tester
+	rm tester
