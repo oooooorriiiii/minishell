@@ -63,10 +63,12 @@ GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
 TESTDIR		=	./test
 
 # Add the file to be tested
-TEST_SRCS	=	is_quote.c
+TEST_SRCS	=	srcs/lexer/is_quote.c \
+				srcs/lexer/insert_spaces.c
 
 # ADD the test code files
-TEST_SCRIPTS	=	is_quote_test.cpp
+TEST_SCRIPTS	=	$(TESTDIR)/is_quote_test.cpp \
+					$(TESTDIR)/between_quotes_test.cpp
 
 $(GTEST):
 	mkdir -p $(dir $(GTESTDIR))
@@ -79,11 +81,12 @@ $(GTEST):
 .PHONY: test
 test: $(GTEST)
 	g++ -std=c++11 \
+	-fsanitize=address \
 	$(GTESTDIR)/googletest-release-1.11.0/googletest/src/gtest_main.cc \
 	$(GTESTDIR)/gtest/gtest-all.cc \
 	-I$(GTESTDIR) -Iincludes \
-	$(TESTDIR)/$(TEST_SCRIPTS) \
-	srcs/$(TEST_SRCS) \
+	$(TEST_SCRIPTS) \
+	$(TEST_SRCS) \
 	-lgtest_main -lgtest -lpthread \
 	-o tester
 	./tester
