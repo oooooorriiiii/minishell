@@ -52,9 +52,9 @@ libft_fclean:
 # TEST		=	test_main.c
 # SRCS		=	main.c $(TEST)
 
-# .PHONY: debug
-# debug: CFLAGS += -g -fsanitize=ingeger -fsanitize=address -DDEBUG
-# debug: re
+.PHONY: debug
+debug: CFLAGS += -g -fsanitize=undefined -fsanitize=address -DDEBUG
+debug: re
 
 ##########
 ## TEST ##
