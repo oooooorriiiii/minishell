@@ -6,7 +6,7 @@
 #    By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 00:46:37 by ymori             #+#    #+#              #
-#    Updated: 2021/03/04 18:15:04 by ymori            ###   ########.fr        #
+#    Updated: 2022/01/10 14:02:38 by ymori            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,33 +49,29 @@ SRCS =	ft_atoi.c		\
 		ft_putstr_fd.c	\
 		ft_putendl_fd.c	\
 		ft_putnbr_fd.c	\
-		get_next_line.c
-BONUS_SRCS =	ft_lstnew.c			\
-				ft_lstsize.c		\
-				ft_lstadd_front.c	\
-				ft_lstlast.c		\
-				ft_lstadd_back.c	\
-				ft_lstdelone.c		\
-				ft_lstclear.c		\
-				ft_lstiter.c		\
-				ft_lstmap.c
+		get_next_line.c	\
+		ft_lstnew.c			\
+		ft_lstsize.c		\
+		ft_lstadd_front.c	\
+		ft_lstlast.c		\
+		ft_lstadd_back.c	\
+		ft_lstdelone.c		\
+		ft_lstclear.c		\
+		ft_lstiter.c		\
+		ft_lstmap.c
 OBJS = $(SRCS:%.c=%.o)
-BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $@ $^
 
-bonus: $(BONUS_OBJS)
-	$(AR) $(NAME) $^
-
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
