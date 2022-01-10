@@ -25,7 +25,7 @@ typedef struct	s_token
 typedef struct s_lexer
 {
 	int		len;
-	t_list	list;
+	t_list	*list;
 }				t_lexer;
 
 
