@@ -7,7 +7,10 @@ INCLUDES_DIR	=	-Iincludes \
 					-Ilibft
 
 INCLUDES	=	$(INCLUDES_DIR)
-SRCS		=	$(SRCS_DIR)/main.c
+SRCS		=	$(SRCS_DIR)/main.c \
+				$(SRCS_DIR)/lexer/lexer.c \
+				$(SRCS_DIR)/lexer/token_split_to_list.c \
+				$(SRCS_DIR)/lexer/is_quote.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -21,7 +24,7 @@ LIBFT				=	$(LIBFT_DIR)/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(OBJS) -lft -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 .PHONY: clean
 clean:
