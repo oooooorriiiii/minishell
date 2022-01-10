@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/10 03:03:59 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/10 14:22:44 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void	lexer(char *original_line, t_token **lex_list)
 
 	init_line_list = token_split_to_list(original_line);
 	list_print(init_line_list);
+	ft_lstclear(&init_line_list, free);
 }
