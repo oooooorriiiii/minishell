@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/10 14:28:20 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/10 14:55:01 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	list_print(t_list *list)
 	}
 	printf("value: %s\n", (char *)(list->content));
 }
+
+
 
 /*
 ** 
