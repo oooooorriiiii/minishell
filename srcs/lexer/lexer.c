@@ -6,55 +6,12 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 01:31:57 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/11 18:48:56 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include <stdio.h>
-
-static bool	exist_closing_token(char *line, char token)
-{
-	char	*current_char;
-
-	current_char = line;
-	current_char++;
-	while (*current_char)
-	{
-		if (*current_char == token)
-		{
-			line = current_char;
-			return (true);
-		}
-		current_char++;
-	}
-	return (false);
-}
-
-bool	between_quotes(char *line)
-{
-	char	*current_char;
-
-	current_char = line;
-	if (is_quote(*current_char) && exist_closing_token(line, *current_char))
-		return (true);
-	return (false);
-}
-
-void	list_print(t_list *list)
-{
-	if (list == NULL)
-	{
-		printf("NULL\n");
-		return ;
-	}
-	while (list->next)
-	{
-		printf("value: %s\n", (char *)(list->content));
-		list = list->next;
-	}
-	printf("value: %s\n", (char *)(list->content));
-}
 
 int	ft_isblank(int c)
 {
@@ -79,7 +36,6 @@ void	quote_process(t_list **token_list, char **token, t_list **ret_list)
 {
 	const char	quote = *(char *)(*token_list)->content;
 
-	printf("quote: %c\n", quote);
 	free_set((void **)token, \
 				ft_strjoin(*token, (char *)(*token_list)->content));
 	while (true)
@@ -136,14 +92,6 @@ t_lexer	*lexer_new(t_list *token_list)
 	return (lexer);
 }
 
-//
-// typedef struct	s_token
-// {
-// 	t_token_type	type;
-// 	char			*val;
-// 	// struct s_token	*next;
-// }				t_token;
-//
 void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
 {
 	t_list	*ret_list;
@@ -156,8 +104,8 @@ void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
 	{
 		element = (char *)token_list->content;
 		// TODO: separate function, is_operator, other
-		printf("element: %s\n", element); // DEBUG
-		printf("*element: %c\n", *element); // DEBUG
+		// printf("element: %s\n", element); // DEBUG
+		// printf("*element: %c\n", *element); // DEBUG
 		if (ft_isblank(*element))
 			token_list = token_list->next;
 		else if (*element == '\'' || *element == '\"')
@@ -182,6 +130,7 @@ void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
 			general_token_process(&token_list, &token, &ret_list);
 	}
 	free(token);
+	list_print_token(ret_list); // DEBUG
 	*lex_list = lexer_new(ret_list);
 }
 
