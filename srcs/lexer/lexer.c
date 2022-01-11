@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 19:01:46 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/11 19:31:40 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	literal_process(t_list **token_list, char **token, t_list **ret_list)
 	*token_list = (*token_list)->next;
 	if (*token_list == NULL || (*token_list != NULL && ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
-		ft_lstadd_back(ret_list, ft_lstnew(token_new(*token, TOKEN)));
+		ft_lstadd_back(ret_list, ft_lstnew(token_new(*token, TOKEN_LITERAL)));
 		free_set((void **)token, ft_strdup(""));
 	}
 }
@@ -105,18 +105,18 @@ void	operetor_analysis(t_list **token_list, char *token, t_list *ret_list, char 
 {
 	if (*element == '\'' || *element == '\"')
 		quote_process(token_list, &token, &ret_list);
-	else if (ft_strncmp(element, "<<", ft_strlen(element)) == 0)
+	else if (ft_strncmp(element, "<<", 2) == 0)
 	{
 		//TODO: Heredoc
 	}
-	else if (ft_strncmp(element, ">>", ft_strlen(element)) == 0)
+	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
-		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, REDIRECT))); // TODO: REDIRECT type
+		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, TOKEN_REDIRECT))); // TODO: REDIRECT type
 		*token_list = (*token_list)->next;
 	}
 	else if (*element == '<' || *element == '>' || *element == '|')
 	{
-		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, TOKEN))); // TODO: TOKEN -> <, >, PIPE
+		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, *element))); // TODO: TOKEN -> <, >, PIPE
 		*token_list = (*token_list)->next;
 	}
 	return ;

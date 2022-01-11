@@ -9,11 +9,13 @@
 
 typedef enum	e_token_type
 {
-	BUILTIN,
-	LITERAL,
-	PIPE,
-	REDIRECT,
-	HERE_DOC,
+	TOKEN_LITERAL = -1,
+	TOKEN_REDIRECT = 4242,
+	TOKEN_PIPE = '|',
+	TOKEN_SQUOTE = '\'',
+	TOKEN_DQUOTE = '\"',
+	TOKEN_MORE_THAN = '>',
+	TOKEN_LESS_THAN = '<',
 	TOKEN = -1,
 }				t_token_type;
 
