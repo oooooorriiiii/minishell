@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 18:48:56 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/11 19:01:46 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	quote_process(t_list **token_list, char **token, t_list **ret_list)
 	return ;
 }
 
-void	general_token_process(t_list **token_list, char **token, t_list **ret_list)
+void	literal_process(t_list **token_list, char **token, t_list **ret_list)
 {
 	free_set((void **)token, ft_strjoin(*token, (char *)(*token_list)->content));
 	*token_list = (*token_list)->next;
@@ -92,6 +92,36 @@ t_lexer	*lexer_new(t_list *token_list)
 	return (lexer);
 }
 
+static bool	is_operator(char *element)
+{
+	if (!ft_strncmp(element, "|", 1) || !ft_strncmp(element, ">>", 2) || \
+			!ft_strncmp(element, "<<", 2) || !ft_strncmp(element, ">", 1) || \
+			!ft_strncmp(element, "<", 1))
+		return (true);
+	return (false);
+}
+
+void	operetor_analysis(t_list **token_list, char *token, t_list *ret_list, char *element)
+{
+	if (*element == '\'' || *element == '\"')
+		quote_process(token_list, &token, &ret_list);
+	else if (ft_strncmp(element, "<<", ft_strlen(element)) == 0)
+	{
+		//TODO: Heredoc
+	}
+	else if (ft_strncmp(element, ">>", ft_strlen(element)) == 0)
+	{
+		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, REDIRECT))); // TODO: REDIRECT type
+		*token_list = (*token_list)->next;
+	}
+	else if (*element == '<' || *element == '>' || *element == '|')
+	{
+		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, TOKEN))); // TODO: TOKEN -> <, >, PIPE
+		*token_list = (*token_list)->next;
+	}
+	return ;
+}
+
 void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
 {
 	t_list	*ret_list;
@@ -103,31 +133,12 @@ void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
 	while (token_list)
 	{
 		element = (char *)token_list->content;
-		// TODO: separate function, is_operator, other
-		// printf("element: %s\n", element); // DEBUG
-		// printf("*element: %c\n", *element); // DEBUG
 		if (ft_isblank(*element))
 			token_list = token_list->next;
-		else if (*element == '\'' || *element == '\"')
-		{
-			quote_process(&token_list, &token, &ret_list);
-		}
-		else if (ft_strncmp(element, "<<", ft_strlen(element)) == 0)
-		{
-			//TODO: Heredoc
-		}
-		else if (ft_strncmp(element, ">>", ft_strlen(element)) == 0)
-		{
-			ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, REDIRECT))); // TODO: REDIRECT type
-			token_list = token_list->next;
-		}
-		else if (*element == '<' || *element == '>' || *element == '|')
-		{
-			ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, TOKEN))); // TODO: TOKEN -> <, >, PIPE
-			token_list = token_list->next;
-		}
+		else if (is_operator(element))
+			operetor_analysis(&token_list, token, ret_list, element);
 		else
-			general_token_process(&token_list, &token, &ret_list);
+			literal_process(&token_list, &token, &ret_list);
 	}
 	free(token);
 	list_print_token(ret_list); // DEBUG

@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 01:06:41 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/11 17:01:57 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,27 @@ int	main(void)
 	puts("**************************");
 	lexer("echo\"ab  c \"|", &lex_list);
 	puts("**************************");
-	lexer("echo\"abc|", &lex_list);
-	puts("**************************");
+	// lexer("echo\"abc|", &lex_list);
+	// puts("**************************");
 	lexer("echo>>abc|>", &lex_list);
 	puts("**************************");
 	lexer("echo>>>abc|>", &lex_list);
 	puts("**************************");
 	lexer("echo>>>>abc|>", &lex_list);
 	puts("**************************");
-	lexer("echo><>>abc|>", &lex_list);
+	lexer("echo> >>>abc|>", &lex_list);
 	puts("**************************");
-	lexer("echo><> >abc|>", &lex_list);
+	lexer("echo>> >>abc|>", &lex_list);
 	puts("**************************");
-	lexer("echo>< >>abc|>", &lex_list);
+	lexer("echo>>> >abc|>", &lex_list);
 	puts("**************************");
-	lexer("echo> <>>abc|>", &lex_list);
+	// lexer("echo><>>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo><> >abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo>< >>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo> <>>abc|>", &lex_list);
 
 	return (0);
 }
