@@ -6,11 +6,11 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:20 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/07 12:09:23 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/07 12:56:55 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 bool	is_quote(char c)
 {

@@ -6,18 +6,46 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/07 12:09:42 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/14 17:49:42 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "minishell.h"
+#include "lexer.h"
+#include <stdio.h>
 
 int	main(void)
 {
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
-	ft_putstr_fd("Hello, libft\n", STDOUT_FILENO);
-	write(STDOUT_FILENO, "Hello, minishell\n", 18);
+	t_lexer	*lex_list;
+
+	lexer("echo abc", &lex_list);
+	puts("**************************");
+	lexer("echo\"abc\"|", &lex_list);
+	puts("**************************");
+	lexer("echo\"ab  c \"|", &lex_list);
+	puts("**************************");
+	// lexer("echo\"abc|", &lex_list);
+	// puts("**************************");
+	lexer("echo>>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo>>>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo>>>>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo> >>>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo>> >>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo>>> >abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo><>>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo><> >abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo>< >>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo> <>>abc|>", &lex_list);
+
 	return (0);
 }

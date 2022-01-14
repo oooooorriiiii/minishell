@@ -7,7 +7,11 @@ INCLUDES_DIR	=	-Iincludes \
 					-Ilibft
 
 INCLUDES	=	$(INCLUDES_DIR)
-SRCS		=	$(SRCS_DIR)/main.c
+SRCS		=	$(SRCS_DIR)/main.c \
+				$(SRCS_DIR)/lexer/lexer.c \
+				$(SRCS_DIR)/lexer/token_split_to_list.c \
+				$(SRCS_DIR)/lexer/helper.c \
+				$(SRCS_DIR)/lexer/is_quote.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -21,7 +25,7 @@ LIBFT				=	$(LIBFT_DIR)/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(OBJS) -lft -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 .PHONY: clean
 clean:
@@ -49,9 +53,9 @@ libft_fclean:
 # TEST		=	test_main.c
 # SRCS		=	main.c $(TEST)
 
-# .PHONY: debug
-# debug: CFLAGS += -g -fsanitize=ingeger -fsanitize=address -DDEBUG
-# debug: re
+.PHONY: debug
+debug: CFLAGS += -g -fsanitize=undefined -fsanitize=address -DDEBUG
+debug: re
 
 ##########
 ## TEST ##
@@ -63,10 +67,16 @@ GTEST		=	$(GTESTDIR)/gtest $(GTESTDIR)/googletest-release-1.11.0
 TESTDIR		=	./test
 
 # Add the file to be tested
-TEST_SRCS	=	is_quote.c
+TEST_SRCS	=	srcs/lexer/is_quote.c \
+				srcs/lexer/insert_spaces.c
 
+TEST_SRCS_OBJS	=	$(TEST_SRCS:.c=.o)
+
+%.o: %.c
+	$(CC) $(INCLUDES) -c $< -o $@
 # ADD the test code files
-TEST_SCRIPTS	=	is_quote_test.cpp
+TEST_SCRIPTS	=	$(TESTDIR)/is_quote_test.cpp \
+					$(TESTDIR)/between_quotes_test.cpp
 
 $(GTEST):
 	mkdir -p $(dir $(GTESTDIR))
@@ -77,14 +87,15 @@ $(GTEST):
 	mv googletest-release-1.11.0 $(GTESTDIR)
 
 .PHONY: test
-test: $(GTEST)
+test: $(GTEST) $(TEST_SRCS_OBJS)
 	g++ -std=c++11 \
+	-fsanitize=address \
 	$(GTESTDIR)/googletest-release-1.11.0/googletest/src/gtest_main.cc \
 	$(GTESTDIR)/gtest/gtest-all.cc \
 	-I$(GTESTDIR) -Iincludes \
-	$(TESTDIR)/$(TEST_SCRIPTS) \
-	srcs/$(TEST_SRCS) \
-	-lgtest_main -lgtest -lpthread \
+	$(TEST_SCRIPTS) \
+	$(TEST_SRCS_OBJS) \
+	-lgtest_main -lgtest -L$(LIBFT_DIR) -lft -lpthread \
 	-o tester
 	./tester
 	rm tester
