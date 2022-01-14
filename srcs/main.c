@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 19:32:38 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/14 17:49:42 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	main(void)
 	puts("**************************");
 	lexer("echo><>>abc|>", &lex_list);
 	puts("**************************");
-	// lexer("echo><> >abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo>< >>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo> <>>abc|>", &lex_list);
+	lexer("echo><> >abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo>< >>abc|>", &lex_list);
+	puts("**************************");
+	lexer("echo> <>>abc|>", &lex_list);
 
 	return (0);
 }

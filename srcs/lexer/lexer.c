@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 19:31:40 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/14 17:48:20 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ void	quote_process(t_list **token_list, char **token, t_list **ret_list)
 		*token_list = (*token_list)->next;
 		if (*token_list == NULL)
 			printf("Close the quote\n"); // TODO: exit
-		free_set((void **)token, ft_strjoin(*token, (char *)(*token_list)->content));
+		free_set((void **)token, \
+					ft_strjoin(*token, (char *)(*token_list)->content));
 		if (*(char *)(*token_list)->content == quote)
 		{
 			*token_list = (*token_list)->next;
 			break ;
 		}
 	}
-	if (*token_list == NULL || (*token_list != NULL && ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
+	if (*token_list == NULL || (*token_list != NULL && \
+		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
 		// TODO: hoge
 		ft_lstadd_back(ret_list, ft_lstnew(token_new(*token, TOKEN))); // TODO: TOKEN type
@@ -61,9 +63,11 @@ void	quote_process(t_list **token_list, char **token, t_list **ret_list)
 
 void	literal_process(t_list **token_list, char **token, t_list **ret_list)
 {
-	free_set((void **)token, ft_strjoin(*token, (char *)(*token_list)->content));
+	free_set((void **)token, \
+				ft_strjoin(*token, (char *)(*token_list)->content));
 	*token_list = (*token_list)->next;
-	if (*token_list == NULL || (*token_list != NULL && ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
+	if (*token_list == NULL || (*token_list != NULL && \
+		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
 		ft_lstadd_back(ret_list, ft_lstnew(token_new(*token, TOKEN_LITERAL)));
 		free_set((void **)token, ft_strdup(""));
@@ -101,7 +105,8 @@ static bool	is_operator(char *element)
 	return (false);
 }
 
-void	operetor_analysis(t_list **token_list, char *token, t_list *ret_list, char *element)
+void	operetor_analysis(t_list **token_list, char *token, \
+							t_list *ret_list, char *element)
 {
 	if (*element == '\'' || *element == '\"')
 		quote_process(token_list, &token, &ret_list);
@@ -111,7 +116,8 @@ void	operetor_analysis(t_list **token_list, char *token, t_list *ret_list, char 
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
-		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, TOKEN_REDIRECT))); // TODO: REDIRECT type
+		ft_lstadd_back(&ret_list, \
+						ft_lstnew(token_new(element, TOKEN_REDIRECT))); // TODO: REDIRECT type
 		*token_list = (*token_list)->next;
 	}
 	else if (*element == '<' || *element == '>' || *element == '|')
