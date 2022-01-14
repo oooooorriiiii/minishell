@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/14 17:48:20 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/14 18:51:30 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	literal_process(t_list **token_list, char **token, t_list **ret_list)
 
 // void pointer??
 // because using ft_strdup in token_new
-void	token_list_free(void *element)
+void	token_free(void *element)
 {
 	t_token	*token;
 
@@ -94,6 +94,13 @@ t_lexer	*lexer_new(t_list *token_list)
 	lexer->len = ft_lstsize(token_list);
 	lexer->list = token_list;
 	return (lexer);
+}
+
+void	lexer_free(t_lexer **lexer)
+{
+	ft_lstclear(&((*lexer)->list), token_free);
+	free(*lexer);
+	*lexer = NULL;
 }
 
 static bool	is_operator(char *element)
@@ -163,4 +170,5 @@ void	lexer(char *original_line, t_lexer **lex_list)
 	puts("*****");
 	lexcal_analysis(init_line_list, lex_list);
 	ft_lstclear(&init_line_list, free);
+	lexer_free(lex_list);
 }
