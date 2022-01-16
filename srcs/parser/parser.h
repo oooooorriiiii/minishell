@@ -18,31 +18,36 @@ typedef	enum
 	NODE_DATA 			= (1 << 7),
 } NodeType;
 
-typedef struct	ASTreeNode
+typedef struct	astree
 {
 	int type;
 	char* szData;
-	struct ASTreeNode* left;
-	struct ASTreeNode* right;
+	struct astree* left;
+	struct astree* right;
 
-} 				t_ASTreeNode;
+} 				t_astree;
 
-ASTreeNode*		CMDLINE();
+t_astree*		CMDLINE();
 
-ASTreeNode*		JOB();
-ASTreeNode*		JOB1();
-ASTreeNode*		JOB2();
+t_astree*		JOB();
+t_astree*		JOB1();
+t_astree*		JOB2();
 
-ASTreeNode*		CMD();
-ASTreeNode*		CMD1();
-ASTreeNode*		CMD2();
-ASTreeNode*		CMD3();
+t_astree*		CMD();
+t_astree*		CMD1();
+t_astree*		CMD2();
+t_astree*		CMD3();
 
-ASTreeNode*		SIMPLECMD();
-ASTreeNode*		SIMPLECMD1();
+t_astree*		SIMPLECMD();
+t_astree*		SIMPLECMD1();
 
-ASTreeNode*		TOKENLIST();
-ASTreeNode*		TOKENLIST1();
-ASTreeNode*		TOKENLIST2();
+t_astree*		TOKENLIST();
+t_astree*		TOKENLIST1();
+t_astree*		TOKENLIST2();
+
+void 			astree_attach(t_astree* root, t_astree* leftNode, t_astree* rightNode);
+void 			astreeset_type(t_astree* node, NodeType nodetype);
+void 			astreeset_data(t_astree* node, char* data);
+void 			astree_delete(t_astree* node);
 
 #endif

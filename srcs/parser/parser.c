@@ -9,230 +9,222 @@ bool term(int toketype, char** bufferptr)
 
 	if (curtok->type == toketype)
 	{
-		if (bufferptr != NULL) {
+		if (bufferptr != NULL)
+		{
 			*bufferptr = malloc(strlen(curtok->data) + 1);
 			strcpy(*bufferptr, curtok->data);
 		}
 		curtok = curtok->next;
 		return true;
 	}
-
 	curtok = curtok->next;
 	return false;
 }
 
-ASTreeNode* CMDLINE()
+t_astree* CMDLINE()
 {
 	return JOB();
 }
 
-ASTreeNode* CMDLINE5()
+t_astree* JOB()
 {
-	return JOB();
-}
+	tok_t		*save;
+	t_astree	*node;
 
-ASTreeNode* JOB()
-{
-	tok_t* save = curtok;
-
-	ASTreeNode* node;
-
-	if ((curtok = save, node = JOB1()) != NULL)
+	save = curtok
+	curtok = save;
+	node = JOB1();
+	if (node != NULL)
 		return node;
-
-	if ((curtok = save, node = JOB2()) != NULL)
+	curtok = save;
+	node = JOB2();
+	if (node != NULL)
 		return node;
-
 	return NULL;
 }
 
-ASTreeNode* JOB1()
+t_astree* JOB1()
 {
-	ASTreeNode* cmdNode;
-	ASTreeNode* jobNode;
-	ASTreeNode* result;
+	t_astree* cmdNode;
+	t_astree* jobNode;
+	t_astree* result;
 
-	if ((cmdNode = CMD()) == NULL)
+	cmdNode = CMD();
+	if (cmdNode == NULL)
 		return NULL;
-
-	if (!term(CHAR_PIPE, NULL)) {
-		ASTreeNodeDelete(cmdNode);
-		return NULL;
-	}
-
-	if ((jobNode = JOB()) == NULL) {
-		ASTreeNodeDelete(cmdNode);
+	if (!term(CHAR_PIPE, NULL))
+	{
+		astree_delete(cmdNode);
 		return NULL;
 	}
-
+	jobNode = JOB();
+	if (jobNode== NULL)
+	{
+		astree_delete(cmdNode);
+		return NULL;
+	}
 	result = malloc(sizeof(*result));
-	ASTreeNodeSetType(result, NODE_PIPE);
-	ASTreeAttachBinaryBranch(result, cmdNode, jobNode);
-
+	dastreeset_type(result, NODE_PIPE);
+	astree_attach(result, cmdNode, jobNode);
 	return result;
 }
 
-ASTreeNode* JOB2()
+t_astree* JOB2()
 {
 	return CMD();
 }
 
-ASTreeNode* CMD()
+t_astree* CMD()
 {
 	tok_t* save = curtok;
 
-	ASTreeNode* node;
+	t_astree* node;
 
-	if ((curtok = save, node = CMD1()) != NULL)
+	curtok = save;
+	node = CMD1();
+	if (node != NULL)
 		return node;
-
-	if ((curtok = save, node = CMD2()) != NULL)
+	curtok = save;
+	node = CMD2();
+	if (node != NULL)
 		return node;
-
-	if ((curtok = save, node = CMD3()) != NULL)
+	curtok = save;
+	node = CMD3();
+	if (node != NULL)
 		return node;
-
 	return NULL;
 }
 
-ASTreeNode* CMD1()
+t_astree* CMD1()
 {
-	ASTreeNode* simplecmdNode;
-	ASTreeNode* result;
+	t_astree	*simplecmdNode;
+	t_astree	*result;
+	char		*filename;
 
-	if ((simplecmdNode = SIMPLECMD()) == NULL)
+	simplecmdNode = SIMPLECMD();
+	if (simplecmdNode == NULL)
 		return NULL;
-
-	if (!term(CHAR_LESSER, NULL)) {
-		ASTreeNodeDelete(simplecmdNode);
+	if (!term(CHAR_LESSER, NULL))
+	{
+		astree_delete(simplecmdNode);
 		return NULL;
 	}
-
-	char* filename;
-	if (!term(TOKEN, &filename)) {
+	if (!term(TOKEN, &filename))
+	{
 		free(filename);
-		ASTreeNodeDelete(simplecmdNode);
+		astree_delete(simplecmdNode);
 		return NULL;
 	}
-
 	result = malloc(sizeof(*result));
-	ASTreeNodeSetType(result, NODE_REDIRECT_IN);
-	ASTreeNodeSetData(result, filename);
-	ASTreeAttachBinaryBranch(result, NULL, simplecmdNode);
-
+	dastreeset_type(result, NODE_REDIRECT_IN);
+	astreeset_data(result, filename);
+	astree_attach(result, NULL, simplecmdNode);
 	return result;
 }
 
-ASTreeNode* CMD2()
+t_astree* CMD2()
 {
-	ASTreeNode* simplecmdNode;
-	ASTreeNode* result;
+	t_astree	*simplecmdNode;
+	t_astree	*result;
+	char*		filename;
 
-	if ((simplecmdNode = SIMPLECMD()) == NULL)
+	simplecmdNode = SIMPLECMD();
+	if (simplecmdNode == NULL)
 		return NULL;
-
-	if (!term(CHAR_GREATER, NULL)) {
-		ASTreeNodeDelete(simplecmdNode);
+	if (!term(CHAR_GREATER, NULL))
+	{
+		astree_delete(simplecmdNode);
 		return NULL;
 	}
-
-	char* filename;
-	if (!term(TOKEN, &filename)) {
+	if (!term(TOKEN, &filename))
+	{
 		free(filename);
-		ASTreeNodeDelete(simplecmdNode);
+		astree_delete(simplecmdNode);
 		return NULL;
 	}
-
 	result = malloc(sizeof(*result));
-	ASTreeNodeSetType(result, NODE_REDIRECT_OUT);
-	ASTreeNodeSetData(result, filename);
-	ASTreeAttachBinaryBranch(result, NULL, simplecmdNode);
-
+	dastreeset_type(result, NODE_REDIRECT_OUT);
+	astreeset_data(result, filename);
+	astree_attach(result, NULL, simplecmdNode);
 	return result;
 }
 
-ASTreeNode* CMD3()
+t_astree* CMD3()
 {
 	return SIMPLECMD();
 }
 
-ASTreeNode* SIMPLECMD()
+t_astree* SIMPLECMD()
 {
 	tok_t* save = curtok;
 	return SIMPLECMD1();
 }
 
-ASTreeNode* SIMPLECMD1()
+t_astree* SIMPLECMD1()
 {
-	ASTreeNode* tokenListNode;
-	ASTreeNode* result;
+	t_astree	*tokenListNode;
+	t_astree	*result;
+	char		*pathname;
 
-	char* pathname;
 	if (!term(TOKEN, &pathname))
 		return NULL;
-
 	tokenListNode = TOKENLIST();
-
 	result = malloc(sizeof(*result));
-	ASTreeNodeSetType(result, NODE_CMDPATH);
-	ASTreeNodeSetData(result, pathname);
-	ASTreeAttachBinaryBranch(result, NULL, tokenListNode);
-
+	dastreeset_type(result, NODE_CMDPATH);
+	astreeset_data(result, pathname);
+	astree_attach(result, NULL, tokenListNode);
 	return result;
 }
 
-ASTreeNode* TOKENLIST()
+t_astree* TOKENLIST()
 {
-	tok_t* save = curtok;
+	tok_t		*save;
+	t_astree	*node;
 
-	ASTreeNode* node;
-
-	if ((curtok = save, node = TOKENLIST1()) != NULL)
+	save  = curtok;
+	curtok = save;
+	node = TOKENLIST1();
+	if (node != NULL)
 		return node;
-
-	if ((curtok = save, node = TOKENLIST2()) != NULL)
+	save  = curtok;
+	curtok = save;
+	node = TOKENLIST2();
+	if (node != NULL)
 		return node;
-
 	return NULL;
 }
 
-ASTreeNode* TOKENLIST1()
+t_astree* TOKENLIST1()
 {
-	ASTreeNode* tokenListNode;
-	ASTreeNode* result;
+	t_astree* tokenListNode;
+	t_astree* result;
 
 	char* arg;
 	if (!term(TOKEN, &arg))
 		return NULL;
-
 	tokenListNode = TOKENLIST();
-
 	result = malloc(sizeof(*result));
-	ASTreeNodeSetType(result, NODE_ARGUMENT);
-	ASTreeNodeSetData(result, arg);
-	ASTreeAttachBinaryBranch(result, NULL, tokenListNode);
-
+	dastreeset_type(result, NODE_ARGUMENT);
+	astreeset_data(result, arg);
+	astree_attach(result, NULL, tokenListNode);
 	return result;
 }
 
-ASTreeNode* TOKENLIST2()
+t_astree* TOKENLIST2()
 {
 	return NULL;
 }
 
-int parse(lexer_t* lexbuf, ASTreeNode** syntax_tree)
+int parse(lexer_t* lexbuf, t_astree** syntax_tree)
 {
 	if (lexbuf->ntoks == 0)
-		return -1;
-
+		return (-1);
 	curtok = lexbuf->llisttok;
 	*syntax_tree = CMDLINE();
-
 	if (curtok != NULL && curtok->type != 0)
 	{
 		printf("Syntax Error near: %s\n", curtok->data);
-		return -1;
+		return (-1);
 	}
-
-	return 0;
+	return (0);
 }
