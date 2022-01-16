@@ -1,6 +1,10 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+#include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 typedef	enum
 {
 	NODE_PIPE 			= (1 << 0),
