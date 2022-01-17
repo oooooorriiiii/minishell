@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:09:21 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:09:39 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:41:12 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_astree	*SIMPLECMD1(tok_t **curtok)
 		return (NULL);
 	tokenListNode = TOKENLIST(curtok);
 	result = malloc(sizeof(*result));
-	dastreeset_type(result, NODE_CMDPATH);
+	astreeset_type(result, NODE_CMDPATH);
 	astreeset_data(result, pathname);
 	astree_attach(result, NULL, tokenListNode);
 	return (result);
@@ -64,7 +64,7 @@ t_astree	*TOKENLIST1(tok_t **curtok)
 		return (NULL);
 	tokenListNode = TOKENLIST(curtok);
 	result = malloc(sizeof(*result));
-	dastreeset_type(result, NODE_ARGUMENT);
+	astreeset_type(result, NODE_ARGUMENT);
 	astreeset_data(result, arg);
 	astree_attach(result, NULL, tokenListNode);
 	return (result);

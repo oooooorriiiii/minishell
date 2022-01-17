@@ -12,11 +12,33 @@ typedef	enum
 	NODE_SEQ 			= (1 << 2),
 	NODE_REDIRECT_IN 	= (1 << 3),
 	NODE_REDIRECT_OUT 	= (1 << 4),
-	NODE_CMDPATH		= (1 << 5),
-	NODE_ARGUMENT		= (1 << 6),
+	NODE_REDIRECT_D_IN 	= (1 << 5),
+	NODE_REDIRECT_D_OUT = (1 << 6),
+	NODE_CMDPATH		= (1 << 7),
+	NODE_ARGUMENT		= (1 << 8),
 
-	NODE_DATA 			= (1 << 7),
+	NODE_DATA 			= (1 << 9),
 } NodeType;
+
+enum TokenType{
+	CHAR_GENERAL		= -1,
+	CHAR_PIPE			= '|',
+	CHAR_AMPERSAND		= '&',
+	CHAR_QOUTE			= '\'',
+	CHAR_DQUOTE			= '\"',
+	CHAR_SEMICOLON		= ';',
+	CHAR_WHITESPACE		= ' ',
+	CHAR_ESCAPESEQUENCE = '\\',
+	CHAR_TAB			= '\t',
+	CHAR_NEWLINE		= '\n',
+	CHAR_GREATER		= '>',
+	CHAR_LESSER			= '<',
+	CHAR_DBLGREATER		= 'O',
+	CHAR_DBLLESSER		= 'I',
+	CHAR_NULL			= 0,
+
+	TOKEN				= -1,
+};
 
 typedef struct	astree
 {
@@ -27,23 +49,27 @@ typedef struct	astree
 
 } 				t_astree;
 
-t_astree*		CMDLINE();
+t_astree		*CMDLINE(tok_t **curtok);
 
-t_astree*		JOB();
-t_astree*		JOB1();
-t_astree*		JOB2();
+t_astree		*JOB(tok_t **curtok);
+t_astree		*JOB1(tok_t **curtok);
+t_astree		*JOB2(tok_t **curtok);
 
-t_astree*		CMD();
-t_astree*		CMD1();
-t_astree*		CMD2();
-t_astree*		CMD3();
+t_astree		*CMD(tok_t **curtok);
+t_astree		*CMD1(tok_t **curtok);
+t_astree		*CMD2(tok_t **curtok);
+t_astree		*CMD11(tok_t **curtok);
+t_astree		*CMD22(tok_t **curtok);
+t_astree		*CMD3(tok_t **curtok);
 
-t_astree*		SIMPLECMD();
-t_astree*		SIMPLECMD1();
+t_astree		*SIMPLECMD(tok_t **curtok);
+t_astree		*SIMPLECMD1(tok_t **curtok);
 
-t_astree*		TOKENLIST();
-t_astree*		TOKENLIST1();
-t_astree*		TOKENLIST2();
+t_astree		*TOKENLIST(tok_t **curtok);
+t_astree		*TOKENLIST1(tok_t **curtok);
+t_astree		*TOKENLIST2(tok_t **curtok);
+
+bool			term(int toketype, char **bufferptr, tok_t **curtok);
 
 void 			astree_attach(t_astree* root, t_astree* leftNode, t_astree* rightNode);
 void 			astreeset_type(t_astree* node, NodeType nodetype);

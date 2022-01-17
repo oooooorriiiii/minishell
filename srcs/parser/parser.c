@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 17:53:00 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:40:59 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_astree	*JOB1(tok_t **curtok)
 		return (NULL);
 	}
 	result = malloc(sizeof(*result));
-	dastreeset_type(result, NODE_PIPE);
+	astreeset_type(result, NODE_PIPE);
 	astree_attach(result, cmdNode, jobNode);
 	return (result);
 }

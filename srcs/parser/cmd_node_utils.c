@@ -1,47 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_node.c                                         :+:      :+:    :+:   */
+/*   cmd_node_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:55:02 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/01/17 18:55:29 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/01/17 18:55:37 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+#include "parser.h"
 
-t_astree	*CMD(tok_t **curtok)
-{
-	tok_t		*save;
-	t_astree	*node;
-
-	save = curtok;
-	*curtok = save;
-	node = CMD1(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD2(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD11(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD22(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD3(curtok);
-	if (node != NULL)
-		return (node);
-	return (NULL);
-}
-
-t_astree	*CMD1(tok_t **curtok)
+t_astree	*CMD11(tok_t **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -50,7 +21,7 @@ t_astree	*CMD1(tok_t **curtok)
 	simplecmdNode = SIMPLECMD(curtok);
 	if (simplecmdNode == NULL)
 		return (NULL);
-	if (!term(CHAR_LESSER, NULL, curtok))
+	if (!term(CHAR_DBLLESSER, NULL, curtok))
 	{
 		astree_delete(simplecmdNode);
 		return (NULL);
@@ -62,13 +33,13 @@ t_astree	*CMD1(tok_t **curtok)
 		return (NULL);
 	}
 	result = malloc(sizeof(*result));
-	astreeset_type(result, NODE_REDIRECT_IN);
+	astreeset_type(result, NODE_REDIRECT_D_IN);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, simplecmdNode);
 	return (result);
 }
 
-t_astree	*CMD2(tok_t **curtok)
+t_astree	*CMD22(tok_t **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -77,7 +48,7 @@ t_astree	*CMD2(tok_t **curtok)
 	simplecmdNode = SIMPLECMD(curtok);
 	if (simplecmdNode == NULL)
 		return (NULL);
-	if (!term(CHAR_GREATER, NULL, curtok))
+	if (!term(CHAR_DBLGREATER, NULL, curtok))
 	{
 		astree_delete(simplecmdNode);
 		return (NULL);
@@ -89,13 +60,8 @@ t_astree	*CMD2(tok_t **curtok)
 		return (NULL);
 	}
 	result = malloc(sizeof(*result));
-	astreeset_type(result, NODE_REDIRECT_OUT);
+	astreeset_type(result, NODE_REDIRECT_D_OUT);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, simplecmdNode);
 	return (result);
-}
-
-t_astree	*CMD3(tok_t **curtok)
-{
-	return (SIMPLECMD(curtok));
 }
