@@ -6,27 +6,27 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 12:36:07 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:00:56 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-bool	term(int toketype, char **bufferptr)
+bool	term(int toketype, char **bufferptr, tok_t **curtok)
 {
-	if (curtok == NULL)
+	if (*curtok == NULL)
 		return (false);
-	if (curtok->type == toketype)
+	if ((*curtok)->type == toketype)
 	{
 		if (bufferptr != NULL)
 		{
-			*bufferptr = malloc(strlen(curtok->data) + 1);
-			strcpy(*bufferptr, curtok->data);
+			*bufferptr = malloc(strlen((*curtok)->data) + 1);
+			strcpy(*bufferptr, (*curtok)->data);
 		}
-		curtok = curtok->next;
+		*curtok = (*curtok)->next;
 		return (true);
 	}
-	curtok = curtok->next;
+	*curtok = (*curtok)->next;
 	return (false);
 }
 
