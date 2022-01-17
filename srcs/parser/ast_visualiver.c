@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:53:58 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 14:40:31 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:45:32 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,18 @@
 
 void print_simple_command(ASTreeNode* simple_cmd_node)
 {
-    printf("@@@@@@@@@@@@@((( simplecmd )))@@@@@@@@@@@@@\n");
-	ptrintf("simple_cmd_node : %s\n", simple_cmd_node->szData);
+    ASTreeNode* node;
+    node = simple_cmd_node;
+    // printf("   -----------< simple_cmd_node  :  %s > \n", simple_cmd_node->szData);
+    while (node->szData != NULL)
+    {
+        printf("           |\n");
+        printf("            -----------simple_cmd_node  :  %s\n", node->szData);
+        if (node->right != NULL)
+            node = node->right;
+        else
+            break ;
+    }
 }
 
 void print_command(ASTreeNode* cmdNode)
@@ -31,40 +41,38 @@ void print_command(ASTreeNode* cmdNode)
     switch (NODETYPE(cmdNode->type))
     {
     case NODE_REDIRECT_IN:		// right side contains simple cmd node
-        printf("@@@@@@@@@@@@@((( cmd : REDIRECT_IN )))@@@@@@@@@@@@@\n");
-        print_simple_command(cmdNode->szData);
+        printf("       |\n");
+        printf("        -----------< cmd_node >-------  REDIRECT_IN");
+        printf("   <   %s \n", cmdNode->szData);
+        print_simple_command(cmdNode->right);
         break;
     case NODE_REDIRECT_OUT:		// right side contains simple cmd node
-        printf("@@@@@@@@@@@@@((( cmd : REDIRECT_OUT )))@@@@@@@@@@@@@\n");
-        print_simple_command(cmdNode->szData);
+        printf("       |\n");
+        printf("        -----------< cmd_node >-------  REDIRECT_OUT");
+        printf("   >   %s \n", cmdNode->szData);
+        print_simple_command(cmdNode->right);
         break;
     case NODE_CMDPATH:
-        printf("@@@@@@@@@@@@@((( cmd : CMDPATH )))@@@@@@@@@@@@@\n");
-        print_simple_command(NULL);
+        printf("       |\n");
+        printf("        -----------< cmd_node >-------  CMDPATH\n");
+        print_simple_command(cmdNode);
         break;
     }
 }
 
 void print_pipeline(ASTreeNode* t, bool async)
 {
-    int file_desc[2];
-
-    pipe(file_desc);
-    int pipewrite = file_desc[1];
-    int piperead = file_desc[0];
-
 	// read input from stdin for the first job
-	printf("@@@@@@@@@@@@@@@@@@@@@@ L of PIPENODE @@@@@@@@@@@@@@@@@@@@@@\n");
-    print_command(t->left, async, false, true, 0, pipewrite);
+    print_command(t->left);
     ASTreeNode* jobNode = t->right;
 
     while (jobNode != NULL && NODETYPE(jobNode->type) == NODE_PIPE)
     {
-        printf("@@@@@@@@@@@@@@@@@@@@@@ R of PIPENODE @@@@@@@@@@@@@@@@@@@@@@\n");
+        printf("   |\n");
+        printf("    -----------< job_node >-------  PIPE\n");
         print_command(jobNode->left);
         jobNode = jobNode->right;
     }
-	printf("@@@@@@@@@@@@@@@@@@@@@@ R of PIPENODE @@@@@@@@@@@@@@@@@@@@@@\n");
     print_command(jobNode);	// only wait for the last command if necessary
 }
 
@@ -76,14 +84,17 @@ void print_job(ASTreeNode* jobNode, bool async)
     switch (NODETYPE(jobNode->type))
     {
     case NODE_PIPE:
-        printf("@@@@@@@@@@@@@((( job : PIPE )))@@@@@@@@@@@@@\n");
+        printf("   |\n");
+        printf("    -----------< job_node >-------  PIPE\n");
         print_pipeline(jobNode, async);
         break;
     case NODE_CMDPATH:
-        printf("@@@@@@@@@@@@@((( job : CMD )))@@@@@@@@@@@@@\n");
+        printf("   |\n");
+        printf("    -----------< job_node >-------  CMDPATH\n");
     default:
-        printf("@@@@@@@@@@@@@((( job : default )))@@@@@@@@@@@@@\n");
-        print_command(jobNode, async, false, false, 0, 0);
+        printf("   |\n");
+        printf("    -----------< job_node >-------  default\n");
+        print_command(jobNode);
         break;
     }
 }
@@ -96,7 +107,7 @@ void print_cmdline(ASTreeNode* cmdline)
     switch(NODETYPE(cmdline->type))
     {
     default:
-        printf("@@@@@@@@@@@@@((( cmdline )))@@@@@@@@@@@@@\n");
+        printf("-----------< cmdline_node >------- \n");
         print_job(cmdline, false);
     }
 }
