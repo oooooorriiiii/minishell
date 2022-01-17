@@ -6,13 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:40:59 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:50:01 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-// tok_t* curtok = NULL;
 
 t_astree	*CMDLINE(tok_t **curtok)
 {
@@ -51,7 +49,7 @@ t_astree	*JOB1(tok_t **curtok)
 		return (NULL);
 	}
 	jobNode = JOB();
-	if (jobNode== NULL)
+	if (jobNode == NULL)
 	{
 		astree_delete(cmdNode);
 		return (NULL);
@@ -67,7 +65,7 @@ t_astree	*JOB2(tok_t **curtok)
 	return (CMD(curtok));
 }
 
-int parse(lexer_t *lexbuf, t_astree** syntax_tree)
+int	parse(lexer_t *lexbuf, t_astree **syntax_tree)
 {
 	tok_t	*curtok;
 

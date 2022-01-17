@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 00:20:19 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:10:22 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:49:25 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	astreeset_type(t_astree *node, NodeType nodetype)
 void	astreeset_data(t_astree *node, char *data)
 {
 	assert(node != NULL);
-	if(data != NULL)
+	if (data != NULL)
 	{
 		node->szData = data;
 		node->type |= NODE_DATA;

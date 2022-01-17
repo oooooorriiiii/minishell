@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:00:56 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:49:41 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ bool	term(int toketype, char **bufferptr, tok_t **curtok)
 	*curtok = (*curtok)->next;
 	return (false);
 }
-
