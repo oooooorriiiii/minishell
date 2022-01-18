@@ -53,3 +53,10 @@ dkms.conf
 
 # Output
 minishell
+
+# test
+gtest/
+tester
+
+# editor
+.vscode
