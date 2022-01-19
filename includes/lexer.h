@@ -23,13 +23,13 @@ typedef struct	s_token
 {
 	t_token_type	type;
 	char			*val;
-	// struct s_token	*next;
-}				t_token;
+	struct s_token	*next;
+}				t_token_list;
 
 typedef struct s_lexer
 {
-	int		len;
-	t_list	*list;
+	int				len;
+	t_token_list	*list;
 }				t_lexer;
 
 
@@ -42,8 +42,12 @@ void	lexer(char *original_line, t_lexer **lex_list);
 void	free_set(void **dst, void *src);
 t_list	*token_split_to_list(char *line);
 
+// token_list_utils.c
+t_token_list	*token_listnew(char *token, t_token_type token_type);
+void	token_list_add_back(t_token_list **lst, t_token_list *new_elem);
+
 // helper.c
 void	list_print(t_list *list);
-void	list_print_token(t_list *list);
+void	print_token_list(t_token_list *list);
 
 #endif

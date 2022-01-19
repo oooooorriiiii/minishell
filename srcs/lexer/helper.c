@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:43:47 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/11 18:46:07 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/19 15:06:59 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	list_print(t_list *list)
 	printf("value: %s\n", (char *)(list->content));
 }
 
-void	list_print_token(t_list *list)
+void	print_token_list(t_token_list *list)
 {
 	puts("ret list");
 	if (list == NULL)
@@ -37,10 +37,10 @@ void	list_print_token(t_list *list)
 	}
 	while (list->next)
 	{
-		printf("value: %s\n", (char *)(((t_token *)(list->content))->val));
-		printf("type: %d\n", (int)(((t_token *)(list->content))->type));
+		printf("value: %s\n", list->val);
+		printf("type: %d\n", list->type);
 		list = list->next;
 	}
-	printf("value: %s\n", (char *)(((t_token *)(list->content))->val));
-	printf("type: %d\n", (int)(((t_token *)(list->content))->type));
+	printf("value: %s\n", list->val);
+	printf("type: %d\n", list->type);
 }
