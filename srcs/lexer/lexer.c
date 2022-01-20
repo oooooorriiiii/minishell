@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/20 13:50:24 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/20 18:21:50 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 }
 
 /*
-** 
+**
 */
 void	lexer(char *original_line, t_lexer **lex_list)
 {
