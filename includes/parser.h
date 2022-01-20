@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:47:50 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:34:07 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ enum TokenType
 	CHAR_NULL			= 0,
 };
 
-typedef struct tok
-{
-	char			*data;
-	int				type;
-	struct tok		*next;
-}					t_token;
-
 typedef	struct	astree
 {
 	int				type;
@@ -68,27 +61,27 @@ typedef	struct	astree
 	struct astree	*right;
 }				t_astree;
 
-t_astree		*CMDLINE(t_token **curtok);
+t_astree		*CMDLINE(t_token_list **curtok);
 
-t_astree		*JOB(t_token **curtok);
-t_astree		*JOB1(t_token **curtok);
-t_astree		*JOB2(t_token **curtok);
+t_astree		*JOB(t_token_list **curtok);
+t_astree		*JOB1(t_token_list **curtok);
+t_astree		*JOB2(t_token_list **curtok);
 
-t_astree		*CMD(t_token **curtok);
-t_astree		*CMD1(t_token **curtok);
-t_astree		*CMD2(t_token **curtok);
-t_astree		*CMD11(t_token **curtok);
-t_astree		*CMD22(t_token **curtok);
-t_astree		*CMD3(t_token **curtok);
+t_astree		*CMD(t_token_list **curtok);
+t_astree		*CMD1(t_token_list **curtok);
+t_astree		*CMD2(t_token_list **curtok);
+t_astree		*CMD11(t_token_list **curtok);
+t_astree		*CMD22(t_token_list **curtok);
+t_astree		*CMD3(t_token_list **curtok);
 
-t_astree		*SIMPLECMD(t_token **curtok);
-t_astree		*SIMPLECMD1(t_token **curtok);
+t_astree		*SIMPLECMD(t_token_list **curtok);
+t_astree		*SIMPLECMD1(t_token_list **curtok);
 
-t_astree		*TOKENLIST(t_token **curtok);
-t_astree		*TOKENLIST1(t_token **curtok);
-t_astree		*TOKENLIST2(t_token **curtok);
+t_astree		*TOKENLIST(t_token_list **curtok);
+t_astree		*TOKENLIST1(t_token_list **curtok);
+t_astree		*TOKENLIST2(t_token_list **curtok);
 
-bool			term(int toketype, char **bufferptr, t_token **curtok);
+bool			term(int toketype, char **bufferptr, t_token_list **curtok);
 
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);

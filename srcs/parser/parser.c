@@ -6,20 +6,20 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 15:01:37 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:32:00 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
 
-t_astree	*CMDLINE(t_token **curtok)
+t_astree	*CMDLINE(t_token_list **curtok)
 {
 	return (JOB(curtok));
 }
 
-t_astree	*JOB(t_token **curtok)
+t_astree	*JOB(t_token_list **curtok)
 {
-	t_token		*save;
+	t_token_list		*save;
 	t_astree	*node;
 
 	save = *curtok;
@@ -34,7 +34,7 @@ t_astree	*JOB(t_token **curtok)
 	return (NULL);
 }
 
-t_astree	*JOB1(t_token **curtok)
+t_astree	*JOB1(t_token_list **curtok)
 {
 	t_astree	*cmdNode;
 	t_astree	*jobNode;
@@ -60,22 +60,22 @@ t_astree	*JOB1(t_token **curtok)
 	return (result);
 }
 
-t_astree	*JOB2(t_token **curtok)
+t_astree	*JOB2(t_token_list **curtok)
 {
 	return (CMD(curtok));
 }
 
-int	parse(t_token_list **lexbuf, t_astree **syntax_tree)
+int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 {
-	t_token	*curtok;
+	t_token_list	*curtok;
 
 	// if (lexbuf->ntoks == 0)
 	// 	return (-1);
-	curtok = lexbuf;
+	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
 	if (curtok != NULL && curtok->type != 0)
 	{
-		printf("Syntax Error near: %s\n", curtok->data);
+		printf("Syntax Error near: %s\n", curtok->val);
 		return (-1);
 	}
 	return (0);
