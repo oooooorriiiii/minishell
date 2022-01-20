@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 15:30:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:22:52 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_astree	*CMD(t_token_list **curtok)
 {
 	t_token_list		*save;
-	t_astree	*node;
+	t_astree			*node;
 
 	save = *curtok;
 	*curtok = save;
