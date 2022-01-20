@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
+/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/20 18:21:50 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:56:40 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void
 	if (*token_list == NULL || (*token_list != NULL && \
 		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
-		token_list_add_back(ret_list, token_listnew(*token, TOKEN_LITERAL));
+		token_list_add_back(ret_list, token_listnew(*token, CHAR_GENERAL));
 		free_set((void **)token, ft_strdup(""));
 	}
 }
@@ -69,7 +69,7 @@ void	operetor_analysis(t_list **token_list, char *token, \
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
 		token_list_add_back(&ret_list, \
-							token_listnew(element, TOKEN_REDIRECT));
+							token_listnew(element, CHAR_DBLGREATER));
 		*token_list = (*token_list)->next;
 	}
 	else if (*element == '<' || *element == '>' || *element == '|')
@@ -116,5 +116,4 @@ void	lexer(char *original_line, t_lexer **lex_list)
 	puts("*****");
 	lexcal_analysis(init_token_list, lex_list);
 	ft_lstclear(&init_token_list, free);
-	lexer_free(lex_list);
 }
