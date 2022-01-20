@@ -6,13 +6,13 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:55:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:55:37 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:39:15 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
-t_astree	*CMD11(tok_t **curtok)
+t_astree	*CMD11(t_token **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -39,7 +39,7 @@ t_astree	*CMD11(tok_t **curtok)
 	return (result);
 }
 
-t_astree	*CMD22(tok_t **curtok)
+t_astree	*CMD22(t_token **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
