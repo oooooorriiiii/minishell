@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:07:24 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/10 14:07:25 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/20 16:12:23 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 # include "libft.h"
 
 # define BUFFER_SIZE 1024
-# define OPEN_MAX 1024
+# define GNL_OPEN_MAX 1024
 #endif

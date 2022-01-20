@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:07:07 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/10 14:07:08 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/20 16:12:27 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ static void	update_loaded_str(char **loaded_str, char *buf_str)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*loaded_str[OPEN_MAX];
+	static char	*loaded_str[GNL_OPEN_MAX];
 	char		*buf_str;
 	ssize_t		read_size;
 
 	buf_str = malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || fd >= OPEN_MAX || !line || !buf_str)
+	if (fd < 0 || fd >= GNL_OPEN_MAX || !line || !buf_str)
 		return (-1);
 	read_size = read(fd, buf_str, BUFFER_SIZE);
 	while (read_size > 0)
