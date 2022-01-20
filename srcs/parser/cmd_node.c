@@ -6,18 +6,18 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:39:22 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:30:25 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
 
-t_astree	*CMD(t_token **curtok)
+t_astree	*CMD(t_token_list **curtok)
 {
-	t_token		*save;
+	t_token_list		*save;
 	t_astree	*node;
 
-	save = curtok;
+	save = *curtok;
 	*curtok = save;
 	node = CMD1(curtok);
 	if (node != NULL)
@@ -41,7 +41,7 @@ t_astree	*CMD(t_token **curtok)
 	return (NULL);
 }
 
-t_astree	*CMD1(t_token **curtok)
+t_astree	*CMD1(t_token_list **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -68,7 +68,7 @@ t_astree	*CMD1(t_token **curtok)
 	return (result);
 }
 
-t_astree	*CMD2(t_token **curtok)
+t_astree	*CMD2(t_token_list **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -95,7 +95,7 @@ t_astree	*CMD2(t_token **curtok)
 	return (result);
 }
 
-t_astree	*CMD3(t_token **curtok)
+t_astree	*CMD3(t_token_list **curtok)
 {
 	return (SIMPLECMD(curtok));
 }

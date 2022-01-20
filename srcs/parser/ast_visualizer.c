@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:53:58 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:35:00 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:48:56 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 #define NODETYPE(a) (a & (~NODE_DATA))
 
-void	print_simple_command(ASTreeNode *simple_cmd_node)
+void	print_simple_command(t_astree *simple_cmd_node)
 {
-	ASTreeNode	*node;
+	t_astree	*node;
 
 	node = simple_cmd_node;
 	while (node->szData != NULL)
@@ -33,7 +33,7 @@ void	print_simple_command(ASTreeNode *simple_cmd_node)
 	}
 }
 
-void	print_command(ASTreeNode *cmdNode)
+void	print_command(t_astree *cmdNode)
 {
 	if (cmdNode == NULL)
 		return ;
@@ -59,9 +59,9 @@ void	print_command(ASTreeNode *cmdNode)
 	}
 }
 
-void	print_pipeline(ASTreeNode *t, bool async)
+void	print_pipeline(t_astree *t, bool async)
 {
-	ASTreeNode	*jobNode;
+	t_astree	*jobNode;
 
 	jobNode = t->right;
 	print_command(t->left);
@@ -75,7 +75,7 @@ void	print_pipeline(ASTreeNode *t, bool async)
 	print_command(jobNode);
 }
 
-void	print_job(ASTreeNode *jobNode, bool async)
+void	print_job(t_astree *jobNode, bool async)
 {
 	if (jobNode == NULL)
 		return ;
@@ -97,7 +97,7 @@ void	print_job(ASTreeNode *jobNode, bool async)
 	}
 }
 
-void	print_cmdline(ASTreeNode *cmdline)
+void	print_cmdline(t_astree *cmdline)
 {
 	if (cmdline == NULL)
 		return ;
@@ -109,7 +109,7 @@ void	print_cmdline(ASTreeNode *cmdline)
 	}
 }
 
-void	print_syntax_tree(ASTreeNode *tree)
+void	print_syntax_tree(t_astree *tree)
 {
 	print_cmdline(tree);
 }
