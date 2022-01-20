@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 15:32:00 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:25:58 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 {
 	t_token_list	*curtok;
 
-	// if (lexbuf->ntoks == 0)
-	// 	return (-1);
 	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
 	if (curtok != NULL && curtok->type != 0)
