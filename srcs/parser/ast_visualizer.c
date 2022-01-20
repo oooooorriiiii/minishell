@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_visualiver.c                                   :+:      :+:    :+:   */
+/*   ast_visualizer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:53:58 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 01:00:03 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:35:00 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command.h"
+#include "../includes/parser.h"
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>

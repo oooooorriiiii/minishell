@@ -6,11 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 00:20:19 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 00:49:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:35:09 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
 void	astree_attach(t_astree *root, t_astree *leftNode, t_astree *rightNode)
 {
