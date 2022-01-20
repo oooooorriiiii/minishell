@@ -6,31 +6,12 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/19 17:31:35 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/20 13:50:24 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include <stdio.h>
-
-int	ft_isblank(int c)
-{
-	if (c == ' ' || c == '\t')
-	{
-		return (1);
-	}
-	return (0);
-}
-
-// t_token_list	*token_new(char *token, t_token_type token_type)
-// {
-// 	t_token_list	*element;
-
-// 	element = malloc(sizeof(t_token_list));
-// 	element->val = ft_strdup(token);
-// 	element->type = token_type;
-// 	return (element);
-// }
 
 void	quote_process(t_list **token_list, char **token, \
 						t_token_list **ret_list)
@@ -74,68 +55,6 @@ void
 		token_list_add_back(ret_list, token_listnew(*token, TOKEN_LITERAL));
 		free_set((void **)token, ft_strdup(""));
 	}
-}
-
-// void pointer??
-// because using ft_strdup in token_new
-// void	token_free(void *element)
-// {
-// 	t_token	*token;
-
-// 	token = (t_token *)element;
-// 	free(token->val);
-// 	token->val = NULL;
-// 	free(token);
-// }
-
-void	token_list_delone(t_token_list *lst)
-{
-	if (lst == NULL)
-		return ;
-	free(lst->val);
-	free(lst);
-}
-
-void	token_list_clear(t_token_list **lst)
-{
-	t_token_list	*lst_tmp;
-	t_token_list	*tmp;
-
-	lst_tmp = *lst;
-	while (lst_tmp)
-	{
-		tmp = lst_tmp->next;
-		token_list_delone(lst_tmp);
-		lst_tmp = tmp;
-	}
-	*lst = NULL;
-}
-
-t_lexer	*lexer_new(t_token_list *token_list)
-{
-	t_lexer	*lexer;
-
-	lexer = malloc(sizeof(t_lexer));
-	// lexer->len = ft_lstsize(token_list);
-	lexer->len = 4242;
-	lexer->list = token_list;
-	return (lexer);
-}
-
-void	lexer_free(t_lexer **lexer)
-{
-	token_list_clear(&((*lexer)->list));
-	free(*lexer);
-	*lexer = NULL;
-}
-
-static bool	is_operator(char *element)
-{
-	if (!ft_strncmp(element, "|", 1) || !ft_strncmp(element, ">>", 2) || \
-			!ft_strncmp(element, "<<", 2) || !ft_strncmp(element, ">", 1) || \
-			!ft_strncmp(element, "<", 1))
-		return (true);
-	return (false);
 }
 
 void	operetor_analysis(t_list **token_list, char *token, \
