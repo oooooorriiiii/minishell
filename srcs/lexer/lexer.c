@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/14 18:51:30 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/19 17:31:35 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@ int	ft_isblank(int c)
 	return (0);
 }
 
-t_token	*token_new(char *element, t_token_type token_type)
-{
-	t_token	*token;
+// t_token_list	*token_new(char *token, t_token_type token_type)
+// {
+// 	t_token_list	*element;
 
-	token = malloc(sizeof(t_token));
-	token->val = ft_strdup(element);
-	token->type = token_type;
-	return (token);
-}
+// 	element = malloc(sizeof(t_token_list));
+// 	element->val = ft_strdup(token);
+// 	element->type = token_type;
+// 	return (element);
+// }
 
-void	quote_process(t_list **token_list, char **token, t_list **ret_list)
+void	quote_process(t_list **token_list, char **token, \
+						t_token_list **ret_list)
 {
 	const char	quote = *(char *)(*token_list)->content;
 
@@ -55,13 +56,14 @@ void	quote_process(t_list **token_list, char **token, t_list **ret_list)
 		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
 		// TODO: hoge
-		ft_lstadd_back(ret_list, ft_lstnew(token_new(*token, TOKEN))); // TODO: TOKEN type
+		token_list_add_back(ret_list, token_listnew(*token, TOKEN)); // TODO: TOKEN type
 		free_set((void **)token, ft_strdup(""));
 	}
 	return ;
 }
 
-void	literal_process(t_list **token_list, char **token, t_list **ret_list)
+void
+	literal_process(t_list **token_list, char **token, t_token_list **ret_list)
 {
 	free_set((void **)token, \
 				ft_strjoin(*token, (char *)(*token_list)->content));
@@ -69,36 +71,60 @@ void	literal_process(t_list **token_list, char **token, t_list **ret_list)
 	if (*token_list == NULL || (*token_list != NULL && \
 		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
-		ft_lstadd_back(ret_list, ft_lstnew(token_new(*token, TOKEN_LITERAL)));
+		token_list_add_back(ret_list, token_listnew(*token, TOKEN_LITERAL));
 		free_set((void **)token, ft_strdup(""));
 	}
 }
 
 // void pointer??
 // because using ft_strdup in token_new
-void	token_free(void *element)
-{
-	t_token	*token;
+// void	token_free(void *element)
+// {
+// 	t_token	*token;
 
-	token = (t_token *)element;
-	free(token->val);
-	token->val = NULL;
-	free(token);
+// 	token = (t_token *)element;
+// 	free(token->val);
+// 	token->val = NULL;
+// 	free(token);
+// }
+
+void	token_list_delone(t_token_list *lst)
+{
+	if (lst == NULL)
+		return ;
+	free(lst->val);
+	free(lst);
 }
 
-t_lexer	*lexer_new(t_list *token_list)
+void	token_list_clear(t_token_list **lst)
+{
+	t_token_list	*lst_tmp;
+	t_token_list	*tmp;
+
+	lst_tmp = *lst;
+	while (lst_tmp)
+	{
+		tmp = lst_tmp->next;
+		token_list_delone(lst_tmp);
+		lst_tmp = tmp;
+	}
+	*lst = NULL;
+}
+
+t_lexer	*lexer_new(t_token_list *token_list)
 {
 	t_lexer	*lexer;
 
 	lexer = malloc(sizeof(t_lexer));
-	lexer->len = ft_lstsize(token_list);
+	// lexer->len = ft_lstsize(token_list);
+	lexer->len = 4242;
 	lexer->list = token_list;
 	return (lexer);
 }
 
 void	lexer_free(t_lexer **lexer)
 {
-	ft_lstclear(&((*lexer)->list), token_free);
+	token_list_clear(&((*lexer)->list));
 	free(*lexer);
 	*lexer = NULL;
 }
@@ -113,7 +139,7 @@ static bool	is_operator(char *element)
 }
 
 void	operetor_analysis(t_list **token_list, char *token, \
-							t_list *ret_list, char *element)
+							t_token_list *ret_list, char *element)
 {
 	if (*element == '\'' || *element == '\"')
 		quote_process(token_list, &token, &ret_list);
@@ -123,38 +149,39 @@ void	operetor_analysis(t_list **token_list, char *token, \
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
-		ft_lstadd_back(&ret_list, \
-						ft_lstnew(token_new(element, TOKEN_REDIRECT))); // TODO: REDIRECT type
+		token_list_add_back(&ret_list, \
+							token_listnew(element, TOKEN_REDIRECT));
 		*token_list = (*token_list)->next;
 	}
 	else if (*element == '<' || *element == '>' || *element == '|')
 	{
-		ft_lstadd_back(&ret_list, ft_lstnew(token_new(element, *element))); // TODO: TOKEN -> <, >, PIPE
+		token_list_add_back(&ret_list, \
+							token_listnew(element, *element));
 		*token_list = (*token_list)->next;
 	}
 	return ;
 }
 
-void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
+void	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 {
-	t_list	*ret_list;
-	char	*element;
-	char	*token;
+	t_token_list	*ret_list;
+	char			*element;
+	char			*token;
 
 	ret_list = NULL;
 	token = ft_strdup("");
-	while (token_list)
+	while (init_token_list)
 	{
-		element = (char *)token_list->content;
+		element = (char *)init_token_list->content;
 		if (ft_isblank(*element))
-			token_list = token_list->next;
+			init_token_list = init_token_list->next;
 		else if (is_operator(element))
-			operetor_analysis(&token_list, token, ret_list, element);
+			operetor_analysis(&init_token_list, token, ret_list, element);
 		else
-			literal_process(&token_list, &token, &ret_list);
+			literal_process(&init_token_list, &token, &ret_list);
 	}
 	free(token);
-	list_print_token(ret_list); // DEBUG
+	print_token_list(ret_list);// DEBUG
 	*lex_list = lexer_new(ret_list);
 }
 
@@ -163,12 +190,12 @@ void	lexcal_analysis(t_list *token_list, t_lexer **lex_list)
 */
 void	lexer(char *original_line, t_lexer **lex_list)
 {
-	t_list	*init_line_list;
+	t_list	*init_token_list;
 
-	init_line_list = token_split_to_list(original_line);
-	list_print(init_line_list);
+	init_token_list = token_split_to_list(original_line);
+	list_print(init_token_list);
 	puts("*****");
-	lexcal_analysis(init_line_list, lex_list);
-	ft_lstclear(&init_line_list, free);
+	lexcal_analysis(init_token_list, lex_list);
+	ft_lstclear(&init_token_list, free);
 	lexer_free(lex_list);
 }
