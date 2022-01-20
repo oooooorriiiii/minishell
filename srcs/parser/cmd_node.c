@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:39:22 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:00:45 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_astree	*CMD(t_token **curtok)
 	t_token		*save;
 	t_astree	*node;
 
-	save = curtok;
+	save = *curtok;
 	*curtok = save;
 	node = CMD1(curtok);
 	if (node != NULL)

@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:38:41 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:47:50 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ enum TokenType
 	CHAR_DBLGREATER		= 'O',
 	CHAR_DBLLESSER		= 'I',
 	CHAR_NULL			= 0,
-	TOKEN				= -1,
 };
 
 typedef struct tok
