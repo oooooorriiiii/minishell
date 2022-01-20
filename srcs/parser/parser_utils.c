@@ -6,13 +6,13 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 00:49:41 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:39:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
-bool	term(int toketype, char **bufferptr, tok_t **curtok)
+bool	term(int toketype, char **bufferptr, t_token **curtok)
 {
 	if (*curtok == NULL)
 		return (false);

@@ -6,20 +6,20 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 00:50:01 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:39:37 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
-t_astree	*CMDLINE(tok_t **curtok)
+t_astree	*CMDLINE(t_token **curtok)
 {
 	return (JOB(curtok));
 }
 
-t_astree	*JOB(tok_t **curtok)
+t_astree	*JOB(t_token **curtok)
 {
-	tok_t		*save;
+	t_token		*save;
 	t_astree	*node;
 
 	save = curtok;
@@ -34,7 +34,7 @@ t_astree	*JOB(tok_t **curtok)
 	return (NULL);
 }
 
-t_astree	*JOB1(tok_t **curtok)
+t_astree	*JOB1(t_token **curtok)
 {
 	t_astree	*cmdNode;
 	t_astree	*jobNode;
@@ -60,14 +60,14 @@ t_astree	*JOB1(tok_t **curtok)
 	return (result);
 }
 
-t_astree	*JOB2(tok_t **curtok)
+t_astree	*JOB2(t_token **curtok)
 {
 	return (CMD(curtok));
 }
 
 int	parse(lexer_t *lexbuf, t_astree **syntax_tree)
 {
-	tok_t	*curtok;
+	t_token	*curtok;
 
 	if (lexbuf->ntoks == 0)
 		return (-1);
