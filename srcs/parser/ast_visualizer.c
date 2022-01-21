@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:53:58 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:48:56 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:52:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,28 @@ void	print_command(t_astree *cmdNode)
 		return ;
 	switch (NODETYPE(cmdNode->type))
 	{
-	case NODE_REDIRECT_IN:
+	case NODE_REDIRECT_IN:		// <
 			printf("	   |\n");
 		printf("		-----------< cmd_node >-------  REDIRECT_IN");
-		printf("   <   %s \n", cmdNode->szData);
+		printf("   < %s \n", cmdNode->szData);
 		print_simple_command(cmdNode->right);
 		break ;
-	case NODE_REDIRECT_OUT:		// right side contains simple cmd node
+	case NODE_REDIRECT_OUT:		// >
 			printf("	   |\n");
 		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
-		printf("   >   %s \n", cmdNode->szData);
+		printf("   > %s \n", cmdNode->szData);
+		print_simple_command(cmdNode->right);
+		break ;
+	case NODE_REDIRECT_D_IN:		// <<
+			printf("	   |\n");
+		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
+		printf("   << %s \n", cmdNode->szData);
+		print_simple_command(cmdNode->right);
+		break ;
+	case NODE_REDIRECT_D_OUT:		// >>
+			printf("	   |\n");
+		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
+		printf("   >> %s \n", cmdNode->szData);
 		print_simple_command(cmdNode->right);
 		break ;
 	case NODE_CMDPATH:

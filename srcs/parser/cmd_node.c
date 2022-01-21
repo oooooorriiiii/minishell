@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 18:22:52 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:58:39 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,27 @@ t_astree	*CMD(t_token_list **curtok)
 
 	save = *curtok;
 	*curtok = save;
+	printf(" ----------[ CMD 1 ]----------\n");
 	node = CMD1(curtok);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
+	printf(" ----------[ CMD 2 ]----------\n");
 	node = CMD2(curtok);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
+	printf(" ----------[ CMD 11 ]----------\n");
 	node = CMD11(curtok);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
+	printf(" ----------[ CMD 22 ]----------\n");
 	node = CMD22(curtok);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
+	printf(" ----------[ CMD 3 ]----------\n");
 	node = CMD3(curtok);
 	if (node != NULL)
 		return (node);
@@ -77,8 +82,12 @@ t_astree	*CMD2(t_token_list **curtok)
 	simplecmdNode = SIMPLECMD(curtok);
 	if (simplecmdNode == NULL)
 		return (NULL);
+	if ((*curtok) != NULL)
+		printf("%s (*curtok)->type :  %d  == toketype :  %d\n",(*curtok)->val, (*curtok)->type, CHAR_GREATER);
+	printf("-----------------------------@@@@@@@@@@@@@@@@@@@ \n");
 	if (!term(CHAR_GREATER, NULL, curtok))
 	{
+		printf("----------- ###################\n");
 		astree_delete(simplecmdNode);
 		return (NULL);
 	}
