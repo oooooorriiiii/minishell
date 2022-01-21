@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 00:20:19 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 14:55:37 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:10:00 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	astree_attach(t_astree *root, t_astree *leftNode, t_astree *rightNode)
 	root->right = rightNode;
 }
 
-void	astreeset_type(t_astree *node, NodeType nodetype)
+void	astreeset_type(t_astree *node, t_node_type nodetype)
 {
 	// assert(node != NULL);
 	node->type = nodetype;

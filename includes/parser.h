@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 18:15:03 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:09:28 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include "lexer.h"
 # include "minishell.h"
-typedef	enum
+typedef enum e_node_type
 {
 	NODE_PIPE			= (1 << 0),
 	NODE_BCKGRND		= (1 << 1),
@@ -32,26 +32,7 @@ typedef	enum
 	NODE_CMDPATH		= (1 << 7),
 	NODE_ARGUMENT		= (1 << 8),
 	NODE_DATA			= (1 << 9),
-}		NodeType;
-
-enum TokenType
-{
-	CHAR_GENERAL		= -1,
-	CHAR_PIPE			= '|',
-	CHAR_AMPERSAND		= '&',
-	CHAR_QOUTE			= '\'',
-	CHAR_DQUOTE			= '\"',
-	CHAR_SEMICOLON		= ';',
-	CHAR_WHITESPACE		= ' ',
-	CHAR_ESCAPESEQUENCE = '\\',
-	CHAR_TAB			= '\t',
-	CHAR_NEWLINE		= '\n',
-	CHAR_GREATER		= '>',
-	CHAR_LESSER			= '<',
-	CHAR_DBLGREATER		= 'O',
-	CHAR_DBLLESSER		= 'I',
-	CHAR_NULL			= 0,
-};
+}		t_node_type;
 
 typedef struct astree
 {
@@ -87,7 +68,7 @@ bool			term(int toketype, char **bufferptr, t_token_list **curtok);
 
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);
-void			astreeset_type(t_astree	*node, NodeType nodetype);
+void			astreeset_type(t_astree	*node, t_node_type nodetype);
 void			astreeset_data(t_astree	*node, char	*data);
 void			astree_delete(t_astree	*node);
 

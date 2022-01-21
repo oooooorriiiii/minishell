@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:09:21 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 18:23:05 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:07:49 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_astree	*TOKENLIST(t_token_list **curtok)
 	node = TOKENLIST1(curtok);
 	if (node != NULL)
 		return (node);
-	save = *curtok;
 	*curtok = save;
 	node = TOKENLIST2(curtok);
 	if (node != NULL)
