@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/21 16:05:16 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:11:49 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
 	puts("**************************");
-	lexer("echo\"abc\"|", &lex_list);
+	lexer("echo 42Tokyo >> test.txt", &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
 	// puts("**************************");
