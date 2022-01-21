@@ -9,14 +9,22 @@
 
 typedef enum	e_token_type
 {
-	TOKEN_LITERAL = -1,
-	TOKEN_REDIRECT = 4242,
-	TOKEN_PIPE = '|',
-	TOKEN_SQUOTE = '\'',
-	TOKEN_DQUOTE = '\"',
-	TOKEN_MORE_THAN = '>',
-	TOKEN_LESS_THAN = '<',
-	TOKEN = -1,
+	CHAR_GENERAL		= -1,
+	CHAR_PIPE			= '|',
+	CHAR_AMPERSAND		= '&',
+	CHAR_QOUTE			= '\'',
+	CHAR_DQUOTE			= '\"',
+	CHAR_SEMICOLON		= ';',
+	CHAR_WHITESPACE		= ' ',
+	CHAR_ESCAPESEQUENCE	= '\\',
+	CHAR_TAB			= '\t',
+	CHAR_NEWLINE		= '\n',
+	CHAR_GREATER		= '>',
+	CHAR_LESSER			= '<',
+	CHAR_DBLGREATER		= 'O',
+	CHAR_DBLLESSER		= 'I',
+	CHAR_NULL			= 0,
+	TOKEN				= -1,
 }				t_token_type;
 
 typedef struct	s_token

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
+/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/20 18:23:13 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:52:59 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,35 @@ int	main(void)
 
 	lexer("echo abc", &lex_list);
 	parse(lex_list, &ast);
+	lexer_free(&lex_list);
 	puts("**************************");
 	lexer("echo\"abc\"|", &lex_list);
-	puts("**************************");
-	lexer("echo\"ab  c \"|", &lex_list);
-	puts("**************************");
-	// lexer("echo\"abc|", &lex_list);
+	parse(lex_list, &ast);
+	lexer_free(&lex_list);
 	// puts("**************************");
-	lexer("echo>>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo>>>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo>>>>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo> >>>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo>> >>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo>>> >abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo><>>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo><> >abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo>< >>abc|>", &lex_list);
-	puts("**************************");
-	lexer("echo> <>>abc|>", &lex_list);
+	// lexer("echo\"ab  c \"|", &lex_list);
+	// puts("**************************");
+	// // lexer("echo\"abc|", &lex_list);
+	// // puts("**************************");
+	// lexer("echo>>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo>>>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo>>>>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo> >>>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo>> >>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo>>> >abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo><>>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo><> >abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo>< >>abc|>", &lex_list);
+	// puts("**************************");
+	// lexer("echo> <>>abc|>", &lex_list);
 
 	return (0);
 }
