@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/21 15:25:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 16:06:45 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ bool	term(int toketype, char **bufferptr, t_token_list **curtok)
 {
 	if (*curtok == NULL)
 		return (false);
-	printf("[ term ] (*curtok)->val :  %s\n", (*curtok)->val);
 	if ((*curtok)->type == toketype)
 	{
 		if (bufferptr != NULL)
