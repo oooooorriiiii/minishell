@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/20 18:15:03 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:05:16 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ typedef	enum
 	NODE_ARGUMENT		= (1 << 8),
 	NODE_DATA			= (1 << 9),
 }		NodeType;
-
-enum TokenType
-{
-	CHAR_GENERAL		= -1,
-	CHAR_PIPE			= '|',
-	CHAR_AMPERSAND		= '&',
-	CHAR_QOUTE			= '\'',
-	CHAR_DQUOTE			= '\"',
-	CHAR_SEMICOLON		= ';',
-	CHAR_WHITESPACE		= ' ',
-	CHAR_ESCAPESEQUENCE = '\\',
-	CHAR_TAB			= '\t',
-	CHAR_NEWLINE		= '\n',
-	CHAR_GREATER		= '>',
-	CHAR_LESSER			= '<',
-	CHAR_DBLGREATER		= 'O',
-	CHAR_DBLLESSER		= 'I',
-	CHAR_NULL			= 0,
-};
 
 typedef struct astree
 {
