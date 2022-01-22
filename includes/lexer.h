@@ -7,25 +7,15 @@
 
 # include <stdio.h>
 
-typedef enum	e_token_type
+typedef enum	e_status
 {
-	CHAR_GENERAL		= -1,
-	CHAR_PIPE			= '|',
-	CHAR_AMPERSAND		= '&',
-	CHAR_QOUTE			= '\'',
-	CHAR_DQUOTE			= '\"',
-	CHAR_SEMICOLON		= ';',
-	CHAR_WHITESPACE		= ' ',
-	CHAR_ESCAPESEQUENCE	= '\\',
-	CHAR_TAB			= '\t',
-	CHAR_NEWLINE		= '\n',
-	CHAR_GREATER		= '>',
-	CHAR_LESSER			= '<',
-	CHAR_DBLGREATER		= 'O',
-	CHAR_DBLLESSER		= 'I',
-	CHAR_NULL			= 0,
-	TOKEN				= -1,
-}				t_token_type;
+	STATUS_ERROR		= -2,
+	STATUS_GENERAL		= -1,
+	STATUS_QOUTE		= '\'',
+	STATUS_DQUOTE		= '\"',
+	STATUS_WHHITESPACE	= ' ',
+	STATUS_DBLESSER		= 'I',
+}				t_status;
 
 typedef struct	s_token
 {
@@ -49,7 +39,7 @@ bool	is_quote(char c);
 int		ft_isblank(int c);
 bool	is_operator(char *element);
 
-void	lexer(char *original_line, t_lexer **lex_list);
+t_status	lexer(char *original_line, t_lexer **lex_list);
 
 // token_split_to_list.c
 void	free_set(void **dst, void *src);

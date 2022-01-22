@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/20 23:56:40 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/22 15:21:31 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	operetor_analysis(t_list **token_list, char *token, \
 	return ;
 }
 
-void	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
+t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 {
 	t_token_list	*ret_list;
 	char			*element;
@@ -102,18 +102,21 @@ void	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 	free(token);
 	print_token_list(ret_list);// DEBUG
 	*lex_list = lexer_new(ret_list);
+	return (STATUS_GENERAL);
 }
 
 /*
 **
 */
-void	lexer(char *original_line, t_lexer **lex_list)
+t_status	lexer(char *original_line, t_lexer **lex_list)
 {
-	t_list	*init_token_list;
+	t_list		*init_token_list;
+	t_status	status;
 
 	init_token_list = token_split_to_list(original_line);
 	list_print(init_token_list);
 	puts("*****");
-	lexcal_analysis(init_token_list, lex_list);
+	status = lexcal_analysis(init_token_list, lex_list);
 	ft_lstclear(&init_token_list, free);
+	return (status);
 }
