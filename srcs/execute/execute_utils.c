@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_command.c                                  :+:      :+:    :+:   */
+/*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 14:12:44 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/22 19:12:14 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parser.h"
 
-void	execute_simple_command(t_astree *simple_cmd_node,
-							 bool async,
-							 bool stdin_pipe,
-							 bool stdout_pipe,
-							 int pipe_read,
-							 int pipe_write,
-							 char *redirect_in,
-							 char *redirect_out
-								)
+void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
 {
 	CommandInternal cmdinternal;
 	init_command_internal(simple_cmd_node, &cmdinternal, async, stdin_pipe, stdout_pipe,
@@ -31,36 +23,26 @@ void	execute_simple_command(t_astree *simple_cmd_node,
 	destroy_command_internal(&cmdinternal);
 }
 
-void	execute_command(t_astree *cmdNode, bool async, bool stdin_pipe,
-							bool stdout_pipe, int pipe_read, int pipe_write)
+void	execute_command(t_astree *cmdNode, t_cmd_args *args)
 {
 	if (cmdNode == NULL)
 		return ;
 	if (cmdNode->type == NODE_REDIRECT_IN)
-		execute_simple_command(cmdNode->right,
-								async,
-								stdin_pipe,
-								stdout_pipe,
-								pipe_read,
-								pipe_write,
-								cmdNode->szData, NULL
-							  );
+	{
+		args->redirect_in = cmdNode->szData;
+		args->redirect_in = cmdNode->NULL;
+		execute_simple_command(cmdNode->right, args);
+	}
 	if (cmdNode->type == NODE_REDIRECT_OUT)
-		execute_simple_command(cmdNode->right,
-								async,
-								stdin_pipe,
-								stdout_pipe,
-								pipe_read,
-								pipe_write,
-								NULL, cmdNode->szData
-							  );
+	{
+		args->redirect_in = cmdNode->NULL;
+		args->redirect_in = cmdNode->szData;
+		execute_simple_command(cmdNode->right, args);
+	}
 	if (cmdNode->type == NODE_CMDPATH)
-		execute_simple_command(cmdNode,
-								async,
-								stdin_pipe,
-								stdout_pipe,
-								pipe_read,
-								pipe_write,
-								NULL, NULL
-							  );
+	{
+		args->redirect_in = cmdNode->NULL;
+		args->redirect_in = cmdNode->NULL;
+		execute_simple_command(cmdNode, args);
+	}
 }

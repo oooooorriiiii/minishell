@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:49:07 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 16:10:03 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/22 19:06:56 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,51 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void	execute_pipeline(t_astree *t, bool async)
+void	execute_pipeline(t_astree *t, t_cmd_args *args)
 {
 	t_astree	*jobNode;
 	int			file_desc[2];
-	int			pipewrite;
-	int			piperead;
 
 	pipe(file_desc);
-	pipewrite = file_desc[1];
-	piperead = file_desc[0];
-	execute_command(t->left, async, false, true, 0, pipewrite);
+	args->pipe_write = file_desc[1];
+	args->pipe_read = file_desc[0];
+	args->stdin_pipe = false;
+	args->stdout_pipe = true;
+	execute_command(t->left, args);
 	jobNode = t->right;
-	while (jobNode != NULL && NODETYPE(jobNode->type) == NODE_PIPE)
+	while (jobNode != NULL && jobNode->type == NODE_PIPE)
 	{
-		close(pipewrite);
+		close(args->pipe_write);
 		pipe(file_desc);
-		pipewrite = file_desc[1];
-		execute_command(jobNode->left, async, true, true, piperead, pipewrite);
-		close(piperead);
-		piperead = file_desc[0];
+		args->pipe_write = file_desc[1];
+		args->stdin_pipe = true;
+		args->stdout_pipe = true;
+		execute_command(jobNode->left, args);
+		close(args->pipe_read);
+		args->pipe_read = file_desc[0];
 		jobNode = jobNode->right;
 	}
-	piperead = file_desc[0];
-	close(pipewrite);
-	execute_command(jobNode, async, true, false, piperead, 0);
-	close(piperead);
+	args->pipe_read = file_desc[0];
+	close(args->pipe_write);
+	args->stdin_pipe = true;
+	args->stdout_pipe = false;
+	execute_command(jobNode, args);
+	close(args->pipe_read);
 }
 
-void	execute_job(t_astree *jobNode, bool async)
+void	execute_job(t_astree *jobNode, t_cmd_args *args)
 {
 	if (jobNode == NULL)
 		return ;
 	if (jobNode->type == NODE_PIPE)
-		execute_pipeline(jobNode, async);
+		execute_pipeline(jobNode, args);
 	else if (jobNode->type == NODE_CMDPATH)
-		execute_command(jobNode, async, false, false, 0, 0);
+		execute_command(args);
 	else
-		execute_command(jobNode, async, false, false, 0, 0);
+		execute_command(args);
 }
 
-void	execute_cmdline(t_astree *cmdline)
+void	execute_cmdline(t_astree *cmdline, t_cmd_args *args)
 {
 	if (cmdline == NULL)
 		return ;
@@ -64,5 +68,8 @@ void	execute_cmdline(t_astree *cmdline)
 
 void	execute_syntax_tree(t_astree *tree)
 {
+	t_cmd_args	*args;
+
+	args = init_struct;
 	execute_cmdline(tree);
 }
