@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 14:26:17 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:10:18 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../includes/minishell.h"
+# include "../includes/parser.h"
 # include <stdbool.h>
 
 typedef struct cmd_args

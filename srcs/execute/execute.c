@@ -6,12 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:49:07 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 14:08:19 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:10:03 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/parser.h"
+#include "execute.h"
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>
