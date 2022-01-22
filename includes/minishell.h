@@ -3,6 +3,18 @@
 
 # include "../libft/libft.h"
 # include <stdbool.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
+typedef struct	s_minishell
+{
+	int		exit_status;
+	int		heredoc_status;
+	char	*pwd;
+}				t_minishell;
+
+extern	t_minishell	g_minishell;
+
 
 typedef enum	e_token_type
 {
