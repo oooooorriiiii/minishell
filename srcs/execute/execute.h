@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 19:29:47 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/23 02:03:36 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,15 @@ void			execute_command(t_astree *t, t_cmd_args *args);
 // -----------  init_struct.c
 
 t_cmd_args		*init_struct(t_astree	*ast);
+
+// -----------  execute
+
+void			execute_echo(t_cmd_args *args);
+void			execute_cd(t_cmd_args *args);
+void			execute_pwd(t_cmd_args *args);
+void			execute_export(t_cmd_args *args);
+void			execute_unset(t_cmd_args *args);
+void			execute_env(t_cmd_args *args);
+void			execute_exit(t_cmd_args *args);
 
 #endif

@@ -6,8 +6,10 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:12:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 16:13:30 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/23 02:13:49 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+void			execute_env(t_cmd_args *args);

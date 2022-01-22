@@ -6,8 +6,10 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:11:23 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 16:13:11 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/23 02:13:33 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+void			execute_cd(t_cmd_args *args);

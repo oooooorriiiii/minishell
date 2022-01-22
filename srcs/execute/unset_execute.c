@@ -6,8 +6,10 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:12:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 16:13:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/23 02:14:30 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+void			execute_unset(t_cmd_args *args);
