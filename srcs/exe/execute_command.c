@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 14:08:24 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/22 14:12:44 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@ void	execute_simple_command(t_astree *simple_cmd_node,
 	destroy_command_internal(&cmdinternal);
 }
 
-void	execute_command(t_astree *cmdNode,
-							bool async,
-							bool stdin_pipe,
-							bool stdout_pipe,
-							int pipe_read,
-							int pipe_write)
+void	execute_command(t_astree *cmdNode, bool async, bool stdin_pipe,
+							bool stdout_pipe, int pipe_read, int pipe_write)
 {
 	if (cmdNode == NULL)
 		return ;
