@@ -6,7 +6,7 @@
 #    By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/19 00:46:37 by ymori             #+#    #+#              #
-#    Updated: 2022/01/10 14:02:38 by ymori            ###   ########.fr        #
+#    Updated: 2022/01/24 17:23:06 by ymori            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS =	ft_atoi.c		\
 		ft_memcpy.c		\
 		ft_memmove.c	\
 		ft_memset.c		\
+		ft_strcmp.c		\
 		ft_strchr.c		\
 		ft_strrchr.c	\
 		ft_strdup.c		\

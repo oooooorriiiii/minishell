@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 22:43:28 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/05 01:34:24 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/24 17:22:24 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void			*ft_memccpy(void *d, const void *s, int c, size_t n);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
+int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *d, const char *s, size_t max_dstsize);
