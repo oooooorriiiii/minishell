@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/22 15:21:31 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/24 14:17:19 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	quote_process(t_list **token_list, char **token, \
 	{
 		*token_list = (*token_list)->next;
 		if (*token_list == NULL)
-			printf("Close the quote\n"); // TODO: exit
+		{
+			ft_putendl_fd("Quote is not closed", STDERR_FILENO);
+			exit(1);
+		}
 		free_set((void **)token, \
 					ft_strjoin(*token, (char *)(*token_list)->content));
 		if (*(char *)(*token_list)->content == quote)
@@ -36,8 +39,7 @@ void	quote_process(t_list **token_list, char **token, \
 	if (*token_list == NULL || (*token_list != NULL && \
 		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
-		// TODO: hoge
-		token_list_add_back(ret_list, token_listnew(*token, TOKEN)); // TODO: TOKEN type
+		token_list_add_back(ret_list, token_listnew(*token, TOKEN));
 		free_set((void **)token, ft_strdup(""));
 	}
 	return ;
