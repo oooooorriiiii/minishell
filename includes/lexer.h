@@ -45,7 +45,7 @@ t_status	lexer(char *original_line, t_lexer **lex_list);
 // operator_analysis.c
 void		literal_process(t_list **token_list, char **token, \
 								t_token_list **ret_list);
-void		operetor_analysis(t_list **token_list, char *token, \
+t_status	operetor_analysis(t_list **token_list, char *token, \
 								t_token_list *ret_list, char *element);
 
 // token_split_to_list.c
