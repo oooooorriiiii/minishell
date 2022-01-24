@@ -9,6 +9,7 @@ INCLUDES_DIR	=	-Iincludes \
 INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/lexer/lexer.c \
+				$(SRCS_DIR)/lexer/operator_analysis.c \
 				$(SRCS_DIR)/lexer/lexer_utils.c \
 				$(SRCS_DIR)/lexer/token_split_to_list.c \
 				$(SRCS_DIR)/lexer/token_list_utils.c \
