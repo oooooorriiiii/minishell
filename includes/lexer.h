@@ -64,4 +64,8 @@ void			token_list_clear(t_token_list **lst);
 void	list_print(t_list *list);
 void	print_token_list(t_token_list *list);
 
+// others
+void	ft_fatal(char *errmsg);
+void	merge_redirections(t_list *tokens);
+
 #endif

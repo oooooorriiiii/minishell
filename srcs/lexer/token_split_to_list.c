@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:27:33 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/10 15:12:36 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/26 01:02:23 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ void	free_set(void **dst, void *src)
 	*dst = src;
 }
 
-static void	merge_doutle_tokens(t_list **tokens, char c)
+void	merge_doutle_tokens(t_list **tokens, char c)
 {
 	char		new_token_elem[3];
 	t_list		*next;
-	const char	current_char = *(char *)(*tokens)->content;
-	const char	next_char = *(char *)(*tokens)->next->content;
 
-	if (current_char == c && next_char == c)
+	if (*(char *)(*tokens)->content == c && \
+			*(char *)(*tokens)->next->content == c)
 	{
 		next = (*tokens)->next->next;
 		new_token_elem[0] = c;
@@ -38,10 +37,10 @@ static void	merge_doutle_tokens(t_list **tokens, char c)
 	}
 }
 
-static void	merge_redirections(t_list *tokens)
+void	merge_redirections(t_list *tokens)
 {
 	if (tokens == NULL)
-		return ;
+		ft_fatal("token error");
 	while (tokens && tokens->next)
 	{
 		merge_doutle_tokens(&tokens, '>');
@@ -56,7 +55,7 @@ t_list	*token_split_to_list(char *line)
 	char	*head;
 
 	new_list = NULL;
-	while (*line)
+	while (*line != '\0')
 	{
 		if (ft_strchr("\'\"\t\n\v\f\r <>|", *line) != NULL)
 		{

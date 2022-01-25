@@ -6,12 +6,19 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/24 14:26:48 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/26 01:03:51 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include <stdio.h>
+
+bool	is_space_string(char *s)
+{
+	while (ft_isblank(*s))
+		s++;
+	return (!*s);
+}
 
 t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 {
@@ -45,6 +52,13 @@ t_status	lexer(char *original_line, t_lexer **lex_list)
 	t_list		*init_token_list;
 	t_status	status;
 
+	if (original_line == NULL || lex_list == NULL)
+		ft_fatal("lexer error");
+	if (is_space_string(original_line))
+	{
+		*lex_list = lexer_new(NULL);
+		return (STATUS_WHHITESPACE);
+	}
 	init_token_list = token_split_to_list(original_line);
 	list_print(init_token_list);
 	puts("*****");
