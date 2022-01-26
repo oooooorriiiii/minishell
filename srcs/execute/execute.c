@@ -6,14 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:49:07 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/22 19:06:56 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 17:04:12 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
-#include <unistd.h>
-#include <stdbool.h>
-#include <stdio.h>
+#include "../includes/execute.h"
 
 void	execute_pipeline(t_astree *t, t_cmd_args *args)
 {
@@ -54,22 +51,24 @@ void	execute_job(t_astree *jobNode, t_cmd_args *args)
 	if (jobNode->type == NODE_PIPE)
 		execute_pipeline(jobNode, args);
 	else if (jobNode->type == NODE_CMDPATH)
-		execute_command(args);
+		execute_command(jobNode, args);
 	else
-		execute_command(args);
+		execute_command(jobNode, args);
 }
 
 void	execute_cmdline(t_astree *cmdline, t_cmd_args *args)
 {
 	if (cmdline == NULL)
 		return ;
-	execute_job(cmdline, false);
+	execute_job(cmdline, args);
 }
 
 void	execute_syntax_tree(t_astree *tree)
 {
 	t_cmd_args	*args;
 
-	args = init_struct;
-	execute_cmdline(tree);
+	args = (t_cmd_args *)malloc(sizeof(t_cmd_args));
+	init_struct(args);
+	execute_cmdline(tree, args);
+	// destroy_command_struct(args);
 }

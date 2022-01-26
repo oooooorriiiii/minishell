@@ -1,22 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast_visualizer.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 13:53:58 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/24 22:15:04 by sosugimo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #include "../includes/parser.h"
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-/*
+
+#define NODETYPE(a) (a)
+
 void	print_simple_command(t_astree *simple_cmd_node)
 {
 	t_astree	*node;
@@ -37,8 +26,9 @@ void	print_command(t_astree *cmdNode)
 {
 	if (cmdNode == NULL)
 		return ;
-	if (cmdNode->type == NODE_REDIRECT_IN)
-
+	// printf("########  %d\n", NODE_CMDPATH);
+	printf("@@@@@@@@@@@@@@@@@@@@@@@@( cmdNode->type :  %d )\n", cmdNode->type);
+	printf("@@@@@@@@@@@@@@@@@@@@@@@@( NODETYPE(cmdNode->type) :  %d )\n", NODETYPE(cmdNode->type));
 	switch (NODETYPE(cmdNode->type))
 	{
 	case NODE_REDIRECT_IN:		// <
@@ -128,4 +118,3 @@ void	print_syntax_tree(t_astree *tree)
 	print_cmdline(tree);
 	// astree_delete(tree);
 }
-*/

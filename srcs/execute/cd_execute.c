@@ -6,10 +6,13 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:11:23 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/23 02:13:33 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/24 13:38:39 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../includes/execute.h"
 
-void			execute_cd(t_cmd_args *args);
+void	execute_cd(t_cmd_args *args)
+{
+	printf(" execute_cd \n");
+}
