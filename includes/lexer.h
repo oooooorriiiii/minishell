@@ -13,7 +13,7 @@ typedef enum	e_status
 	STATUS_GENERAL		= -1,
 	STATUS_QOUTE		= '\'',
 	STATUS_DQUOTE		= '\"',
-	STATUS_WHHITESPACE	= ' ',
+	STATUS_WHITESPACE	= ' ',
 	STATUS_DBLESSER		= 'I',
 }				t_status;
 
