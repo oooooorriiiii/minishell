@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/26 17:07:44 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 20:06:51 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int	main(void)
 	lexer("pwd", &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
+	execute_syntax_tree(ast);
+	astree_delete(ast);
+	puts("**************************");
+	lexer("cd ../..", &lex_list);
+	parse(lex_list, &ast);
+	lexer_free(&lex_list);
+	print_syntax_tree(ast);
 	execute_syntax_tree(ast);
 	astree_delete(ast);
 	// lexer("echo\"ab  c \"|", &lex_list);
