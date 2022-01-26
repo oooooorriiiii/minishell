@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:26:16 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/24 17:37:26 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 02:33:57 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void
 }
 
 t_status	operetor_analysis(t_list **token_list, char *token, \
-							t_token_list *ret_list, char *element)
+								t_token_list *ret_list, char *element)
 {
 	if (*element == '\'' || *element == '\"')
 		quote_process(token_list, &token, &ret_list);
