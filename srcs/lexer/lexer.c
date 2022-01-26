@@ -6,11 +6,12 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 02:48:30 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 03:10:24 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "msh_error.h"
 #include <stdio.h>
 
 bool	is_space_string(char *s)
@@ -53,7 +54,7 @@ t_status	lexer(char *original_line, t_lexer **lex_list)
 	t_status	status;
 
 	if (original_line == NULL || lex_list == NULL)
-		ft_fatal("lexer error");
+		msh_fatal("lexer error");
 	if (is_space_string(original_line))
 	{
 		*lex_list = lexer_new(NULL);

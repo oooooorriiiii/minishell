@@ -23,6 +23,8 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/parser/parser_utils.c \
 				$(SRCS_DIR)/parser/parser.c \
 				$(SRCS_DIR)/parser/simplecmd_node.c \
+				$(SRCS_DIR)/signal/signal.c \
+				$(SRCS_DIR)/error/error.c \
 
 OBJS		=	$(SRCS:.c=.o)
 

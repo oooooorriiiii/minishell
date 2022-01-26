@@ -6,11 +6,12 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:27:33 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/26 16:59:18 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 03:15:48 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "msh_error.h"
 
 void	free_set(void **dst, void *src)
 {
@@ -40,7 +41,7 @@ void	merge_doutle_tokens(t_list **tokens, char c)
 void	merge_redirections(t_list *tokens)
 {
 	if (tokens == NULL)
-		ft_fatal("token error");
+		msh_fatal("token error");
 	while (tokens && tokens->next)
 	{
 		merge_doutle_tokens(&tokens, '>');
