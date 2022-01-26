@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/21 13:09:28 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:30:03 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef enum e_node_type
 
 typedef struct astree
 {
-	int				type;
+	t_node_type		type;
 	char			*szData;
 	struct astree	*left;
 	struct astree	*right;
 }				t_astree;
+
+# define NODETYPE(a) (a & (~NODE_DATA))
 
 t_astree		*CMDLINE(t_token_list **curtok);
 
@@ -68,6 +70,7 @@ bool			term(int toketype, char **bufferptr, t_token_list **curtok);
 
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);
+// void			astreeset_type(t_astree	*node, int nodetype);
 void			astreeset_type(t_astree	*node, t_node_type nodetype);
 void			astreeset_data(t_astree	*node, char	*data);
 void			astree_delete(t_astree	*node);

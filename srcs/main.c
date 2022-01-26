@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/22 15:53:33 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/26 17:07:44 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minishell.h"
 #include "lexer.h"
 #include "parser.h"
+#include "execute.h"
 #include <stdio.h>
 #include <errno.h>
 
@@ -64,7 +65,12 @@ int	main(void)
 	lexer("echo 42Tokyo > test.txt", &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
-	// puts("**************************");
+	puts("**************************");
+	lexer("pwd", &lex_list);
+	parse(lex_list, &ast);
+	lexer_free(&lex_list);
+	execute_syntax_tree(ast);
+	astree_delete(ast);
 	// lexer("echo\"ab  c \"|", &lex_list);
 	// puts("**************************");
 	// // lexer("echo\"abc|", &lex_list);

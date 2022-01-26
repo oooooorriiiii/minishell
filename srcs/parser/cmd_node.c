@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/21 16:07:33 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:22:04 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_astree	*CMD1(t_token_list **curtok)
 	char		*filename;
 
 	simplecmdNode = SIMPLECMD(curtok);
+	// printf("CMD1  simplecmdNode->type :  %d\n", simplecmdNode->type);
 	if (simplecmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_LESSER, NULL, curtok))
