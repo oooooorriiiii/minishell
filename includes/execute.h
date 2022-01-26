@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/23 02:03:36 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 17:04:24 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 # define EXECUTE_H
 
 # include "../libft/libft.h"
-# include "../includes/minishell.h"
-# include "../includes/parser.h"
+# include "lexer.h"
+# include "minishell.h"
+# include "parser.h"
 # include <stdbool.h>
+# include <unistd.h>
+# include <stdio.h>
+
+// # define NODETYPE(a) (a & (~NODE_DATA))
 
 typedef struct cmd_args
 {
-	t_astree	*simple_cmd_node;
 	bool		stdin_pipe;
 	bool		stdout_pipe;
 	int			pipe_read;
@@ -34,7 +38,7 @@ typedef struct cmd_args
 // -----------  execute.c
 
 void			execute_syntax_tree(t_astree *tree);
-void			execute_cmdline(t_astree *cmdline);
+void			execute_cmdline(t_astree *cmdline, t_cmd_args *args);
 void			execute_job(t_astree *jobNode, t_cmd_args *args);
 void			execute_pipeline(t_astree *t, t_cmd_args *args);
 
@@ -43,9 +47,15 @@ void			execute_pipeline(t_astree *t, t_cmd_args *args);
 void			execute_simple_command(t_astree *t, t_cmd_args *args);
 void			execute_command(t_astree *t, t_cmd_args *args);
 
+// -----------  execute_utils2.c
+
+void			execute_command_struct(t_cmd_args *args);
+int				init_command_struct(t_astree *simplecmdNode, t_cmd_args *args);
+void			destroy_command_struct(t_cmd_args *args);
+
 // -----------  init_struct.c
 
-t_cmd_args		*init_struct(t_astree	*ast);
+void			init_struct(t_cmd_args *args);
 
 // -----------  execute
 

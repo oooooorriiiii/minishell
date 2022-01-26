@@ -26,6 +26,17 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/parser/simplecmd_node.c \
 				$(SRCS_DIR)/signal/signal.c \
 				$(SRCS_DIR)/error/error.c \
+				$(SRCS_DIR)/execute/cd_execute.c \
+				$(SRCS_DIR)/execute/echo_execute.c \
+				$(SRCS_DIR)/execute/env_execute.c \
+				$(SRCS_DIR)/execute/execute_utils.c \
+				$(SRCS_DIR)/execute/execute_utils2.c \
+				$(SRCS_DIR)/execute/execute.c \
+				$(SRCS_DIR)/execute/exit_execute.c \
+				$(SRCS_DIR)/execute/export_execute.c \
+				$(SRCS_DIR)/execute/init_struct.c \
+				$(SRCS_DIR)/execute/pwd_execute.c \
+				$(SRCS_DIR)/execute/unset_execute.c
 
 OBJS		=	$(SRCS:.c=.o)
 

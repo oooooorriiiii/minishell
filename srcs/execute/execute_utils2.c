@@ -6,13 +6,13 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/23 01:53:15 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 17:05:08 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../includes/execute.h"
 
-void	execute_command_internal(t_cmd_args *args)
+void	execute_command_struct(t_cmd_args *args)
 {
 	if (args->cmdpath_argc < 0)
 		return ;
@@ -48,11 +48,11 @@ void	execute_command_internal(t_cmd_args *args)
 		exit(0);
 		return ;
 	}
-	while (waitpid(pid, NULL, 0) <= 0); //////////////////
+	// while (waitpid(pid, NULL, 0) <= 0); //////////////////
 	return ;
 }
 
-int	init_command_internal(t_astree *simplecmdNode, t_cmd_args *args)
+int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
 	t_astree	*argNode;
 	int			i;
@@ -60,12 +60,12 @@ int	init_command_internal(t_astree *simplecmdNode, t_cmd_args *args)
 	i = 0;
 	if (simplecmdNode == NULL || simplecmdNode->type != NODE_CMDPATH)
 	{
-		cmdinternal->argc = 0;
+		args->cmdpath_argc = 0;
 		return (-1);
 	}
 	argNode = simplecmdNode;
-	while (argNode != NULL && argNode->type == NODE_ARGUMENT
-		|| argNode->type == NODE_CMDPATH)
+	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
+			|| argNode->type == NODE_CMDPATH))
 	{
 		argNode = argNode->right;
 		i++;
@@ -73,8 +73,8 @@ int	init_command_internal(t_astree *simplecmdNode, t_cmd_args *args)
 	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
 	argNode = simplecmdNode;
 	i = 0;
-	while (argNode != NULL && argNode->type == NODE_ARGUMENT
-		|| argNode->type == NODE_CMDPATH)
+	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
+			|| argNode->type == NODE_CMDPATH))
 	{
 		args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
 		strcpy(args->cmdpath[i], argNode->szData);
@@ -84,4 +84,19 @@ int	init_command_internal(t_astree *simplecmdNode, t_cmd_args *args)
 	args->cmdpath[i] = NULL;
 	args->cmdpath_argc = i;
 	return (0);
+}
+
+void	destroy_command_struct(t_cmd_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->cmdpath_argc)
+	{
+		free(args->cmdpath[i]);
+		i++;
+	}
+	free(args->cmdpath);
+	args->cmdpath_argc = 0;
+	free(args);
 }

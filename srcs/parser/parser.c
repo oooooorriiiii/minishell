@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/21 14:37:31 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:23:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 	}
 	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
+	// printf(" (*syntax_tree)->type :  %d\n", (*syntax_tree)->type);
 	if (curtok != NULL && curtok->type != 0)
 	{
 		printf("Syntax Error near: %s\n", curtok->val);
 		return (-1);
 	}
-	print_syntax_tree(*syntax_tree);
+	// print_syntax_tree(*syntax_tree);
 	return (0);
 }

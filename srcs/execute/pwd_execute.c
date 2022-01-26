@@ -6,11 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:11:36 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/23 15:04:35 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:50:22 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../includes/execute.h"
 
 void	execute_pwd(t_cmd_args *args)
 {
