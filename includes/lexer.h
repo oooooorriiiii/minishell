@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 02:57:53 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 02:57:55 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 03:28:06 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ void			token_list_clear(t_token_list **lst);
 // helper.c
 void	list_print(t_list *list);
 void	print_token_list(t_token_list *list);
+
+// heredoc.c
+t_status	heredoc_process(t_list **token_list, char **token, \
+							t_token_list **ret_list);
 
 // others
 void	ft_fatal(char *errmsg);

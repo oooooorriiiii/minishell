@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:29:32 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 03:09:18 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 03:23:50 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	signal_handler_prompt(int sig)
 	(void)sig;
 	printf("\n");
 	rl_on_new_line();
-	rl_replace_line("",0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
