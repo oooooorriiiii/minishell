@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:26:16 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 02:33:57 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 02:49:22 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,23 +170,23 @@ void
 }
 
 t_status	operetor_analysis(t_list **token_list, char *token, \
-								t_token_list *ret_list, char *element)
+								t_token_list **ret_list, char *element)
 {
 	if (*element == '\'' || *element == '\"')
-		quote_process(token_list, &token, &ret_list);
+		quote_process(token_list, &token, ret_list);
 	else if (ft_strncmp(element, "<<", 2) == 0)
 	{
-		heredoc_process(token_list, &token, &ret_list);
+		heredoc_process(token_list, &token, ret_list);
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
-		token_list_add_back(&ret_list, \
+		token_list_add_back(ret_list, \
 							token_listnew(element, CHAR_DBLGREATER));
 		*token_list = (*token_list)->next;
 	}
 	else if (*element == '<' || *element == '>' || *element == '|')
 	{
-		token_list_add_back(&ret_list, \
+		token_list_add_back(ret_list, \
 							token_listnew(element, *element));
 		*token_list = (*token_list)->next;
 	}

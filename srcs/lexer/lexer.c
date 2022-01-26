@@ -6,7 +6,7 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 22:23:51 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/26 16:23:33 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 02:48:30 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 		if (ft_isblank(*element))
 			init_token_list = init_token_list->next;
 		else if (is_operator(element))
-			operetor_analysis(&init_token_list, token, ret_list, element);
+			operetor_analysis(&init_token_list, token, &ret_list, element);
 		else
 			literal_process(&init_token_list, &token, &ret_list);
 	}
