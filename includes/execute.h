@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 12:36:05 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 13:38:59 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ void			execute_pipeline(t_astree *t, t_cmd_args *args);
 
 // -----------  execute_utils.c
 
+int				joudge_process(t_cmd_args *args);
 void			execute_simple_command(t_astree *t, t_cmd_args *args);
 void			execute_command(t_astree *t, t_cmd_args *args);
 
-// -----------  execute_utils2.c
+// -----------  execute_command_struct.c
 
 void			execute_command_struct(t_cmd_args *args);
 int				init_command_struct(t_astree *simplecmdNode, t_cmd_args *args);
