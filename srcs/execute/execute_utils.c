@@ -5,43 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 17:04:39 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/01/27 13:38:02 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
 
-void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
+int	joudge_process(t_cmd_args *args)
 {
-	init_command_struct(simple_cmd_node, args);
-	execute_command_struct(args);
-	destroy_command_struct(args);
+	if (args->pipe_read == true || args->pipe_write == true)
+		return (0);
+	if (strcmp(args->cmdpath[0], "echo") != 0
+		&& strcmp(args->cmdpath[0], "cd") != 0
+		&& strcmp(args->cmdpath[0], "pwd") != 0
+		&& strcmp(args->cmdpath[0], "export") != 0
+		&& strcmp(args->cmdpath[0], "unset") != 0
+		&& strcmp(args->cmdpath[0], "env") != 0
+		&& strcmp(args->cmdpath[0], "exit") != 0)
+		return (0);
+	return (1);
 }
 
-void	execute_command(t_astree *cmdNode, t_cmd_args *args)
+int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
-	if (cmdNode == NULL)
+	t_astree	*argNode;
+	int			i;
+
+	i = 0;
+	if (simplecmdNode == NULL || simplecmdNode->type != NODE_CMDPATH)
 	{
-		// printf("cmdNode == NULL\n");///////
-		return ;
+		args->cmdpath_argc = 0;
+		return (-1);
 	}
-	if (cmdNode->type == NODE_REDIRECT_IN)
+	argNode = simplecmdNode;
+	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
+			|| argNode->type == NODE_CMDPATH))
 	{
-		args->redirect_in = cmdNode->szData;
-		args->redirect_out = NULL;
-		execute_simple_command(cmdNode->right, args);
+		argNode = argNode->right;
+		i++;
 	}
-	if (cmdNode->type == NODE_REDIRECT_OUT)
+	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
+	argNode = simplecmdNode;
+	i = 0;
+	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
+			|| argNode->type == NODE_CMDPATH))
 	{
-		args->redirect_in = NULL;
-		args->redirect_out = cmdNode->szData;
-		execute_simple_command(cmdNode->right, args);
+		args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
+		strcpy(args->cmdpath[i], argNode->szData);
+		argNode = argNode->right;
+		i++;
 	}
-	if (cmdNode->type == NODE_CMDPATH)
+	args->cmdpath[i] = NULL;
+	args->cmdpath_argc = i;
+	return (0);
+}
+
+void	destroy_command_struct(t_cmd_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->cmdpath_argc)
 	{
-		args->redirect_in = NULL;
-		args->redirect_out = NULL;
-		execute_simple_command(cmdNode, args);
+		free(args->cmdpath[i]);
+		i++;
 	}
+	free(args->cmdpath);
+	args->cmdpath_argc = 0;
+	free(args);
 }
