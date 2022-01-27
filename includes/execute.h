@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 17:04:24 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:36:05 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <unistd.h>
 # include <stdio.h>
 
-// # define NODETYPE(a) (a & (~NODE_DATA))
+# define STDIN_FILENO 0
+# define STDOUT_FILENO 1
 
 typedef struct cmd_args
 {
