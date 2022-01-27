@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/27 03:37:16 by ymori             #+#    #+#             */
+/*   Updated: 2022/01/27 03:37:32 by ymori            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -6,17 +18,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct	s_minishell
+typedef struct _minishell
 {
 	int		exit_status;
 	int		heredoc_status;
 	char	*pwd;
 }				t_minishell;
 
-extern	t_minishell	g_minishell;
+extern t_minishell	g_minishell;
 
-
-typedef enum	e_token_type
+typedef enum e_token_type
 {
 	CHAR_GENERAL		= -1,
 	CHAR_PIPE			= '|',
