@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
+/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/01/26 20:06:51 by sosugimo         ###   ########.fr       */
+=======
+/*   Updated: 2022/01/27 03:48:51 by ymori            ###   ########.fr       */
+>>>>>>> 384d0cf72ec39e54d9fc4571d7e75c8a40ebbb8d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +73,6 @@ int	main(void)
 	lexer("pwd", &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
-	execute_syntax_tree(ast);
-	astree_delete(ast);
-	puts("**************************");
-	lexer("cd ../..", &lex_list);
-	parse(lex_list, &ast);
-	lexer_free(&lex_list);
-	print_syntax_tree(ast);
 	execute_syntax_tree(ast);
 	astree_delete(ast);
 	// lexer("echo\"ab  c \"|", &lex_list);
