@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 17:05:08 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:24:38 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	execute_command_struct(t_cmd_args *args)
 {
+	// dup2で出力先の変更を行う。
+
 	if (args->cmdpath_argc < 0)
 		return ;
 	if (strcmp(args->cmdpath[0], "echo") == 0)
