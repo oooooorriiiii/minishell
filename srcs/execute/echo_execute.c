@@ -6,17 +6,47 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:09:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 12:32:50 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:55:55 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
 
-void	execute_echo(t_cmd_args *args)
+bool	check_option(char **cmdarg, int argc)
 {
-	printf(" execute_echo \n");
+	char	*option;
+
+	if (argc < 1)
+		return (false);
+	option = cmdarg[1];
+	if (option[0] == '-' && option[1] == 'n')
+		return (true);
+	return (false);
 }
 
+int	execute_echo(t_cmd_args *args)
+{
+	int	i;
+	int	fd;
+
+	i = 1;
+	if (args->stdout_pipe && !args->stdout_pipe)
+		dup2(args->stdout_pipe, STDOUT_FILENO);
+	if (args->redirect_out) // cmd < file
+	{
+		fd = open(args->redirect_out, O_WRONLY);
+		dup2(fd, STDOUT_FILENO);
+	}
+	while (i < args->cmdpath_argc)
+	{
+		printf("%s", args->cmdpath_argc[i]);
+		i++;
+	}
+	if (!check_option(args->cmdpath, args->cmdpath_argc))
+		printf("\n");
+}
+
+/*
 t_bool	is_option_str(char *str)
 {
 	size_t	len;
@@ -65,3 +95,4 @@ int	execute_echo(char **args)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }
+*/

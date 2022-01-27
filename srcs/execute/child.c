@@ -6,14 +6,44 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:43:47 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 12:45:26 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:11:44 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../includes/execute.h"
 
-static void	exec_command_child(
-	t_command *command, char **args, t_pipe_state state, int old_pipe[])
+void	execute_in_child(t_cmd_args *args)
+{
+	pid_t	pid;
+	int		fd;
+
+	pid = fork();
+	if (pid < 0)
+		exit(0);// error
+	if (pid == 0)
+	{
+		if (args->redirect_out)
+		{
+			fd = open(args->redirect_out, O_WRONLY);
+			dup2(fd, STDOUT_FILENO);
+		}
+		if (args->redirect_in)
+		{
+			fd = open(args->redirect_in, O_WRONLY);
+			dup2(fd, STDIN_FILENO);
+		}
+		if (args->pipe_read)
+			dup2(args->pipe_read, STDIN_FILENO);
+		if (args->pipe_write)
+			dup2(args->pipe_write, STDOUT_FILENO);
+		execute_command_struct(args);
+	}
+	close(args->pipe_read);
+	close(args->pipe_write);
+}
+
+/*
+void	execute_in_child(t_cmd_args *args)
 {
 	pid_t	pid;
 	int		new_pipe[2];
@@ -40,3 +70,4 @@ static void	exec_command_child(
 	cleanup_pipe(state, old_pipe, new_pipe);
 	command->pid = pid;
 }
+*/

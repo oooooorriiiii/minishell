@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 03:37:16 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 03:37:32 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 17:08:41 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "execute.h"
+# include "lexer.h"
+# include "minishell.h"
+# include "msh_error.h"
+# include "msh_signal.h"
+# include "parser.h"
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
