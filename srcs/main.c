@@ -30,11 +30,12 @@ void	init(char **input, t_lexer **lex_list/*, t_astree **ast*/)
 //	*ast = NULL;
 }
 
-void	minishell_loop(char **input, t_lexer **lex_list, /*t_astree **ast,*/ char **envp)
+void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 {
 	t_envlist	*envlist;
+	extern char **environ;
 
-	envlist = create_envlist(envp);
+	envlist = create_envlist(environ);
 	print_envlist(envlist);
 //	while (true)
 //	{
@@ -66,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 
 	init(&input, &lex_list/*, &ast*/);
-	minishell_loop(&input, &lex_list, /*&ast*,*/ envp);
+	minishell_loop(&input, &lex_list/*, &ast*,*/);
 
 //	lexer("echo abc", &lex_list);
 //	parse(lex_list, &ast);

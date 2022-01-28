@@ -5,7 +5,7 @@
 #include "msh_env.h"
 #include "msh_error.h"
 
-static bool	satisfy_conditions(t_envlist *envlist)
+static bool	is_countable(t_envlist *envlist)
 {
 	if (envlist->value == NULL)
 		return (false);
@@ -21,7 +21,7 @@ size_t	get_envlist_size(t_envlist *envlist)
 	size = 0;
 	while (envlist)
 	{
-		if (satisfy_conditions(envlist))
+		if (is_countable(envlist))
 			size++;
 		envlist = envlist->next;
 	}
@@ -41,7 +41,7 @@ char	**gen_env_str(t_envlist *envlist)
 	i = 0;
 	while (i < envlist_size)
 	{
-		if (satisfy_conditions(envlist))
+		if (is_countable(envlist))
 		{
 			ret_strs[i] = ft_strjoin(envlist->key, "=");
 			tmp = ret_strs[i];
