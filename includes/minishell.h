@@ -14,12 +14,6 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "execute.h"
-# include "lexer.h"
-# include "minishell.h"
-# include "msh_error.h"
-# include "msh_signal.h"
-# include "parser.h"
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -55,7 +49,5 @@ typedef enum e_token_type
 
 # define SINGLE_QUOTE '\''
 # define DOUBLE_QUOTE '\"'
-
-bool	is_quote(char c);
 
 #endif

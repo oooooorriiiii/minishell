@@ -1,0 +1,13 @@
+echo a\npwd
+echo aaa|cat
+   echo aaa|cat
+echo aaa|cat	\
+echo aaa | cat
+echo aaa| cat
+echo "aaa | bbb"
+echo "aaa > bbb"
+echo '''' | cat -e
+echo '' '' | cat -e
+echo " " " """ | ''c'at' -e
+echo ">"
+echo ">>"
