@@ -9,6 +9,8 @@ INCLUDES_DIR	=	-Iincludes \
 INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/env/env_list.c \
+				$(SRCS_DIR)/env/env_list_clear.c \
+				$(SRCS_DIR)/env/gen_env_str.c \
 				$(SRCS_DIR)/signal/signal.c \
 				$(SRCS_DIR)/error/error.c \
 				$(SRCS_DIR)/lexer/lexer.c \
