@@ -30,13 +30,38 @@ void	init(char **input, t_lexer **lex_list/*, t_astree **ast*/)
 //	*ast = NULL;
 }
 
+void 	free_strstr(char ***str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!(*str))
+		return ;
+	while ((*str)[i])
+	{
+		free((*str)[i]);
+		(*str)[i] = NULL;
+		i++;
+	}
+	free(*str);
+	*str = NULL;
+}
+
 void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 {
 	t_envlist	*envlist;
 	extern char **environ;
+	size_t		i = 0;
 
 	envlist = create_envlist(environ);
 	print_envlist(envlist);
+	char **tmp = gen_env_str(envlist);
+	while (tmp[i] != NULL)
+	{
+		printf("%s\n", tmp[i]);
+		i++;
+	}
+	free_strstr(&tmp);
 //	while (true)
 //	{
 //		free_set((void **)input, NULL);
