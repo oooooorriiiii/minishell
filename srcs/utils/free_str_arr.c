@@ -20,4 +20,3 @@ void 	free_str_arr(char ***str)
 	free(*str);
 	*str = NULL;
 }
-
