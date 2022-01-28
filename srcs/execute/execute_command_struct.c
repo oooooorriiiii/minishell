@@ -48,6 +48,8 @@ void	execute_command_struct(t_cmd_args *args)
 		exit(0);
 		return ;
 	}
+	else
+		execve(args->cmdpath[0], args, generate_env(g_minishell.env))
 	// while (waitpid(pid, NULL, 0) <= 0); //////////////////
 	return ;
 }
