@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-#define NODETYPE(a) (a)
+#define NODETYPE(a) (a*1)
 
 void	print_simple_command(t_astree *simple_cmd_node)
 {

@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 13:38:59 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:55:34 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void			execute_cmdline(t_astree *cmdline, t_cmd_args *args);
 void			execute_job(t_astree *jobNode, t_cmd_args *args);
 void			execute_pipeline(t_astree *t, t_cmd_args *args);
 
+// -----------  expansion.c
+
+void			extra_strcpy(t_cmd_args *args, t_astree *ast_node);
+
 // -----------  execute_utils.c
 
 int				joudge_process(t_cmd_args *args);
@@ -58,6 +62,14 @@ void			destroy_command_struct(t_cmd_args *args);
 // -----------  init_struct.c
 
 void			init_struct(t_cmd_args *args);
+
+// -----------  parent.c
+
+void			execute_in_parent(t_cmd_args *args);
+
+// -----------  child.c
+
+void			execute_in_child(t_cmd_args *args);
 
 // -----------  execute
 

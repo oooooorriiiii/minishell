@@ -6,17 +6,29 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:43:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 13:02:16 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:50:37 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../includes/execute.h"
 
-static int	execute_in_parent(t_command *command, char **args)
+void	execute_in_parent(t_cmd_args *args)
 {
-	if (setup_redirects(command) == FALSE)
-		return (EXIT_FAILURE);
-	if (dup_redirects(command, TRUE) == FALSE)
-		return (EXIT_FAILURE);
-	return (exec_builtin(args));
+	int	fd;
+	int	backup;
+
+	if (args->redirect_in)
+	{
+		backup = dup(STDIN_FILENO);
+		fd = open(args->redirect_in, O_RDONLY);
+		dup2(fd, STDIN_FILENO);
+	}
+	if (args->redirect_out)
+	{
+		backup = dup(STDOUT_FILENO);
+		fd = open(args->redirect_out, O_WRONLY);
+		dup2(fd, STDOUT_FILENO);
+	}
+	close(backup);
+	execute_command_struct(args);
 }

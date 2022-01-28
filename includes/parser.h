@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 13:30:03 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:38:00 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include "lexer.h"
 # include "minishell.h"
+
 typedef enum e_node_type
 {
 	NODE_PIPE			= (1 << 0),
@@ -41,8 +42,6 @@ typedef struct astree
 	struct astree	*left;
 	struct astree	*right;
 }				t_astree;
-
-# define NODETYPE(a) (a & (~NODE_DATA))
 
 t_astree		*CMDLINE(t_token_list **curtok);
 

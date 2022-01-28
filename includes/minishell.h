@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 03:37:16 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 03:37:32 by ymori            ###   ########.fr       */
+/*   Updated: 2022/01/27 17:08:41 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,5 @@ typedef enum e_token_type
 
 # define SINGLE_QUOTE '\''
 # define DOUBLE_QUOTE '\"'
-
-bool	is_quote(char c);
 
 #endif
