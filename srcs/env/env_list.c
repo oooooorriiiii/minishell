@@ -39,7 +39,7 @@ static void			set_elements(char *env, t_envlist *new)
 	new->is_shell_var = true;
 }
 
-static t_envlist	*envlist_listnew(t_envlist *current, char *env)
+t_envlist	*envlist_listnew(t_envlist *current, char *env)
 {
 	t_envlist	*new_env;
 

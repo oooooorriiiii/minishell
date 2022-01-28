@@ -11,6 +11,8 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/utils/free_str_arr.c \
 				$(SRCS_DIR)/env/env_list.c \
 				$(SRCS_DIR)/env/env_list_clear.c \
+				$(SRCS_DIR)/env/env_list_utils.c \
+				$(SRCS_DIR)/env/update_env_val.c \
 				$(SRCS_DIR)/env/gen_env_str.c \
 				$(SRCS_DIR)/signal/signal.c \
 				$(SRCS_DIR)/error/error.c \
