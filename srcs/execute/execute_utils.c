@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 13:38:02 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:49:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 	}
 	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
 	argNode = simplecmdNode;
-	i = 0;
-	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
-			|| argNode->type == NODE_CMDPATH))
-	{
-		args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
-		strcpy(args->cmdpath[i], argNode->szData);
-		argNode = argNode->right;
-		i++;
-	}
-	args->cmdpath[i] = NULL;
-	args->cmdpath_argc = i;
+	extra_strcpy(args, argNode);
+	// i = 0;
+	// while (argNode != NULL && (argNode->type == NODE_ARGUMENT
+	// 		|| argNode->type == NODE_CMDPATH))
+	// {
+	// 	args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
+	// 	strcpy(args->cmdpath[i], argNode->szData);////////////////////////
+	// 	argNode = argNode->right;
+	// 	i++;
+	// }
+	// args->cmdpath[i] = NULL;
+	// args->cmdpath_argc = i;
 	return (0);
 }
 

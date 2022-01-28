@@ -6,16 +6,14 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 13:24:59 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:28:23 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../includes/execute.h"
 
 void	execute_command_struct(t_cmd_args *args)
 {
-	// dup2で出力先の変更を行う。
-
 	if (args->cmdpath_argc < 0)
 		return ;
 	if (strcmp(args->cmdpath[0], "echo") == 0)
