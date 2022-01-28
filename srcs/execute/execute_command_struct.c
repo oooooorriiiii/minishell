@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
+#include "minishell.h"
 
 void	execute_command_struct(t_cmd_args *args)
 {
@@ -49,7 +50,7 @@ void	execute_command_struct(t_cmd_args *args)
 		return ;
 	}
 	else
-		execve(args->cmdpath[0], args, generate_env(g_minishell.env))
+		execve(args->cmdpath[0], args, gen_env_str(g_minishell.env));
 	// while (waitpid(pid, NULL, 0) <= 0); //////////////////
 	return ;
 }
