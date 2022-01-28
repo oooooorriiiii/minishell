@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "minishell.h"
 #include "lexer.h"
+#include "utils.h"
 //#include "parser.h"
 //#include "execute.h"
 #include "msh_env.h"
@@ -30,23 +31,6 @@ void	init(char **input, t_lexer **lex_list/*, t_astree **ast*/)
 //	*ast = NULL;
 }
 
-void 	free_strstr(char ***str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!(*str))
-		return ;
-	while ((*str)[i])
-	{
-		free((*str)[i]);
-		(*str)[i] = NULL;
-		i++;
-	}
-	free(*str);
-	*str = NULL;
-}
-
 void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 {
 	t_envlist	*envlist;
@@ -61,7 +45,7 @@ void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 		printf("%s\n", tmp[i]);
 		i++;
 	}
-	free_strstr(&tmp);
+	free_str_arr(&tmp);
 //	while (true)
 //	{
 //		free_set((void **)input, NULL);

@@ -12,23 +12,7 @@
 
 #include "../includes/execute.h"
 #include "minishell.h"
-
-void 	free_strstr(char ***str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!(*str))
-		return ;
-	while ((*str)[i])
-	{
-		free((*str)[i]);
-		(*str)[i] = NULL;
-		i++;
-	}
-	free(*str);
-	*str = NULL;
-}
+#include "utils.h"
 
 void 	execute_external_cmd(t_cmd_args *args)
 {
@@ -41,7 +25,7 @@ void 	execute_external_cmd(t_cmd_args *args)
 	{
 		// TODO: handle_execve_error
 	}
-	free_strstr(&env_strs);
+	free_str_arr(&env_strs);
 }
 
 void	execute_command_struct(t_cmd_args *args)
