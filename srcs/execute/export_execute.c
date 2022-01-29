@@ -61,6 +61,7 @@ static int		separate_arg(char *arg, char **sep, char **value)
 	}
 	else
 		*value = NULL;
+	return (append_flag);
 }
 
 static int		store_env(char **cmdpath)
