@@ -17,7 +17,7 @@ static void	set_env_value(t_envlist *envlist, const char *new_value, bool append
 	{
 		if (old_value || new_value)
 		{
-			envlist->value = ft_strjoin(old_value, new_value)
+			envlist->value = ft_strjoin(old_value, new_value);
 			if (envlist->value == NULL)
 				msh_fatal("env error");
 		}
@@ -38,6 +38,9 @@ static void	set_env_value(t_envlist *envlist, const char *new_value, bool append
 	free_str(&old_value);
 }
 
+/*
+ * if used by store_env(), is_env_var is true.
+ */
 void	update_env_val(const char *env_key, const char *new_env_val, bool is_env_var, bool append_flag)
 {
 	t_envlist	*envlist;

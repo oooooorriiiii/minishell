@@ -33,38 +33,38 @@ void	init(char **input, t_lexer **lex_list/*, t_astree **ast*/)
 
 void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 {
-	t_envlist	*envlist;
-	extern char **environ;
-	size_t		i = 0;
-
-	envlist = create_envlist(environ);
-	print_envlist(envlist);
-	char **tmp = gen_env_str(envlist);
-	while (tmp[i] != NULL)
-	{
-		printf("%s\n", tmp[i]);
-		i++;
-	}
-	free_str_arr(&tmp);
-//	while (true)
+//	t_envlist	*envlist;
+//	extern char **environ;
+//	size_t		i = 0;
+//
+//	envlist = create_envlist(environ);
+//	print_envlist(envlist);
+//	char **tmp = gen_env_str(envlist);
+//	while (tmp[i] != NULL)
 //	{
-//		free_set((void **)input, NULL);
-//		*input = readline("minishell> ");
-//		if (*input == NULL)
-//			exit(g_minishell.exit_status);
-//		if (ft_strlen(*input) == 0)
-//			continue ;
-//		add_history(*input);
-//		if (lexer(*input, lex_list) != STATUS_GENERAL)
-//		{
-//			lexer_free(lex_list);
-//			continue ;
-//		}
-//		// TODO: parse
-//		lexer_free(lex_list);
+//		printf("%s\n", tmp[i]);
+//		i++;
 //	}
+//	free_str_arr(&tmp);
+	while (true)
+	{
+		free_set((void **)input, NULL);
+		*input = readline("minishell> ");
+		if (*input == NULL)
+			exit(g_minishell.exit_status);
+		if (ft_strlen(*input) == 0)
+			continue ;
+		add_history(*input);
+		if (lexer(*input, lex_list) != STATUS_GENERAL)
+		{
+			lexer_free(lex_list);
+			continue ;
+		}
+		// TODO: parse
+		lexer_free(lex_list);
+	}
 
-	envlist_clear(&envlist);
+//	envlist_clear(&envlist);
 }
 
 int	main(int argc, char **argv, char **envp)
