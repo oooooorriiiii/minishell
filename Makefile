@@ -6,6 +6,12 @@ SRCS_DIR		=	srcs
 INCLUDES_DIR	=	-Iincludes \
 					-Ilibft
 
+LIB_READLINE	:=	-lreadline
+ifeq ($(shell uname),Darwin)
+	INCLUDE_DIR		+=	-I$(shell brew --prefix readline)/include
+	LIB_READLINE	+=	-L$(shell brew --prefix readline)/lib
+endif
+
 INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/utils/free_str_arr.c \
@@ -62,7 +68,7 @@ LIBFT				=	$(LIBFT_DIR)/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft $(READLINE_DIR) -lreadline -o $(NAME)
 
 .PHONY: clean
 clean:
