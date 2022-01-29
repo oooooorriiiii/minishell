@@ -31,7 +31,7 @@ void		envlist_add_back(t_envlist **p_envlist, t_envlist *new_envlist);
 void		envlist_del(t_envlist **p_envlist, char *key);
 
 // env_name_rule.c
-bool		satisfy_env_name_rule(*key);
+bool		satisfy_env_name_rule(char *key);
 
 // update_env_val.c
 void		update_env_val(const char *env_key, const char *new_env_val, \
