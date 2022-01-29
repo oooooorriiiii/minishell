@@ -15,7 +15,7 @@
 static void	print_env(t_envlist *envlist)
 {
 	if (envlist->value == NULL)
-		return;
+		return ;
 	if (envlist->is_shell_var == false)
 		return ;
 	printf("%s=%s", envlist->key, envlist->value);
@@ -25,8 +25,8 @@ static void	print_env(t_envlist *envlist)
 void	execute_env(t_cmd_args *args)
 {
 	t_envlist	*envlist;
-	(void)args;
 
+	(void)args;
 	printf(" execute_env \n"); // DEBUG
 	envlist = g_minishell.env;
 	while (envlist)

@@ -23,11 +23,11 @@ void	print_envlist(t_envlist *list)
 	printf("is_shell: %d\n", list->is_shell_var);
 }
 
-static void			set_elements(char *env, t_envlist *new)
+static void	set_elements(char *env, t_envlist *new)
 {
-	char 	*key;
-	char 	*value;
-	char 	*p_equal;
+	char	*key;
+	char	*value;
+	char	*p_equal;
 	size_t	key_len;
 
 	p_equal = ft_strchr(env, '=');

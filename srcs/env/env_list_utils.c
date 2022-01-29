@@ -6,7 +6,6 @@
 #include "utils.h"
 #include "minishell.h"
 
-
 t_envlist	*msh_get_envlist(const char *key)
 {
 	t_envlist	*current;

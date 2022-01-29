@@ -30,9 +30,9 @@ size_t	get_envlist_size(t_envlist *envlist)
 
 char	**gen_env_str(t_envlist *envlist)
 {
-	char 	**ret_strs;
-	char 	*tmp;
-	size_t	i;
+	char			**ret_strs;
+	char			*tmp;
+	size_t			i;
 	const size_t	envlist_size = get_envlist_size(envlist);
 
 	ret_strs = malloc(sizeof(char *) * (envlist_size + 1));

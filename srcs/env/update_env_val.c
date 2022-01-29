@@ -8,7 +8,8 @@
 #include "minishell.h"
 #include <stdlib.h>
 
-static void	set_env_value(t_envlist *envlist, const char *new_value, bool append_flag)
+static void	set_env_value(t_envlist *envlist, const char *new_value, \
+							bool append_flag)
 {
 	char	*old_value;
 
@@ -16,22 +17,14 @@ static void	set_env_value(t_envlist *envlist, const char *new_value, bool append
 	if (append_flag == true)
 	{
 		if (old_value || new_value)
-		{
 			envlist->value = ft_strjoin(old_value, new_value);
-			if (envlist->value == NULL)
-				msh_fatal("env error");
-		}
 		else
 			envlist->value = NULL;
 	}
 	else
 	{
 		if (new_value)
-		{
 			envlist->value = ft_strdup(new_value);
-			if (envlist->value == NULL)
-				msh_fatal("env error");
-		}
 		else
 			envlist->value = NULL;
 	}
@@ -41,7 +34,8 @@ static void	set_env_value(t_envlist *envlist, const char *new_value, bool append
 /*
  * if used by store_env(), is_env_var is true.
  */
-void	update_env_val(const char *env_key, const char *new_env_val, bool is_env_var, bool append_flag)
+void	update_env_val(const char *env_key, const char *new_env_val, \
+						bool is_env_var, bool append_flag)
 {
 	t_envlist	*envlist;
 

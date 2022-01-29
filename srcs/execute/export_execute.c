@@ -15,7 +15,7 @@
 #include "msh_env.h"
 #include "utils.h"
 
-static void		restore_arg(char *sep, bool append_flag)
+static void	restore_arg(char *sep, bool append_flag)
 {
 	if (sep)
 	{
@@ -25,7 +25,7 @@ static void		restore_arg(char *sep, bool append_flag)
 	}
 }
 
-static int		separate_arg(char *arg, char **sep, char **value)
+static int	separate_arg(char *arg, char **sep, char **value)
 {
 	bool	append_flag;
 
@@ -46,7 +46,7 @@ static int		separate_arg(char *arg, char **sep, char **value)
 	return (append_flag);
 }
 
-static int		store_env(char **cmdpath)
+static int	store_env(char **cmdpath)
 {
 	size_t	i;
 	int		status;
@@ -84,7 +84,7 @@ void	print_export(char **env_arr)
 }
 
 // TODO: return exit status ??
-void			execute_export(t_cmd_args *args)
+void	execute_export(t_cmd_args *args)
 {
 	char	**env_arr;
 	int		status;
