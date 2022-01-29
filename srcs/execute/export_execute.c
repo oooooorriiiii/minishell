@@ -15,23 +15,6 @@
 #include "msh_env.h"
 #include "utils.h"
 
-static bool		satisfy_name_rule(*key)
-{
-	size_t	i;
-
-	i = 0;
-	if (key[i] != '_' && !ft_isalpha(key[i]))
-		return (false);
-	i++;
-	while (key[i])
-	{
-		if (key[i] != '_' && !ft_isalnum(key[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 static void		restore_arg(char *sep, bool append_flag)
 {
 	if (sep)
@@ -78,7 +61,7 @@ static int		store_env(char **cmdpath)
 	{
 		append_flag = false;
 		append_flag = separate_arg(cmdpath[i], &sep, &value);
-		if (satisfy_name_rule(cmdpath[i]))
+		if (satisfy_env_name_rule(cmdpath[i]))
 			update_env_val(cmdpath[i], value, true, append_flag);
 		else
 		{

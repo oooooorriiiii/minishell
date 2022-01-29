@@ -29,6 +29,9 @@ t_envlist	*msh_get_envlist(const char *key);
 t_envlist	*envlist_listlast(t_envlist *envlist);
 void		envlist_add_back(t_envlist **p_envlist, t_envlist *new_envlist);
 
+// env_name_rule.c
+bool	satisfy_env_name_rule(*key);
+
 // update_env_val.c
 void	update_env_val(const char *env_key, const char *new_env_val, bool is_env_var, bool append_flag);
 

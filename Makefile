@@ -13,6 +13,7 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/env/env_list.c \
 				$(SRCS_DIR)/env/env_list_clear.c \
 				$(SRCS_DIR)/env/env_list_utils.c \
+				$(SRCS_DIR)/env/env_name_rule.c \
 				$(SRCS_DIR)/env/update_env_val.c \
 				$(SRCS_DIR)/env/gen_env_str.c \
 				$(SRCS_DIR)/signal/signal.c \
