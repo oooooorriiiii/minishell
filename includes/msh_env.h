@@ -28,6 +28,7 @@ char		**gen_env_str(t_envlist *envlist);
 t_envlist	*msh_get_envlist(const char *key);
 t_envlist	*envlist_listlast(t_envlist *envlist);
 void		envlist_add_back(t_envlist **p_envlist, t_envlist *new_envlist);
+void		envlist_del(t_envlist **p_envlist, char *key);
 
 // env_name_rule.c
 bool	satisfy_env_name_rule(*key);

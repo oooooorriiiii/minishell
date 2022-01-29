@@ -5,7 +5,7 @@
 
 void	print_envlist(t_envlist *list)
 {
-	puts("------env list------");
+	printf("------env list------\n");
 	if (list == NULL)
 	{
 		printf("NULL\n");

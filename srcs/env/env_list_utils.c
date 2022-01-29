@@ -3,6 +3,7 @@
 //
 
 #include "msh_env.h"
+#include "utils.h"
 #include "minishell.h"
 
 
@@ -44,5 +45,31 @@ void	envlist_add_back(t_envlist **p_envlist, t_envlist *new_envlist)
 	{
 		envlist_listlast(*p_envlist)->next = new_envlist;
 		new_envlist->next = NULL;
+	}
+}
+
+void	envlist_del(t_envlist **p_envlist, char *key)
+{
+	t_envlist	*current;
+	t_envlist	*prev;
+
+	prev = NULL;
+	current = *p_envlist;
+	while (current)
+	{
+		if (!ft_strncmp(current->key, key, ft_strlen(key) + 1))
+		{
+			if (prev)
+				prev->next = current->next;
+			else
+				*p_envlist = current->next;
+			free_str(&(current->key));
+			free_str(&(current->value));
+			free(current);
+			current = NULL;
+			break ;
+		}
+		prev = current;
+		current = current->next;
 	}
 }
