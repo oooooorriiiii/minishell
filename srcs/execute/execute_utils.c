@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/29 22:38:43 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:43:38 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	is_need_expansion(t_astree *ast)
 				return (1);
 			i++;
 		}
+		i = 0;
 		ast = ast->right;
 	}
 	return (0);
@@ -57,7 +58,7 @@ void	just_strcpy(t_cmd_args *args, t_astree *argNode)
 	{
 		args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
 		strcpy(args->cmdpath[i], argNode->szData);////////////////////////
-		printf("args->cmdpath[%d] :  %s\n", i, args->cmdpath[i]);
+		// printf("args->cmdpath[%d] :  %s\n", i, args->cmdpath[i]);
 		argNode = argNode->right;
 		i++;
 	}
@@ -68,6 +69,7 @@ void	just_strcpy(t_cmd_args *args, t_astree *argNode)
 int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
 	t_astree	*argNode;
+	t_astree	*argNode2;
 	int			i;
 
 	i = 0;
@@ -85,7 +87,8 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 	}
 	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
 	argNode = simplecmdNode;
-	if (is_need_expansion(simplecmdNode))
+	argNode2 = simplecmdNode;
+	if (is_need_expansion(argNode2))
 		extra_strcpy(args, argNode);
 	else
 		just_strcpy(args, argNode);

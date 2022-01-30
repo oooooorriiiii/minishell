@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/29 20:06:42 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:40:41 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
 	else
 		execute_in_child(args);
 	// execute_command_struct(args);
-	destroy_command_struct(args);
+	// destroy_command_struct(args);
 }
 
 void	execute_command(t_astree *cmdNode, t_cmd_args *args)
