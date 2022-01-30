@@ -15,23 +15,23 @@
 #include "minishell.h"
 #include "lexer.h"
 #include "utils.h"
-//#include "parser.h"
-//#include "execute.h"
+#include "../includes/parser.h"
+#include "../includes/execute.h"
 #include "msh_env.h"
 #include <stdio.h>
 #include <errno.h>
 
 t_minishell g_minishell = {};
 
-void	init(char **input, t_lexer **lex_list/*, t_astree **ast*/)
+void	init(char **input, t_lexer **lex_list, t_astree **ast)
 {
 	errno = 0;
 	*input = NULL;
 	*lex_list = NULL;
-//	*ast = NULL;
+	*ast = NULL;
 }
 
-void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
+void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 {
 //	t_envlist	*envlist;
 //	extern char **environ;
@@ -61,7 +61,10 @@ void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 			continue ;
 		}
 		// TODO: parse
+		parse(*lex_list, ast);
+		printf("===================================================\n\n");
 		lexer_free(lex_list);
+		execute_syntax_tree(*ast);
 	}
 
 //	envlist_clear(&envlist);
@@ -72,15 +75,20 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	t_lexer		*lex_list;
-//	t_astree	*ast;
+	t_astree	*ast;
 	char		*input;
 
-	init(&input, &lex_list/*, &ast*/);
-	minishell_loop(&input, &lex_list/*, &ast*,*/);
+	init(&input, &lex_list, &ast);
+	minishell_loop(&input, &lex_list, &ast);
 
-//	lexer("echo abc", &lex_list);
-//	parse(lex_list, &ast);
-//	lexer_free(&lex_list);
+/*
+	lexer("echo 42Tokyo > test.txt", &lex_list);
+	parse(lex_list, &ast);
+	lexer_free(&lex_list);
+	printf("==============================================================\n");
+	printf("\n\n");
+	execute_syntax_tree(ast);
+*/
 //	puts("**************************");
 //	lexer("echo 42Tokyo > test.txt", &lex_list);
 //	parse(lex_list, &ast);

@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 14:27:45 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:40:41 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,33 @@ void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
 	else
 		execute_in_child(args);
 	// execute_command_struct(args);
-	destroy_command_struct(args);
+	// destroy_command_struct(args);
 }
 
 void	execute_command(t_astree *cmdNode, t_cmd_args *args)
 {
 	if (cmdNode == NULL)
-	{
-		// printf("cmdNode == NULL\n");///////
 		return ;
-	}
 	if (cmdNode->type == NODE_REDIRECT_IN)
 	{
 		args->redirect_in = cmdNode->szData;
-		args->redirect_out = NULL;
 		execute_simple_command(cmdNode->right, args);
 	}
 	if (cmdNode->type == NODE_REDIRECT_OUT)
 	{
-		args->redirect_in = NULL;
 		args->redirect_out = cmdNode->szData;
 		execute_simple_command(cmdNode->right, args);
 	}
-	if (cmdNode->type == NODE_CMDPATH)
+	if (cmdNode->type == NODE_REDIRECT_D_IN)
 	{
-		args->redirect_in = NULL;
-		args->redirect_out = NULL;
-		execute_simple_command(cmdNode, args);
+		args->redirect_double_in = cmdNode->szData;
+		execute_simple_command(cmdNode->right, args);
 	}
+	if (cmdNode->type == NODE_REDIRECT_D_OUT)
+	{
+		args->redirect_double_out = cmdNode->szData;
+		execute_simple_command(cmdNode->right, args);
+	}
+	if (cmdNode->type == NODE_CMDPATH)
+		execute_simple_command(cmdNode, args);
 }
