@@ -11,6 +11,22 @@
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
+#include "minishell.h"
+#include "utils.h"
+
+void 	execute_external_cmd(t_cmd_args *args)
+{
+	char	**env_strs;
+	int		ret;
+
+	env_strs = gen_env_str(g_minishell.env);
+	ret = execve(args->cmdpath[0], args, env_strs);
+	if (ret < 0)
+	{
+		// TODO: handle_execve_error
+	}
+	free_str_arr(&env_strs);
+}
 
 void	execute_command_struct(t_cmd_args *args)
 {
@@ -48,6 +64,8 @@ void	execute_command_struct(t_cmd_args *args)
 		exit(0);
 		return ;
 	}
+	else
+		execute_external_cmd(args);
 	// while (waitpid(pid, NULL, 0) <= 0); //////////////////
 	return ;
 }

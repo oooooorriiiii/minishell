@@ -14,15 +14,17 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "msh_env.h"
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 typedef struct _minishell
 {
-	int		exit_status;
-	int		heredoc_status;
-	char	*pwd;
+	t_envlist	*env;
+	int			exit_status;
+	int			heredoc_status;
+	char		*pwd;
 }				t_minishell;
 
 extern t_minishell	g_minishell;

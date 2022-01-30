@@ -11,8 +11,27 @@
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
+#include "msh_error.h"
 
+// TODO: return status ??
 void	execute_unset(t_cmd_args *args)
 {
-	printf(" execute_unset \n");
+	size_t	i;
+	int		status;
+
+	printf(" execute_unset \n"); // DEBUG
+	i = 1;
+	status = EXIT_SUCCESS;
+	while (args->cmdpath[i])
+	{
+		if (satisfy_env_name_rule(args->cmdpath[i]) == true)
+			envlist_del(&g_minishell.env, args->cmdpath[i]);
+		else
+		{
+			msh_fatal("unset");
+			status = EXIT_FAILURE;
+		}
+		i++;
+	}
+	return ;
 }

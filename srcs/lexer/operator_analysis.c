@@ -68,7 +68,7 @@ t_status	operetor_analysis(t_list **token_list, char *token, \
 		quote_process(token_list, &token, ret_list);
 	else if (ft_strncmp(element, "<<", 2) == 0)
 	{
-		heredoc_process(token_list, &token, ret_list);
+//		heredoc_process(token_list, &token, ret_list);
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
