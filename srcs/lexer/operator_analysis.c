@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:26:16 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/29 23:48:00 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/30 09:22:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_status	operetor_analysis(t_list **token_list, char *token, \
 		quote_process(token_list, &token, ret_list);
 	else if (ft_strncmp(element, "<<", 2) == 0)
 	{
-		// heredoc_process(token_list, &token, ret_list);
+//		heredoc_process(token_list, &token, ret_list);
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{

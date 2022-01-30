@@ -12,7 +12,27 @@
 
 #include "../includes/execute.h"
 
+static void	print_env(t_envlist *envlist)
+{
+	if (envlist->value == NULL)
+		return ;
+	if (envlist->is_shell_var == false)
+		return ;
+	printf("%s=%s", envlist->key, envlist->value);
+}
+
+// TODO: return status ??
 void	execute_env(t_cmd_args *args)
 {
-	printf(" execute_env \n");
+	t_envlist	*envlist;
+
+	(void)args;
+	printf(" execute_env \n"); // DEBUG
+	envlist = g_minishell.env;
+	while (envlist)
+	{
+		print_env(envlist);
+		envlist = envlist->next;
+	}
+	return ;
 }

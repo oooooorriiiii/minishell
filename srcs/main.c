@@ -14,23 +14,38 @@
 #include <unistd.h>
 #include "minishell.h"
 #include "lexer.h"
-#include "parser.h"
-#include "execute.h"
+#include "utils.h"
+//#include "parser.h"
+//#include "execute.h"
+#include "msh_env.h"
 #include <stdio.h>
 #include <errno.h>
 
 t_minishell g_minishell = {};
 
-void	init(char **input, t_lexer **lex_list, t_astree **ast)
+void	init(char **input, t_lexer **lex_list/*, t_astree **ast*/)
 {
 	errno = 0;
 	*input = NULL;
 	*lex_list = NULL;
-	*ast = NULL;
+//	*ast = NULL;
 }
 
-void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
+void	minishell_loop(char **input, t_lexer **lex_list/*, t_astree **ast,*/)
 {
+//	t_envlist	*envlist;
+//	extern char **environ;
+//	size_t		i = 0;
+//
+//	envlist = create_envlist(environ);
+//	print_envlist(envlist);
+//	char **tmp = gen_env_str(envlist);
+//	while (tmp[i] != NULL)
+//	{
+//		printf("%s\n", tmp[i]);
+//		i++;
+//	}
+//	free_str_arr(&tmp);
 	while (true)
 	{
 		free_set((void **)input, NULL);
@@ -48,30 +63,34 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 		// TODO: parse
 		lexer_free(lex_list);
 	}
+
+//	envlist_clear(&envlist);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
 	t_lexer		*lex_list;
-	t_astree	*ast;
+//	t_astree	*ast;
 	char		*input;
 
-	init(&input, &lex_list, &ast);
-	minishell_loop(&input, &lex_list, &ast);
+	init(&input, &lex_list/*, &ast*/);
+	minishell_loop(&input, &lex_list/*, &ast*,*/);
 
-	lexer("echo abc", &lex_list);
-	parse(lex_list, &ast);
-	lexer_free(&lex_list);
-	puts("**************************");
-	lexer("echo 42Tokyo > test.txt", &lex_list);
-	parse(lex_list, &ast);
-	lexer_free(&lex_list);
-	puts("**************************");
-	lexer("pwd", &lex_list);
-	parse(lex_list, &ast);
-	lexer_free(&lex_list);
-	execute_syntax_tree(ast);
-	astree_delete(ast);
+//	lexer("echo abc", &lex_list);
+//	parse(lex_list, &ast);
+//	lexer_free(&lex_list);
+//	puts("**************************");
+//	lexer("echo 42Tokyo > test.txt", &lex_list);
+//	parse(lex_list, &ast);
+//	lexer_free(&lex_list);
+//	puts("**************************");
+//	lexer("pwd", &lex_list);
+//	parse(lex_list, &ast);
+//	lexer_free(&lex_list);
+//	execute_syntax_tree(ast);
+//	astree_delete(ast);
 	// lexer("echo\"ab  c \"|", &lex_list);
 	// puts("**************************");
 	// // lexer("echo\"abc|", &lex_list);
