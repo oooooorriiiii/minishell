@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 21:55:34 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/29 19:09:20 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define STDIN_FILENO 0
 # define STDOUT_FILENO 1
 
+# define SINGLE_Q 1
+# define DOUBLE_Q 10
+
 typedef struct cmd_args
 {
 	bool		stdin_pipe;
@@ -32,6 +35,8 @@ typedef struct cmd_args
 	int			pipe_write;
 	char		*redirect_in;
 	char		*redirect_out;
+	char		*redirect_double_in;
+	char		*redirect_double_out;
 	int			cmdpath_argc;
 	char		**cmdpath;
 }				t_cmd_args;

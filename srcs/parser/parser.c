@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 14:23:29 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/29 23:19:02 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 		printf("Syntax Error near: %s\n", curtok->val);
 		return (-1);
 	}
-	// print_syntax_tree(*syntax_tree);
+	print_syntax_tree(*syntax_tree);
 	return (0);
 }

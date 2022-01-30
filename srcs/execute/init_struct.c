@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:23:25 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 15:10:51 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/29 19:12:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ void	init_struct(t_cmd_args *args)
 	args->pipe_write = 0;
 	args->redirect_in = NULL;
 	args->redirect_out = NULL;
+	args->redirect_double_in = NULL;
+	args->redirect_double_out = NULL;
 	args->cmdpath_argc = 0;
 }

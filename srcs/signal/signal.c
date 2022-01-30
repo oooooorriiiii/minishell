@@ -6,10 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:29:32 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 16:14:13 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:08:23 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include <stdio.h>
 #include "msh_signal.h"
 #include "msh_error.h"
@@ -35,10 +36,11 @@ int	rl_msh_event_hook_heredoc(void)
 		rl_done = 1;
 	return (0);
 }
-
+*/
 /*
 **
 */
+/*
 void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 {
 	rl_event_hook = heredoc_hook;
@@ -47,3 +49,4 @@ void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 		msh_fatal("signal error: ");
 	return ;
 }
+*/

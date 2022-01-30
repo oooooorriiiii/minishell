@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/27 14:28:23 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/29 20:07:57 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	execute_command_struct(t_cmd_args *args)
 {
+	// printf("args->cmdpath[0] :  %s\n", args->cmdpath[0]);
 	if (args->cmdpath_argc < 0)
 		return ;
 	if (strcmp(args->cmdpath[0], "echo") == 0)

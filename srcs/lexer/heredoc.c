@@ -6,10 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 03:24:44 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 16:13:18 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:41:50 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "lexer.h"
 #include "msh_signal.h"
 #include "msh_error.h"
@@ -71,3 +72,4 @@ t_status	heredoc_process(t_list **token_list, char **token, \
 	*token_list = (*token_list)->next;
 	return (STATUS_GENERAL);
 }
+*/
