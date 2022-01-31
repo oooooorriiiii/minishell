@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:07:09 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 01:03:08 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 02:13:32 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,54 +270,51 @@ int	copy_expansion(t_astree *ast_node, int *quote)
 	return (len);
 }
 
-void	extra_strcpy(t_cmd_args *args, t_astree *ast_node)
+void double_reset(int *status, int *status2)
 {
-	int			i;
-	int			quote;
-	int			len;
-	char		*expand;
-	int			status;
-	char		*tmp;
-	t_astree	*tmp_node;
+	reset_status(status);
+	reset_status(status2);
+}
 
-	i = 0;
-	quote = 0;
+void	copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i)
+{
+	int	status;
+	int	status2;
+	int	len;
+
 	status = 0;
-	tmp_node = ast_node;
-	args->cmdpath = (char **)malloc(sizeof(char *) * (get_twodim_len(tmp_node) + 1));
+	status2 = 0;
+	len = 0;
 	while (ast_node != NULL && (ast_node->type == NODE_ARGUMENT
 			|| ast_node->type == NODE_CMDPATH))
 	{
 		get_quote_status(&status, ast_node->szData);
 		if ((status != SINGLE_Q && status != SINGLE_Q * 2)
 			&& isenval(ast_node->szData))
-		{
-			// expand = expand_enval(ast_node->szData);
-			// len = 0;
-			// if (expand)
-			// 	len = quote_skip_strlen(expand, &quote);
-			// free(ast_node->szData);
-			// ast_node->szData = (char *)malloc(sizeof(char) * (len + 1));
-			// if (expand)
-			// 	quote_skip_strcpy(ast_node->szData, expand, quote);
-			// else
-			// 	ast_node->szData[0] = '\0';
-			// free(expand);
-			// tmp_node = ast_node;
-			len = copy_expansion(ast_node, &quote);
-		}
+			len = copy_expansion(ast_node, &status2);
 		else
-			len = quote_skip_strlen(ast_node->szData, &quote);
+			len = quote_skip_strlen(ast_node->szData, &status2);
 		if (len > 0)
 		{
-			args->cmdpath[i] = (char *)malloc(len + 1);
-			quote_skip_strcpy(args->cmdpath[i], ast_node->szData, quote);
-			i++;
+			args->cmdpath[*i] = (char *)malloc(len + 1);
+			quote_skip_strcpy(args->cmdpath[*i], ast_node->szData, status2);
+			(*i)++;
 		}
-		reset_status(&quote);
-		reset_status(&status);
+		double_reset(&status, &status2);
 		ast_node = ast_node->right;
 	}
+}
+
+void	extra_strcpy(t_cmd_args *args, t_astree *ast_node)
+{
+	int			i;
+	t_astree	*tmp_node;
+
+	i = 0;
+	tmp_node = ast_node;
+	args->cmdpath = (char **)malloc(sizeof(char *)
+			* (get_twodim_len(tmp_node) + 1));
+	copy_one_byone(args, ast_node, &i);
 	args->cmdpath[i] = NULL;
 	args->cmdpath_argc = i;
 }
