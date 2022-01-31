@@ -6,11 +6,46 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/30 15:43:38 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/31 19:08:14 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
+
+void	print_allstruct(t_cmd_args *args)
+{
+	int			i;
+	t_cmd_args	*tmp;
+
+	i = 0;
+	tmp = NULL;
+	printf("/////////////////////  print_allstruct ///////////////////////\n");
+	if (args->stdin_pipe == true)
+		printf("stdin_pipe :   true    /    ");
+	else
+		printf("stdin_pipe :   false    /    ");
+	if (args->stdout_pipe == true)
+		printf("stdout_pipe :   true\n");
+	else
+		printf("stdout_pipe :   false\n");
+	printf("pipe_read :   %d   /   pipe_write :   %d\n", args->pipe_read, args->pipe_write);
+	if (args->redirect_in)
+		printf("redirect_in :   %s\n", args->redirect_in);
+	if (args->redirect_out)
+		printf("redirect_out :   %s\n", args->redirect_in);
+	if (args->redirect_double_in)
+		printf("redirect_double_in :   %s\n", args->redirect_double_in);
+	if (args->redirect_double_out)
+		printf("redirect_double_out :   %s\n", args->redirect_double_in);
+	printf("cmdpath_argc  :    %d\n", args->cmdpath_argc);
+	tmp = args;
+	while (tmp->cmdpath[i])
+	{
+		printf("cmdpath[%d] :   %s\n", i, tmp->cmdpath[i]);
+		i++;
+	}
+	printf("/////////////////////////////////////////////////////////////\n");
+}
 
 int	joudge_process(t_cmd_args *args)
 {
@@ -48,18 +83,27 @@ int	is_need_expansion(t_astree *ast)
 	return (0);
 }
 
-void	just_strcpy(t_cmd_args *args, t_astree *argNode)
+void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 {
-	int	i;
+	int			i;
+	t_astree	*argNode;
 
 	i = 0;
+	argNode = simplecmdNode;
 	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
 			|| argNode->type == NODE_CMDPATH))
 	{
-		args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
-		strcpy(args->cmdpath[i], argNode->szData);////////////////////////
-		// printf("args->cmdpath[%d] :  %s\n", i, args->cmdpath[i]);
 		argNode = argNode->right;
+		i++;
+	}
+	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (simplecmdNode != NULL && (simplecmdNode->type == NODE_ARGUMENT
+			|| simplecmdNode->type == NODE_CMDPATH))
+	{
+		args->cmdpath[i] = (char *)malloc(strlen(simplecmdNode->szData) + 1);
+		strcpy(args->cmdpath[i], simplecmdNode->szData);////////////////////////
+		simplecmdNode = simplecmdNode->right;
 		i++;
 	}
 	args->cmdpath[i] = NULL;
@@ -79,30 +123,11 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 		return (-1);
 	}
 	argNode = simplecmdNode;
-	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
-			|| argNode->type == NODE_CMDPATH))
-	{
-		argNode = argNode->right;
-		i++;
-	}
-	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
-	argNode = simplecmdNode;
 	argNode2 = simplecmdNode;
 	if (is_need_expansion(argNode2))
 		extra_strcpy(args, argNode);
 	else
 		just_strcpy(args, argNode);
-	// i = 0;
-	// while (argNode != NULL && (argNode->type == NODE_ARGUMENT
-	// 		|| argNode->type == NODE_CMDPATH))
-	// {
-	// 	args->cmdpath[i] = (char *)malloc(strlen(argNode->szData) + 1);
-	// 	strcpy(args->cmdpath[i], argNode->szData);////////////////////////
-	// 	argNode = argNode->right;
-	// 	i++;
-	// }
-	// args->cmdpath[i] = NULL;
-	// args->cmdpath_argc = i;
 	return (0);
 }
 
