@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/31 10:34:17 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:52:36 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,9 @@ void			execute_exit(t_cmd_args *args);
 
 void			dupfor_redirection(t_cmd_args *args, int *backup);
 void			close_fdbackup(t_cmd_args *args, int *backup);
+
+// -----------  error_execute.c
+
+void			malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3);
 
 #endif

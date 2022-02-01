@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:43:47 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/30 23:26:45 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:01:00 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 void	execute_in_child(t_cmd_args *args)
 {
 	pid_t	pid;
+	pid_t	wait_pid;
 	int		backup;
 
 	backup = 0;
 	pid = fork();
 	if (pid < 0)
-		exit(0);// error
+		exit(0);
 	else if (pid == 0)
 	{
 		if (args->pipe_read)
@@ -33,6 +34,8 @@ void	execute_in_child(t_cmd_args *args)
 	}
 	else
 	{
-		wait(pid);
+		wait_pid = waitpid(pid, NULL, 0);
+		while (wait_pid <= 0)
+			wait_pid = waitpid(pid, NULL, 0);
 	}
 }

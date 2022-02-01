@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:07:09 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 02:13:32 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 17:00:30 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	**split_non_alnum(char *str)
 	int		i;
 
 	split = (char **)malloc(sizeof(char *) * 3);
+	malloc_error_exec(NULL, split, NULL);
 	enval_len = 0;
 	i = 0;
 	while (str[enval_len])
@@ -94,9 +95,11 @@ char	**split_non_alnum(char *str)
 		enval_len++;
 	}
 	split[0] = (char *)malloc(sizeof(char) * (enval_len + 1));
+	malloc_error_exec(split[0], NULL, NULL);
 	ft_strlcpy(split[0], str, enval_len + 1);
 	str += enval_len;
 	split[1] = (char *)malloc(sizeof(char) * (strlen(str) + 1));
+	malloc_error_exec(split[1], NULL, NULL);
 	ft_strlcpy(split[1], str, strlen(str) + 1);
 	split[2] = NULL;
 	return (split);
@@ -262,6 +265,7 @@ int	copy_expansion(t_astree *ast_node, int *quote)
 		len = quote_skip_strlen(expand, quote);
 	free(ast_node->szData);
 	ast_node->szData = (char *)malloc(sizeof(char) * (len + 1));
+	malloc_error_exec(ast_node->szData, NULL, NULL);
 	if (expand)
 		quote_skip_strcpy(ast_node->szData, expand, *quote);
 	else
@@ -276,15 +280,20 @@ void double_reset(int *status, int *status2)
 	reset_status(status2);
 }
 
+void	int_init(int *status, int *status2, int *len)
+{
+	*status = 0;
+	*status2 = 0;
+	*len = 0;
+}
+
 void	copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i)
 {
 	int	status;
 	int	status2;
 	int	len;
 
-	status = 0;
-	status2 = 0;
-	len = 0;
+	int_init(&status, &status2, &len);
 	while (ast_node != NULL && (ast_node->type == NODE_ARGUMENT
 			|| ast_node->type == NODE_CMDPATH))
 	{
@@ -297,6 +306,7 @@ void	copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i)
 		if (len > 0)
 		{
 			args->cmdpath[*i] = (char *)malloc(len + 1);
+			malloc_error_exec(args->cmdpath[*i], NULL, NULL);
 			quote_skip_strcpy(args->cmdpath[*i], ast_node->szData, status2);
 			(*i)++;
 		}
@@ -314,6 +324,7 @@ void	extra_strcpy(t_cmd_args *args, t_astree *ast_node)
 	tmp_node = ast_node;
 	args->cmdpath = (char **)malloc(sizeof(char *)
 			* (get_twodim_len(tmp_node) + 1));
+	malloc_error_exec(NULL, args->cmdpath, NULL);
 	copy_one_byone(args, ast_node, &i);
 	args->cmdpath[i] = NULL;
 	args->cmdpath_argc = i;
