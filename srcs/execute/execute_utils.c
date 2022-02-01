@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/31 19:08:14 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:53:05 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,13 @@ void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 		i++;
 	}
 	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
+	malloc_error_exec(NULL, args->cmdpath, NULL);
 	i = 0;
 	while (simplecmdNode != NULL && (simplecmdNode->type == NODE_ARGUMENT
 			|| simplecmdNode->type == NODE_CMDPATH))
 	{
 		args->cmdpath[i] = (char *)malloc(strlen(simplecmdNode->szData) + 1);
+		malloc_error_exec(args->cmdpath[i], NULL, NULL);
 		strcpy(args->cmdpath[i], simplecmdNode->szData);////////////////////////
 		simplecmdNode = simplecmdNode->right;
 		i++;

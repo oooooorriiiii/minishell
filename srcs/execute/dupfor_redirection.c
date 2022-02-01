@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 18:55:12 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/30 19:42:39 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:15:11 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
+void	open_error_handle(int fd)
+{
+	if (fd == -1)
+	{
+		perror("file descripter");
+		exit(0);
+	}
+}
 
 void	dupfor_redirection(t_cmd_args *args, int *backup)
 {
@@ -24,24 +33,29 @@ void	dupfor_redirection(t_cmd_args *args, int *backup)
 	{
 		*backup = dup(STDIN_FILENO);
 		fd = open(args->redirect_in, O_RDONLY);
+		open_error_handle(fd);
 		dup2(fd, STDIN_FILENO);
 	}
 	if (args->redirect_out)
 	{
 		*backup = dup(STDOUT_FILENO);
-		fd = open(args->redirect_out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(args->redirect_out, O_WRONLY | O_CREAT | O_TRUNC,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		open_error_handle(fd);
 		dup2(fd, STDOUT_FILENO);
 	}
 	if (args->redirect_double_in)
 	{
 		*backup = dup(STDIN_FILENO);
 		fd = open(args->redirect_double_in, O_RDONLY);
+		open_error_handle(fd);
 		dup2(fd, STDIN_FILENO);
 	}
 	if (args->redirect_double_out)
 	{
 		*backup = dup(STDOUT_FILENO);
 		fd = open(args->redirect_double_out, O_WRONLY | O_APPEND);
+		open_error_handle(fd);
 		dup2(fd, STDOUT_FILENO);
 	}
 }

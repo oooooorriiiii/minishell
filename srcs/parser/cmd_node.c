@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 14:22:04 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:15:03 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,17 @@ t_astree	*CMD1(t_token_list **curtok)
 	char		*filename;
 
 	simplecmdNode = SIMPLECMD(curtok);
-	// printf("CMD1  simplecmdNode->type :  %d\n", simplecmdNode->type);
 	if (simplecmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_LESSER, NULL, curtok))
-	{
-		astree_delete(simplecmdNode);
-		return (NULL);
-	}
+		return (astree_delete(simplecmdNode));
 	if (!term(TOKEN, &filename, curtok))
 	{
 		free(filename);
-		astree_delete(simplecmdNode);
-		return (NULL);
+		return (astree_delete(simplecmdNode));
 	}
 	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_IN);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, simplecmdNode);
@@ -79,17 +75,14 @@ t_astree	*CMD2(t_token_list **curtok)
 	if (simplecmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_GREATER, NULL, curtok))
-	{
-		astree_delete(simplecmdNode);
-		return (NULL);
-	}
+		return (astree_delete(simplecmdNode));
 	if (!term(TOKEN, &filename, curtok))
 	{
 		free(filename);
-		astree_delete(simplecmdNode);
-		return (NULL);
+		return (astree_delete(simplecmdNode));
 	}
 	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_OUT);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, simplecmdNode);

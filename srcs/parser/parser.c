@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/29 23:19:02 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:17:28 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,12 @@ t_astree	*JOB1(t_token_list **curtok)
 	if (cmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_PIPE, NULL, curtok))
-	{
-		astree_delete(cmdNode);
-		return (NULL);
-	}
+		return (astree_delete(cmdNode));
 	jobNode = JOB(curtok);
 	if (jobNode == NULL)
-	{
-		astree_delete(cmdNode);
-		return (NULL);
-	}
+		return (astree_delete(cmdNode));
 	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_PIPE);
 	astree_attach(result, cmdNode, jobNode);
 	return (result);
@@ -81,7 +76,6 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 	}
 	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
-	// printf(" (*syntax_tree)->type :  %d\n", (*syntax_tree)->type);
 	if (curtok != NULL && curtok->type != 0)
 	{
 		printf("Syntax Error near: %s\n", curtok->val);

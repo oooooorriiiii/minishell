@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   error_deal_execute.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 12:43:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 14:35:28 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/02/01 15:41:13 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/02/01 16:52:53 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
-void	execute_in_parent(t_cmd_args *args)
+void	malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3)
 {
-	int	backup;
-
-	backup = 0;
-	dupfor_redirection(args, &backup);
-	execute_command_struct(args);
-	close_fdbackup(args, &backup);
+	if (!buf1 && !buf2 && !buf3)
+	{
+		perror("malloc");
+		exit(0);
+	}
 }

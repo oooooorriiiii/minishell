@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/30 09:58:09 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:17:17 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void			astree_attach(t_astree	*root,
 // void			astreeset_type(t_astree	*node, int nodetype);
 void			astreeset_type(t_astree	*node, t_node_type nodetype);
 void			astreeset_data(t_astree	*node, char	*data);
-void			astree_delete(t_astree	*node);
+void			*astree_delete(t_astree	*node);
+void			parse_malloc_errordeal(t_astree *buf1, char *buf2);
 
 void			print_syntax_tree(t_astree *tree);
 
