@@ -85,8 +85,8 @@ int	main(int argc, char **argv, char **envp)
 	char *txt[9];
 	int i = 1;
 
-	txt[0] = "ls -a | grep 42Tokyo | wc -l";
-	// txt[0] = "pwd";
+	// txt[0] = "ls -a | grep 42Tokyo | wc -l";
+	txt[0] = "ls";
 
 	txt[1] = "echo \"I like $sport\"";
 	txt[2] = "echo \'I like $sport\'";
@@ -97,7 +97,7 @@ int	main(int argc, char **argv, char **envp)
 	txt[7] = "echo a ba cfd";
 	txt[8] = NULL;
 
-	/*
+
 	init(&input, &lex_list, &ast);
 	printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", txt[0]);
@@ -109,9 +109,9 @@ int	main(int argc, char **argv, char **envp)
 	printf("\n\n");
 	execute_syntax_tree(ast);
 	astree_delete(ast);
-	*/
 
 
+	/*
 	while (txt[i])
 	{
 		init(&input, &lex_list, &ast);
@@ -127,6 +127,7 @@ int	main(int argc, char **argv, char **envp)
 		astree_delete(ast);
 		i++;
 	}
+	*/
 
 
 //	puts("**************************");

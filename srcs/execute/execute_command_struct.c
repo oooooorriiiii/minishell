@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/31 10:12:38 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:18:02 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ void	execute_command_struct(t_cmd_args *args)
 	}
 	else
 		execute_external_cmd(args);
-	// while (waitpid(pid, NULL, 0) <= 0); //////////////////
 	return ;
 }
