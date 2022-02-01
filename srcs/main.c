@@ -54,7 +54,7 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 		}
 		// TODO: parse
 		parse(*lex_list, ast);
-		printf("===================================================\n\n\n\n");
+//		printf("===================================================\n\n\n\n");
 		lexer_free(lex_list);
 		execute_syntax_tree(*ast);
 		astree_delete(*ast);
