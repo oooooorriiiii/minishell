@@ -18,7 +18,7 @@ static void	print_env(t_envlist *envlist)
 		return ;
 	if (envlist->is_shell_var == false)
 		return ;
-	printf("%s=%s", envlist->key, envlist->value);
+	printf("%s=%s\n", envlist->key, envlist->value);
 }
 
 // TODO: return status ??

@@ -33,20 +33,11 @@ void	init(char **input, t_lexer **lex_list, t_astree **ast)
 
 void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 {
-	t_envlist	*envlist;
 	extern char **environ;
 	size_t		i = 0;
 
-	envlist = create_envlist(environ);
-	print_envlist(envlist);
-	g_minishell.env = envlist;
-	char **tmp = gen_env_str(envlist);
-	while (tmp[i] != NULL)
-	{
-		printf("%s\n", tmp[i]);
-		i++;
-	}
-	free_str_arr(&tmp);
+	g_minishell.env = create_envlist(environ);
+
 	while (true)
 	{
 		free_set((void **)input, NULL);
@@ -68,8 +59,6 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 		execute_syntax_tree(*ast);
 		astree_delete(*ast);
 	}
-
-//	envlist_clear(&envlist);
 }
 
 int	main(void)
