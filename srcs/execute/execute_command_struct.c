@@ -13,6 +13,7 @@
 #include "../includes/execute.h"
 #include "minishell.h"
 #include "utils.h"
+#include "msh_error.h"
 #include <sys/stat.h>
 
 typedef enum e_cmd_type
@@ -171,6 +172,7 @@ bool	is_cmd_exist(const char *path, char **res)
 	return (true);
 }
 
+//		printf("path_elem: %s\n", path_elem);
 void	search_cmd(char **path_elems, char **res_str, const char *cmd)
 {
 	size_t	i;
@@ -182,7 +184,6 @@ void	search_cmd(char **path_elems, char **res_str, const char *cmd)
 	{
 		free_str(&path_elem);
 		path_elem = join_path(path_elems[i], cmd);
-		printf("path_elem: %s\n", path_elem);
 		if (is_cmd_exist(path_elem, res_str) && !is_directory(path_elem) && is_executable(path_elem))
 			break ;
 		i++;
@@ -190,13 +191,17 @@ void	search_cmd(char **path_elems, char **res_str, const char *cmd)
 	free_str(&path_elem);
 }
 
+//	printf("env_val: %s\n", env_val);
+//	for (int i = 0; path_elems[i] != NULL; i++)
+//	{
+//		printf("path_elems[%d] : %s\n", i, path_elems[i]);
+//	}
 char	*search_cmd_path(const char *cmd)
 {
 	char	*ret_str;
 	char	**path_elems;
 	const char	*env_val = get_env_data("PATH");
 
-	printf("env_val: %s\n", env_val);
 	ret_str = NULL;
 	if (ft_strcmp((char *)env_val, "") == 0)
 	{
@@ -204,15 +209,12 @@ char	*search_cmd_path(const char *cmd)
 		return (ret_str);
 	}
 	path_elems = get_path_elem_in_envlist(env_val);
-	for (int i = 0; path_elems[i] != NULL; i++)
-	{
-		printf("path_elems[%d] : %s\n", i, path_elems[i]);
-	}
 	search_cmd(path_elems, &ret_str, cmd);
 	free_str_arr(&path_elems);
 	return (ret_str);
 }
 
+// printf("ret_str in add_path is : %s\n", res_str);
 char	*add_path(t_cmd_args *args)
 {
 	char	*res_str;
@@ -224,26 +226,22 @@ char	*add_path(t_cmd_args *args)
 		res_str = search_cmd_path(cmd);
 	else
 		res_str = ft_strdup(cmd);
-	printf("ret_str in add_path is : %s\n", res_str);
 	return (res_str);
 }
 
+//	printf("path: %s\n", path);
+//	printf("ret: %d\n", ret);
 void 	execute_external_cmd(t_cmd_args *args)
 {
 	char	**env_strs;
 	char	*path;
-	extern char **environ;
 	int		ret;
 
 	env_strs = gen_env_str(g_minishell.env);
 	path = add_path(args);
-	printf("path: %s\n", path);
-	ret = execve(path, args->cmdpath, environ); //TODO: remove environ
-	printf("ret: %d\n", ret);
+	ret = execve(path, args->cmdpath, env_strs);
 	if (ret < 0)
-	{
-		// TODO: handle_execve_error
-	}
+		msh_fatal("execve error: ");
 	free_str(&path);
 	free_str_arr(&env_strs);
 }

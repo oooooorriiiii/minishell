@@ -21,6 +21,7 @@ bool	is_space_string(char *s)
 	return (!*s);
 }
 
+//	print_token_list(ret_list);// DEBUG
 t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 {
 	t_token_list	*ret_list;
@@ -40,7 +41,6 @@ t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 			literal_process(&init_token_list, &token, &ret_list);
 	}
 	free(token);
-	print_token_list(ret_list);// DEBUG
 	*lex_list = lexer_new(ret_list);
 	return (STATUS_GENERAL);
 }
@@ -48,6 +48,8 @@ t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 /*
 **
 */
+//	list_print(init_token_list);
+//	puts("*****");
 t_status	lexer(char *original_line, t_lexer **lex_list)
 {
 	t_list		*init_token_list;
@@ -61,8 +63,6 @@ t_status	lexer(char *original_line, t_lexer **lex_list)
 		return (STATUS_WHITESPACE);
 	}
 	init_token_list = token_split_to_list(original_line);
-	list_print(init_token_list);
-	puts("*****");
 	status = lexcal_analysis(init_token_list, lex_list);
 	ft_lstclear(&init_token_list, free);
 	return (status);
