@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/31 19:10:05 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/01 22:08:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
 {
 	init_command_struct(simple_cmd_node, args);
-	print_allstruct(args);
+	// print_allstruct(args);
 	if (joudge_process(args) == 1)
 		execute_in_parent(args);
 	else
