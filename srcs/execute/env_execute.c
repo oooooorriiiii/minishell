@@ -29,6 +29,7 @@ void	execute_env(t_cmd_args *args)
 	(void)args;
 	printf(" execute_env \n"); // DEBUG
 	envlist = g_minishell.env;
+	print_envlist(envlist);
 	while (envlist)
 	{
 		print_env(envlist);
