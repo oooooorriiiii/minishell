@@ -20,7 +20,7 @@ void 	execute_external_cmd(t_cmd_args *args)
 	int		ret;
 
 	env_strs = gen_env_str(g_minishell.env);
-	ret = execve(args->cmdpath[0], args, env_strs);
+	ret = execve(args->cmdpath[0], args->cmdpath, env_strs);
 	if (ret < 0)
 	{
 		// TODO: handle_execve_error

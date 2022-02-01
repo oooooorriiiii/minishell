@@ -93,11 +93,11 @@ void	execute_export(t_cmd_args *args)
 	printf(" execute_export \n"); // DEBUG
 	if (!(args->cmdpath[1]))
 	{
-		env_arr = msh_get_envlist(g_minishell.env);
+		env_arr = gen_env_str(g_minishell.env);
 		print_export(env_arr);
 		free_str(env_arr);
 	}
 	else
-		status = store_env(args->cmdpath[1]);
+		status = store_env(args->cmdpath);
 	return ;
 }
