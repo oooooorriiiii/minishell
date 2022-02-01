@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/30 09:58:12 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:34:17 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,17 @@ void			extra_strcpy(t_cmd_args *args, t_astree *ast_node);
 
 // -----------  execute_utils.c
 
+void	print_allstruct(t_cmd_args *args);
+
 int				joudge_process(t_cmd_args *args);
 void			execute_simple_command(t_astree *t, t_cmd_args *args);
 void			execute_command(t_astree *t, t_cmd_args *args);
+void			destroy_command_struct(t_cmd_args *args);
 
 // -----------  execute_command_struct.c
 
 void			execute_command_struct(t_cmd_args *args);
 int				init_command_struct(t_astree *simplecmdNode, t_cmd_args *args);
-void			destroy_command_struct(t_cmd_args *args);
 
 // -----------  init_struct.c
 
@@ -85,5 +87,10 @@ void			execute_export(t_cmd_args *args);
 void			execute_unset(t_cmd_args *args);
 void			execute_env(t_cmd_args *args);
 void			execute_exit(t_cmd_args *args);
+
+// -----------  dupfor_redirection.c
+
+void			dupfor_redirection(t_cmd_args *args, int *backup);
+void			close_fdbackup(t_cmd_args *args, int *backup);
 
 #endif

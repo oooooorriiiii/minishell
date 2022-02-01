@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 00:20:19 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/26 14:19:48 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:50:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	astree_delete(t_astree *node)
 {
 	if (node == NULL)
 		return ;
-	if (node->type & NODE_DATA)
+	if (node->type)
 		free(node->szData);
 	astree_delete(node->left);
 	astree_delete(node->right);

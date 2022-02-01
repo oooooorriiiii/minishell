@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:23:25 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/29 19:12:29 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/01/31 10:13:02 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	init_struct(t_cmd_args *args)
 	args->redirect_out = NULL;
 	args->redirect_double_in = NULL;
 	args->redirect_double_out = NULL;
+	args->cmdpath = NULL;
 	args->cmdpath_argc = 0;
 }

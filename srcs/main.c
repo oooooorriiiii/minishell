@@ -62,9 +62,10 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 		}
 		// TODO: parse
 		parse(*lex_list, ast);
-		printf("===================================================\n\n");
+		printf("===================================================\n\n\n\n");
 		lexer_free(lex_list);
 		execute_syntax_tree(*ast);
+		astree_delete(*ast);
 	}
 
 //	envlist_clear(&envlist);
@@ -79,16 +80,38 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 
 	init(&input, &lex_list, &ast);
-	minishell_loop(&input, &lex_list, &ast);
+	// minishell_loop(&input, &lex_list, &ast);
 
-/*
-	lexer("echo 42Tokyo > test.txt", &lex_list);
-	parse(lex_list, &ast);
-	lexer_free(&lex_list);
-	printf("==============================================================\n");
-	printf("\n\n");
-	execute_syntax_tree(ast);
-*/
+	char *txt[9];
+	int i = 0;
+
+	txt[0] = "echo I like $sport";
+	txt[1] = "echo \"I like $sport\"";
+	txt[2] = "echo \'I like $sport\'";
+	txt[3] = "echo I like $nothing";
+	txt[4] = "echo \"I like $nothing\"";
+	txt[5] = "echo \'I like $nothing\'";
+	txt[6] = "echo aaaaaaa$sport****";
+	txt[7] = "echo a ba cfd";
+	txt[8] = NULL;
+
+
+	while (txt[i])
+	{
+		init(&input, &lex_list, &ast);
+		printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", txt[i]);
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+		lexer(txt[i], &lex_list);
+		parse(lex_list, &ast);
+		lexer_free(&lex_list);
+		printf("==============================================================\n");
+		printf("\n\n");
+		execute_syntax_tree(ast);
+		astree_delete(ast);
+		i++;
+	}
+
 //	puts("**************************");
 //	lexer("echo 42Tokyo > test.txt", &lex_list);
 //	parse(lex_list, &ast);
