@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:49:07 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 17:00:06 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 00:30:57 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	execute_syntax_tree(t_astree *tree)
 	malloc_error_exec(NULL, NULL, args);
 	init_struct(args);
 	execute_cmdline(tree, args);
-	destroy_command_struct(args);
+	free(args);
+	// destroy_command_struct(args);
 }

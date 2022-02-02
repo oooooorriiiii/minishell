@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 16:53:05 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 00:33:50 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ void	print_allstruct(t_cmd_args *args)
 	printf("pipe_read :   %d   /   pipe_write :   %d\n", args->pipe_read, args->pipe_write);
 	if (args->redirect_in)
 		printf("redirect_in :   %s\n", args->redirect_in);
+	else
+		printf("redirect_in :   NONE\n");
 	if (args->redirect_out)
 		printf("redirect_out :   %s\n", args->redirect_in);
+	else
+		printf("redirect_out :   NONE\n");
 	if (args->redirect_double_in)
 		printf("redirect_double_in :   %s\n", args->redirect_double_in);
 	if (args->redirect_double_out)
@@ -49,7 +53,7 @@ void	print_allstruct(t_cmd_args *args)
 
 int	joudge_process(t_cmd_args *args)
 {
-	if (args->pipe_read == true || args->pipe_write == true)
+	if (args->stdin_pipe == true || args->stdout_pipe == true)
 		return (0);
 	if (strcmp(args->cmdpath[0], "echo") != 0
 		&& strcmp(args->cmdpath[0], "cd") != 0
@@ -145,5 +149,4 @@ void	destroy_command_struct(t_cmd_args *args)
 	}
 	free(args->cmdpath);
 	args->cmdpath_argc = 0;
-	free(args);
 }

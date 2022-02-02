@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:55:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 16:14:46 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:51:46 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ t_astree	*CMD11(t_token_list **curtok)
 	if (simplecmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_DBLLESSER, NULL, curtok))
-		return (astree_delete(simplecmdNode));
+	{
+		astree_delete(simplecmdNode);
+		return (NULL);
+	}
 	if (!term(TOKEN, &filename, curtok))
 	{
 		free(filename);
-		return (astree_delete(simplecmdNode));
+		astree_delete(simplecmdNode);
+		return (NULL);
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
@@ -46,11 +50,15 @@ t_astree	*CMD22(t_token_list **curtok)
 	if (simplecmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_DBLGREATER, NULL, curtok))
-		return (astree_delete(simplecmdNode));
+	{
+		astree_delete(simplecmdNode);
+		return (NULL);
+	}
 	if (!term(TOKEN, &filename, curtok))
 	{
 		free(filename);
-		return (astree_delete(simplecmdNode));
+		astree_delete(simplecmdNode);
+		return (NULL);
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
