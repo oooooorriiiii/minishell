@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 22:08:02 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:52:17 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,16 @@ t_astree	*JOB1(t_token_list **curtok)
 	if (cmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_PIPE, NULL, curtok))
-		return (astree_delete(cmdNode));
+	{
+		astree_delete(cmdNode);
+		return (NULL);
+	}
 	jobNode = JOB(curtok);
 	if (jobNode == NULL)
-		return (astree_delete(cmdNode));
+	{
+		astree_delete(cmdNode);
+		return (NULL);
+	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_PIPE);

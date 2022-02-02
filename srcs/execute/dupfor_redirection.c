@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 18:55:12 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 15:15:11 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 00:23:40 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	open_error_handle(int fd)
 		exit(0);
 	}
 }
+
+void	dupfor_redirection(t_cmd_args *args, int *backup);
 
 void	dupfor_redirection(t_cmd_args *args, int *backup)
 {
