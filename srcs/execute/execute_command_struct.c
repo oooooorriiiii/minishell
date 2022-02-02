@@ -65,7 +65,7 @@ void	execute_command_struct(t_cmd_args *args)
 	}
 	else if (strcmp(args->cmdpath[0], "exit") == 0)
 	{
-		exit(0);
+		execute_exit(args);
 		return ;
 	}
 	else
