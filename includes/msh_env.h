@@ -45,4 +45,7 @@ bool		satisfy_env_name_rule(char *key);
 void		update_env_val(const char *env_key, const char *new_env_val, \
 							bool is_env_var, bool append_flag);
 
+// get_env_value.c;
+char		*get_env_value(const char *key);
+
 #endif
