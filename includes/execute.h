@@ -97,4 +97,13 @@ void			close_fdbackup(t_cmd_args *args, int *backup);
 
 void			malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3);
 
+// -----------  add_path.c
+char			*add_path(t_cmd_args *args);
+bool			is_directory(const char *path);
+bool			is_executable(const char *path);
+bool			is_cmd_exist(const char *path, char **res);
+
+// -----------  path_get_elem.c
+char			**get_path_elem_in_envlist(const char *str);
+
 #endif

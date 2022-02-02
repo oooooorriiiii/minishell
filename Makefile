@@ -22,6 +22,7 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/env/env_name_rule.c \
 				$(SRCS_DIR)/env/update_env_val.c \
 				$(SRCS_DIR)/env/gen_env_str.c \
+				$(SRCS_DIR)/env/get_env_value.c \
 				$(SRCS_DIR)/signal/signal.c \
 				$(SRCS_DIR)/error/error.c \
 				$(SRCS_DIR)/lexer/lexer.c \
@@ -55,6 +56,9 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/execute/export_execute.c \
 				$(SRCS_DIR)/execute/init_struct.c \
 				$(SRCS_DIR)/execute/parent.c \
+				$(SRCS_DIR)/execute/path_add.c \
+				$(SRCS_DIR)/execute/path_get_elem.c \
+				$(SRCS_DIR)/execute/path_utils.c \
 				$(SRCS_DIR)/execute/pwd_execute.c \
 				$(SRCS_DIR)/execute/unset_execute.c
 
