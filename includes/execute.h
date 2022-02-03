@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 16:52:36 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:48:25 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,25 @@ void			execute_pipeline(t_astree *t, t_cmd_args *args);
 
 // -----------  expansion.c
 
+int				quote_skip_strlen(char *arguments, int *quote);
+void			quote_skip_strcpy(char *dst, char *src, int quote);
+int				isenval(char *str);
+char			**split_non_alnum(char *str);
+char			*expand_united_enval(char *str);
+int				judge_united_enval(char *str);
+char			*get_enval(char *split);
+void			double_free(char **buf1, char **buf2);
+char			*first_enval(char *str, char *split);
+char			*expand_enval(char *str);
+void			get_quote_status(int *status, char *str);
+void			reset_status(int *status);
+int				get_twodim_len(t_astree *ast_node);
+int				copy_expansion(t_astree *ast_node, int *quote);
+void			double_reset(int *status, int *status2);
+void			int_init(int *status, int *status2, int *len);
+void			copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i);
 void			extra_strcpy(t_cmd_args *args, t_astree *ast_node);
+
 
 // -----------  execute_utils.c
 
