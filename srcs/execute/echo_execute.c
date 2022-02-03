@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:09:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 23:11:56 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:53:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	check_option(char **cmdarg, int argc)
 {
 	char	*option;
 
-	if (argc < 1)
+	if (argc <= 1)
 		return (false);
 	option = cmdarg[1];
 	if (option[0] == '-' && option[1] == 'n')
@@ -39,7 +39,6 @@ void	execute_echo(t_cmd_args *args)
 			printf(" ");
 		i++;
 	}
-	if (args->cmdpath_argc > 1
-		&& !check_option(args->cmdpath, args->cmdpath_argc))
+	if (!check_option(args->cmdpath, args->cmdpath_argc))
 		printf("\n");
 }
