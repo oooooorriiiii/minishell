@@ -52,11 +52,9 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 			lexer_free(lex_list);
 			continue ;
 		}
-		// TODO: parse
-		parse(*lex_list, ast);
-//		printf("===================================================\n\n\n\n");
+		if (parse(*lex_list, ast) != -1)
+			execute_syntax_tree(*ast);
 		lexer_free(lex_list);
-		execute_syntax_tree(*ast);
 		astree_delete(*ast);
 	}
 }
