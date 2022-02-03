@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 18:55:12 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 00:23:40 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:02:55 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,26 @@ void	open_error_handle(int fd)
 	}
 }
 
-void	dupfor_redirection(t_cmd_args *args, int *backup);
+void	dupfor_dbl_redirection(t_cmd_args *args, int *backup)
+{
+	int	fd;
+
+	fd = 0;
+	if (args->redirect_double_in)
+	{
+		*backup = dup(STDIN_FILENO);
+		fd = open(args->redirect_double_in, O_RDONLY);
+		open_error_handle(fd);
+		dup2(fd, STDIN_FILENO);
+	}
+	if (args->redirect_double_out)
+	{
+		*backup = dup(STDOUT_FILENO);
+		fd = open(args->redirect_double_out, O_WRONLY | O_APPEND);
+		open_error_handle(fd);
+		dup2(fd, STDOUT_FILENO);
+	}
+}
 
 void	dupfor_redirection(t_cmd_args *args, int *backup)
 {
@@ -46,20 +65,7 @@ void	dupfor_redirection(t_cmd_args *args, int *backup)
 		open_error_handle(fd);
 		dup2(fd, STDOUT_FILENO);
 	}
-	if (args->redirect_double_in)
-	{
-		*backup = dup(STDIN_FILENO);
-		fd = open(args->redirect_double_in, O_RDONLY);
-		open_error_handle(fd);
-		dup2(fd, STDIN_FILENO);
-	}
-	if (args->redirect_double_out)
-	{
-		*backup = dup(STDOUT_FILENO);
-		fd = open(args->redirect_double_out, O_WRONLY | O_APPEND);
-		open_error_handle(fd);
-		dup2(fd, STDOUT_FILENO);
-	}
+	dupfor_dbl_redirection(args, backup);
 }
 
 void	close_fdbackup(t_cmd_args *args, int *backup)

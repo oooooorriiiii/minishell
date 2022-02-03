@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:07:09 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 00:42:58 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:52:21 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,199 +14,6 @@
 #include "../includes/parser.h"
 #include "../includes/execute.h"
 #include "../includes/lexer.h"
-
-int	quote_skip_strlen(char *arguments, int *quote)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (arguments[i])
-	{
-		if (arguments[i] == '\'' && (!*quote || *quote == SINGLE_Q))
-			*quote += SINGLE_Q;
-		else if (arguments[i] == '\"' && (!*quote || *quote == DOUBLE_Q))
-			*quote += DOUBLE_Q;
-		else
-			len++;
-		i++;
-	}
-	return (len);
-}
-
-void	quote_skip_strcpy(char *dst, char *src, int quote)
-{
-	int		i;
-	int		j;
-	int		skip;
-
-	i = 0;
-	j = 0;
-	skip = 0;
-	while (src[j])
-	{
-		if (skip < 2 && ((src[j] == '\'' && (quote == SINGLE_Q
-						|| quote == SINGLE_Q * 2)) || (src[j] == '\"'
-					&& (quote == DOUBLE_Q || quote == DOUBLE_Q * 2))))
-		{
-			skip++;
-			j++;
-		}
-		else
-		{
-			if (src[j])
-				dst[i] = src[j];
-			i++;
-			j++;
-		}
-	}
-	dst[i] = '\0';
-}
-
-int	isenval(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	**split_non_alnum(char *str)
-{
-	char	**split;
-	int		enval_len;
-	int		i;
-
-	split = (char **)malloc(sizeof(char *) * 3);
-	malloc_error_exec(NULL, split, NULL);
-	enval_len = 0;
-	i = 0;
-	while (str[enval_len])
-	{
-		if (!ft_isalnum(str[enval_len]))
-			break ;
-		enval_len++;
-	}
-	split[0] = (char *)malloc(sizeof(char) * (enval_len + 1));
-	malloc_error_exec(split[0], NULL, NULL);
-	ft_strlcpy(split[0], str, enval_len + 1);
-	str += enval_len;
-	split[1] = (char *)malloc(sizeof(char) * (strlen(str) + 1));
-	malloc_error_exec(split[1], NULL, NULL);
-	ft_strlcpy(split[1], str, strlen(str) + 1);
-	split[2] = NULL;
-	return (split);
-}
-
-char	*expand_united_enval(char *str)
-{
-	char	**split;
-	char	*enval;
-	char	*res;
-
-	split = split_non_alnum(str);
-	enval = getenv(split[0]);
-	if (enval)
-		res = ft_strjoin(enval, split[1]);
-	else
-		res = ft_strjoin("", split[1]);
-	free(split[0]);
-	free(split[1]);
-	free(split[2]);
-	free(split);
-	return (res);
-}
-
-int	judge_united_enval(char *str)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isalnum(str[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*get_enval(char *split)
-{
-	char	*enval;
-
-	enval = NULL;
-	if (judge_united_enval(split))
-		enval = expand_united_enval(split);
-	else
-		enval = ft_strjoin("", getenv(split));
-	return (enval);
-}
-
-void	double_free(char **buf1, char **buf2)
-{
-	free(*buf1);
-	free(*buf2);
-}
-
-char	*first_enval(char *str ,char *split)
-{
-	char	*res;
-
-	res = NULL;
-	if (str[0] == '$')
-	{
-		if (judge_united_enval(split))
-			res = expand_united_enval(split);
-		else
-		{
-			res = getenv(split);
-			if (res)
-				res = strdup(res);
-		}
-	}
-	else
-		res = strdup(split);
-	free(split);
-	return (res);
-}
-
-char	*expand_enval(char *str)
-{
-	char	**split;
-	char	*enval;
-	char	*res;
-	int		i;
-	char	*tmp;
-
-	i = 1;
-	split = ft_split(str, '$');
-	res = first_enval(str, split[0]);
-	while (split[i])
-	{
-		enval = get_enval(split[i]);
-		if (res && enval)
-		{
-			tmp = res;
-			res = ft_strjoin(tmp, enval);
-			double_free(&tmp, &enval);
-		}
-		else if (enval)
-			res = strdup(enval);
-		free(split[i]);
-		i++;
-	}
-	free(split);
-	return (res);
-}
 
 void	get_quote_status(int *status, char *str)
 {
@@ -221,12 +28,6 @@ void	get_quote_status(int *status, char *str)
 			*status += DOUBLE_Q;
 		i++;
 	}
-}
-
-void	reset_status(int *status)
-{
-	if (*status == SINGLE_Q * 2 || *status == DOUBLE_Q * 2)
-		*status = 0;
 }
 
 int	get_twodim_len(t_astree *ast_node)
@@ -272,19 +73,6 @@ int	copy_expansion(t_astree *ast_node, int *quote)
 		ast_node->szData[0] = '\0';
 	free(expand);
 	return (len);
-}
-
-void double_reset(int *status, int *status2)
-{
-	reset_status(status);
-	reset_status(status2);
-}
-
-void	int_init(int *status, int *status2, int *len)
-{
-	*status = 0;
-	*status2 = 0;
-	*len = 0;
 }
 
 void	copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i)

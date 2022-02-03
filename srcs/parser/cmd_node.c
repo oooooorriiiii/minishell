@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/02 15:50:03 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:47:01 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_astree	*CMD1(t_token_list **curtok)
 	}
 	if (!term(TOKEN, &filename, curtok))
 	{
-		free(filename);
+		// free(filename);
 		astree_delete(simplecmdNode);
 		return (NULL);
 	}
@@ -85,7 +85,7 @@ t_astree	*CMD2(t_token_list **curtok)
 	}
 	if (!term(TOKEN, &filename, curtok))
 	{
-		free(filename);
+		// free(filename);
 		astree_delete(simplecmdNode);
 		return (NULL);
 	}

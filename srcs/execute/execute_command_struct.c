@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 00:51:06 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:22:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 //	printf("path: %s\n", path);
 //	printf("ret: %d\n", ret);
-void 	execute_external_cmd(t_cmd_args *args)
+void	execute_external_cmd(t_cmd_args *args)
 {
 	char	**env_strs;
 	char	*path;
@@ -32,23 +32,9 @@ void 	execute_external_cmd(t_cmd_args *args)
 	free_str_arr(&env_strs);
 }
 
-void	execute_command_struct(t_cmd_args *args)
+void	execute_command_struct2(t_cmd_args *args)
 {
-	if (args->cmdpath_argc < 0)
-		return ;
-	if (strcmp(args->cmdpath[0], "echo") == 0)
-	{
-		execute_echo(args);
-		return ;
-	}
-	else if (strcmp(args->cmdpath[0], "cd") == 0)
-	{
-		execute_cd(args);
-		return ;
-	}
-	else if (strcmp(args->cmdpath[0], "pwd") == 0)
-		return (execute_pwd(args));
-	else if (strcmp(args->cmdpath[0], "export") == 0)
+	if (strcmp(args->cmdpath[0], "export") == 0)
 	{
 		execute_export(args);
 		return ;
@@ -68,6 +54,30 @@ void	execute_command_struct(t_cmd_args *args)
 		execute_exit(args);
 		return ;
 	}
+	return ;
+}
+
+void	execute_command_struct(t_cmd_args *args)
+{
+	if (args->cmdpath_argc < 0)
+		return ;
+	if (strcmp(args->cmdpath[0], "echo") == 0)
+	{
+		execute_echo(args);
+		return ;
+	}
+	else if (strcmp(args->cmdpath[0], "cd") == 0)
+	{
+		execute_cd(args);
+		return ;
+	}
+	else if (strcmp(args->cmdpath[0], "pwd") == 0)
+		return (execute_pwd(args));
+	else if (!strcmp(args->cmdpath[0], "export")
+		|| !strcmp(args->cmdpath[0], "unset")
+		|| !strcmp(args->cmdpath[0], "env")
+		|| !strcmp(args->cmdpath[0], "exit"))
+		execute_command_struct2(args);
 	else
 		execute_external_cmd(args);
 	return ;

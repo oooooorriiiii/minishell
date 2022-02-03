@@ -53,6 +53,9 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/execute/execute.c \
 				$(SRCS_DIR)/execute/exit_execute.c \
 				$(SRCS_DIR)/execute/expansion.c \
+				$(SRCS_DIR)/execute/expansion_utils.c \
+				$(SRCS_DIR)/execute/expansion_utils2.c \
+				$(SRCS_DIR)/execute/expansion_utils3.c \
 				$(SRCS_DIR)/execute/export_execute.c \
 				$(SRCS_DIR)/execute/init_struct.c \
 				$(SRCS_DIR)/execute/parent.c \
