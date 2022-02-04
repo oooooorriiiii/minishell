@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:49 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 13:59:21 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:22:26 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	judge_united_enval(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]))
+		if (!ft_isalnum(str[i]) && str[i] != '?')
 			return (1);
 		i++;
 	}
@@ -54,7 +54,9 @@ char	*get_enval(char *split)
 	char	*enval;
 
 	enval = NULL;
-	if (judge_united_enval(split))
+	if (!strcmp(split, "?"))
+		enval = ft_itoa(g_minishell.exit_status);
+	else if (judge_united_enval(split))
 		enval = expand_united_enval(split);
 	else
 		enval = ft_strjoin("", getenv(split));
@@ -72,9 +74,14 @@ char	*first_enval(char *str, char *split)
 			res = expand_united_enval(split);
 		else
 		{
-			res = getenv(split);
-			if (res)
-				res = strdup(res);
+			if (!strcmp(split, "?"))
+				res = ft_itoa(g_minishell.exit_status);
+			else
+			{
+				res = getenv(split);
+				if (res)
+					res = strdup(res);
+			}
 		}
 	}
 	else
@@ -83,6 +90,7 @@ char	*first_enval(char *str, char *split)
 	return (res);
 }
 
+//?の次がalnumかどうか
 bool	next_to_envalmark(char *str)
 {
 	int	i;
@@ -92,10 +100,26 @@ bool	next_to_envalmark(char *str)
 	{
 		if (str[i] == '$' && str[i + 1] && ft_isalnum(str[i + 1]))
 			return (true);
+		if (str[i] == '$' && str[i + 1] && str[i + 1] == '?')
+			return (true);
 		i++;
 	}
 	return (false);
 }
+
+// char	*get_exit_status(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '$' && str[i + 1] && str[i + 1] == '?')
+// 			return (ft_itoa(g_minishell.exit_status));
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
 void	join_splitted(char **res, char **enval)
 {
@@ -112,7 +136,6 @@ char	*expand_enval(char *str)
 	char	*enval;
 	char	*res;
 	int		i;
-	char	*tmp;
 
 	i = 1;
 	if (!next_to_envalmark(str))
