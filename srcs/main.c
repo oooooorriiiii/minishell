@@ -54,6 +54,8 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 		}
 		if (parse(*lex_list, ast) != -1)
 			execute_syntax_tree(*ast);
+		// print_token_list(ret_list);
+		// print_syntax_tree(*ast);
 		lexer_free(lex_list);
 		astree_delete(*ast);
 	}
@@ -68,27 +70,29 @@ int	main(void)
 	init(&input, &lex_list, &ast);
 	minishell_loop(&input, &lex_list, &ast);
 
-//	char *txt[9];
-//	int i = 1;
+	// char *txt[6];
+	// int i = 0;
 //
 //	txt[0] = "ls -a | grep 42Tokyo | wc -l";
 //	// txt[0] = "pwd";
 //
-//	txt[1] = "echo \"I like $sport\"";
-//	txt[2] = "echo \'I like $sport\'";
-//	txt[3] = "echo I like $nothing";
-//	txt[4] = "echo \"I like $nothing\"";
+
+	// txt[0] = "echo $";
+	// txt[1] = "echo ddd$?aaa";
+	// txt[2] = "echo $sport";
+	// txt[3] = "echo $$";
+	// txt[4] = "echo ++++$++++";
 //	txt[5] = "echo \'I like $nothing\'";
 //	txt[6] = "echo aaaaaaa$sport****";
 //	txt[7] = "echo a ba cfd";
-//	txt[8] = NULL;
+	// txt[5] = NULL;
 
 	/*
 	init(&input, &lex_list, &ast);
 	printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
-	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", txt[0]);
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", "echo $?");
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
-	lexer(txt[0], &lex_list);
+	lexer("echo $?", &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
 	printf("==============================================================\n");
@@ -97,24 +101,27 @@ int	main(void)
 	astree_delete(ast);
 	*/
 
+/*
+	while (txt[i])
+	{
+		init(&input, &lex_list, &ast);
+		printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("   ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ \n", txt[i]);
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+		lexer(txt[i], &lex_list);
+		parse(lex_list, &ast);
+		lexer_free(&lex_list);
+		printf("minishell> ");
+		execute_syntax_tree(ast);
+		astree_delete(ast);
+		i++;
+	}
+	printf("\n\n");
 
-//	while (txt[i])
-//	{
-//		init(&input, &lex_list, &ast);
-//		printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
-//		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", txt[i]);
-//		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
-//		lexer(txt[i], &lex_list);
-//		parse(lex_list, &ast);
-//		lexer_free(&lex_list);
-//		printf("==============================================================\n");
-//		printf("\n\n");
-//		execute_syntax_tree(ast);
-//		astree_delete(ast);
-//		i++;
-//	}
+	printf("exit_status :   %d\n", g_minishell.exit_status);
+*/
 
-
+// exit(2);
 //	puts("**************************");
 //	lexer("echo 42Tokyo > test.txt", &lex_list);
 //	parse(lex_list, &ast);
