@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:49 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 14:52:01 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:59:21 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,29 @@ char	*first_enval(char *str, char *split)
 	return (res);
 }
 
+bool	next_to_envalmark(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$' && str[i + 1] && ft_isalnum(str[i + 1]))
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+void	join_splitted(char **res, char **enval)
+{
+	char	*tmp;
+
+	tmp = *res;
+	*res = ft_strjoin(tmp, *enval);
+	double_free(&tmp, enval);
+}
+
 char	*expand_enval(char *str)
 {
 	char	**split;
@@ -92,17 +115,15 @@ char	*expand_enval(char *str)
 	char	*tmp;
 
 	i = 1;
+	if (!next_to_envalmark(str))
+		return (strdup(str));
 	split = ft_split(str, '$');
 	res = first_enval(str, split[0]);
 	while (split[i])
 	{
 		enval = get_enval(split[i]);
 		if (res && enval)
-		{
-			tmp = res;
-			res = ft_strjoin(tmp, enval);
-			double_free(&tmp, &enval);
-		}
+			join_splitted(&res, &enval);
 		else if (enval)
 			res = strdup(enval);
 		free(split[i]);

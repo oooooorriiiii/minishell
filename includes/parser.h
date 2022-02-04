@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/02 15:47:35 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:31:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,9 @@ t_astree		*TOKENLIST1(t_token_list **curtok);
 t_astree		*TOKENLIST2(t_token_list **curtok);
 
 int				parse(t_lexer *lexbuf, t_astree **syntax_tree);
-
 bool			term(int toketype, char **bufferptr, t_token_list **curtok);
-
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);
-// void			astreeset_type(t_astree	*node, int nodetype);
 void			astreeset_type(t_astree	*node, t_node_type nodetype);
 void			astreeset_data(t_astree	*node, char	*data);
 void			astree_delete(t_astree	*node);

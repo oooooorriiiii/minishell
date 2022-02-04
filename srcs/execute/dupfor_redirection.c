@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 18:55:12 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 14:02:55 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:55:56 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	open_error_handle(int fd)
 	if (fd == -1)
 	{
 		perror("file descripter");
-		exit(0);
+		exit(1);
 	}
 }
 
