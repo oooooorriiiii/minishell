@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:11:50 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/24 13:39:22 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:43:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	execute_export(t_cmd_args *args)
 	int		status;
 
 	status = EXIT_SUCCESS;
-	printf(" execute_export \n"); // DEBUG
 	if (!(args->cmdpath[1]))
 	{
 		env_arr = gen_env_str(g_minishell.env);

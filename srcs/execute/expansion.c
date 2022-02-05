@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:07:09 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 19:01:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 15:56:55 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i)
 		double_reset(&status, &status2);
 		ast_node = ast_node->right;
 	}
+	if (status % 2 == 1)
+		g_minishell.exit_status = 2;
 }
 
 void	extra_strcpy(t_cmd_args *args, t_astree *ast_node)

@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:11:36 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 17:42:27 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:00:10 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ void	execute_pwd(t_cmd_args *args)
 	int			fd;
 	char		cwd[1024];
 
-	if (args->cmdpath_argc > 1)
-		printf("pwd: too many arguments\n");
-	else if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
 		printf("%s\n", cwd);
+		g_minishell.exit_status = 0;
+	}
 	else
+	{
 		perror("getcwd() error");
+		g_minishell.exit_status = 1;
+	}
 	return ;
 }
