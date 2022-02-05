@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:49:07 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 14:37:47 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:55:47 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,4 @@ void	execute_syntax_tree(t_astree *tree)
 	init_struct(args);
 	execute_cmdline(tree, args);
 	free(args);
-	// destroy_command_struct(args);
 }

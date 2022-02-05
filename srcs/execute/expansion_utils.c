@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:49 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 19:22:26 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 03:10:39 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@ char	*expand_united_enval(char *str)
 	char	**split;
 	char	*enval;
 	char	*res;
+	char	*exit_status;
 
+	if (str[0] == '?')
+	{
+		exit_status = ft_itoa(g_minishell.exit_status);
+		res = ft_strjoin(exit_status, ++str);
+		free(exit_status);
+		return (res);
+	}
 	split = split_non_alnum(str);
 	enval = getenv(split[0]);
 	if (enval)
@@ -42,7 +50,7 @@ int	judge_united_enval(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '?')
+		if (!ft_isalnum(str[i]) || str[i] == '?')
 			return (1);
 		i++;
 	}
@@ -90,7 +98,6 @@ char	*first_enval(char *str, char *split)
 	return (res);
 }
 
-//?の次がalnumかどうか
 bool	next_to_envalmark(char *str)
 {
 	int	i;
@@ -106,20 +113,6 @@ bool	next_to_envalmark(char *str)
 	}
 	return (false);
 }
-
-// char	*get_exit_status(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '$' && str[i + 1] && str[i + 1] == '?')
-// 			return (ft_itoa(g_minishell.exit_status));
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
 
 void	join_splitted(char **res, char **enval)
 {

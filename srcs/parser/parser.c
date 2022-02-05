@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 17:08:30 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:36:07 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 	if (lexbuf == NULL)
 	{
 		printf("error: lexbuf == NULL\n");
+		g_minishell.exit_status = 258;
 		return (-1);
 	}
 	if (lexbuf->len == 0)
 	{
 		printf("error: lexbuf->len == 0");
+		g_minishell.exit_status = 258;
 		return (-1);
 	}
 	curtok = lexbuf->list;
@@ -85,8 +87,8 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 	if (curtok != NULL && curtok->type != 0)
 	{
 		printf("Syntax Error near: %s\n", curtok->val);
+		g_minishell.exit_status = 258;
 		return (-1);
 	}
-	// print_syntax_tree(*syntax_tree);
 	return (0);
 }
