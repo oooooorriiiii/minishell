@@ -18,6 +18,7 @@
 #include "../includes/parser.h"
 #include "../includes/execute.h"
 #include "msh_env.h"
+#include "msh_error.h"
 #include <stdio.h>
 #include <errno.h>
 
@@ -52,13 +53,58 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 			lexer_free(lex_list);
 			continue ;
 		}
+//		print_token_list((*lex_list)->list);
+//		lexer_data_expand(lex_list);
 		if (parse(*lex_list, ast) != -1)
+		{
+//			free_set((void **)&((*ast)->szData), ast_data_expand((*ast)->szData));
 			execute_syntax_tree(*ast);
+		}
 		// print_token_list(ret_list);
 		// print_syntax_tree(*ast);
 		lexer_free(lex_list);
 		astree_delete(*ast);
 	}
+}
+
+int lexer_test(t_lexer **lex_list)
+{
+	int i = 0;
+	char *tmp[] = {
+		"\"echo >> abc|>\"", \
+		"echo \"echo $ USER\" >> test", \
+		"echo \"echo >> $USER\" >> test", \
+		"echo \"echo $U S E R\" >> test", \
+		"echo \"echo $USER\" >> test", \
+		"echo \"echo $USER\" >> test", \
+		"echo \"echo $USER\" >> test", \
+        NULL};
+	while (tmp[i]) {
+		lexer(tmp[i], lex_list);
+		printf("\n%s ============\n", tmp[i]);
+		print_token_list((*lex_list)->list);
+		lexer_free(lex_list);
+		i++;
+	}
+//	puts("**************************");
+//	lexer("echo>>>abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo>>>>abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo> >>>abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo>> >>abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo>>> >abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo><>>abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo><> >abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo>< >>abc|>", &lex_list);
+//	puts("**************************");
+//	lexer("echo> <>>abc|>", &lex_list);
+	return (0);
 }
 
 int	main(void)
@@ -68,6 +114,7 @@ int	main(void)
 	char		*input;
 
 	init(&input, &lex_list, &ast);
+//	lexer_test(&lex_list);
 	minishell_loop(&input, &lex_list, &ast);
 
 	// char *txt[6];
@@ -132,29 +179,10 @@ int	main(void)
 //	lexer_free(&lex_list);
 //	execute_syntax_tree(ast);
 //	astree_delete(ast);
-	// lexer("echo\"ab  c \"|", &lex_list);
-	// puts("**************************");
-	// // lexer("echo\"abc|", &lex_list);
-	// // puts("**************************");
-	// lexer("echo>>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo>>>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo>>>>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo> >>>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo>> >>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo>>> >abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo><>>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo><> >abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo>< >>abc|>", &lex_list);
-	// puts("**************************");
-	// lexer("echo> <>>abc|>", &lex_list);
+//	 lexer("echo\"ab  c \"|", &lex_list);
+//	 puts("**************************");
+	 // lexer("echo\"abc|", &lex_list);
+	 // puts("**************************");
 
 	return (0);
 }
