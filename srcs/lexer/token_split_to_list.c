@@ -51,28 +51,6 @@ void	merge_redirections(t_list *tokens)
 	}
 }
 
-char	*ft_strchrset(const char *s, char *chrset, size_t chrset_len)
-{
-	size_t	i;
-	size_t	j;
-	size_t	s_len;
-
-	s_len = ft_strlen(s);
-	i = 0;
-	while (i < s_len + 1)
-	{
-		j = 0;
-		while (j < chrset_len)
-		{
-			if (chrset[j] == s[i])
-				return ((char *)&s[i]);
-			j++;
-		}
-		i++;
-	}
-	return (NULL);
-}
-
 static char	*expand_env(char *content)
 {
 	char	*tmp;
@@ -109,7 +87,20 @@ void	merge_doutle_string(t_list **tokens)
 	(*tokens)->next = next;
 }
 
-bool	ft_strcmp_double(char *str, char token)
+/*
+ * Need free
+ */
+char	*char_to_str(char c)
+{
+	char	*ret_str;
+
+	ret_str = malloc(2 * sizeof(char));
+	ret_str[0] = c;
+	ret_str[1] = '\0';
+	return (ret_str);
+}
+
+bool	exist_double_token(char *str, char token)
 {
 	char	*tmp;
 	char	*head;
@@ -117,9 +108,7 @@ bool	ft_strcmp_double(char *str, char token)
 	bool	ret;
 
 	ret = false;
-	cmp_str = malloc(2 * sizeof(char));
-	cmp_str[0] = token;
-	cmp_str[1] = '\0';
+	cmp_str = char_to_str(token);
 	if (ft_strchr(str, token) == NULL)
 	{
 		free_str(&cmp_str);
@@ -132,14 +121,11 @@ bool	ft_strcmp_double(char *str, char token)
 			str++;
 		tmp = ft_substr(head, 0, str - head);
 	}
-	if (tmp == NULL)
-		ret = false;
-	else if (ft_strcmp(tmp, cmp_str) == 0)
+	if (tmp == NULL || ft_strcmp(tmp, cmp_str) == 0)
 		ret = false;
 	else
 		ret = true;
-	free_str(&tmp);
-	free_str(&cmp_str);
+	free_str(&tmp), free_str(&cmp_str);
 	return (ret);
 }
 
@@ -150,17 +136,16 @@ t_status merge_quote_list(t_list *tokens)
 	char		*content;
 
 	status = STATUS_GENERAL;
-
 	while (tokens && tokens->next)
 	{
 		content = (char *)tokens->content;
-		if (ft_strcmp(content, "\'") == 0 && !ft_strcmp_double(content, '\'') && status == STATUS_GENERAL)
+		if (ft_strcmp(content, "\'") == 0 && !exist_double_token(content, '\'') && status == STATUS_GENERAL)
 			status = STATUS_QUOTE;
-		else if (ft_strcmp_double(content, '\''))
+		else if (exist_double_token(content, '\''))
 			status = STATUS_GENERAL;
-		else if (ft_strcmp(content, "\"") == 0 && !ft_strcmp_double(content, '\"') && status == STATUS_GENERAL)
+		else if (ft_strcmp(content, "\"") == 0 && !exist_double_token(content, '\"') && status == STATUS_GENERAL)
 			status = STATUS_DQUOTE;
-		else if (ft_strcmp_double(content, '\"'))
+		else if (exist_double_token(content, '\"'))
 			status = STATUS_GENERAL;
 		else if (ft_strcmp(content, "$") == 0 && status != STATUS_QUOTE && tokens->next != NULL)
 			status = STATUS_ENV;
