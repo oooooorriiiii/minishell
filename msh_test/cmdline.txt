@@ -11,3 +11,4 @@ echo '' '' | cat -e
 echo " " " """ | ''c'at' -e
 echo ">"
 echo ">>"
+pwd

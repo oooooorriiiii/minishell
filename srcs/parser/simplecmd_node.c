@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:09:21 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 16:24:00 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:57:50 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ t_astree	*SIMPLECMD1(t_token_list **curtok)
 	result = malloc(sizeof(t_astree));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_CMDPATH);
-	// printf("1----------  result->type :  %d\n", result->type);
 	astreeset_data(result, pathname);
-	// printf("2----------  result->type :  %d\n", result->type);
 	astree_attach(result, NULL, tokenListNode);
 	return (result);
 }

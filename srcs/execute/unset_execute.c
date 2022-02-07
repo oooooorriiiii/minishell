@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:12:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/24 13:39:40 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:43:16 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	execute_unset(t_cmd_args *args)
 	size_t	i;
 	int		status;
 
-	printf(" execute_unset \n"); // DEBUG
 	i = 1;
 	status = EXIT_SUCCESS;
 	while (args->cmdpath[i])

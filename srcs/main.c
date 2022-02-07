@@ -4,10 +4,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 03:48:51 by ymori            ###   ########.fr       */
+/*   Updated: 2022/02/05 17:54:09 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,29 +117,13 @@ int	main(void)
 //	lexer_test(&lex_list);
 	minishell_loop(&input, &lex_list, &ast);
 
-	// char *txt[6];
-	// int i = 0;
-//
-//	txt[0] = "ls -a | grep 42Tokyo | wc -l";
-//	// txt[0] = "pwd";
-//
-
-	// txt[0] = "echo $";
-	// txt[1] = "echo ddd$?aaa";
-	// txt[2] = "echo $sport";
-	// txt[3] = "echo $$";
-	// txt[4] = "echo ++++$++++";
-//	txt[5] = "echo \'I like $nothing\'";
-//	txt[6] = "echo aaaaaaa$sport****";
-//	txt[7] = "echo a ba cfd";
-	// txt[5] = NULL;
-
 	/*
+	char *test = "echo aaaa$?aaaaa";
 	init(&input, &lex_list, &ast);
 	printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
-	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", "echo $?");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", test);
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
-	lexer("echo $?", &lex_list);
+	lexer(test, &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
 	printf("==============================================================\n");

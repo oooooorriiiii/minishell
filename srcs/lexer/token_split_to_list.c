@@ -149,9 +149,7 @@ t_status merge_quote_list(t_list *tokens)
 			status = STATUS_GENERAL;
 		else if (ft_strcmp(content, "$") == 0 && status != STATUS_QUOTE && tokens->next != NULL)
 			status = STATUS_ENV;
-		if (status == STATUS_DQUOTE)
-			merge_doutle_string(&tokens);
-		else if (status == STATUS_QUOTE)
+		if (status == STATUS_DQUOTE || status == STATUS_QUOTE)
 			merge_doutle_string(&tokens);
 		else
 			tokens = tokens->next;
