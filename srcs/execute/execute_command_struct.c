@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/06 22:38:49 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:14:33 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	execute_external_cmd(t_cmd_args *args)
 	char	*path;
 	int		ret;
 
+	if (args->cmdpath[0] == NULL)
+	{
+		msh_fatal("execve error: ");
+		return ;
+	}
 	env_strs = gen_env_str(g_minishell.env);
 	path = add_path(args);
 	ret = execve(path, args->cmdpath, env_strs);
@@ -61,7 +66,9 @@ void	execute_command_struct(t_cmd_args *args)
 {
 	if (args->cmdpath_argc < 0)
 		return ;
-	if (strcmp(args->cmdpath[0], "echo") == 0)
+	else if (args->cmdpath[0] == NULL)
+		execute_external_cmd(args);
+	else if (strcmp(args->cmdpath[0], "echo") == 0)
 	{
 		execute_echo(args);
 		return ;

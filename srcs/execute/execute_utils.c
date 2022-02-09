@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:23:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 19:00:30 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:15:56 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	joudge_process(t_cmd_args *args)
 {
 	if (args->stdin_pipe == true || args->stdout_pipe == true)
 		return (0);
+	if (args->cmdpath[0] == NULL)
+		return (1);
 	if (strcmp(args->cmdpath[0], "echo") != 0
 		&& strcmp(args->cmdpath[0], "cd") != 0
 		&& strcmp(args->cmdpath[0], "pwd") != 0
@@ -116,10 +118,39 @@ void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 	args->cmdpath_argc = i;
 }
 
+bool	check_componet(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '\'' && str[i] != '\"')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+int	get_list_len(t_astree *argNode)
+{
+	int	i;
+
+	i = 0;
+	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
+			|| argNode->type == NODE_CMDPATH))
+	{
+		argNode = argNode->right;
+		i++;
+	}
+	return (i);
+}
+
 int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
 	t_astree	*argNode;
 	t_astree	*argNode2;
+	t_astree	*argNode3;
 //	int			i; // COMMENT OUT: ymori
 
 //	i = 0; // COMMENT OUT: ymori
@@ -130,6 +161,7 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 	}
 	argNode = simplecmdNode;
 	argNode2 = simplecmdNode;
+	argNode3 = simplecmdNode;
 	if (is_need_expansion(argNode2))
 		extra_strcpy(args, argNode);
 	else

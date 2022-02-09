@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/09 16:17:08 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:16:58 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 bool	check_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (false);
 	if (!strcmp("echo", cmd) || !strcmp("cd", cmd) || !strcmp("pwd", cmd)
 		|| !strcmp("export", cmd) || !strcmp("unset", cmd)
 		|| !strcmp("exit", cmd))
