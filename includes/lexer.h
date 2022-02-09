@@ -23,10 +23,11 @@ typedef enum e_status
 {
 	STATUS_ERROR		= -2,
 	STATUS_GENERAL		= -1,
-	STATUS_QOUTE		= '\'',
+	STATUS_QUOTE		= '\'',
 	STATUS_DQUOTE		= '\"',
 	STATUS_WHITESPACE	= ' ',
 	STATUS_DBLESSER		= 'I',
+	STATUS_ENV			= 42,
 }				t_status;
 
 typedef struct s_token
@@ -79,5 +80,8 @@ void			print_token_list(t_token_list *list);
 // heredoc.c
 t_status		heredoc_process(t_list **token_list, char **token, \
 									t_token_list **ret_list);
+
+
+t_status merge_quote_list(t_list *tokens);
 
 #endif

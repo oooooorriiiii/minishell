@@ -32,5 +32,6 @@ void	execute_unset(t_cmd_args *args)
 		}
 		i++;
 	}
+	(void)status; // TODO: return status
 	return ;
 }

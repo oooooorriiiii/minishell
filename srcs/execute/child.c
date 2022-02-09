@@ -68,7 +68,7 @@ void		wait_commands(t_command *command)
 void	execute_in_child(t_cmd_args *args)
 {
 	pid_t	pid;
-	pid_t	wait_pid;
+//	pid_t	wait_pid; // COMMENT OUT: ymori
 	int		backup;
 	int		status;
 

@@ -14,9 +14,9 @@
 
 t_astree	*SIMPLECMD(t_token_list **curtok)
 {
-	t_token_list	*save;
+//	t_token_list	*save; // COMMENT OUT: ymori
 
-	save = *curtok;
+//	save = *curtok; // COMMENT OUT: ymori
 	return (SIMPLECMD1(curtok));
 }
 
@@ -73,5 +73,6 @@ t_astree	*TOKENLIST1(t_token_list **curtok)
 
 t_astree	*TOKENLIST2(t_token_list **curtok)
 {
+	(void)curtok; // ADD: ymori
 	return (NULL);
 }
