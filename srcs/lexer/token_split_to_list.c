@@ -51,27 +51,27 @@ void	merge_redirections(t_list *tokens)
 	}
 }
 
-static char	*expand_env(char *content)
-{
-	char	*tmp;
-
-	if (!ft_strcmp(content, "?"))
-	{
-		if (g_minishell.heredoc_status != 0)
-			tmp = ft_itoa(g_minishell.heredoc_status);
-		else
-			tmp = ft_itoa(g_minishell.exit_status);
-		g_minishell.heredoc_status = 0;
-	}
-	else
-	{
-		tmp = get_env_value(content);
-		if (tmp == NULL)
-			tmp = "";
-		tmp = ft_strdup(tmp);
-	}
-	return (tmp);
-}
+//static char	*expand_env(char *content)
+//{
+//	char	*tmp;
+//
+//	if (!ft_strcmp(content, "?"))
+//	{
+//		if (g_minishell.heredoc_status != 0)
+//			tmp = ft_itoa(g_minishell.heredoc_status);
+//		else
+//			tmp = ft_itoa(g_minishell.exit_status);
+//		g_minishell.heredoc_status = 0;
+//	}
+//	else
+//	{
+//		tmp = get_env_value(content);
+//		if (tmp == NULL)
+//			tmp = "";
+//		tmp = ft_strdup(tmp);
+//	}
+//	return (tmp);
+//}
 
 //printf("tmp: %s\n", tmp);
 void	merge_doutle_string(t_list **tokens)

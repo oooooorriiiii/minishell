@@ -35,7 +35,7 @@ void	init(char **input, t_lexer **lex_list, t_astree **ast)
 void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 {
 	extern char **environ;
-	size_t		i = 0;
+//	size_t		i = 0;
 
 	g_minishell.env = create_envlist(environ);
 

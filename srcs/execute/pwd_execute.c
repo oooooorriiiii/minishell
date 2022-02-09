@@ -14,11 +14,12 @@
 
 void	execute_pwd(t_cmd_args *args)
 {
-	pid_t		pid;
-	pid_t		wait;
-	int			fd;
+//	pid_t		pid; // ymori
+//	pid_t		wait;
+//	int			fd;
 	char		cwd[1024];
 
+	(void)args; // ADD: ymori
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		printf("%s\n", cwd);

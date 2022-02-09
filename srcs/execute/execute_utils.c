@@ -120,9 +120,9 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
 	t_astree	*argNode;
 	t_astree	*argNode2;
-	int			i;
+//	int			i; // COMMENT OUT: ymori
 
-	i = 0;
+//	i = 0; // COMMENT OUT: ymori
 	if (simplecmdNode == NULL || simplecmdNode->type != NODE_CMDPATH)
 	{
 		args->cmdpath_argc = 0;
