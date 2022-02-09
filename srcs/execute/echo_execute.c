@@ -27,16 +27,16 @@ bool	check_option(char **cmdarg, int argc)
 void	execute_echo(t_cmd_args *args)
 {
 	int	i;
-	int	j;
-	int	fd;
+//	int	j; // COMMENT OUT: ymori
+//	int	fd; // COMMENT OUT: ymori
 	int	flag;
 
 	i = 1;
-	j = 0;
+//	j = 0; // COMMENT OUT: ymori
 	flag = 0;
 	while (i < args->cmdpath_argc)
 	{
-		j = 0;
+//		j = 0; // COMMENT OUT: ymori
 		while (flag == 0 && check_option(args->cmdpath, args->cmdpath_argc)
 			&& !strcmp(args->cmdpath[i], "-n"))
 			i++;

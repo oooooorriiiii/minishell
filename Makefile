@@ -65,12 +65,14 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/execute/pwd_execute.c \
 				$(SRCS_DIR)/execute/unset_execute.c
 
-OBJS		=	$(SRCS:.c=.o)
+OBJROOT		=	obj
+OBJS		=	$(addprefix $(OBJROOT)/, $(SRCS:.c=.o))
 
 LIBFT_DIR			=	libft
 LIBFT				=	$(LIBFT_DIR)/libft.a
 
-%.o: %.c
+$(OBJROOT)/%.o: %.c
+	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 .PHONY: all

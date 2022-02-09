@@ -63,6 +63,7 @@ t_status	lexer(char *original_line, t_lexer **lex_list)
 		return (STATUS_WHITESPACE);
 	}
 	init_token_list = token_split_to_list(original_line);
+	status = merge_quote_list(init_token_list);
 	status = lexcal_analysis(init_token_list, lex_list);
 	ft_lstclear(&init_token_list, free);
 	return (status);

@@ -64,6 +64,7 @@ void	print_pipeline(t_astree *t, bool async)
 {
 	t_astree	*jobNode;
 
+	(void)async; // ADDING: ymori
 	jobNode = t->right;
 	print_command(t->left);
 	while (jobNode != NULL && NODETYPE(jobNode->type) == NODE_PIPE)
@@ -90,6 +91,7 @@ void	print_job(t_astree *jobNode, bool async)
 	case NODE_CMDPATH:
 			printf("   |\n");
 		printf("	-----------< job_node >-------  CMDPATH\n");
+		break ; // ADDING: ymori
 	default:
 			printf("   |\n");
 		printf("	-----------< job_node >-------  default\n");

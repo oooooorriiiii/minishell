@@ -68,12 +68,12 @@ char	**split_non_alnum(char *str)
 {
 	char	**split;
 	int		enval_len;
-	int		i;
+//	int		i; // ymori
 
 	split = (char **)malloc(sizeof(char *) * 3);
 	malloc_error_exec(NULL, split, NULL);
 	enval_len = 0;
-	i = 0;
+//	i = 0; // COMMENT OUT: ymori
 	while (str[enval_len])
 	{
 		if (!ft_isalnum(str[enval_len]))

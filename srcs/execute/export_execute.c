@@ -98,5 +98,6 @@ void	execute_export(t_cmd_args *args)
 	}
 	else
 		status = store_env(args->cmdpath);
+	(void)status; // TODO: return exit status
 	return ;
 }

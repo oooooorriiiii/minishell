@@ -45,7 +45,7 @@ char	*expand_united_enval(char *str)
 int	judge_united_enval(char *str)
 {
 	int	i;
-	int	status;
+//	int	status; // COMMENT OUT: ymori
 
 	i = 0;
 	while (str[i])
