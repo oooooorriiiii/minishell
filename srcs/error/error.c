@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 03:03:07 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/27 03:14:47 by ymori            ###   ########.fr       */
+/*   Updated: 2022/02/05 20:32:20 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "../libft/libft.h"
+#include "../includes/execute.h"
 
 void	msh_fatal(char *errmsg)
 {
@@ -31,5 +32,5 @@ void	msh_fatal(char *errmsg)
 		else
 			ft_putendl_fd(errmsg, STDERR_FILENO);
 	}
-	exit(1);
+	return ;
 }

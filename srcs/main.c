@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 12:09:39 by ymori             #+#    #+#             */
-/*   Updated: 2022/02/05 17:54:09 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/06 10:56:06 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(void)
 	minishell_loop(&input, &lex_list, &ast);
 
 	/*
-	char *test = "echo aaaa$?aaaaa";
+	char *test = "ffffffff";
 	init(&input, &lex_list, &ast);
 	printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", test);
@@ -78,11 +78,12 @@ int	main(void)
 	lexer(test, &lex_list);
 	parse(lex_list, &ast);
 	lexer_free(&lex_list);
+	// print_syntax_tree(ast);
 	printf("==============================================================\n");
 	printf("\n\n");
 	execute_syntax_tree(ast);
 	astree_delete(ast);
-	*/
+	// */
 
 /*
 	while (txt[i])
