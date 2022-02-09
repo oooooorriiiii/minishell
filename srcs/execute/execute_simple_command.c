@@ -6,11 +6,12 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/07 21:23:57 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:17:08 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
+#include "../includes/utils.h"
 
 bool	check_builtin(char *cmd)
 {
@@ -35,6 +36,7 @@ void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
 			g_minishell.exit_status = 126;
 		if (!path)
 			g_minishell.exit_status = 127;
+		free_str(&path);
 	}
 	if (joudge_process(args) == 1)
 		execute_in_parent(args);
