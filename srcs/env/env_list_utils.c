@@ -32,26 +32,30 @@ t_envlist	*msh_get_envlist(const char *key)
 
 t_envlist	*envlist_listlast(t_envlist *envlist)
 {
-	t_envlist	*list_last;
+	t_envlist	*lst_last;
 
-	if (!envlist)
+	lst_last = envlist;
+	if (envlist == NULL)
 		return (NULL);
-	list_last = envlist;
-	while (list_last->next)
-		list_last = list_last->next;
-	return (list_last);
+	while (lst_last->next)
+		lst_last = lst_last->next;
+	return (lst_last);
 }
 
-void	envlist_add_back(t_envlist **p_envlist, t_envlist *new_envlist)
+/*
+ * **p_envlist:  pointer of envlist
+ * *new_envlist: pointer of envlist element
+ */
+void	envlist_add_back(t_envlist **p_envlist, t_envlist *new_elem)
 {
-	if (!new_envlist || !p_envlist)
+	t_envlist	*lst_last;
+
+	if (new_elem == NULL || p_envlist == NULL)
 		return ;
-	if (!*p_envlist)
-		*p_envlist = new_envlist;
-	else
+	if (*p_envlist == NULL)
 	{
-		envlist_listlast(*p_envlist)->next = new_envlist;
-		new_envlist->next = NULL;
+		envlist_listlast(*p_envlist)->next = new_elem;
+		new_elem->next = NULL;
 	}
 }
 
