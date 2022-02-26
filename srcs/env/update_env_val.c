@@ -39,6 +39,34 @@ static void	set_env_value(t_envlist *envlist, const char *new_value, \
 	free_str(&old_value);
 }
 
+t_envlist	*recreate_envlist(char *env_str)
+{
+	t_envlist	*envlist;
+	char		*sep;
+
+	envlist = malloc(sizeof(t_envlist));
+	if (envlist == NULL)
+		exit(-1); // TODO: EXIT STATUS
+	sep = ft_strchr(env_str, '=');
+	if (!sep)
+	{
+		envlist->key = ft_strdup(env_str);
+		if (envlist->key == NULL)
+			exit(-1); // TODO: EXIT STATUS
+		envlist->value = NULL;
+	}
+	else
+	{
+		envlist->key = ft_substr(env_str, 0, sep - env_str);
+		envlist->value = ft_strdup(sep + 1);
+		if (envlist->key == NULL || envlist->value == NULL)
+			exit(-1); // TODO: EXIT STATUS
+	}
+	envlist->is_shell_var = true;
+	envlist->next = NULL;
+	return (envlist);
+}
+
 /*
  * if used by store_env(), is_env_var is true.
  */
@@ -52,7 +80,7 @@ void	update_env_val(const char *env_key, const char *new_env_val, \
 	envlist = msh_get_envlist(env_key);
 	if (envlist == NULL)
 	{
-		envlist = envlist_listnew(g_minishell.env, (char *)env_key);
+		envlist = recreate_envlist((char *)env_key);
 		envlist->is_shell_var = is_env_var;
 		envlist_add_back(&(g_minishell.env), envlist);
 	}

@@ -48,11 +48,11 @@ t_envlist	*envlist_listlast(t_envlist *envlist)
  */
 void	envlist_add_back(t_envlist **p_envlist, t_envlist *new_elem)
 {
-	t_envlist	*lst_last;
-
 	if (new_elem == NULL || p_envlist == NULL)
 		return ;
 	if (*p_envlist == NULL)
+		*p_envlist = new_elem;
+	else
 	{
 		envlist_listlast(*p_envlist)->next = new_elem;
 		new_elem->next = NULL;

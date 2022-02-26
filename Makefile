@@ -1,6 +1,6 @@
 NAME	=	minishell
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g #-O0
 
 SRCS_DIR		=	srcs
 INCLUDES_DIR	=	-Iincludes \
@@ -26,6 +26,7 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/signal/signal.c \
 				$(SRCS_DIR)/error/error.c \
 				$(SRCS_DIR)/lexer/lexer.c \
+				$(SRCS_DIR)/lexer/merge_escape.c \
 				$(SRCS_DIR)/lexer/operator_analysis.c \
 				$(SRCS_DIR)/lexer/lexer_utils.c \
 				$(SRCS_DIR)/lexer/token_split_to_list.c \
@@ -108,7 +109,7 @@ libft_fclean:
 # SRCS		=	main.c $(TEST)
 
 .PHONY: debug
-debug: CFLAGS += -g -fsanitize=undefined -fsanitize=address -DDEBUG
+debug: CFLAGS += -fsanitize=undefined -fsanitize=address -DDEBUG
 debug: re
 
 ##########
