@@ -58,10 +58,11 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 //		lexer_data_expand(lex_list);
 		if (parse(*lex_list, ast) != -1)
 		{
+			// print_syntax_tree(*ast);
 //			free_set((void **)&((*ast)->szData), ast_data_expand((*ast)->szData));
 			execute_syntax_tree(*ast);
 		}
-		// print_token_list(ret_list);
+		// print_token_list(*lex_list);
 		// print_syntax_tree(*ast);
 		lexer_free(lex_list);
 		astree_delete(*ast);
