@@ -12,6 +12,15 @@
 
 #include "msh_env.h"
 
+/*
+ * satisfy case
+ * 	_ABC
+ * 	ABC
+ * 	A_3_2
+ * error case
+ * 	0AB
+ * 	E+X
+ */
 bool	satisfy_env_name_rule(char *key)
 {
 	size_t	i;

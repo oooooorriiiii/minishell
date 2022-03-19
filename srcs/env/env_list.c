@@ -35,15 +35,18 @@ void	print_envlist(t_envlist *list)
 	printf("is_shell: %d\n", list->is_shell_var);
 }
 
+/*
+ * used by envlist_listnew
+ */
 static void	set_elements(char *env, t_envlist *new)
 {
 	char	*key;
 	char	*value;
-	char	*p_equal;
+	char	*equal_and_beyond;
 	size_t	key_len;
 
-	p_equal = ft_strchr(env, '=');
-	key_len = p_equal - env;
+	equal_and_beyond = ft_strchr(env, '=');
+	key_len = equal_and_beyond - env;
 	key = ft_substr(env, 0, key_len);
 	value = ft_substr(env, key_len + 1, ft_strlen(env) - key_len - 1);
 	new->key = key;
@@ -51,6 +54,9 @@ static void	set_elements(char *env, t_envlist *new)
 	new->is_shell_var = true;
 }
 
+/*
+ * create new element of envlist.
+ */
 t_envlist	*envlist_listnew(t_envlist *current, char *env)
 {
 	t_envlist	*new_env;
@@ -61,6 +67,10 @@ t_envlist	*envlist_listnew(t_envlist *current, char *env)
 	return (new_env);
 }
 
+/*
+ * Create first environ list.
+ * Used only for initialization.
+ */
 t_envlist	*create_envlist(char **envp)
 {
 	t_envlist	head;

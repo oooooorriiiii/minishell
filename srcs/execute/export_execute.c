@@ -25,6 +25,22 @@ static void	restore_arg(char *sep, bool append_flag)
 	}
 }
 
+/*
+ * case 1)
+ * KEY=VALUE
+ * -> append_flag = false
+ * In the case of "=", the operation to update all variables is executed.
+ *
+ * case 2)
+ * KEY+=VALUE
+ * -> append_flag = true
+ * In the case of "+=", the operation to append is executed.
+ *
+ * KEY=VALUE
+ * arg:    KEY=VALUE
+ * *sep:   =VALUE
+ * *value: VALUE
+ */
 static int	separate_arg(char *arg, char **sep, char **value)
 {
 	bool	append_flag;
@@ -46,6 +62,9 @@ static int	separate_arg(char *arg, char **sep, char **value)
 	return (append_flag);
 }
 
+/*
+ *
+ */
 static int	store_env(char **cmdpath)
 {
 	size_t	i;

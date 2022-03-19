@@ -147,8 +147,8 @@ t_status merge_quote_list(t_list *tokens)
 			status = STATUS_DQUOTE;
 		else if (exist_double_token(content, '\"'))
 			status = STATUS_GENERAL;
-		else if (ft_strcmp(content, "$") == 0 && status != STATUS_QUOTE && tokens->next != NULL)
-			status = STATUS_ENV;
+//		else if (ft_strcmp(content, "$") == 0 && status != STATUS_QUOTE && tokens->next != NULL)
+//			status = STATUS_ENV;
 		if (status == STATUS_DQUOTE || status == STATUS_QUOTE)
 			merge_doutle_string(&tokens);
 		else
