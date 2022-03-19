@@ -58,5 +58,9 @@ minishell
 gtest/
 tester
 
+# msh_test
+msh_test/output
+
 # editor
 .vscode
+.idea

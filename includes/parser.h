@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:00:52 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 01:00:55 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:31:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
-typedef	enum
+
+# include "lexer.h"
+# include "minishell.h"
+
+typedef enum e_node_type
 {
 	NODE_PIPE			= (1 << 0),
 	NODE_BCKGRND		= (1 << 1),
@@ -29,62 +33,45 @@ typedef	enum
 	NODE_CMDPATH		= (1 << 7),
 	NODE_ARGUMENT		= (1 << 8),
 	NODE_DATA			= (1 << 9),
-}		NodeType;
+}		t_node_type;
 
-enum TokenType
+typedef struct astree
 {
-	CHAR_GENERAL		= -1,
-	CHAR_PIPE			= '|',
-	CHAR_AMPERSAND		= '&',
-	CHAR_QOUTE			= '\'',
-	CHAR_DQUOTE			= '\"',
-	CHAR_SEMICOLON		= ';',
-	CHAR_WHITESPACE		= ' ',
-	CHAR_ESCAPESEQUENCE = '\\',
-	CHAR_TAB			= '\t',
-	CHAR_NEWLINE		= '\n',
-	CHAR_GREATER		= '>',
-	CHAR_LESSER			= '<',
-	CHAR_DBLGREATER		= 'O',
-	CHAR_DBLLESSER		= 'I',
-	CHAR_NULL			= 0,
-	TOKEN				= -1,
-};
-
-typedef	struct	astree
-{
-	int				type;
+	t_node_type		type;
 	char			*szData;
 	struct astree	*left;
 	struct astree	*right;
 }				t_astree;
 
-t_astree		*CMDLINE(tok_t **curtok);
+t_astree		*CMDLINE(t_token_list **curtok);
 
-t_astree		*JOB(tok_t **curtok);
-t_astree		*JOB1(tok_t **curtok);
-t_astree		*JOB2(tok_t **curtok);
+t_astree		*JOB(t_token_list **curtok);
+t_astree		*JOB1(t_token_list **curtok);
+t_astree		*JOB2(t_token_list **curtok);
 
-t_astree		*CMD(tok_t **curtok);
-t_astree		*CMD1(tok_t **curtok);
-t_astree		*CMD2(tok_t **curtok);
-t_astree		*CMD11(tok_t **curtok);
-t_astree		*CMD22(tok_t **curtok);
-t_astree		*CMD3(tok_t **curtok);
+t_astree		*CMD(t_token_list **curtok);
+t_astree		*CMD1(t_token_list **curtok);
+t_astree		*CMD2(t_token_list **curtok);
+t_astree		*CMD11(t_token_list **curtok);
+t_astree		*CMD22(t_token_list **curtok);
+t_astree		*CMD3(t_token_list **curtok);
 
-t_astree		*SIMPLECMD(tok_t **curtok);
-t_astree		*SIMPLECMD1(tok_t **curtok);
+t_astree		*SIMPLECMD(t_token_list **curtok);
+t_astree		*SIMPLECMD1(t_token_list **curtok);
 
-t_astree		*TOKENLIST(tok_t **curtok);
-t_astree		*TOKENLIST1(tok_t **curtok);
-t_astree		*TOKENLIST2(tok_t **curtok);
+t_astree		*TOKENLIST(t_token_list **curtok);
+t_astree		*TOKENLIST1(t_token_list **curtok);
+t_astree		*TOKENLIST2(t_token_list **curtok);
 
-bool			term(int toketype, char **bufferptr, tok_t **curtok);
-
+int				parse(t_lexer *lexbuf, t_astree **syntax_tree);
+bool			term(int toketype, char **bufferptr, t_token_list **curtok);
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);
-void			astreeset_type(t_astree	*node, NodeType nodetype);
+void			astreeset_type(t_astree	*node, t_node_type nodetype);
 void			astreeset_data(t_astree	*node, char	*data);
 void			astree_delete(t_astree	*node);
+void			parse_malloc_errordeal(t_astree *buf1, char *buf2);
+
+void			print_syntax_tree(t_astree *tree);
 
 #endif

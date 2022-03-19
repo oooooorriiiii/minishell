@@ -1,25 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast_visualiver.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 13:53:58 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 01:00:03 by sosugimo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "command.h"
+#include "../includes/parser.h"
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-#define NODETYPE(a) (a & (~NODE_DATA))
 
-void	print_simple_command(ASTreeNode *simple_cmd_node)
+#define NODETYPE(a) (a*1)
+
+void	print_simple_command(t_astree *simple_cmd_node)
 {
-	ASTreeNode	*node;
+	t_astree	*node;
 
 	node = simple_cmd_node;
 	while (node->szData != NULL)
@@ -33,22 +22,34 @@ void	print_simple_command(ASTreeNode *simple_cmd_node)
 	}
 }
 
-void	print_command(ASTreeNode *cmdNode)
+void	print_command(t_astree *cmdNode)
 {
 	if (cmdNode == NULL)
 		return ;
 	switch (NODETYPE(cmdNode->type))
 	{
-	case NODE_REDIRECT_IN:
+	case NODE_REDIRECT_IN:		// <
 			printf("	   |\n");
 		printf("		-----------< cmd_node >-------  REDIRECT_IN");
-		printf("   <   %s \n", cmdNode->szData);
+		printf("   < %s \n", cmdNode->szData);
 		print_simple_command(cmdNode->right);
 		break ;
-	case NODE_REDIRECT_OUT:		// right side contains simple cmd node
+	case NODE_REDIRECT_OUT:		// >
 			printf("	   |\n");
 		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
-		printf("   >   %s \n", cmdNode->szData);
+		printf("   > %s \n", cmdNode->szData);
+		print_simple_command(cmdNode->right);
+		break ;
+	case NODE_REDIRECT_D_IN:		// <<
+			printf("	   |\n");
+		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
+		printf("   << %s \n", cmdNode->szData);
+		print_simple_command(cmdNode->right);
+		break ;
+	case NODE_REDIRECT_D_OUT:		// >>
+			printf("	   |\n");
+		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
+		printf("   >> %s \n", cmdNode->szData);
 		print_simple_command(cmdNode->right);
 		break ;
 	case NODE_CMDPATH:
@@ -59,10 +60,11 @@ void	print_command(ASTreeNode *cmdNode)
 	}
 }
 
-void	print_pipeline(ASTreeNode *t, bool async)
+void	print_pipeline(t_astree *t, bool async)
 {
-	ASTreeNode	*jobNode;
+	t_astree	*jobNode;
 
+	(void)async; // ADDING: ymori
 	jobNode = t->right;
 	print_command(t->left);
 	while (jobNode != NULL && NODETYPE(jobNode->type) == NODE_PIPE)
@@ -75,7 +77,7 @@ void	print_pipeline(ASTreeNode *t, bool async)
 	print_command(jobNode);
 }
 
-void	print_job(ASTreeNode *jobNode, bool async)
+void	print_job(t_astree *jobNode, bool async)
 {
 	if (jobNode == NULL)
 		return ;
@@ -89,6 +91,7 @@ void	print_job(ASTreeNode *jobNode, bool async)
 	case NODE_CMDPATH:
 			printf("   |\n");
 		printf("	-----------< job_node >-------  CMDPATH\n");
+		break ; // ADDING: ymori
 	default:
 			printf("   |\n");
 		printf("	-----------< job_node >-------  default\n");
@@ -97,19 +100,20 @@ void	print_job(ASTreeNode *jobNode, bool async)
 	}
 }
 
-void	print_cmdline(ASTreeNode *cmdline)
+void	print_cmdline(t_astree *cmdline)
 {
 	if (cmdline == NULL)
 		return ;
 	switch (NODETYPE(cmdline->type))
 	{
 		default:
-			printf("-----------< cmdline_node >------- \n");
+			printf("-----------< cmdline_node > \n");
 		print_job(cmdline, false);
 	}
 }
 
-void	print_syntax_tree(ASTreeNode *tree)
+void	print_syntax_tree(t_astree *tree)
 {
 	print_cmdline(tree);
+	// astree_delete(tree);
 }

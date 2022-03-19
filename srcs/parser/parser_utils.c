@@ -6,13 +6,22 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 00:49:41 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:23:46 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
-bool	term(int toketype, char **bufferptr, tok_t **curtok)
+void	parse_malloc_errordeal(t_astree *buf1, char *buf2)
+{
+	if (!buf1 && !buf2)
+	{
+		perror("parser malloc error");
+		exit(0);
+	}
+}
+
+bool	term(int toketype, char **bufferptr, t_token_list **curtok)
 {
 	if (*curtok == NULL)
 		return (false);
@@ -20,8 +29,9 @@ bool	term(int toketype, char **bufferptr, tok_t **curtok)
 	{
 		if (bufferptr != NULL)
 		{
-			*bufferptr = malloc(strlen((*curtok)->data) + 1);
-			strcpy(*bufferptr, (*curtok)->data);
+			*bufferptr = malloc(strlen((*curtok)->val) + 1);
+			parse_malloc_errordeal(NULL, *bufferptr);
+			strcpy(*bufferptr, (*curtok)->val);
 		}
 		*curtok = (*curtok)->next;
 		return (true);

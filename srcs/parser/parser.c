@@ -6,35 +6,35 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:24:41 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/18 00:50:01 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:36:07 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
-t_astree	*CMDLINE(tok_t **curtok)
+t_astree	*CMDLINE(t_token_list **curtok)
 {
 	return (JOB(curtok));
 }
 
-t_astree	*JOB(tok_t **curtok)
+t_astree	*JOB(t_token_list **curtok)
 {
-	tok_t		*save;
-	t_astree	*node;
+	t_token_list		*save;
+	t_astree			*node;
 
-	save = curtok;
-	curtok = save;
+	save = *curtok;
+	*curtok = save;
 	node = JOB1(curtok);
 	if (node != NULL)
 		return (node);
-	curtok = save;
+	*curtok = save;
 	node = JOB2(curtok);
 	if (node != NULL)
 		return (node);
 	return (NULL);
 }
 
-t_astree	*JOB1(tok_t **curtok)
+t_astree	*JOB1(t_token_list **curtok)
 {
 	t_astree	*cmdNode;
 	t_astree	*jobNode;
@@ -48,34 +48,46 @@ t_astree	*JOB1(tok_t **curtok)
 		astree_delete(cmdNode);
 		return (NULL);
 	}
-	jobNode = JOB();
+	jobNode = JOB(curtok);
 	if (jobNode == NULL)
 	{
 		astree_delete(cmdNode);
 		return (NULL);
 	}
 	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_PIPE);
 	astree_attach(result, cmdNode, jobNode);
 	return (result);
 }
 
-t_astree	*JOB2(tok_t **curtok)
+t_astree	*JOB2(t_token_list **curtok)
 {
 	return (CMD(curtok));
 }
 
-int	parse(lexer_t *lexbuf, t_astree **syntax_tree)
+int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 {
-	tok_t	*curtok;
+	t_token_list	*curtok;
 
-	if (lexbuf->ntoks == 0)
+	if (lexbuf == NULL)
+	{
+		printf("error: lexbuf == NULL\n");
+		g_minishell.exit_status = 258;
 		return (-1);
-	curtok = lexbuf->llisttok;
+	}
+	if (lexbuf->len == 0)
+	{
+		printf("error: lexbuf->len == 0");
+		g_minishell.exit_status = 258;
+		return (-1);
+	}
+	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
 	if (curtok != NULL && curtok->type != 0)
 	{
-		printf("Syntax Error near: %s\n", curtok->data);
+		printf("Syntax Error near: %s\n", curtok->val);
+		g_minishell.exit_status = 258;
 		return (-1);
 	}
 	return (0);

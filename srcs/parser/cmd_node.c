@@ -6,18 +6,18 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:37:31 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/01/17 18:55:02 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:57:29 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+#include "../includes/parser.h"
 
-t_astree	*CMD(tok_t **curtok)
+t_astree	*CMD(t_token_list **curtok)
 {
-	tok_t		*save;
-	t_astree	*node;
+	t_token_list		*save;
+	t_astree			*node;
 
-	save = curtok;
+	save = *curtok;
 	*curtok = save;
 	node = CMD1(curtok);
 	if (node != NULL)
@@ -41,7 +41,7 @@ t_astree	*CMD(tok_t **curtok)
 	return (NULL);
 }
 
-t_astree	*CMD1(tok_t **curtok)
+t_astree	*CMD1(t_token_list **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -57,18 +57,18 @@ t_astree	*CMD1(tok_t **curtok)
 	}
 	if (!term(TOKEN, &filename, curtok))
 	{
-		free(filename);
 		astree_delete(simplecmdNode);
 		return (NULL);
 	}
 	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_IN);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, simplecmdNode);
 	return (result);
 }
 
-t_astree	*CMD2(tok_t **curtok)
+t_astree	*CMD2(t_token_list **curtok)
 {
 	t_astree	*simplecmdNode;
 	t_astree	*result;
@@ -84,18 +84,18 @@ t_astree	*CMD2(tok_t **curtok)
 	}
 	if (!term(TOKEN, &filename, curtok))
 	{
-		free(filename);
 		astree_delete(simplecmdNode);
 		return (NULL);
 	}
 	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_OUT);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, simplecmdNode);
 	return (result);
 }
 
-t_astree	*CMD3(tok_t **curtok)
+t_astree	*CMD3(t_token_list **curtok)
 {
 	return (SIMPLECMD(curtok));
 }
