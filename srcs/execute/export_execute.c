@@ -102,7 +102,6 @@ void	print_export(char **env_arr)
 	}
 }
 
-// TODO: return exit status ??
 void	execute_export(t_cmd_args *args)
 {
 	char	**env_arr;
@@ -117,6 +116,6 @@ void	execute_export(t_cmd_args *args)
 	}
 	else
 		status = store_env(args->cmdpath);
-	(void)status; // TODO: return exit status
+	g_minishell.exit_status = status;
 	return ;
 }

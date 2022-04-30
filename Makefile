@@ -30,6 +30,7 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/lexer/operator_analysis.c \
 				$(SRCS_DIR)/lexer/lexer_utils.c \
 				$(SRCS_DIR)/lexer/token_split_to_list.c \
+				$(SRCS_DIR)/lexer/token_merger.c \
 				$(SRCS_DIR)/lexer/token_list_utils.c \
 				$(SRCS_DIR)/lexer/token_list_clear.c \
 				$(SRCS_DIR)/lexer/helper.c \
