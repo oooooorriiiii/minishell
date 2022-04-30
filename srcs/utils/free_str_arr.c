@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-//
-// Created by ymori on 1/28/22.
-//
-
-#include <stdlib.h>
-
-void 	free_str_arr(char ***str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!(*str))
-		return ;
-	while ((*str)[i])
-	{
-		free((*str)[i]);
-		(*str)[i] = NULL;
-		i++;
-	}
-	free(*str);
-	*str = NULL;
-}
-=======
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -53,4 +29,3 @@ void 	free_str_arr(char ***str)
 	free(*str);
 	*str = NULL;
 }
->>>>>>> ba2b558f9fb4576505b8cd43038ee974a9f361a7

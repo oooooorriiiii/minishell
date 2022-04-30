@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-//
-// Created by ymori on 1/29/22.
-//
-
-#include <stdlib.h>
-
-void	free_str(char **str)
-{
-	free(*str);
-	*str = NULL;
-}
-=======
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -30,4 +17,3 @@ void	free_str(char **str)
 	free(*str);
 	*str = NULL;
 }
->>>>>>> ba2b558f9fb4576505b8cd43038ee974a9f361a7
