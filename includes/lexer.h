@@ -81,7 +81,6 @@ void			print_token_list(t_token_list *list);
 t_status		heredoc_process(t_list **token_list, char **token, \
 									t_token_list **ret_list);
 
-
-t_status merge_quote_list(t_list *tokens);
+t_status		merge_quote_list(t_list *tokens);
 
 #endif
