@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_merger.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/01 11:25:59 by marvin            #+#    #+#             */
+/*   Updated: 2022/05/01 11:26:01 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lexer.h"
 #include "msh_error.h"
 #include "utils.h"
@@ -72,7 +84,8 @@ bool	exist_double_token(char *str, char token)
 		ret = false;
 	else
 		ret = true;
-	free_str(&tmp), free_str(&cmp_str);
+	free_str(&tmp);
+	free_str(&cmp_str);
 	return (ret);
 }
 
@@ -97,7 +110,8 @@ t_status	merge_quote_list(t_list *tokens)
 			status = STATUS_QUOTE;
 		else if (exist_double_token(content, '\''))
 			status = STATUS_GENERAL;
-		else if (ft_strcmp(content, "\"") == 0 && !exist_double_token(content, '\"') \
+		else if (ft_strcmp(content, "\"") == 0 && \
+					!exist_double_token(content, '\"') \
 					&& status == STATUS_GENERAL)
 			status = STATUS_DQUOTE;
 		else if (exist_double_token(content, '\"'))
