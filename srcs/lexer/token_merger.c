@@ -1,7 +1,3 @@
-//
-// Created by yuumo on 2022/04/30.
-//
-
 #include "lexer.h"
 #include "msh_error.h"
 #include "utils.h"
@@ -80,9 +76,13 @@ bool	exist_double_token(char *str, char token)
 	return (ret);
 }
 
-//		printf("content: %s\n", content);
-//		else if (ft_strcmp(content, "$") == 0 && status != STATUS_QUOTE && tokens->next != NULL)
-//			status = STATUS_ENV;
+/*
+ *printf("content: %s\n", content);
+ *		else if (ft_strcmp(content, "$") == 0 && \
+ *					status != STATUS_QUOTE \
+ *					&& tokens->next != NULL)
+ *			status = STATUS_ENV;
+*/
 t_status	merge_quote_list(t_list *tokens)
 {
 	t_status	status;
@@ -92,11 +92,13 @@ t_status	merge_quote_list(t_list *tokens)
 	while (tokens && tokens->next)
 	{
 		content = (char *)tokens->content;
-		if (ft_strcmp(content, "\'") == 0 && !exist_double_token(content, '\'') && status == STATUS_GENERAL)
+		if (ft_strcmp(content, "\'") == 0 && !exist_double_token(content, '\'') \
+			&& status == STATUS_GENERAL)
 			status = STATUS_QUOTE;
 		else if (exist_double_token(content, '\''))
 			status = STATUS_GENERAL;
-		else if (ft_strcmp(content, "\"") == 0 && !exist_double_token(content, '\"') && status == STATUS_GENERAL)
+		else if (ft_strcmp(content, "\"") == 0 && !exist_double_token(content, '\"') \
+					&& status == STATUS_GENERAL)
 			status = STATUS_DQUOTE;
 		else if (exist_double_token(content, '\"'))
 			status = STATUS_GENERAL;
