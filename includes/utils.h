@@ -16,5 +16,6 @@
 void	free_str(char **str);
 void	free_str_arr(char ***str);
 char	*char_to_str(char c);
+char	*ft_xstrdup(const char *s1);
 
 #endif

@@ -16,6 +16,7 @@ INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/utils/free_str_arr.c \
 				$(SRCS_DIR)/utils/free_str.c \
+				$(SRCS_DIR)/utils/ft_xstrdup.c \
 				$(SRCS_DIR)/env/env_list.c \
 				$(SRCS_DIR)/env/env_list_clear.c \
 				$(SRCS_DIR)/env/env_list_utils.c \
