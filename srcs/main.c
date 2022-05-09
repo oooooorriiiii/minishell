@@ -54,7 +54,7 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 			lexer_free(lex_list);
 			continue ;
 		}
-		print_token_list((*lex_list)->list);
+//		print_token_list((*lex_list)->list);
 //		lexer_data_expand(lex_list);
 		if (parse(*lex_list, ast) != -1)
 		{
