@@ -150,7 +150,7 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
 	t_astree	*argNode;
 	t_astree	*argNode2;
-	t_astree	*argNode3;
+//	t_astree	*argNode3;
 //	int			i; // COMMENT OUT: ymori
 
 //	i = 0; // COMMENT OUT: ymori
@@ -161,7 +161,7 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 	}
 	argNode = simplecmdNode;
 	argNode2 = simplecmdNode;
-	argNode3 = simplecmdNode;
+//	argNode3 = simplecmdNode;
 	if (is_need_expansion(argNode2))
 		extra_strcpy(args, argNode);
 	else
