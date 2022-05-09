@@ -58,7 +58,7 @@ t_status		lexer(char *original_line, t_lexer **lex_list);
 // operator_analysis.c
 void			literal_process(t_list **token_list, char **token, \
 									t_token_list **ret_list);
-t_status		operetor_analysis(t_list **token_list, char *token, \
+t_status		operator_analysis(t_list **token_list, char **token, \
 									t_token_list **ret_list, char *element);
 
 // token_split_to_list.c
@@ -81,7 +81,8 @@ void			print_token_list(t_token_list *list);
 t_status		heredoc_process(t_list **token_list, char **token, \
 									t_token_list **ret_list);
 
-
-t_status merge_quote_list(t_list *tokens);
+// token_merger.c
+void			merge_redirections(t_list *tokens);
+t_status		merge_quote_list(t_list *tokens);
 
 #endif

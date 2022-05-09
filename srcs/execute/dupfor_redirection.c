@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+// TODO: heredocへの対応
 void	open_error_handle(int fd)
 {
 	if (fd == -1)

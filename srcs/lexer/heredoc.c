@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "lexer.h"
 #include "msh_signal.h"
 #include "msh_error.h"
+#include "utils.h"
 
 static void	list_skip(t_list **token_list)
 {
@@ -31,16 +31,14 @@ static void	list_skip(t_list **token_list)
 static char	*heredoc_readline(char *heredoc)
 {
 	char	*read;
-	int		flag;
 	char	*token;
 
 	g_minishell.heredoc_status = 0;
-	flag = 0;
 	token = ft_strdup("");
 	signal_init(signal_handler_heredoc, SIG_IGN, rl_msh_event_hook_heredoc);
 	while (true)
 	{
-		read = readline("heredoc> ");
+		read = readline("> ");
 		if (g_minishell.heredoc_status != 0 || read == NULL)
 		{
 			free_set((void **)&token, ft_strdup(""));
@@ -51,7 +49,6 @@ static char	*heredoc_readline(char *heredoc)
 		free_set((void **)&token, ft_strjoin(token, read));
 		free_set((void **)&token, ft_strjoin(token, "\n"));
 		free(read);
-		flag++;
 	}
 	free_set((void **)&read, NULL);
 	signal_init(signal_handler_prompt, SIG_IGN, NULL);
@@ -66,10 +63,9 @@ t_status	heredoc_process(t_list **token_list, char **token, \
 	list_skip(token_list);
 	if (*token_list == NULL)
 		return (STATUS_ERROR);
-	free_set((void **)token_list, heredoc_readline((*token_list)->content));
+	free_set((void **)token, heredoc_readline((*token_list)->content));
 	token_list_add_back(ret_list, token_listnew(*token, TOKEN));
-	free_set((void **)token_list, ft_strdup(""));
+	free_set((void **)token, ft_strdup(""));
 	*token_list = (*token_list)->next;
 	return (STATUS_GENERAL);
 }
-*/

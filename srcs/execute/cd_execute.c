@@ -33,6 +33,7 @@ void	execute_cd(t_cmd_args *args)
 		if (chdir(args->cmdpath[1]) != 0)
 		{
 			perror(args->cmdpath[1]);
+			// TODO: Exit Code of "No such file or directory" is "2"
 			g_minishell.exit_status = 1;
 		}
 		else

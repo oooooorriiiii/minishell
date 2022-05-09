@@ -26,19 +26,20 @@ t_minishell g_minishell = {};
 
 void	init(char **input, t_lexer **lex_list, t_astree **ast)
 {
+	extern char **environ;
+
 	errno = 0;
 	*input = NULL;
 	*lex_list = NULL;
 	*ast = NULL;
+	g_minishell.env = create_envlist(environ);
 }
 
 
 void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 {
-	extern char **environ;
 //	size_t		i = 0;
 
-	g_minishell.env = create_envlist(environ);
 
 	while (true)
 	{

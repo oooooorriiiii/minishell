@@ -13,7 +13,6 @@
 #include "../includes/execute.h"
 #include "msh_error.h"
 
-// TODO: return status ??
 void	execute_unset(t_cmd_args *args)
 {
 	size_t	i;
@@ -32,6 +31,6 @@ void	execute_unset(t_cmd_args *args)
 		}
 		i++;
 	}
-	(void)status; // TODO: return status
+	g_minishell.exit_status = status;
 	return ;
 }

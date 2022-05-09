@@ -12,12 +12,12 @@
 
 #include "lexer.h"
 
+// lexer->len = ft_lstsize(token_list);
 t_lexer	*lexer_new(t_token_list *token_list)
 {
 	t_lexer	*lexer;
 
 	lexer = malloc(sizeof(t_lexer));
-	// lexer->len = ft_lstsize(token_list);
 	lexer->len = 4242;
 	lexer->list = token_list;
 	return (lexer);
