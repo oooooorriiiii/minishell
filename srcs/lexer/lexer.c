@@ -12,6 +12,7 @@
 
 #include "lexer.h"
 #include "msh_error.h"
+#include "utils.h"
 #include <stdio.h>
 
 bool	is_space_string(char *s)
@@ -40,7 +41,7 @@ t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 		else
 			literal_process(&init_token_list, &token, &ret_list);
 	}
-	free(token);
+	free_str(&token);
 	*lex_list = lexer_new(ret_list);
 	return (STATUS_GENERAL);
 }

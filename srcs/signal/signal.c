@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include <stdio.h>
 #include "msh_signal.h"
 #include "msh_error.h"
@@ -36,11 +35,9 @@ int	rl_msh_event_hook_heredoc(void)
 		rl_done = 1;
 	return (0);
 }
-*/
 /*
 **
 */
-/*
 void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 {
 	rl_event_hook = heredoc_hook;
@@ -49,4 +46,3 @@ void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 		msh_fatal("signal error: ");
 	return ;
 }
-*/
