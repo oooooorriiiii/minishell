@@ -37,7 +37,7 @@ t_status	lexcal_analysis(t_list *init_token_list, t_lexer **lex_list)
 		if (ft_isblank(*element))
 			init_token_list = init_token_list->next;
 		else if (is_operator(element))
-			operator_analysis(&init_token_list, token, &ret_list, element);
+			operator_analysis(&init_token_list, &token, &ret_list, element);
 		else
 			literal_process(&init_token_list, &token, &ret_list);
 	}

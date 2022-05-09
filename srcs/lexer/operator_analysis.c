@@ -66,14 +66,14 @@ void
 	}
 }
 
-t_status	operator_analysis(t_list **token_list, char *token, \
+t_status	operator_analysis(t_list **token_list, char **token, \
 								t_token_list **ret_list, char *element)
 {
 	if (*element == '\'' || *element == '\"')
-		quote_process(token_list, &token, ret_list);
+		quote_process(token_list, token, ret_list);
 	else if (ft_strncmp(element, "<<", 2) == 0)
 	{
-		heredoc_process(token_list, &token, ret_list);
+		heredoc_process(token_list, token, ret_list);
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{
