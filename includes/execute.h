@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 15:53:40 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/07 20:02:51 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ void			int_init(int *status, int *status2, int *len);
 void			copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i);
 void			extra_strcpy(t_cmd_args *args, t_astree *ast_node);
 
-
 // -----------  execute_utils.c
-void	print_allstruct(t_cmd_args *args);
+void			print_allstruct(t_cmd_args *args);
 
 int				joudge_process(t_cmd_args *args);
 void			execute_simple_command(t_astree *t, t_cmd_args *args);

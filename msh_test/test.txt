@@ -1,1 +1,0 @@
-/Users/soichirosugimoto/42Tokyo/42cursus/Minishell/msh_test
