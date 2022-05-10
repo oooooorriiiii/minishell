@@ -8,7 +8,7 @@ INCLUDES_DIR	=	-Iincludes \
 
 LIB_READLINE	:=	-lreadline
 ifeq ($(shell uname),Darwin)
-	INCLUDE_DIR		+=	-I$(shell brew --prefix readline)/include
+	INCLUDES_DIR	+=	-I$(shell brew --prefix readline)/include
 	LIB_READLINE	+=	-L$(shell brew --prefix readline)/lib
 endif
 
@@ -82,7 +82,7 @@ $(OBJROOT)/%.o: %.c
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft $(READLINE_DIR) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) $(INCLUDES) -L$(LIBFT_DIR) -lft $(LIB_READLINE) -o $@
 
 .PHONY: clean
 clean:
