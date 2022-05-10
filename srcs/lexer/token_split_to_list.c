@@ -14,19 +14,6 @@
 #include "msh_error.h"
 #include "utils.h"
 
-/*
- * This function need free
- */
-char	*char_to_str(char c)
-{
-	char	*ret_str;
-
-	ret_str = malloc(2 * sizeof(char));
-	ret_str[0] = c;
-	ret_str[1] = '\0';
-	return (ret_str);
-}
-
 void	free_set(void **dst, void *src)
 {
 	free(*dst);
