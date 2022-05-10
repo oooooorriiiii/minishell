@@ -47,3 +47,9 @@ void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 		msh_fatal("signal error: ");
 	return ;
 }
+
+void	msh_signal(int signo)
+{
+	if (signo == SIGRL)
+		signal(SIGINT, &signal_handler_prompt);
+}

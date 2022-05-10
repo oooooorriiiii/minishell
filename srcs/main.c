@@ -19,6 +19,7 @@
 #include "../includes/execute.h"
 #include "msh_env.h"
 #include "msh_error.h"
+#include "msh_signal.h"
 #include <stdio.h>
 #include <errno.h>
 
@@ -42,6 +43,7 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 
 	while (true)
 	{
+		msh_signal(SIGRL);
 		free_set((void **)input, NULL);
 		*input = readline("minishell> ");
 		if (*input == NULL)
