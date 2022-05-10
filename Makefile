@@ -7,7 +7,7 @@ INCLUDES	=	./includes ./libft
 
 LIB_READLINE	:=	-lreadline
 ifeq ($(shell uname),Darwin)
-	INCLUDES		+=	-I$(shell brew --prefix readline)/include
+	INCLUDES		+=	$(shell brew --prefix readline)/include
 	LIB_READLINE	+=	-L$(shell brew --prefix readline)/lib
 endif
 
