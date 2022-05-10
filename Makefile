@@ -3,16 +3,15 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 
 SRCS_DIR		=	srcs
-INCLUDES_DIR	=	-Iincludes \
+INCLUDES	=	-Iincludes \
 					-Ilibft
 
 LIB_READLINE	:=	-lreadline
 ifeq ($(shell uname),Darwin)
-	INCLUDE_DIR		+=	-I$(shell brew --prefix readline)/include
+	INCLUDES		+=	-I$(shell brew --prefix readline)/include
 	LIB_READLINE	+=	-L$(shell brew --prefix readline)/lib
 endif
 
-INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/utils/free_str_arr.c \
 				$(SRCS_DIR)/utils/free_str.c \
