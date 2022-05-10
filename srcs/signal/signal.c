@@ -14,7 +14,6 @@
 #include "msh_signal.h"
 #include "msh_error.h"
 #include "minishell.h"
-#include <readline/readline.h>
 
 void	signal_handler_prompt(int sig)
 {

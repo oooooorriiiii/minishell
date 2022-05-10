@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "msh_env.h"
 # include <stdbool.h>
+# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
