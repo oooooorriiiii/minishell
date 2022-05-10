@@ -17,6 +17,7 @@
 # include "msh_env.h"
 # include <stdbool.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
