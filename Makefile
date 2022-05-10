@@ -1,6 +1,6 @@
 NAME	=	minishell
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g #-O0
+CFLAGS	=	-Wall -Werror -Wextra
 
 SRCS_DIR		=	srcs
 INCLUDES_DIR	=	-Iincludes \
@@ -111,7 +111,7 @@ libft_fclean:
 # SRCS		=	main.c $(TEST)
 
 .PHONY: debug
-debug: CFLAGS += -fsanitize=undefined -fsanitize=address -DDEBUG
+debug: CFLAGS +=  -g -O0 -fsanitize=undefined -fsanitize=address -DDEBUG
 debug: re
 
 ##########
