@@ -15,7 +15,7 @@
 #include "utils.h"
 
 /*
- * Need free
+ * This function need free
  */
 char	*char_to_str(char c)
 {
