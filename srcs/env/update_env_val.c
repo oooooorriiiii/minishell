@@ -88,8 +88,6 @@ void	update_env_val(const char *env_key, const char *new_env_val, \
 	{
 		if (envlist->is_shell_var == false)
 			envlist->is_shell_var = is_env_var;
-		if (!env_key)
-			return ;
 	}
 	set_env_value(envlist, new_env_val, append_flag);
 }

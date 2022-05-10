@@ -35,6 +35,7 @@ int	rl_msh_event_hook_heredoc(void)
 		rl_done = 1;
 	return (0);
 }
+
 /*
 **
 */
