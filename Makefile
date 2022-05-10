@@ -1,10 +1,9 @@
 NAME	=	minishell
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra $(INCLUDES:%=-I%)
 
 SRCS_DIR		=	srcs
-INCLUDES	=	-Iincludes \
-					-Ilibft
+INCLUDES	=	./includes ./libft
 
 LIB_READLINE	:=	-lreadline
 ifeq ($(shell uname),Darwin)
@@ -75,7 +74,7 @@ LIBFT				=	$(LIBFT_DIR)/libft.a
 
 $(OBJROOT)/%.o: %.c
 	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all
 all: $(NAME)
