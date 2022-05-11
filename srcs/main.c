@@ -56,7 +56,6 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 			lexer_free(lex_list);
 			continue ;
 		}
-//		print_token_list((*lex_list)->list);
 //		lexer_data_expand(lex_list);
 		if (parse(*lex_list, ast) != -1)
 		{
@@ -71,45 +70,6 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 	}
 }
 
-int lexer_test(t_lexer **lex_list)
-{
-	int i = 0;
-	char *tmp[] = {
-		"\"echo >> abc|>\"", \
-		"echo \"echo $ USER\" >> test", \
-		"echo \"echo >> $USER\" >> test", \
-		"echo \"echo $U S E R\" >> test", \
-		"echo \"echo $USER\" >> test", \
-		"echo \"echo $USER\" >> test", \
-		"echo \"echo $USER\" >> test", \
-        NULL};
-	while (tmp[i]) {
-		lexer(tmp[i], lex_list);
-		printf("\n%s ============\n", tmp[i]);
-		print_token_list((*lex_list)->list);
-		lexer_free(lex_list);
-		i++;
-	}
-//	puts("**************************");
-//	lexer("echo>>>abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo>>>>abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo> >>>abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo>> >>abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo>>> >abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo><>>abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo><> >abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo>< >>abc|>", &lex_list);
-//	puts("**************************");
-//	lexer("echo> <>>abc|>", &lex_list);
-	return (0);
-}
 
 int	main(void)
 {
