@@ -1,18 +1,16 @@
 NAME	=	minishell
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g #-O0
+CFLAGS	=	-Wall -Werror -Wextra $(INCLUDES:%=-I%)
 
 SRCS_DIR		=	srcs
-INCLUDES_DIR	=	-Iincludes \
-					-Ilibft
+INCLUDES	=	./includes ./libft
 
 LIB_READLINE	:=	-lreadline
 ifeq ($(shell uname),Darwin)
-	INCLUDE_DIR		+=	-I$(shell brew --prefix readline)/include
+	INCLUDES		+=	$(shell brew --prefix readline)/include
 	LIB_READLINE	+=	-L$(shell brew --prefix readline)/lib
 endif
 
-INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/utils/free_str_arr.c \
 				$(SRCS_DIR)/utils/free_str.c \
@@ -76,13 +74,13 @@ LIBFT				=	$(LIBFT_DIR)/libft.a
 
 $(OBJROOT)/%.o: %.c
 	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft $(READLINE_DIR) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft $(LIB_READLINE) -o $(NAME)
 
 .PHONY: clean
 clean:
@@ -111,7 +109,7 @@ libft_fclean:
 # SRCS		=	main.c $(TEST)
 
 .PHONY: debug
-debug: CFLAGS += -fsanitize=undefined -fsanitize=address -DDEBUG
+debug: CFLAGS +=  -g -O0 -fsanitize=undefined -fsanitize=address -DDEBUG
 debug: re
 
 ##########

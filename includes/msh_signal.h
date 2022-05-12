@@ -15,9 +15,12 @@
 
 # include <signal.h>
 
+# define SIGRL	4242
+
 void	signal_handler_prompt(int sig);
 void	signal_handler_heredoc(int sig);
 int		rl_msh_event_hook_heredoc(void);
 void	signal_init(void func1(int), void func2(int), int heredoc_hook(void));
+void	msh_signal(int signo);
 
 #endif

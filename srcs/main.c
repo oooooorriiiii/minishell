@@ -19,6 +19,7 @@
 #include "../includes/execute.h"
 #include "msh_env.h"
 #include "msh_error.h"
+#include "msh_signal.h"
 #include <stdio.h>
 #include <errno.h>
 
@@ -35,7 +36,6 @@ void	init(char **input, t_lexer **lex_list, t_astree **ast)
 	g_minishell.env = create_envlist(environ);
 }
 
-
 void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 {
 //	size_t		i = 0;
@@ -43,6 +43,7 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 
 	while (true)
 	{
+		msh_signal(SIGRL);
 		free_set((void **)input, NULL);
 		*input = readline("minishell> ");
 		if (*input == NULL)
@@ -55,7 +56,6 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 			lexer_free(lex_list);
 			continue ;
 		}
-//		print_token_list((*lex_list)->list);
 //		lexer_data_expand(lex_list);
 		if (parse(*lex_list, ast) != -1)
 		{
@@ -71,43 +71,6 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 }
 
 
-void	minishell_test(char **input, t_lexer **lex_list, t_astree **ast)
-{
-	extern char **environ;
-
-	g_minishell.env = create_envlist(environ);
-	if (lexer(*input, lex_list) != STATUS_GENERAL)
-		lexer_free(lex_list);
-	print_token_list((*lex_list)->list);
-	if (parse(*lex_list, ast) != -1)
-		execute_syntax_tree(*ast);
-	print_syntax_tree(*ast);
-	lexer_free(lex_list);
-	astree_delete(*ast);
-}
-
-int lexer_test(t_lexer **lex_list)
-{
-	int i = 0;
-	char *tmp[] = {
-		"\"echo >> abc|>\"", \
-		"echo \"echo $ USER\" >> test", \
-		"echo \"echo >> $USER\" >> test", \
-		"echo \"echo $U S E R\" >> test", \
-		"echo \"echo $USER\" >> test", \
-		"echo \"echo $USER\" >> test", \
-		"echo \"echo $USER\" >> test", \
-        NULL};
-	while (tmp[i]) {
-		lexer(tmp[i], lex_list);
-		printf("\n%s ============\n", tmp[i]);
-		print_token_list((*lex_list)->list);
-		lexer_free(lex_list);
-		i++;
-	}
-	return (0);
-}
-
 int	main(void)
 {
 	t_lexer		*lex_list;
@@ -117,20 +80,57 @@ int	main(void)
 	init(&input, &lex_list, &ast);
 //	lexer_test(&lex_list);
 	minishell_loop(&input, &lex_list, &ast);
-	return (0);
-}
+
+	/*
+	char *test = "ffffffff";
+	init(&input, &lex_list, &ast);
+	printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n", test);
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+	lexer(test, &lex_list);
+	parse(lex_list, &ast);
+	lexer_free(&lex_list);
+	// print_syntax_tree(ast);
+	printf("==============================================================\n");
+	printf("\n\n");
+	execute_syntax_tree(ast);
+	astree_delete(ast);
+	// */
 
 /*
-int main(void)
-{
-	t_lexer		*lex_list;
-	t_astree	*ast;
-	char		*input;
+	while (txt[i])
+	{
+		init(&input, &lex_list, &ast);
+		printf("\n\n\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("   ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ [[[[[ %s ]]]]] ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ \n", txt[i]);
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+		lexer(txt[i], &lex_list);
+		parse(lex_list, &ast);
+		lexer_free(&lex_list);
+		printf("minishell> ");
+		execute_syntax_tree(ast);
+		astree_delete(ast);
+		i++;
+	}
+	printf("\n\n");
+	printf("exit_status :   %d\n", g_minishell.exit_status);
+*/
 
-	init(&input, &lex_list, &ast);
-	input = "aaaa";
-	minishell_test(&input, &lex_list, &ast);
-	// system("leaks minishell");
+// exit(2);
+//	puts("**************************");
+//	lexer("echo 42Tokyo > test.txt", &lex_list);
+//	parse(lex_list, &ast);
+//	lexer_free(&lex_list);
+//	puts("**************************");
+//	lexer("pwd", &lex_list);
+//	parse(lex_list, &ast);
+//	lexer_free(&lex_list);
+//	execute_syntax_tree(ast);
+//	astree_delete(ast);
+//	 lexer("echo\"ab  c \"|", &lex_list);
+//	 puts("**************************");
+	 // lexer("echo\"abc|", &lex_list);
+	 // puts("**************************");
+
 	return (0);
 }
-*/

@@ -112,7 +112,7 @@ void	execute_export(t_cmd_args *args)
 	{
 		env_arr = gen_env_str(g_minishell.env);
 		print_export(env_arr);
-		free_str(env_arr);
+		free_str_arr(&env_arr);
 	}
 	else
 		status = store_env(args->cmdpath);

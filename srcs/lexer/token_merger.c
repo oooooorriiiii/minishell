@@ -61,16 +61,14 @@ void	merge_doutle_string(t_list **tokens)
 
 bool	exist_double_token(char *str, char token)
 {
-	char	*tmp;
-	char	*head;
-	char	*cmp_str;
-	bool	ret;
+	char		*tmp;
+	char		*head;
+	const char	cmp_str[2] = {token, '\0'};
+	bool		ret;
 
 	ret = false;
-	cmp_str = char_to_str(token);
 	if (ft_strchr(str, token) == NULL)
 	{
-		free_str(&cmp_str);
 		return (false);
 	}
 	else
@@ -85,7 +83,6 @@ bool	exist_double_token(char *str, char token)
 	else
 		ret = true;
 	free_str(&tmp);
-	free_str(&cmp_str);
 	return (ret);
 }
 
