@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:29:32 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/29 18:08:23 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/12 09:05:24 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	rl_msh_event_hook_heredoc(void)
 		rl_done = 1;
 	return (0);
 }
+
 /*
 **
 */
@@ -45,4 +46,10 @@ void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 		|| signal(SIGQUIT, func2) == SIG_ERR)
 		msh_fatal("signal error: ");
 	return ;
+}
+
+void	msh_signal(int signo)
+{
+	if (signo == SIGRL)
+		signal(SIGINT, &signal_handler_prompt);
 }
