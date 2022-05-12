@@ -39,6 +39,9 @@ static void	set_env_value(t_envlist *envlist, const char *new_value, \
 	free_str(&old_value);
 }
 
+/*
+ *  if recreating is success, return envlist
+ */
 t_envlist	*recreate_envlist(char *env_str)
 {
 	t_envlist	*envlist;
@@ -46,13 +49,13 @@ t_envlist	*recreate_envlist(char *env_str)
 
 	envlist = malloc(sizeof(t_envlist));
 	if (envlist == NULL)
-		exit(-1); // TODO: EXIT STATUS
+		exit(-1);
 	sep = ft_strchr(env_str, '=');
 	if (!sep)
 	{
 		envlist->key = ft_strdup(env_str);
 		if (envlist->key == NULL)
-			exit(-1); // TODO: EXIT STATUS
+			exit(-1);
 		envlist->value = NULL;
 	}
 	else
@@ -60,7 +63,7 @@ t_envlist	*recreate_envlist(char *env_str)
 		envlist->key = ft_substr(env_str, 0, sep - env_str);
 		envlist->value = ft_strdup(sep + 1);
 		if (envlist->key == NULL || envlist->value == NULL)
-			exit(-1); // TODO: EXIT STATUS
+			exit(-1);
 	}
 	envlist->is_shell_var = true;
 	envlist->next = NULL;

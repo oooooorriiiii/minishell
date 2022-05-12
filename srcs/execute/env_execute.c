@@ -23,13 +23,13 @@ static void	print_env(t_envlist *envlist)
 
 // TODO: return status ??
 //	printf(" execute_env \n"); // DEBUG
+//	print_envlist(envlist);
 void	execute_env(t_cmd_args *args)
 {
 	t_envlist	*envlist;
 
 	(void)args;
 	envlist = g_minishell.env;
-	print_envlist(envlist);
 	while (envlist)
 	{
 		print_env(envlist);
