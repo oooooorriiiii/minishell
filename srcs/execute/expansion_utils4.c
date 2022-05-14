@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_execute.c                                      :+:      :+:    :+:   */
+/*   expansion_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 16:11:36 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/14 10:59:59 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/05/14 11:20:08 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/05/14 11:20:28 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../includes/execute.h"
+#include "../includes/lexer.h"
 
-void	execute_pwd(t_cmd_args *args)
+bool	check_for_copy_expansion(int status, char *data)
 {
-	char		cwd[1024];
-
-	(void)args;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		printf("%s\n", cwd);
-		g_minishell.exit_status = 0;
-	}
+	if ((status != SINGLE_Q && status != SINGLE_Q * 2)
+		&& isenval(data))
+		return (true);
 	else
-	{
-		perror("getcwd() error");
-		g_minishell.exit_status = 1;
-	}
-	return ;
+		return (false);
 }

@@ -113,7 +113,6 @@ int	main(void)
 		i++;
 	}
 	printf("\n\n");
-
 	printf("exit_status :   %d\n", g_minishell.exit_status);
 */
 

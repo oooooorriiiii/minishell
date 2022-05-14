@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 15:53:40 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 11:23:05 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,18 @@ void			int_init(int *status, int *status2, int *len);
 void			copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i);
 void			extra_strcpy(t_cmd_args *args, t_astree *ast_node);
 
-
 // -----------  execute_utils.c
-void	print_allstruct(t_cmd_args *args);
+// void			print_allstruct(t_cmd_args *args);
 
 int				joudge_process(t_cmd_args *args);
 void			execute_simple_command(t_astree *t, t_cmd_args *args);
 void			execute_command(t_astree *t, t_cmd_args *args);
 void			destroy_command_struct(t_cmd_args *args);
+bool			check_componet(char *str);
+int				get_list_len(t_astree *argNode);
+char			**functional_malloc(int i);
+int				is_need_expansion(t_astree *ast);
+bool			check_for_copy_expansion(int status, char *data);
 
 // -----------  execute_command_struct.c
 void			execute_command_struct(t_cmd_args *args);

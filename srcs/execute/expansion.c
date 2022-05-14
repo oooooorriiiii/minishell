@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:07:09 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/09 18:17:56 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 11:19:21 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ void	copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i)
 			|| ast_node->type == NODE_CMDPATH))
 	{
 		get_quote_status(&status, ast_node->szData);
-		if ((status != SINGLE_Q && status != SINGLE_Q * 2)
-			&& isenval(ast_node->szData))
+		if (check_for_copy_expansion(status, ast_node->szData))
 			len = copy_expansion(ast_node, &status2);
 		else
 			len = quote_skip_strlen(ast_node->szData, &status2);
