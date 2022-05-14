@@ -29,8 +29,8 @@ void	execute_external_cmd(t_cmd_args *args)
 	env_strs = gen_env_str(g_minishell.env);
 	path = add_path(args);
 	ret = execve(path, args->cmdpath, env_strs);
-	// if (ret < 0)
-	// 	msh_fatal("execve error: ");
+	 if (ret < 0)
+	 	msh_fatal("execve error: ");
 	free_str(&path);
 	free_str_arr(&env_strs);
 }
