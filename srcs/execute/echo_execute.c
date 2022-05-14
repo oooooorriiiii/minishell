@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:09:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/09 15:05:14 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 11:24:22 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,12 @@ bool	check_option(char **cmdarg, int argc)
 void	execute_echo(t_cmd_args *args)
 {
 	int	i;
-//	int	j; // COMMENT OUT: ymori
-//	int	fd; // COMMENT OUT: ymori
 	int	flag;
 
 	i = 1;
-//	j = 0; // COMMENT OUT: ymori
 	flag = 0;
 	while (i < args->cmdpath_argc)
 	{
-//		j = 0; // COMMENT OUT: ymori
 		while (flag == 0 && check_option(args->cmdpath, args->cmdpath_argc)
 			&& !strcmp(args->cmdpath[i], "-n"))
 			i++;

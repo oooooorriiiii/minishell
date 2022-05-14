@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:49 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/05 03:10:39 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 10:58:59 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,6 @@ char	*expand_united_enval(char *str)
 	return (res);
 }
 
-int	judge_united_enval(char *str)
-{
-	int	i;
-//	int	status; // COMMENT OUT: ymori
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isalnum(str[i]) || str[i] == '?')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*get_enval(char *split)
 {
 	char	*enval;
@@ -69,33 +54,6 @@ char	*get_enval(char *split)
 	else
 		enval = ft_strjoin("", getenv(split));
 	return (enval);
-}
-
-char	*first_enval(char *str, char *split)
-{
-	char	*res;
-
-	res = NULL;
-	if (str[0] == '$')
-	{
-		if (judge_united_enval(split))
-			res = expand_united_enval(split);
-		else
-		{
-			if (!strcmp(split, "?"))
-				res = ft_itoa(g_minishell.exit_status);
-			else
-			{
-				res = getenv(split);
-				if (res)
-					res = strdup(res);
-			}
-		}
-	}
-	else
-		res = strdup(split);
-	free(split);
-	return (res);
 }
 
 bool	next_to_envalmark(char *str)

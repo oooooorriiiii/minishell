@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/04/27 20:00:23 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 11:25:52 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "utils.h"
 #include "msh_error.h"
 
-//	printf("path: %s\n", path);
-//	printf("ret: %d\n", ret);
 void	execute_external_cmd(t_cmd_args *args)
 {
 	char	**env_strs;

@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:09:21 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/05 17:57:50 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 10:20:00 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 t_astree	*SIMPLECMD(t_token_list **curtok)
 {
-//	t_token_list	*save; // COMMENT OUT: ymori
-
-//	save = *curtok; // COMMENT OUT: ymori
 	return (SIMPLECMD1(curtok));
 }
 

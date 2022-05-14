@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:07:57 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/09 18:16:58 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 10:29:14 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
 	char	*path;
 
 	init_command_struct(simple_cmd_node, args);
-	// print_allstruct(args);
 	if (!check_builtin(args->cmdpath[0]))
 	{
 		path = add_path(args);

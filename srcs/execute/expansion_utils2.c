@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 18:59:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 10:59:07 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,47 @@
 #include "../includes/parser.h"
 #include "../includes/execute.h"
 #include "../includes/lexer.h"
+
+int	judge_united_enval(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]) || str[i] == '?')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*first_enval(char *str, char *split)
+{
+	char	*res;
+
+	res = NULL;
+	if (str[0] == '$')
+	{
+		if (judge_united_enval(split))
+			res = expand_united_enval(split);
+		else
+		{
+			if (!strcmp(split, "?"))
+				res = ft_itoa(g_minishell.exit_status);
+			else
+			{
+				res = getenv(split);
+				if (res)
+					res = strdup(res);
+			}
+		}
+	}
+	else
+		res = strdup(split);
+	free(split);
+	return (res);
+}
 
 int	quote_skip_strlen(char *arguments, int *quote)
 {
@@ -68,12 +109,10 @@ char	**split_non_alnum(char *str)
 {
 	char	**split;
 	int		enval_len;
-//	int		i; // ymori
 
 	split = (char **)malloc(sizeof(char *) * 3);
 	malloc_error_exec(NULL, split, NULL);
 	enval_len = 0;
-//	i = 0; // COMMENT OUT: ymori
 	while (str[enval_len])
 	{
 		if (!ft_isalnum(str[enval_len]))
