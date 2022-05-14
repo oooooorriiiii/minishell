@@ -15,7 +15,7 @@
 
 # include <signal.h>
 
-# define SIGRL	4242
+# define MSH_SIG_PROMPT	4242
 
 void	signal_handler_prompt(int sig);
 void	signal_handler_heredoc(int sig);

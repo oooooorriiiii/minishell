@@ -43,9 +43,9 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 
 	while (true)
 	{
-		msh_signal(SIGRL);
+		msh_signal(MSH_SIG_PROMPT);
 		free_set((void **)input, NULL);
-		*input = readline("minishell> ");
+		*input = readline("minishell$ ");
 		if (*input == NULL)
 			exit(g_minishell.exit_status);
 		if (ft_strlen(*input) == 0)

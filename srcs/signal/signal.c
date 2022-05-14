@@ -50,6 +50,6 @@ void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 
 void	msh_signal(int signo)
 {
-	if (signo == SIGRL)
+	if (signo == MSH_SIG_PROMPT)
 		signal(SIGINT, &signal_handler_prompt);
 }
