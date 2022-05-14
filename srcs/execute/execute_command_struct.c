@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:38:26 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/09 18:14:33 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 11:25:52 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "utils.h"
 #include "msh_error.h"
 
-//	printf("path: %s\n", path);
-//	printf("ret: %d\n", ret);
 void	execute_external_cmd(t_cmd_args *args)
 {
 	char	**env_strs;
@@ -31,8 +29,8 @@ void	execute_external_cmd(t_cmd_args *args)
 	env_strs = gen_env_str(g_minishell.env);
 	path = add_path(args);
 	ret = execve(path, args->cmdpath, env_strs);
-	if (ret < 0)
-		msh_fatal("execve error: ");
+	// if (ret < 0)
+	// 	msh_fatal("execve error: ");
 	free_str(&path);
 	free_str_arr(&env_strs);
 }

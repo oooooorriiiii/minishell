@@ -12,45 +12,6 @@
 
 #include "../includes/execute.h"
 
-void	print_allstruct(t_cmd_args *args)
-{
-	int			i;
-	t_cmd_args	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	printf("/////////////////////  print_allstruct ///////////////////////\n");
-	if (args->stdin_pipe == true)
-		printf("stdin_pipe :   true    /    ");
-	else
-		printf("stdin_pipe :   false    /    ");
-	if (args->stdout_pipe == true)
-		printf("stdout_pipe :   true\n");
-	else
-		printf("stdout_pipe :   false\n");
-	printf("pipe_read :   %d   /   pipe_write :   %d\n", args->pipe_read, args->pipe_write);
-	if (args->redirect_in)
-		printf("redirect_in :   %s\n", args->redirect_in);
-	else
-		printf("redirect_in :   NONE\n");
-	if (args->redirect_out)
-		printf("redirect_out :   %s\n", args->redirect_in);
-	else
-		printf("redirect_out :   NONE\n");
-	if (args->redirect_double_in)
-		printf("redirect_double_in :   %s\n", args->redirect_double_in);
-	if (args->redirect_double_out)
-		printf("redirect_double_out :   %s\n", args->redirect_double_in);
-	printf("cmdpath_argc  :    %d\n", args->cmdpath_argc);
-	tmp = args;
-	while (tmp->cmdpath[i])
-	{
-		printf("cmdpath[%d] :   %s\n", i, tmp->cmdpath[i]);
-		i++;
-	}
-	printf("/////////////////////////////////////////////////////////////\n");
-}
-
 int	joudge_process(t_cmd_args *args)
 {
 	if (args->stdin_pipe == true || args->stdout_pipe == true)
@@ -102,15 +63,15 @@ void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 		argNode = argNode->right;
 		i++;
 	}
-	args->cmdpath = (char **)malloc(sizeof(char *) * (i + 1));
-	malloc_error_exec(NULL, args->cmdpath, NULL);
+	args->cmdpath = functional_malloc(i);
 	i = 0;
 	while (simplecmdNode != NULL && (simplecmdNode->type == NODE_ARGUMENT
 			|| simplecmdNode->type == NODE_CMDPATH))
 	{
 		args->cmdpath[i] = (char *)malloc(strlen(simplecmdNode->szData) + 1);
 		malloc_error_exec(args->cmdpath[i], NULL, NULL);
-		strcpy(args->cmdpath[i], simplecmdNode->szData);////////////////////////
+		ft_strlcpy(args->cmdpath[i], simplecmdNode->szData,
+			ft_strlen(args->cmdpath[i]));
 		simplecmdNode = simplecmdNode->right;
 		i++;
 	}
@@ -118,42 +79,11 @@ void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 	args->cmdpath_argc = i;
 }
 
-bool	check_componet(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '\'' && str[i] != '\"')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-int	get_list_len(t_astree *argNode)
-{
-	int	i;
-
-	i = 0;
-	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
-			|| argNode->type == NODE_CMDPATH))
-	{
-		argNode = argNode->right;
-		i++;
-	}
-	return (i);
-}
-
 int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 {
 	t_astree	*argNode;
 	t_astree	*argNode2;
-//	t_astree	*argNode3;
-//	int			i; // COMMENT OUT: ymori
 
-//	i = 0; // COMMENT OUT: ymori
 	if (simplecmdNode == NULL || simplecmdNode->type != NODE_CMDPATH)
 	{
 		args->cmdpath_argc = 0;
@@ -161,7 +91,6 @@ int	init_command_struct(t_astree *simplecmdNode, t_cmd_args *args)
 	}
 	argNode = simplecmdNode;
 	argNode2 = simplecmdNode;
-//	argNode3 = simplecmdNode;
 	if (is_need_expansion(argNode2))
 		extra_strcpy(args, argNode);
 	else
