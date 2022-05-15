@@ -30,7 +30,7 @@ char	*expand_united_enval(char *str)
 		return (res);
 	}
 	split = split_non_alnum(str);
-	enval = getenv(split[0]);
+	enval = get_env_value(split[0]);
 	if (enval)
 		res = ft_strjoin(enval, split[1]);
 	else
