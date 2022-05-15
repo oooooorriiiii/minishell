@@ -33,7 +33,7 @@ void	execute_cd(t_cmd_args *args)
 		if (chdir(args->cmdpath[1]) != 0)
 		{
 			perror(args->cmdpath[1]);
-			g_minishell.exit_status = 2;
+			g_minishell.exit_status = 1;
 		}
 		else
 			g_minishell.exit_status = 0;
