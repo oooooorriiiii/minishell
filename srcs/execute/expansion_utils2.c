@@ -44,7 +44,7 @@ char	*first_enval(char *str, char *split)
 				res = ft_itoa(g_minishell.exit_status);
 			else
 			{
-				res = getenv(split);
+				res = get_env_value(split);
 				if (res)
 					res = ft_strdup(res);
 			}

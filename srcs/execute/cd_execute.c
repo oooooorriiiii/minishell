@@ -25,7 +25,7 @@ void	execute_cd(t_cmd_args *args)
 {
 	if (args->cmdpath_argc == 1)
 	{
-		chdir(getenv("HOME"));
+		chdir(get_env_value("HOME"));
 		g_minishell.exit_status = 0;
 	}
 	else
