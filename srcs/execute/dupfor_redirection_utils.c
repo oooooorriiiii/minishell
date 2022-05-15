@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   dupfor_redirection_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 12:43:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/15 00:05:41 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/05/15 09:18:01 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/05/15 09:20:34 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-void	execute_in_parent(t_cmd_args *args)
+int	simple_error_handle(int status, char *title)
 {
-	int	backup;
+	if (status == -1)
+	{
+		perror(title);
+		exit(1);
+	}
+	return (status);
+}
 
-	backup = 0;
-	dupfor_redirection(args, &backup);
-	execute_command_struct(args);
-	close_fdbackup(args, &backup);
+void	connect_pipe(int pipefd[2], int fd)
+{
+	simple_error_handle(dup2(pipefd[fd], fd), "dup2");
+	simple_error_handle(close(pipefd[0]), "close");
+	simple_error_handle(close(pipefd[1]), "close");
 }

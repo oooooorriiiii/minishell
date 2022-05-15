@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 16:23:46 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:33:18 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ bool	term(int toketype, char **bufferptr, t_token_list **curtok)
 	{
 		if (bufferptr != NULL)
 		{
-			*bufferptr = malloc(strlen((*curtok)->val) + 1);
+			*bufferptr = malloc(ft_strlen((*curtok)->val) + 1);
 			parse_malloc_errordeal(NULL, *bufferptr);
-			strcpy(*bufferptr, (*curtok)->val);
+			ft_strlcpy(*bufferptr, (*curtok)->val,
+				ft_strlen((*curtok)->val) + 1);
+			// strcpy(*bufferptr, (*curtok)->val);
 		}
 		*curtok = (*curtok)->next;
 		return (true);
