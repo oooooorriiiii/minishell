@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/15 09:32:52 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 11:42:26 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*first_enval(char *str, char *split)
 			res = expand_united_enval(split);
 		else
 		{
-			if (!strcmp(split, "?"))
+			if (!ft_strcmp(split, "?"))
 				res = ft_itoa(g_minishell.exit_status);
 			else
 			{
