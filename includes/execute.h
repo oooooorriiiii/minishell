@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/14 11:23:05 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:18:45 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void			execute_env(t_cmd_args *args);
 void			execute_exit(t_cmd_args *args);
 
 // -----------  dupfor_redirection.c
+int				simple_error_handle(int status, char *title);
+void			connect_pipe(int pipefd[2], int fd);
 void			dupfor_redirection(t_cmd_args *args, int *backup);
 void			close_fdbackup(t_cmd_args *args, int *backup);
 
