@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:09:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/14 11:24:22 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 11:41:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	execute_echo(t_cmd_args *args)
 	while (i < args->cmdpath_argc)
 	{
 		while (flag == 0 && check_option(args->cmdpath, args->cmdpath_argc)
-			&& !strcmp(args->cmdpath[i], "-n"))
+			&& !ft_strcmp(args->cmdpath[i], "-n"))
 			i++;
 		flag = 1;
 		printf("%s", args->cmdpath[i]);
