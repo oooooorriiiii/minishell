@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 18:55:12 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 15:55:56 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:18:32 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ void	open_error_handle(int fd)
 	}
 }
 
+void	handle_heredoc(char *data)
+{
+	int		pipefd[2];
+	pid_t	pid;
+
+	simple_error_handle(pipe(pipefd), "pipe");
+	pid = simple_error_handle(fork(), "fork");
+	if (pid == 0)
+	{
+		connect_pipe(pipefd, STDOUT_FILENO);
+		simple_error_handle(write(STDOUT_FILENO, data, ft_strlen(data)),
+			"write");
+		exit(0);
+	}
+	simple_error_handle(waitpid(pid, NULL, 0), "waitpid");
+	connect_pipe(pipefd, STDIN_FILENO);
+}
+
 void	dupfor_dbl_redirection(t_cmd_args *args, int *backup)
 {
 	int	fd;
@@ -32,10 +50,7 @@ void	dupfor_dbl_redirection(t_cmd_args *args, int *backup)
 	fd = 0;
 	if (args->redirect_double_in)
 	{
-		*backup = dup(STDIN_FILENO);
-		fd = open(args->redirect_double_in, O_RDONLY);
-		open_error_handle(fd);
-		dup2(fd, STDIN_FILENO);
+		handle_heredoc(args->redirect_double_in);
 	}
 	if (args->redirect_double_out)
 	{
@@ -75,7 +90,7 @@ void	close_fdbackup(t_cmd_args *args, int *backup)
 		dup2(*backup, STDIN_FILENO);
 	if (args->redirect_out || args->redirect_double_out)
 		dup2(*backup, STDOUT_FILENO);
-	if (args->redirect_in || args->redirect_double_in
+	if (args->redirect_in
 		||args->redirect_out || args->redirect_double_out)
 		close(*backup);
 }

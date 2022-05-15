@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:49 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/14 10:58:59 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:39:49 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_enval(char *split)
 	char	*enval;
 
 	enval = NULL;
-	if (!strcmp(split, "?"))
+	if (!ft_strcmp(split, "?"))
 		enval = ft_itoa(g_minishell.exit_status);
 	else if (judge_united_enval(split))
 		enval = expand_united_enval(split);
@@ -90,7 +90,7 @@ char	*expand_enval(char *str)
 
 	i = 1;
 	if (!next_to_envalmark(str))
-		return (strdup(str));
+		return (ft_strdup(str));
 	split = ft_split(str, '$');
 	res = first_enval(str, split[0]);
 	while (split[i])
@@ -99,7 +99,7 @@ char	*expand_enval(char *str)
 		if (res && enval)
 			join_splitted(&res, &enval);
 		else if (enval)
-			res = strdup(enval);
+			res = ft_strdup(enval);
 		free(split[i]);
 		i++;
 	}

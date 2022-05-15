@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/14 10:59:07 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:32:52 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char	*first_enval(char *str, char *split)
 			{
 				res = getenv(split);
 				if (res)
-					res = strdup(res);
+					res = ft_strdup(res);
 			}
 		}
 	}
 	else
-		res = strdup(split);
+		res = ft_strdup(split);
 	free(split);
 	return (res);
 }
@@ -123,9 +123,9 @@ char	**split_non_alnum(char *str)
 	malloc_error_exec(split[0], NULL, NULL);
 	ft_strlcpy(split[0], str, enval_len + 1);
 	str += enval_len;
-	split[1] = (char *)malloc(sizeof(char) * (strlen(str) + 1));
+	split[1] = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	malloc_error_exec(split[1], NULL, NULL);
-	ft_strlcpy(split[1], str, strlen(str) + 1);
+	ft_strlcpy(split[1], str, ft_strlen(str) + 1);
 	split[2] = NULL;
 	return (split);
 }

@@ -42,7 +42,7 @@ void	print_command(t_astree *cmdNode)
 		break ;
 	case NODE_REDIRECT_D_IN:		// <<
 			printf("	   |\n");
-		printf("		-----------< cmd_node >-------  REDIRECT_OUT");
+		printf("		-----------< cmd_node >-------  REDIRECT_IN");
 		printf("   << %s \n", cmdNode->szData);
 		print_simple_command(cmdNode->right);
 		break ;
