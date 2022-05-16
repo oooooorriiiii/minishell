@@ -68,7 +68,7 @@ void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 	while (simplecmdNode != NULL && (simplecmdNode->type == NODE_ARGUMENT
 			|| simplecmdNode->type == NODE_CMDPATH))
 	{
-		args->cmdpath[i] = (char *)malloc(strlen(simplecmdNode->szData) + 1);
+		args->cmdpath[i] = (char *)malloc(ft_strlen(simplecmdNode->szData) + 1);
 		malloc_error_exec(args->cmdpath[i], NULL, NULL);
 		ft_strlcpy(args->cmdpath[i], simplecmdNode->szData,
 			ft_strlen(simplecmdNode->szData) + 1);
