@@ -48,23 +48,22 @@ t_astree	*SIMPLECMD(t_token_list **curtok)
  *                | '>>' <word>
  *                | '<<' <word>
  */
-t_astree	*REDIRECTION(t_token_list **curtok)
-{
-	t_astree	*result;
-
-	if ((*curtok)->type == CHAR_LESSER)
-		result = CMD1(curtok);
-	else if ((*curtok)->type == CHAR_GREATER)
-		result = CMD2(curtok);
-	else if ((*curtok)->type == CHAR_DBLLESSER)
-		result = CMD11(curtok);
-	else if ((*curtok)->type == CHAR_DBLGREATER)
-		result = CMD22(curtok);
-	else
-		result = NULL;
-	return (result);
-}
-
+//t_astree	*REDIRECTION(t_token_list **curtok)
+//{
+//	t_astree	*result;
+//
+//	if ((*curtok)->type == CHAR_LESSER)
+//		result = CMD1(curtok);
+//	else if ((*curtok)->type == CHAR_GREATER)
+//		result = CMD2(curtok);
+//	else if ((*curtok)->type == CHAR_DBLLESSER)
+//		result = CMD11(curtok);
+//	else if ((*curtok)->type == CHAR_DBLGREATER)
+//		result = CMD22(curtok);
+//	else
+//		result = NULL;
+//	return (result);
+//}
 t_astree	*SIMPLECMD1(t_token_list **curtok)
 {
 	t_astree	*tokenListNode;
