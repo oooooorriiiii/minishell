@@ -29,6 +29,18 @@ void	signal_handler_heredoc(int sig)
 	g_minishell.heredoc_status = sig + 128;
 }
 
+/*
+ * Set this function to not display "minishell$ " in a child process.
+ * I think it needs a break, but for some reason it's fine without it.
+ */
+//	printf("\n");
+void	signal_child_process(int sig)
+{
+	(void)sig;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+}
+
 int	rl_msh_event_hook_heredoc(void)
 {
 	if (g_minishell.heredoc_status != 0)
@@ -48,8 +60,8 @@ void	signal_init(void func1(int), void func2(int), int heredoc_hook(void))
 	return ;
 }
 
-void	msh_signal(int signo)
-{
-	if (signo == MSH_SIG_PROMPT)
-		signal(SIGINT, &signal_handler_prompt);
-}
+//void	msh_signal(int signo)
+//{
+//	if (signo == MSH_SIG_PROMPT)
+//		signal(SIGINT, &signal_handler_prompt);
+//}

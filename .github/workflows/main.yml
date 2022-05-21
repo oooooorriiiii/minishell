@@ -38,16 +38,16 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-#   norm:
-#     runs-on: ubuntu-latest
+  norm:
+    runs-on: ubuntu-latest
       
-#     steps:
-#       - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
       
-#       - name: Install Norminette
-#         run: |
-#           python3 -m pip install --upgrade pip setuptools
-#           python3 -m pip install norminette==3.3.2
+      - name: Install Norminette
+        run: |
+          python3 -m pip install --upgrade pip setuptools
+          python3 -m pip install norminette==3.3.2
           
-#       - name: Run Norminette
-#         run: norminette .
+      - name: Run Norminette
+        run: norminette srcs

@@ -12,11 +12,58 @@
 
 #include "../includes/parser.h"
 
+/*
+* <letter> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
+ *              A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+ *
+ * <digit> ::= 0|1|2|3|4|5|6|7|8|9
+ *
+ * <number> ::= <digit>
+ *            | <number> <digit>
+ *
+ * <word> ::= <letter>        -> TOKENLIST1
+ *          | <word> <letter> -> TOKENLIST1
+ *          | <word> '_'      -> TOKENLIST1
+ *
+ * <assignment_word> ::= <word> '=' <word> // Handled by other functions
+ *
+ * <redirection> ::= '>' <word>
+ *                 | '<' <word>
+ *                 | '>>' <word>
+ *                 | '<<' <word>
+ *
+ * // CMD3, SIMPLECMD, SIMPLECMD1
+ * <simple_command_element> ::= <word>            -> TOKENLIST
+ *                            | <assignment_word> // Handled by other functions
+ *                            | <redirection>
+ */
 t_astree	*SIMPLECMD(t_token_list **curtok)
 {
 	return (SIMPLECMD1(curtok));
 }
 
+/*
+ *<redirection> ::= '>' <word>
+ *                | '<' <word>
+ *                | '>>' <word>
+ *                | '<<' <word>
+ */
+//t_astree	*REDIRECTION(t_token_list **curtok)
+//{
+//	t_astree	*result;
+//
+//	if ((*curtok)->type == CHAR_LESSER)
+//		result = CMD1(curtok);
+//	else if ((*curtok)->type == CHAR_GREATER)
+//		result = CMD2(curtok);
+//	else if ((*curtok)->type == CHAR_DBLLESSER)
+//		result = CMD11(curtok);
+//	else if ((*curtok)->type == CHAR_DBLGREATER)
+//		result = CMD22(curtok);
+//	else
+//		result = NULL;
+//	return (result);
+//}
 t_astree	*SIMPLECMD1(t_token_list **curtok)
 {
 	t_astree	*tokenListNode;

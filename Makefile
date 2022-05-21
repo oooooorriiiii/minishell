@@ -35,7 +35,6 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/lexer/helper.c \
 				$(SRCS_DIR)/lexer/is_utils.c \
 				$(SRCS_DIR)/lexer/heredoc.c \
-				$(SRCS_DIR)/parser/ast_visualizer.c \
 				$(SRCS_DIR)/parser/astree.c \
 				$(SRCS_DIR)/parser/cmd_node_utils.c \
 				$(SRCS_DIR)/parser/cmd_node.c \

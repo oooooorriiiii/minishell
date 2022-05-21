@@ -13,9 +13,9 @@
 #include "../includes/execute.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 
-// TODO: heredocへの対応
 void	open_error_handle(int fd)
 {
 	if (fd == -1)

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
+#include "msh_signal.h"
 
 void	set_pipefd(t_cmd_args *args, bool stdin_pipe, bool stdout_pipe)
 {
@@ -47,8 +48,12 @@ void	execute_pipeline(t_astree *t, t_cmd_args *args)
 	close(args->pipe_read);
 }
 
+/*
+ * What does this function execute?
+ */
 void	execute_job(t_astree *jobNode, t_cmd_args *args)
 {
+	signal_init(signal_child_process, signal_child_process, NULL);
 	if (jobNode == NULL)
 		return ;
 	if (jobNode->type == NODE_PIPE)
@@ -57,6 +62,7 @@ void	execute_job(t_astree *jobNode, t_cmd_args *args)
 		execute_command(jobNode, args);
 	else
 		execute_command(jobNode, args);
+	signal_init(signal_handler_prompt, SIG_IGN, NULL);
 }
 
 void	execute_cmdline(t_astree *cmdline, t_cmd_args *args)

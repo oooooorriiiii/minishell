@@ -30,7 +30,6 @@ static void	handle_command_status(int status, bool catch_sigint)
 			if (signal == SIGQUIT)
 				ft_putendl_fd("Quit: 3", STDERR_FILENO);
 			g_minishell.exit_status = signal + 128;
-			printf("g_minishell.exit_status :  %d\n", g_minishell.exit_status);
 		}
 		if (catch_sigint)
 			ft_putendl_fd("", STDERR_FILENO);

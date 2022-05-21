@@ -17,6 +17,15 @@ t_astree	*CMDLINE(t_token_list **curtok)
 	return (JOB(curtok));
 }
 
+/*
+ * // handle by lexer
+ * <newline_list> ::=
+ *                  | <newline_list> '\n'
+ *
+ * // JOB
+ * <pipeline> ::= <pipeline> '|' <newline_list> <pipeline> -> JOB1
+ *              | <command>                                -> JOB2
+ */
 t_astree	*JOB(t_token_list **curtok)
 {
 	t_token_list		*save;
