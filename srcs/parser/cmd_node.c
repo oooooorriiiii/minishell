@@ -42,13 +42,13 @@
  *
  * <assignment_word> ::= <word> '=' <word> // Handled by other functions
  *
- * <redirection> ::= '>' <word>
- *                 | '<' <word>
- *                 | '>>' <word>
- *                 | '<<' <word>
+ * <redirection> ::= '>' <word>  -> CMD1
+ *                 | '<' <word>  -> CMD2
+ *                 | '>>' <word>  -> CMD11
+ *                 | '<<' <word>  -> CMD22
  *
- * // CMD3, SIMPLECMD
- * <simple_command_element> ::= <word>
+ * // CMD3, SIMPLECMD, SIMPLECMD1
+ * <simple_command_element> ::= <word> ->
  *                            | <assignment_word> // Handled by other functions
  *                            | <redirection>
  *
