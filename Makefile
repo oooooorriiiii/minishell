@@ -41,6 +41,8 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/parser/parser_utils.c \
 				$(SRCS_DIR)/parser/parser.c \
 				$(SRCS_DIR)/parser/simplecmd_node.c \
+				$(SRCS_DIR)/parser/redirection.c \
+				$(SRCS_DIR)/parser/redirection_token.c \
 				$(SRCS_DIR)/execute/cd_execute.c \
 				$(SRCS_DIR)/execute/child.c \
 				$(SRCS_DIR)/execute/dupfor_redirection.c \

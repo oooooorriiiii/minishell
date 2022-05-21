@@ -42,28 +42,6 @@ t_astree	*SIMPLECMD(t_token_list **curtok)
 	return (SIMPLECMD1(curtok));
 }
 
-/*
- *<redirection> ::= '>' <word>
- *                | '<' <word>
- *                | '>>' <word>
- *                | '<<' <word>
- */
-//t_astree	*REDIRECTION(t_token_list **curtok)
-//{
-//	t_astree	*result;
-//
-//	if ((*curtok)->type == CHAR_LESSER)
-//		result = CMD1(curtok);
-//	else if ((*curtok)->type == CHAR_GREATER)
-//		result = CMD2(curtok);
-//	else if ((*curtok)->type == CHAR_DBLLESSER)
-//		result = CMD11(curtok);
-//	else if ((*curtok)->type == CHAR_DBLGREATER)
-//		result = CMD22(curtok);
-//	else
-//		result = NULL;
-//	return (result);
-//}
 t_astree	*SIMPLECMD1(t_token_list **curtok)
 {
 	t_astree	*tokenListNode;
@@ -73,6 +51,7 @@ t_astree	*SIMPLECMD1(t_token_list **curtok)
 	if (!term(TOKEN, &pathname, curtok))
 		return (NULL);
 	tokenListNode = TOKENLIST(curtok);
+	// REDIRECTION
 	result = malloc(sizeof(t_astree));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_CMDPATH);
