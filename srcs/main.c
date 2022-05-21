@@ -32,6 +32,7 @@ void	init(char **input, t_lexer **lex_list, t_astree **ast)
 	*input = NULL;
 	*lex_list = NULL;
 	*ast = NULL;
+	signal_init(signal_handler_prompt, SIG_IGN, NULL);
 	g_minishell.env = create_envlist(environ);
 }
 
@@ -39,7 +40,6 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 {
 	while (true)
 	{
-		msh_signal(MSH_SIG_PROMPT);
 		free_set((void **)input, NULL);
 		*input = readline("minishell$ ");
 		if (*input == NULL)
