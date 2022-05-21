@@ -59,35 +59,38 @@
  *                    | <simple_command> <simple_command_element>
  *
  * // CMD
- * <command> ::= <simple_command>
+ * <command> ::= <simple_command> ::= <simple_command_element>
+ *           ::= <word>        ->
+ *             | <redirection_list> -> REDIRECTION_LIST
  */
 t_astree	*CMD(t_token_list **curtok)
 {
-	t_token_list		*save;
-	t_astree			*node;
-
-	save = *curtok;
-	*curtok = save;
-	node = CMD1(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD2(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD11(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD22(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = CMD3(curtok);
-	if (node != NULL)
-		return (node);
-	return (NULL);
+	return (CMD3(curtok));
+//	t_token_list		*save;
+//	t_astree			*node;
+//
+//	save = *curtok;
+//	*curtok = save;
+//	node = CMD1(curtok);
+//	if (node != NULL)
+//		return (node);
+//	*curtok = save;
+//	node = CMD2(curtok);
+//	if (node != NULL)
+//		return (node);
+//	*curtok = save;
+//	node = CMD11(curtok);
+//	if (node != NULL)
+//		return (node);
+//	*curtok = save;
+//	node = CMD22(curtok);
+//	if (node != NULL)
+//		return (node);
+//	*curtok = save;
+//	node = CMD3(curtok);
+//	if (node != NULL)
+//		return (node);
+//	return (NULL);
 }
 
 /*

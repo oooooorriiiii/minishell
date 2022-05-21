@@ -56,10 +56,13 @@ t_astree		*CMD11(t_token_list **curtok);
 t_astree		*CMD22(t_token_list **curtok);
 t_astree		*CMD3(t_token_list **curtok);
 
-t_astree		*RIDIRECTION1(t_token_list **curtok);
-t_astree		*RIDIRECTION2(t_token_list **curtok);
-t_astree		*RIDIRECTION11(t_token_list **curtok);
-t_astree		*RIDIRECTION22(t_token_list **curtok);
+t_astree		*REDIRECTION_LIST(t_token_list **curtok);
+t_astree		*REDIRECTION(t_token_list **curtok);
+
+t_astree		*REDIRECTION1(t_token_list **curtok);
+t_astree		*REDIRECTION2(t_token_list **curtok);
+t_astree		*REDIRECTION11(t_token_list **curtok);
+t_astree		*REDIRECTION22(t_token_list **curtok);
 
 t_astree		*SIMPLECMD(t_token_list **curtok);
 t_astree		*SIMPLECMD1(t_token_list **curtok);

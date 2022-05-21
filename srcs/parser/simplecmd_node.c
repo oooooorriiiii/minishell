@@ -39,7 +39,22 @@
  */
 t_astree	*SIMPLECMD(t_token_list **curtok)
 {
-	return (SIMPLECMD1(curtok));
+	t_token_list	*save;
+	t_astree		*node;
+
+	save = *curtok;
+	printf("SIMPLECMD\n"); // D
+	print_token_list(*curtok); // D
+	printf("\n"); // D
+	node = REDIRECTION_LIST(curtok);
+	if (node != NULL)
+		return (node);
+	*curtok = save;
+	node = SIMPLECMD1(curtok);
+	if (node != NULL)
+		return (node);
+	return (NULL);
+//	return (SIMPLECMD1(curtok));
 }
 
 t_astree	*SIMPLECMD1(t_token_list **curtok)
@@ -50,8 +65,8 @@ t_astree	*SIMPLECMD1(t_token_list **curtok)
 
 	if (!term(TOKEN, &pathname, curtok))
 		return (NULL);
+	printf("pathname: %s\n", pathname); // D
 	tokenListNode = TOKENLIST(curtok);
-	// REDIRECTION
 	result = malloc(sizeof(t_astree));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_CMDPATH);
