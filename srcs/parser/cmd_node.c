@@ -55,7 +55,29 @@ t_astree	*COMMAND1(t_token_list **curtok)
  */
 t_astree	*COMMAND2(t_token_list **curtok)
 {
+	t_astree	*redirectionNode;
+	t_astree	*cmdNode;
+	t_astree	*result;
+	char		*pathname;
 
+	redirectionNode = REDIRECTION_LIST(curtok);
+	if (redirectionNode == NULL)
+		return (NULL);
+	if (!term(TOKEN, &pathname, curtok))
+	{
+		astree_delete(redirectionNode );
+		return (NULL);
+	}
+	cmdNode = CMD(curtok);
+	if (cmdNode == NULL)
+	{
+		astree_delete(redirectionNode );
+		return (NULL);
+	}
+	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
+	astreeset_type(result, NODE_CMDPATH);
+	return (result);
 }
 
 /**
