@@ -8,19 +8,6 @@
  */
 t_astree	*REDIRECTION(t_token_list **curtok)
 {
-//	t_astree	*result;
-//
-//	if ((*curtok)->type == CHAR_LESSER)
-//		result = REDIRECTION1(curtok);
-//	else if ((*curtok)->type == CHAR_GREATER)
-//		result = REDIRECTION2(curtok);
-//	else if ((*curtok)->type == CHAR_DBLLESSER)
-//		result = REDIRECTION11(curtok);
-//	else if ((*curtok)->type == CHAR_DBLGREATER)
-//		result = REDIRECTION22(curtok);
-//	else
-//		result = NULL;
-//	return (result);
 	t_token_list		*save;
 	t_astree			*node;
 

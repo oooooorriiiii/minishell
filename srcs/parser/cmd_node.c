@@ -12,85 +12,89 @@
 
 #include "../includes/parser.h"
 
-/*
- * current
- * <CMD>
- * ::=  <simple commant> '<'  <token(file name)> -> CMD1
- * |    <simple commant> '>'  <token(file name)> -> CMD2
- * |    <simple commant> '<<' <token(file name)> -> CMD11
- * |    <simple commant> '<<' <token(file name)> -> CMD22
- * |    <simple commant>                         -> CMD3
+/**
  *
- * <CMD>              ::=  <redirection list> <CMD>
- * <redirection list> ::=  <redirection> <redirection list>
- * <redirection>      ::=  '<'  <token(file name)>
- *                    |    '>'  <token(file name)>
- *                    |    '<<' <token(file name)>
- *                    |    '<<' <token(file name)>
+ * @param curtok
+ * @return
  *
- * <letter> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
- *              A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+ * <simple command> <command>
+ */
+t_astree	*COMMAND1(t_token_list **curtok)
+{
+	t_astree	*simpleCMD;
+	t_astree	*cmdNode;
+	t_astree	*result;
+	char		*pathname;
+
+	simpleCMD = SIMPLECMD(curtok);
+	if (simpleCMD == NULL)
+		return (NULL);
+	if (!term(TOKEN, &pathname, curtok))
+	{
+		astree_delete(simpleCMD);
+		return (NULL);
+	}
+	cmdNode = CMD(curtok);
+	if (cmdNode == NULL)
+	{
+		astree_delete(simpleCMD);
+		return (NULL);
+	}
+	result = malloc(sizeof(*result));
+	parse_malloc_errordeal(result, NULL);
+	astreeset_type(result, NODE_CMDPATH);
+	return (result);
+}
+
+/**
  *
- * <digit> ::= 0|1|2|3|4|5|6|7|8|9
+ * @param curtok
+ * @return
  *
- * <number> ::= <digit>
- *            | <number> <digit>
+ * <redirection list> <command>
+ */
+t_astree	*COMMAND2(t_token_list **curtok)
+{
+
+}
+
+/**
  *
- * <word> ::= <letter>
- *          | <word> <letter>
- *          | <word> '_'
+ * @param curtok
+ * @return
  *
- * <assignment_word> ::= <word> '=' <word> // Handled by other functions
+ * <EMPTY>
+ */
+t_astree	*COMMAND3(t_token_list **curtok)
+{
+	(void)curtok;
+	return (NULL);
+}
+
+/**
  *
- * <redirection> ::= '>' <word>  -> CMD1
- *                 | '<' <word>  -> CMD2
- *                 | '>>' <word>  -> CMD11
- *                 | '<<' <word>  -> CMD22
+ * @param curtok
+ * @return
  *
- * // CMD3, SIMPLECMD, SIMPLECMD1
- * <simple_command_element> ::= <word> ->
- *                            | <assignment_word> // Handled by other functions
- *                            | <redirection>
- *
- * <redirection_list> ::= <redirection>
- *                      | <redirection_list> <redirection>
- * // CMD
- * <simple_command> ::= <simple_command_element>
- *                    | <simple_command> <simple_command_element>
- *
- * // CMD
- * <command> ::= <simple_command> ::= <simple_command_element>
- *           ::= <word>        ->
- *             | <redirection_list> -> REDIRECTION_LIST
+ * <command> ::= <simple command> <command>   -> COMMAND1
+ *             | <redirection list> <command> -> COMMAND2
+ *             | <EMPTY>                      -> COMMAND3
  */
 t_astree	*CMD(t_token_list **curtok)
 {
-	return (CMD3(curtok));
-//	t_token_list		*save;
-//	t_astree			*node;
-//
-//	save = *curtok;
-//	*curtok = save;
-//	node = CMD1(curtok);
-//	if (node != NULL)
-//		return (node);
-//	*curtok = save;
-//	node = CMD2(curtok);
-//	if (node != NULL)
-//		return (node);
-//	*curtok = save;
-//	node = CMD11(curtok);
-//	if (node != NULL)
-//		return (node);
-//	*curtok = save;
-//	node = CMD22(curtok);
-//	if (node != NULL)
-//		return (node);
-//	*curtok = save;
-//	node = CMD3(curtok);
-//	if (node != NULL)
-//		return (node);
-//	return (NULL);
+	t_token_list	*save;
+	t_astree		*node;
+
+	save = *curtok;
+	*curtok = save;
+	node = COMMAND1(curtok);
+	if (node != NULL)
+		return (node);
+	*curtok = save;
+	node = COMMAND2(curtok);
+	if (node != NULL)
+		return (node);
+	return (COMMAND3(curtok));
 }
 
 /*

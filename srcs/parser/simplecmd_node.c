@@ -12,51 +12,26 @@
 
 #include "../includes/parser.h"
 
-/*
-* <letter> ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|
- *              A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+/**
  *
- * <digit> ::= 0|1|2|3|4|5|6|7|8|9
+ * @param curtok
+ * @return
  *
- * <number> ::= <digit>
- *            | <number> <digit>
- *
- * <word> ::= <letter>        -> TOKENLIST1
- *          | <word> <letter> -> TOKENLIST1
- *          | <word> '_'      -> TOKENLIST1
- *
- * <assignment_word> ::= <word> '=' <word> // Handled by other functions
- *
- * <redirection> ::= '>' <word>
- *                 | '<' <word>
- *                 | '>>' <word>
- *                 | '<<' <word>
- *
- * // CMD3, SIMPLECMD, SIMPLECMD1
- * <simple_command_element> ::= <word>            -> TOKENLIST
- *                            | <assignment_word> // Handled by other functions
- *                            | <redirection>
+ * <simple command> ::= <pathname> <token list> -> SIMPLECMD1
  */
 t_astree	*SIMPLECMD(t_token_list **curtok)
 {
-	t_token_list	*save;
-	t_astree		*node;
-
-	save = *curtok;
-	printf("SIMPLECMD\n"); // D
-	print_token_list(*curtok); // D
-	printf("\n"); // D
-	node = REDIRECTION_LIST(curtok);
-	if (node != NULL)
-		return (node);
-	*curtok = save;
-	node = SIMPLECMD1(curtok);
-	if (node != NULL)
-		return (node);
-	return (NULL);
-//	return (SIMPLECMD1(curtok));
+	return (SIMPLECMD1(curtok));
 }
 
+/**
+ *
+ * @param curtok
+ * @return
+ *
+ * <simple command> <token list>
+ *
+ */
 t_astree	*SIMPLECMD1(t_token_list **curtok)
 {
 	t_astree	*tokenListNode;
@@ -65,7 +40,6 @@ t_astree	*SIMPLECMD1(t_token_list **curtok)
 
 	if (!term(TOKEN, &pathname, curtok))
 		return (NULL);
-	printf("pathname: %s\n", pathname); // D
 	tokenListNode = TOKENLIST(curtok);
 	result = malloc(sizeof(t_astree));
 	parse_malloc_errordeal(result, NULL);
@@ -75,6 +49,14 @@ t_astree	*SIMPLECMD1(t_token_list **curtok)
 	return (result);
 }
 
+/**
+ *
+ * @param curtok
+ * @return
+ *
+ * <token list> ::= <token> <token list> -> TOKENLIST1
+ *                | <EMPTY>              -> TOKENLIST2
+ */
 t_astree	*TOKENLIST(t_token_list **curtok)
 {
 	t_token_list		*save;
@@ -92,6 +74,13 @@ t_astree	*TOKENLIST(t_token_list **curtok)
 	return (NULL);
 }
 
+/**
+ *
+ * @param curtok
+ * @return
+ *
+ * <token> <token list>
+ */
 t_astree	*TOKENLIST1(t_token_list **curtok)
 {
 	t_astree	*tokenListNode;
@@ -109,6 +98,13 @@ t_astree	*TOKENLIST1(t_token_list **curtok)
 	return (result);
 }
 
+/**
+ *
+ * @param curtok
+ * @return
+ *
+ * <EMPTY>
+ */
 t_astree	*TOKENLIST2(t_token_list **curtok)
 {
 	(void)curtok;
