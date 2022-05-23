@@ -29,13 +29,13 @@ t_astree	*COMMAND1(t_token_list **curtok)
 	tokenNode = TOKENLIST(curtok);
 	if (tokenNode == NULL)
 		return (NULL);
-	tokenNode->type = NODE_CMDPATH | NODE_DATA;
+	tokenNode->type = NODE_CMDPATH;
 	cmdNode = CMD(curtok);
 	if (cmdNode == NULL)
 		return (tokenNode);
 	if (cmdNode->type & NODE_REDIRECTION)
 	{
-		cmdNode->left->type = NODE_ARGUMENT | NODE_DATA;
+		cmdNode->left->type = NODE_ARGUMENT;
 		astree_right_node_last(tokenNode)->right = cmdNode->left;
 		cmdNode->left = NULL;
 		tmpNode = cmdNode->right;
@@ -72,7 +72,7 @@ t_astree	*COMMAND2(t_token_list **curtok)
 		return (redirectionNode);
 	if (cmdNode->type & NODE_REDIRECTION)
 	{
-		cmdNode->left->type = NODE_ARGUMENT | NODE_DATA;
+		cmdNode->left->type = NODE_ARGUMENT;
 		astree_right_node_last(redirectionNode)->right = cmdNode->right;
 		cmdNode->right = NULL;
 		tmpNode = cmdNode->left;
@@ -80,7 +80,7 @@ t_astree	*COMMAND2(t_token_list **curtok)
 		astree_delete(cmdNode);
 		cmdNode = tmpNode;
 	}
-	cmdNode->type = NODE_CMDPATH | NODE_DATA;
+	cmdNode->type = NODE_CMDPATH;
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECTION);

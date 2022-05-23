@@ -97,7 +97,7 @@ t_astree	*TOKENLIST1(t_token_list **curtok)
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_ARGUMENT | NODE_DATA);
+	astreeset_type(result, NODE_ARGUMENT);
 	astreeset_data(result, arg);
 	astree_attach(result, NULL, tokenListNode);
 	return (result);
@@ -119,7 +119,7 @@ t_astree	*TOKENLIST2(t_token_list **curtok)
 		return (NULL);
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_ARGUMENT | NODE_DATA);
+	astreeset_type(result, NODE_ARGUMENT);
 	astreeset_data(result, arg);
 	astree_attach(result, NULL, NULL);
 	return (result);

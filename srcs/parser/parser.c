@@ -275,9 +275,9 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 	}
 	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
-	printf("Parse\n"); // D
-	print_syntax_tree(*syntax_tree); // DE
-	printf("Parse\n"); // D
+//	printf("Parse\n"); // D
+//	print_syntax_tree(*syntax_tree); // DE
+//	printf("Parse\n"); // D
 	if (curtok != NULL && curtok->type != 0)
 	{
 		printf("Syntax Error near: %s\n", curtok->val);
