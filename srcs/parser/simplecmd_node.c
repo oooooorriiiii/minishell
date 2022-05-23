@@ -17,43 +17,6 @@
  * @param curtok
  * @return
  *
- * <simple command> ::= <pathname> <token list> -> SIMPLECMD1
- */
-//t_astree	*SIMPLECMD(t_token_list **curtok)
-//{
-//	return (SIMPLECMD1(curtok));
-//}
-
-/**
- *
- * @param curtok
- * @return
- *
- * <simple command> <token list>
- *
- */
-//t_astree	*SIMPLECMD1(t_token_list **curtok)
-//{
-//	t_astree	*tokenListNode;
-//	t_astree	*result;
-//	char		*pathname;
-//
-//	if (!term(TOKEN, &pathname, curtok))
-//		return (NULL);
-//	tokenListNode = TOKENLIST(curtok);
-//	result = malloc(sizeof(t_astree));
-//	parse_malloc_errordeal(result, NULL);
-//	astreeset_type(result, NODE_CMDPATH);
-//	astreeset_data(result, pathname);
-//	astree_attach(result, NULL, tokenListNode);
-//	return (result);
-//}
-
-/**
- *
- * @param curtok
- * @return
- *
  * <token list> ::= <token> <token list> -> TOKENLIST1
  *                | <token>              -> TOKENLIST2
  */

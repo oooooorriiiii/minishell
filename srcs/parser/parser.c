@@ -222,12 +222,8 @@ void	print_syntax_tree(t_astree *tree)
  *
  * <pathname> ::= <token>
  *
- * SIMPLECMD
- * <simple command> ::= <pathname> <token list> -> SIMPLECMD1
- *
  * REDIRECTION_LIST
  * <redirection list> ::= <redirection> <redirection list> -> REDIRECTION_LIST1
- *                      | <redirection>                    -> REDIRECTION_LIST2
  *
  * REDIRECTION
  * <redirection> ::= '>'  <token> -> REDIRECTION1
