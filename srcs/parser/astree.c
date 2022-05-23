@@ -40,3 +40,10 @@ void	astree_delete(t_astree *node)
 	free(node);
 	return ;
 }
+
+t_astree	*astree_right_node_last(t_astree *node)
+{
+	while (node->right != NULL)
+		node = node->right;
+	return (node);
+}

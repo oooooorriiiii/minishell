@@ -25,7 +25,7 @@ typedef enum e_node_type
 {
 	NODE_PIPE			= (1 << 0),
 	NODE_BCKGRND		= (1 << 1),
-	NODE_SEQ			= (1 << 2),
+	NODE_REDIRECTION	= (1 << 2),
 	NODE_REDIRECT_IN	= (1 << 3),
 	NODE_REDIRECT_OUT	= (1 << 4),
 	NODE_REDIRECT_D_IN	= (1 << 5),
@@ -78,6 +78,7 @@ void			astree_attach(t_astree	*root,
 void			astreeset_type(t_astree	*node, t_node_type nodetype);
 void			astreeset_data(t_astree	*node, char	*data);
 void			astree_delete(t_astree	*node);
+t_astree		*astree_right_node_last(t_astree *node);
 void			parse_malloc_errordeal(t_astree *buf1, char *buf2);
 
 void			print_syntax_tree(t_astree *tree);

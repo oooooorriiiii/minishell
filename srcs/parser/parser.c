@@ -116,8 +116,8 @@ void	print_command(t_astree *cmdNode)
 		case NODE_REDIRECT_OUT:		// >
 			printf("	   |\n");
 			printf("		-----------< cmd_node >-------  REDIRECT_OUT");
-//			if (cmdNode->szData != NULL)
-//				printf("   > %s \n", cmdNode->szData);
+			if (cmdNode->szData != NULL)
+				printf("   > %s \n", cmdNode->szData);
 			print_simple_command(cmdNode->right);
 			break ;
 		case NODE_REDIRECT_D_IN:		// <<
@@ -226,8 +226,8 @@ void	print_syntax_tree(t_astree *tree)
  * <simple command> ::= <pathname> <token list> -> SIMPLECMD1
  *
  * REDIRECTION_LIST
- * <redirection list> ::= <redirection> <redirection list> -> REDIRECTION1
- *                      | <redirection>                    -> REDIRECTION2
+ * <redirection list> ::= <redirection> <redirection list> -> REDIRECTION_LIST1
+ *                      | <redirection>                    -> REDIRECTION_LIST2
  *
  * REDIRECTION
  * <redirection> ::= '>'  <token> -> REDIRECTION1
@@ -275,7 +275,9 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 	}
 	curtok = lexbuf->list;
 	*syntax_tree = CMDLINE(&curtok);
+	printf("Parse\n"); // D
 	print_syntax_tree(*syntax_tree); // DE
+	printf("Parse\n"); // D
 	if (curtok != NULL && curtok->type != 0)
 	{
 		printf("Syntax Error near: %s\n", curtok->val);
