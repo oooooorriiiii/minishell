@@ -26,7 +26,6 @@ t_astree	*COMMAND1(t_token_list **curtok)
 	t_astree	*result;
 	t_astree	*tmpNode;
 
-	puts(" CMD1"); // D
 	tokenNode = TOKENLIST(curtok);
 	if (tokenNode == NULL)
 		return (NULL);
@@ -65,7 +64,6 @@ t_astree	*COMMAND2(t_token_list **curtok)
 	t_astree	*result;
 	t_astree	*tmpNode;
 
-	puts(" CMD2"); // D
 	redirectionNode = REDIRECTION_LIST(curtok);
 	if (redirectionNode == NULL)
 		return (NULL);
@@ -99,7 +97,6 @@ t_astree	*COMMAND2(t_token_list **curtok)
  */
 t_astree	*COMMAND3(t_token_list **curtok)
 {
-	puts(" CMD3"); // D
 	(void)curtok;
 	return (NULL);
 }
@@ -118,7 +115,6 @@ t_astree	*CMD(t_token_list **curtok)
 	t_token_list	*save;
 	t_astree		*node;
 
-	puts("CMD"); // D
 	save = *curtok;
 	*curtok = save;
 	node = COMMAND1(curtok);
