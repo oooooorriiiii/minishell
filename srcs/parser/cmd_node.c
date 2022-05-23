@@ -46,6 +46,7 @@ t_astree	*COMMAND1(t_token_list **curtok)
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECTION);
+	astreeset_data(result, NULL);
 	astree_attach(result, tokenNode, cmdNode);
 	return (result);
 }
@@ -84,6 +85,7 @@ t_astree	*COMMAND2(t_token_list **curtok)
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECTION);
+	astreeset_data(result, NULL);
 	astree_attach(result, cmdNode, redirectionNode);
 	return (result);
 }
