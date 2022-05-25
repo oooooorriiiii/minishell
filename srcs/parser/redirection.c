@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymori <ymori@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/25 16:12:30 by ymori             #+#    #+#             */
+/*   Updated: 2022/05/25 16:12:30 by ymori            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/parser.h"
 
- /**
-  *
-  * @param curtok
-  * @return
-  *
-  * <redirection> ::= '>' <word>   ->REDIRECTION1
-  *                 | '<' <word>   ->REDIRECTION2
-  *                 | '>>' <word>  ->REDIRECTION11
-  *                 | '<<' <word>  ->REDIRECTION22
-  */
+/**
+ *
+ * @param curtok
+ * @return
+ *
+ * <redirection> ::= '>' <word>   ->REDIRECTION1
+ *                 | '<' <word>   ->REDIRECTION2
+ *                 | '>>' <word>  ->REDIRECTION11
+ *                 | '<<' <word>  ->REDIRECTION22
+ */
 t_astree	*REDIRECTION(t_token_list **curtok)
 {
 	t_token_list		*save;
