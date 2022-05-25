@@ -12,6 +12,18 @@
 
 #include "../includes/parser.h"
 
+t_astree	*cmd_helper(t_node_type node_type, t_astree *l, t_astree *r)
+{
+	t_astree	*result;
+
+	result = malloc(sizeof(t_astree));
+	parse_malloc_errordeal(result, NULL);
+	astreeset_type(result, node_type);
+	astreeset_data(result, NULL);
+	astree_attach(result, l, r);
+	return (result);
+}
+
 /**
  *
  * @param curtok
@@ -23,7 +35,6 @@ t_astree	*COMMAND1(t_token_list **curtok)
 {
 	t_astree	*tokenNode;
 	t_astree	*cmdNode;
-	t_astree	*result;
 	t_astree	*tmpNode;
 
 	tokenNode = TOKENLIST(curtok);
@@ -43,12 +54,7 @@ t_astree	*COMMAND1(t_token_list **curtok)
 		astree_delete(cmdNode);
 		cmdNode = tmpNode;
 	}
-	result = malloc(sizeof(*result));
-	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_REDIRECTION);
-	astreeset_data(result, NULL);
-	astree_attach(result, tokenNode, cmdNode);
-	return (result);
+	return (cmd_helper(NODE_REDIRECTION, tokenNode, cmdNode));
 }
 
 /**
@@ -62,7 +68,6 @@ t_astree	*COMMAND2(t_token_list **curtok)
 {
 	t_astree	*redirectionNode;
 	t_astree	*cmdNode;
-	t_astree	*result;
 	t_astree	*tmpNode;
 
 	redirectionNode = REDIRECTION_LIST(curtok);
@@ -82,12 +87,7 @@ t_astree	*COMMAND2(t_token_list **curtok)
 		cmdNode = tmpNode;
 	}
 	cmdNode->type = NODE_CMDPATH;
-	result = malloc(sizeof(*result));
-	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_REDIRECTION);
-	astreeset_data(result, NULL);
-	astree_attach(result, cmdNode, redirectionNode);
-	return (result);
+	return (cmd_helper(NODE_REDIRECTION, cmdNode, redirectionNode));
 }
 
 /**
