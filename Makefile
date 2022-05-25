@@ -51,6 +51,7 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/execute/error_deal_execute.c \
 				$(SRCS_DIR)/execute/execute_command_struct.c \
 				$(SRCS_DIR)/execute/execute_simple_command.c \
+				$(SRCS_DIR)/execute/execute_redirection.c \
 				$(SRCS_DIR)/execute/execute_utils.c \
 				$(SRCS_DIR)/execute/execute_utils2.c \
 				$(SRCS_DIR)/execute/execute.c \
