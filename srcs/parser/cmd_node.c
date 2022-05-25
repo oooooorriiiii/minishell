@@ -64,13 +64,13 @@ t_astree	*COMMAND1(t_token_list **curtok)
  *
  * <redirection list> <command>
  */
-t_astree	*COMMAND2(t_token_list **curtok)
+t_astree	*COMMAND2(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*redirectionNode;
 	t_astree	*cmdNode;
 	t_astree	*tmpNode;
 
-	redirectionNode = REDIRECTION_LIST(curtok);
+	redirectionNode = REDIRECTION_LIST(curtok, nofile);
 	if (redirectionNode == NULL)
 		return (NULL);
 	cmdNode = CMD(curtok);
@@ -116,15 +116,17 @@ t_astree	*CMD(t_token_list **curtok)
 {
 	t_token_list	*save;
 	t_astree		*node;
+	bool			nofile;
 
+	nofile = false;
 	save = *curtok;
 	*curtok = save;
 	node = COMMAND1(curtok);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
-	node = COMMAND2(curtok);
-	if (node != NULL)
+	node = COMMAND2(curtok,&nofile);
+	if (node != NULL || nofile == true)
 		return (node);
 	*curtok = save;
 	return (COMMAND3(curtok));

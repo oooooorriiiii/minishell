@@ -20,7 +20,7 @@
  * < >
  * ::=	'<' <token>
  */
-t_astree	*REDIRECTION1(t_token_list **curtok)
+t_astree	*REDIRECTION1(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*result;
 	char		*filename;
@@ -28,7 +28,10 @@ t_astree	*REDIRECTION1(t_token_list **curtok)
 	if (!term(CHAR_LESSER, NULL, curtok))
 		return (NULL);
 	if (!term(TOKEN, &filename, curtok))
+	{
+		*nofile = true;
 		return (NULL);
+	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_IN);
@@ -45,7 +48,7 @@ t_astree	*REDIRECTION1(t_token_list **curtok)
  * < >
  * ::=	'>' <token>
  */
-t_astree	*REDIRECTION2(t_token_list **curtok)
+t_astree	*REDIRECTION2(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*result;
 	char		*filename;
@@ -53,7 +56,10 @@ t_astree	*REDIRECTION2(t_token_list **curtok)
 	if (!term(CHAR_GREATER, NULL, curtok))
 		return (NULL);
 	if (!term(TOKEN, &filename, curtok))
+	{
+		*nofile = true;
 		return (NULL);
+	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_OUT);
@@ -70,7 +76,7 @@ t_astree	*REDIRECTION2(t_token_list **curtok)
  * < >
  * ::=	'<<' <token>
  */
-t_astree	*REDIRECTION11(t_token_list **curtok)
+t_astree	*REDIRECTION11(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*result;
 	char		*filename;
@@ -78,7 +84,10 @@ t_astree	*REDIRECTION11(t_token_list **curtok)
 	if (!term(CHAR_DBLLESSER, NULL, curtok))
 		return (NULL);
 	if (!term(TOKEN, &filename, curtok))
+	{
+		*nofile = true;
 		return (NULL);
+	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_D_IN);
@@ -95,7 +104,7 @@ t_astree	*REDIRECTION11(t_token_list **curtok)
  * < >
  * ::=	'>>' <token>
  */
-t_astree	*REDIRECTION22(t_token_list **curtok)
+t_astree	*REDIRECTION22(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*result;
 	char		*filename;
@@ -103,7 +112,10 @@ t_astree	*REDIRECTION22(t_token_list **curtok)
 	if (!term(CHAR_DBLGREATER, NULL, curtok))
 		return (NULL);
 	if (!term(TOKEN, &filename, curtok))
+	{
+		*nofile = true;
 		return (NULL);
+	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
 	astreeset_type(result, NODE_REDIRECT_D_OUT);

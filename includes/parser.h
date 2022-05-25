@@ -51,13 +51,13 @@ t_astree		*JOB2(t_token_list **curtok);
 
 t_astree		*CMD(t_token_list **curtok);
 
-t_astree		*REDIRECTION_LIST(t_token_list **curtok);
-t_astree		*REDIRECTION(t_token_list **curtok);
+t_astree		*REDIRECTION_LIST(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION(t_token_list **curtok, bool *nofile);
 
-t_astree		*REDIRECTION1(t_token_list **curtok);
-t_astree		*REDIRECTION2(t_token_list **curtok);
-t_astree		*REDIRECTION11(t_token_list **curtok);
-t_astree		*REDIRECTION22(t_token_list **curtok);
+t_astree		*REDIRECTION1(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION2(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION11(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION22(t_token_list **curtok, bool *nofile);
 
 t_astree		*TOKENLIST(t_token_list **curtok);
 t_astree		*TOKENLIST1(t_token_list **curtok);
