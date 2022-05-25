@@ -25,7 +25,7 @@ void	open_error_handle(int fd)
 	}
 }
 
-void	handle_heredoc(char *data)
+t_exec_result	handle_heredoc(char *data)
 {
 	int		pipefd[2];
 	pid_t	pid;
@@ -41,6 +41,7 @@ void	handle_heredoc(char *data)
 	}
 	simple_error_handle(waitpid(pid, NULL, 0), "waitpid");
 	connect_pipe(pipefd, STDIN_FILENO);
+	return (e_success);
 }
 
 void	dupfor_dbl_redirection(t_cmd_args *args, int *backup)

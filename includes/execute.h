@@ -27,6 +27,12 @@
 # define SINGLE_Q 1
 # define DOUBLE_Q 10
 
+typedef enum e_exec_result
+{
+	e_success,
+	e_failure,
+}			t_exec_result;
+
 typedef struct cmd_args
 {
 	bool		stdin_pipe;
@@ -107,6 +113,13 @@ int				simple_error_handle(int status, char *title);
 void			connect_pipe(int pipefd[2], int fd);
 void			dupfor_redirection(t_cmd_args *args, int *backup);
 void			close_fdbackup(t_cmd_args *args, int *backup);
+
+// -----------  dupfor_redirection.c
+void			open_error_handle(int fd);
+t_exec_result	handle_heredoc(char *data);
+
+// -----------  execute_redirection.c
+t_exec_result	execute_redirection(t_astree *cmdNode, t_cmd_args *args);
 
 // -----------  error_execute.c
 void			malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3);

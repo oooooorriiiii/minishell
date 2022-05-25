@@ -61,26 +61,34 @@ void	execute_command(t_astree *cmdNode, t_cmd_args *args)
 {
 	if (cmdNode == NULL)
 		return ;
-	if (cmdNode->type == NODE_REDIRECT_IN)
+	if (cmdNode->type & NODE_REDIRECTION)
 	{
-		args->redirect_in = cmdNode->szData;
-		execute_simple_command(cmdNode->right, args);
+		if (execute_redirection(cmdNode->right, args) == e_failure)
+			return ;
+		execute_simple_command(cmdNode->left, args);
 	}
-	if (cmdNode->type == NODE_REDIRECT_OUT)
-	{
-		args->redirect_out = cmdNode->szData;
-		execute_simple_command(cmdNode->right, args);
-	}
-	if (cmdNode->type == NODE_REDIRECT_D_IN)
-	{
-		args->redirect_double_in = cmdNode->szData;
-		execute_simple_command(cmdNode->right, args);
-	}
-	if (cmdNode->type == NODE_REDIRECT_D_OUT)
-	{
-		args->redirect_double_out = cmdNode->szData;
-		execute_simple_command(cmdNode->right, args);
-	}
-	if (cmdNode->type == NODE_CMDPATH)
+	else
 		execute_simple_command(cmdNode, args);
+//	if (cmdNode->type == NODE_REDIRECT_IN)
+//	{
+//		args->redirect_in = cmdNode->szData;
+//		execute_simple_command(cmdNode->right, args);
+//	}
+//	if (cmdNode->type == NODE_REDIRECT_OUT)
+//	{
+//		args->redirect_out = cmdNode->szData;
+//		execute_simple_command(cmdNode->right, args);
+//	}
+//	if (cmdNode->type == NODE_REDIRECT_D_IN)
+//	{
+//		args->redirect_double_in = cmdNode->szData;
+//		execute_simple_command(cmdNode->right, args);
+//	}
+//	if (cmdNode->type == NODE_REDIRECT_D_OUT)
+//	{
+//		args->redirect_double_out = cmdNode->szData;
+//		execute_simple_command(cmdNode->right, args);
+//	}
+//	if (cmdNode->type == NODE_CMDPATH)
+//		execute_simple_command(cmdNode, args);
 }
