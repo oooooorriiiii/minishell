@@ -32,7 +32,7 @@ typedef enum e_node_type
 	NODE_REDIRECT_D_OUT		= (1 << 6),
 	NODE_CMDPATH			= (1 << 7),
 	NODE_ARGUMENT			= (1 << 8),
-	NODE_DATA				= (1 << 9),
+	ELIGIBLE_EXPANSION		= (1 << 9),
 }		t_node_type;
 
 typedef struct astree
@@ -75,6 +75,6 @@ void			parse_malloc_errordeal(t_astree *buf1, char *buf2);
 
 void			print_syntax_tree(t_astree *tree);
 
-void			expansion(t_astree *tree);
+void			expansion(t_astree *astree);
 
 #endif

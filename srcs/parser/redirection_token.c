@@ -34,7 +34,7 @@ t_astree	*REDIRECTION1(t_token_list **curtok, bool *nofile)
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_REDIRECT_IN);
+	astreeset_type(result, NODE_REDIRECT_IN | ELIGIBLE_EXPANSION);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, NULL);
 	return (result);
@@ -62,7 +62,7 @@ t_astree	*REDIRECTION2(t_token_list **curtok, bool *nofile)
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_REDIRECT_OUT);
+	astreeset_type(result, NODE_REDIRECT_OUT | ELIGIBLE_EXPANSION);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, NULL);
 	return (result);
@@ -90,7 +90,7 @@ t_astree	*REDIRECTION11(t_token_list **curtok, bool *nofile)
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_REDIRECT_D_IN);
+	astreeset_type(result, NODE_REDIRECT_D_IN | ELIGIBLE_EXPANSION);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, NULL);
 	return (result);
@@ -118,7 +118,7 @@ t_astree	*REDIRECTION22(t_token_list **curtok, bool *nofile)
 	}
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);
-	astreeset_type(result, NODE_REDIRECT_D_OUT);
+	astreeset_type(result, NODE_REDIRECT_D_OUT | ELIGIBLE_EXPANSION);
 	astreeset_data(result, filename);
 	astree_attach(result, NULL, NULL);
 	return (result);

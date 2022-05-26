@@ -40,13 +40,13 @@ t_astree	*COMMAND1(t_token_list **curtok)
 	tokenNode = TOKENLIST(curtok);
 	if (tokenNode == NULL)
 		return (NULL);
-	tokenNode->type = NODE_CMDPATH;
+	tokenNode->type = NODE_CMDPATH | ELIGIBLE_EXPANSION;
 	cmdNode = CMD(curtok);
 	if (cmdNode == NULL)
 		return (tokenNode);
 	if (cmdNode->type & NODE_REDIRECTION)
 	{
-		cmdNode->left->type = NODE_ARGUMENT;
+		cmdNode->left->type = NODE_ARGUMENT | ELIGIBLE_EXPANSION;
 		astree_right_node_last(tokenNode)->right = cmdNode->left;
 		cmdNode->left = NULL;
 		tmpNode = cmdNode->right;
@@ -78,7 +78,7 @@ t_astree	*COMMAND2(t_token_list **curtok, bool *nofile)
 		return (redirectionNode);
 	if (cmdNode->type & NODE_REDIRECTION)
 	{
-		cmdNode->left->type = NODE_ARGUMENT;
+		cmdNode->left->type = NODE_ARGUMENT | ELIGIBLE_EXPANSION;
 		astree_right_node_last(redirectionNode)->right = cmdNode->right;
 		cmdNode->right = NULL;
 		tmpNode = cmdNode->left;
@@ -86,7 +86,7 @@ t_astree	*COMMAND2(t_token_list **curtok, bool *nofile)
 		astree_delete(cmdNode);
 		cmdNode = tmpNode;
 	}
-	cmdNode->type = NODE_CMDPATH;
+	cmdNode->type = NODE_CMDPATH | ELIGIBLE_EXPANSION;
 	return (cmd_helper(NODE_REDIRECTION, cmdNode, redirectionNode));
 }
 

@@ -143,6 +143,7 @@ char	*general_expansion(char *data)
 	char		*content;
 	t_status	status;
 
+	printf("data: %s\n", data); // D
 	status = STATUS_GENERAL;
 	if (data == NULL)
 		msh_fatal("expamsion");
@@ -200,14 +201,17 @@ char	*heredoc_expansion(char *data)
 	return (ret);
 }
 
-void	expansion(t_astree *tree)
+void	expansion(t_astree *astree)
 {
-	if (tree == NULL)
+	if (astree == NULL)
 		return ;
-	if (tree->type & NODE_REDIRECT_D_IN)
-		free_set((void **)&tree->szData, heredoc_expansion(tree->szData));
-	else
-		free_set((void **)&tree->szData, general_expansion(tree->szData));
-	expansion(tree->right);
-	expansion(tree->left);
+	if (astree->type & ELIGIBLE_EXPANSION)
+	{
+		if (astree->type & NODE_REDIRECT_D_IN)
+			free_set((void **) &astree->szData, heredoc_expansion(astree->szData));
+		else
+			free_set((void **) &astree->szData, general_expansion(astree->szData));
+	}
+	expansion(astree->right);
+	expansion(astree->left);
 }
