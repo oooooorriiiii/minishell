@@ -30,19 +30,19 @@ t_astree	*REDIRECTION(t_token_list **curtok, bool *nofile)
 	save = *curtok;
 	*curtok = save;
 	node = REDIRECTION1(curtok, nofile);
-	if (node != NULL || nofile)
+	if (node != NULL || *nofile)
 		return (node);
 	*curtok = save;
 	node = REDIRECTION2(curtok, nofile);
-	if (node != NULL || nofile)
+	if (node != NULL || *nofile)
 		return (node);
 	*curtok = save;
 	node = REDIRECTION11(curtok, nofile);
-	if (node != NULL || nofile)
+	if (node != NULL || *nofile)
 		return (node);
 	*curtok = save;
 	node = REDIRECTION22(curtok, nofile);
-	if (node != NULL || nofile)
+	if (node != NULL || *nofile)
 		return (node);
 	return (NULL);
 }
