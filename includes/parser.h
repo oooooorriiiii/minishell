@@ -75,4 +75,6 @@ void			parse_malloc_errordeal(t_astree *buf1, char *buf2);
 
 void			print_syntax_tree(t_astree *tree);
 
+void			expansion(t_astree *tree);
+
 #endif

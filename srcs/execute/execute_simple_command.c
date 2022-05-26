@@ -51,11 +51,6 @@ void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
  * @param cmdNode
  * @param args
  *
- * t_astree *CMD(t_token_list **curtok)
- *
- * <command> ::= <simple command> <command>
- *             | <redirection list> <command>
- *             | <EMPTY>
  */
 void	execute_command(t_astree *cmdNode, t_cmd_args *args)
 {
