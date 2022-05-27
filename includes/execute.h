@@ -49,9 +49,11 @@ typedef struct cmd_args
 
 // -----------  execute.c
 void			execute_syntax_tree(t_astree *tree);
-void			execute_cmdline(t_astree *cmdline, t_cmd_args *args);
-void			execute_job(t_astree *jobNode, t_cmd_args *args);
-void			execute_pipeline(t_astree *t, t_cmd_args *args);
+void			execute_cmdline(t_astree *cmdline, t_cmd_args *args, \
+								int *status);
+void			execute_job(t_astree *jobNode, t_cmd_args *args, int *status);
+//void			execute_pipeline(t_astree *t, t_cmd_args *args);
+pid_t			execute_pipe(t_astree *astree, t_cmd_args *args);
 
 // -----------  expansion.c
 int				quote_skip_strlen(char *arguments, int *quote);
@@ -126,11 +128,14 @@ void			malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3);
 
 // -----------  add_path.c
 char			*add_path(t_cmd_args *args);
+char			*search_cmd_path(const char *cmd);
 bool			is_directory(const char *path);
 bool			is_executable(const char *path);
 bool			is_cmd_exist(const char *path, char **res);
 
 // -----------  path_get_elem.c
 char			**get_path_elem_in_envlist(const char *str);
+
+bool	check_builtin_in_astree(t_astree *astree);
 
 #endif

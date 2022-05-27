@@ -60,13 +60,14 @@ void	execute_command_struct2(t_cmd_args *args)
 	return ;
 }
 
+//printf("args->cmdpath[0]: %s\n", args->cmdpath[0]); // D
 void	execute_command_struct(t_cmd_args *args)
 {
-	if (args->cmdpath_argc < 0)
-		return ;
-	else if (args->cmdpath[0] == NULL)
-		execute_external_cmd(args);
-	else if (ft_strcmp(args->cmdpath[0], "echo") == 0)
+//	if (args->cmdpath_argc < 0)
+//		return ;
+//	else if (args->cmdpath[0] == NULL)
+//		execute_external_cmd(args);
+	if (ft_strcmp(args->cmdpath[0], "echo") == 0)
 	{
 		execute_echo(args);
 		return ;
@@ -87,3 +88,31 @@ void	execute_command_struct(t_cmd_args *args)
 		execute_external_cmd(args);
 	return ;
 }
+
+//void	execute_command_struct(char *path)
+//{
+//	if (path == NULL)
+//		return ;
+//	else if (args->cmdpath[0] == NULL)
+//		execute_external_cmd(args);
+//	else if (ft_strcmp(args->cmdpath[0], "echo") == 0)
+//	{
+//		execute_echo(args);
+//		return ;
+//	}
+//	else if (ft_strcmp(args->cmdpath[0], "cd") == 0)
+//	{
+//		execute_cd(args);
+//		return ;
+//	}
+//	else if (ft_strcmp(args->cmdpath[0], "pwd") == 0)
+//		return (execute_pwd(args));
+//	else if (!ft_strcmp(args->cmdpath[0], "export")
+//		|| !ft_strcmp(args->cmdpath[0], "unset")
+//		|| !ft_strcmp(args->cmdpath[0], "env")
+//		|| !ft_strcmp(args->cmdpath[0], "exit"))
+//		execute_command_struct2(args);
+//	else
+//		execute_external_cmd(args);
+//	return ;
+//}
