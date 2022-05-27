@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/execute.h"
+#include "execute.h"
 
 static void	print_env(t_envlist *envlist)
 {

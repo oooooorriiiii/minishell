@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_execute.c                                      :+:      :+:    :+:   */
+/*   cd_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 16:11:36 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/14 10:59:59 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/01/22 16:11:23 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/05/15 12:29:01 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/execute.h"
+#include "execute.h"
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <pwd.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <signal.h>
 
-void	execute_pwd(t_cmd_args *args)
+void	execute_cd(t_cmd_args *args)
 {
-	char		cwd[1024];
-
-	(void)args;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (args->cmdpath_argc == 1)
 	{
-		printf("%s\n", cwd);
+		chdir(get_env_value("HOME"));
 		g_minishell.exit_status = 0;
 	}
 	else
 	{
-		perror("getcwd() error");
-		g_minishell.exit_status = 1;
+		if (chdir(args->cmdpath[1]) != 0)
+		{
+			perror(args->cmdpath[1]);
+			g_minishell.exit_status = 1;
+		}
+		else
+			g_minishell.exit_status = 0;
 	}
-	return ;
 }
