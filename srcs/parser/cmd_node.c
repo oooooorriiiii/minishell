@@ -125,7 +125,7 @@ t_astree	*CMD(t_token_list **curtok)
 	if (node != NULL)
 		return (node);
 	*curtok = save;
-	node = COMMAND2(curtok,&nofile);
+	node = COMMAND2(curtok, &nofile);
 	if (node != NULL || nofile == true)
 		return (node);
 	*curtok = save;
