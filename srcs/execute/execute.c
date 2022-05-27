@@ -106,11 +106,16 @@ void	execute_job(t_astree *jobNode, t_cmd_args *args, int *status)
 	pid_t	pid;
 	pid_t	wait_pid;
 	int		child_status;
+	int		fd[2];
 
 	wait_pid = 0;
 	pid = -1;
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
 	signal_init(signal_child_process, signal_child_process, NULL);
 	job_processer(jobNode, args, &pid, status);
+	dup2(fd[0], STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
 //	if (jobNode == NULL)
 //		return ;
 //	if (jobNode->type == NODE_PIPE)
