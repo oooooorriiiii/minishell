@@ -17,11 +17,9 @@ t_exec_result	redirection_out(char *filename)
 {
 	int	fd;
 	int	oflag;
-	int	mode;
 
 	oflag = O_WRONLY | O_CREAT | O_TRUNC;
-	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	fd = open(filename, oflag, mode);
+	fd = open(filename, oflag, 0644);
 	open_error_handle(fd);
 	if (fd == -1)
 		return (e_failure);
@@ -34,11 +32,9 @@ t_exec_result	redirection_d_out(char *filename)
 {
 	int	fd;
 	int	oflag;
-	int	mode;
 
 	oflag = O_WRONLY | O_CREAT | O_APPEND;
-	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	fd = open(filename, oflag, mode);
+	fd = open(filename, oflag, 0644);
 	open_error_handle(fd);
 	if (fd == -1)
 		return (e_failure);
