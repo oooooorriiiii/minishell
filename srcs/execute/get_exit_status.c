@@ -1,6 +1,6 @@
 #include "execute.h"
 
-int		get_exit_status(int status)
+int	get_exit_status(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
