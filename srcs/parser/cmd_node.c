@@ -37,7 +37,7 @@ t_astree	*COMMAND1(t_token_list **curtok, bool *nofile)
 	t_astree	*cmdNode;
 	t_astree	*tmpNode;
 
-	tokenNode = TOKENLIST(curtok);
+	tokenNode = TOKENLIST(curtok, nofile);
 	if (tokenNode == NULL)
 		return (NULL);
 	tokenNode->type = NODE_CMDPATH | ELIGIBLE_EXPANSION;
@@ -120,7 +120,7 @@ t_astree	*CMD(t_token_list **curtok, bool *nofile)
 	save = *curtok;
 	*curtok = save;
 	node = COMMAND1(curtok, nofile);
-	if (node != NULL)
+	if (node != NULL || *nofile == true)
 		return (node);
 	*curtok = save;
 	node = COMMAND2(curtok, nofile);

@@ -20,19 +20,19 @@
  * <token list> ::= <token> <token list> -> TOKENLIST1
  *                | <token>              -> TOKENLIST2
  */
-t_astree	*TOKENLIST(t_token_list **curtok)
+t_astree	*TOKENLIST(t_token_list **curtok, bool *nofile)
 {
 	t_token_list		*save;
 	t_astree			*node;
 
 	save = *curtok;
 	*curtok = save;
-	node = TOKENLIST1(curtok);
-	if (node != NULL)
+	node = TOKENLIST1(curtok, nofile);
+	if (node != NULL || *nofile == true)
 		return (node);
 	*curtok = save;
 	node = TOKENLIST2(curtok);
-	if (node != NULL)
+	if (node != NULL || *nofile == true)
 		return (node);
 	return (NULL);
 }
@@ -44,15 +44,15 @@ t_astree	*TOKENLIST(t_token_list **curtok)
  *
  * <token> <token list>
  */
-t_astree	*TOKENLIST1(t_token_list **curtok)
+t_astree	*TOKENLIST1(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*tokenListNode;
 	t_astree	*result;
 	char		*arg;
 
-	if (!term(TOKEN, &arg, curtok))
+	if (!trim_alloc(curtok, &arg))
 		return (NULL);
-	tokenListNode = TOKENLIST(curtok);
+	tokenListNode = TOKENLIST(curtok, nofile);
 	if (tokenListNode == NULL)
 	{
 		free(arg);
@@ -78,7 +78,7 @@ t_astree	*TOKENLIST2(t_token_list **curtok)
 	t_astree	*result;
 	char		*arg;
 
-	if (!term(TOKEN, &arg, curtok))
+	if (!trim_alloc(curtok, &arg))
 		return (NULL);
 	result = malloc(sizeof(*result));
 	parse_malloc_errordeal(result, NULL);

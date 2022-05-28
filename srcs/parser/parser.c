@@ -25,7 +25,7 @@ t_astree	*JOB(t_token_list **curtok, bool *nofile)
 	save = *curtok;
 	*curtok = save;
 	node = JOB1(curtok, nofile);
-	if (node != NULL)
+	if (node != NULL || *nofile)
 		return (node);
 	*curtok = save;
 	node = JOB2(curtok, nofile);
@@ -46,7 +46,7 @@ t_astree	*JOB1(t_token_list **curtok, bool *nofile)
 	cmdNode = CMD(curtok, nofile);
 	if (cmdNode == NULL)
 		return (NULL);
-	if (!term(CHAR_PIPE, NULL, curtok))
+	if (!trim_x(curtok, CHAR_PIPE))
 	{
 		astree_delete(cmdNode);
 		return (NULL);
@@ -54,6 +54,7 @@ t_astree	*JOB1(t_token_list **curtok, bool *nofile)
 	jobNode = JOB(curtok, nofile);
 	if (jobNode == NULL)
 	{
+		*nofile = true;
 		astree_delete(cmdNode);
 		return (NULL);
 	}

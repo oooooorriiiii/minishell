@@ -59,12 +59,16 @@ t_astree		*REDIRECTION2(t_token_list **curtok, bool *nofile);
 t_astree		*REDIRECTION11(t_token_list **curtok, bool *nofile);
 t_astree		*REDIRECTION22(t_token_list **curtok, bool *nofile);
 
-t_astree		*TOKENLIST(t_token_list **curtok);
-t_astree		*TOKENLIST1(t_token_list **curtok);
+t_astree		*TOKENLIST(t_token_list **curtok, bool *nofile);
+t_astree		*TOKENLIST1(t_token_list **curtok, bool *nofile);
 t_astree		*TOKENLIST2(t_token_list **curtok);
 
 int				parse(t_lexer *lexbuf, t_astree **syntax_tree);
 bool			term(int toketype, char **bufferptr, t_token_list **curtok);
+
+bool			trim_x(t_token_list **curtok, t_token_type type);
+bool			trim_alloc(t_token_list **curtok, char **bufptr);
+
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);
 void			astreeset_type(t_astree	*node, t_node_type nodetype);

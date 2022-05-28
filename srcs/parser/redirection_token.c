@@ -25,9 +25,9 @@ t_astree	*REDIRECTION1(t_token_list **curtok, bool *nofile)
 	t_astree	*result;
 	char		*filename;
 
-	if (!term(CHAR_LESSER, NULL, curtok))
+	if (!trim_x(curtok, CHAR_LESSER))
 		return (NULL);
-	if (!term(TOKEN, &filename, curtok))
+	if (!trim_alloc(curtok, &filename))
 	{
 		*nofile = true;
 		return (NULL);
@@ -53,9 +53,9 @@ t_astree	*REDIRECTION2(t_token_list **curtok, bool *nofile)
 	t_astree	*result;
 	char		*filename;
 
-	if (!term(CHAR_GREATER, NULL, curtok))
+	if (!trim_x(curtok, CHAR_GREATER))
 		return (NULL);
-	if (!term(TOKEN, &filename, curtok))
+	if (!trim_alloc(curtok, &filename))
 	{
 		*nofile = true;
 		return (NULL);
@@ -81,9 +81,9 @@ t_astree	*REDIRECTION11(t_token_list **curtok, bool *nofile)
 	t_astree	*result;
 	char		*filename;
 
-	if (!term(CHAR_DBLLESSER, NULL, curtok))
+	if (!trim_x(curtok, CHAR_DBLLESSER))
 		return (NULL);
-	if (!term(TOKEN, &filename, curtok))
+	if (!trim_alloc(curtok, &filename))
 	{
 		*nofile = true;
 		return (NULL);
@@ -109,9 +109,9 @@ t_astree	*REDIRECTION22(t_token_list **curtok, bool *nofile)
 	t_astree	*result;
 	char		*filename;
 
-	if (!term(CHAR_DBLGREATER, NULL, curtok))
+	if (!trim_x(curtok, CHAR_DBLGREATER))
 		return (NULL);
-	if (!term(TOKEN, &filename, curtok))
+	if (!trim_alloc(curtok, &filename))
 	{
 		*nofile = true;
 		return (NULL);
