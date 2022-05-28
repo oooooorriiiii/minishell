@@ -48,6 +48,12 @@ void
 	}
 }
 
+void	job_err_exit(char *str)
+{
+	perror(str);
+	exit(1);
+}
+
 /**
  *
  * @param jobNode
@@ -76,10 +82,7 @@ void	execute_job(t_astree *jobNode, t_cmd_args *args, int *status)
 			*status = child_status;
 	}
 	if (errno != ECHILD)
-	{
-		perror("job error");
-		exit(1);
-	}
+		job_err_exit("job error");
 	errno = 0;
 	signal_init(signal_handler_prompt, SIG_IGN, NULL);
 }
