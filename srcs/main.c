@@ -68,7 +68,6 @@ int	main(void)
 	t_astree	*ast;
 	char		*input;
 
-	rl_outstream = stderr;
 	init(&input, &lex_list, &ast);
 	minishell_loop(&input, &lex_list, &ast);
 	return (0);
