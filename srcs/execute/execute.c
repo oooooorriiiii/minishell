@@ -31,7 +31,6 @@ void	execute_syntax_tree(t_astree *tree)
 	t_cmd_args	*args;
 
 	args = NULL;
-	g_minishell.exit_status = 0;
 	status = 0;
 	args = (t_cmd_args *)malloc(sizeof(t_cmd_args));
 	malloc_error_exec(NULL, NULL, args);

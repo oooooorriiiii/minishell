@@ -31,7 +31,7 @@ t_astree	*cmd_helper(t_node_type node_type, t_astree *l, t_astree *r)
  *
  * <simple command> <command>
  */
-t_astree	*COMMAND1(t_token_list **curtok)
+t_astree	*COMMAND1(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*tokenNode;
 	t_astree	*cmdNode;
@@ -41,7 +41,7 @@ t_astree	*COMMAND1(t_token_list **curtok)
 	if (tokenNode == NULL)
 		return (NULL);
 	tokenNode->type = NODE_CMDPATH | ELIGIBLE_EXPANSION;
-	cmdNode = CMD(curtok);
+	cmdNode = CMD(curtok, nofile);
 	if (cmdNode == NULL)
 		return (tokenNode);
 	if (cmdNode->type & NODE_REDIRECTION)
@@ -73,7 +73,7 @@ t_astree	*COMMAND2(t_token_list **curtok, bool *nofile)
 	redirectionNode = REDIRECTION_LIST(curtok, nofile);
 	if (redirectionNode == NULL)
 		return (NULL);
-	cmdNode = CMD(curtok);
+	cmdNode = CMD(curtok, nofile);
 	if (cmdNode == NULL)
 		return (redirectionNode);
 	if (cmdNode->type & NODE_REDIRECTION)
@@ -112,21 +112,19 @@ t_astree	*COMMAND3(t_token_list **curtok)
  *             | <redirection list> <command> -> COMMAND2
  *             | <EMPTY>                      -> COMMAND3
  */
-t_astree	*CMD(t_token_list **curtok)
+t_astree	*CMD(t_token_list **curtok, bool *nofile)
 {
 	t_token_list	*save;
 	t_astree		*node;
-	bool			nofile;
 
-	nofile = false;
 	save = *curtok;
 	*curtok = save;
-	node = COMMAND1(curtok);
+	node = COMMAND1(curtok, nofile);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
-	node = COMMAND2(curtok, &nofile);
-	if (node != NULL || nofile == true)
+	node = COMMAND2(curtok, nofile);
+	if (node != NULL || *nofile == true)
 		return (node);
 	*curtok = save;
 	return (COMMAND3(curtok));

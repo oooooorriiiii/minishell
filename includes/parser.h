@@ -43,13 +43,13 @@ typedef struct astree
 	struct astree	*right;
 }				t_astree;
 
-t_astree		*CMDLINE(t_token_list **curtok);
+t_astree		*CMDLINE(t_token_list **curtok, bool *nofile);
 
-t_astree		*JOB(t_token_list **curtok);
-t_astree		*JOB1(t_token_list **curtok);
-t_astree		*JOB2(t_token_list **curtok);
+t_astree		*JOB(t_token_list **curtok, bool *nofile);
+t_astree		*JOB1(t_token_list **curtok, bool *nofile);
+t_astree		*JOB2(t_token_list **curtok, bool *nofile);
 
-t_astree		*CMD(t_token_list **curtok);
+t_astree		*CMD(t_token_list **curtok, bool *nofile);
 
 t_astree		*REDIRECTION_LIST(t_token_list **curtok, bool *nofile);
 t_astree		*REDIRECTION(t_token_list **curtok, bool *nofile);

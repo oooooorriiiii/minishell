@@ -12,23 +12,23 @@
 
 #include "../includes/parser.h"
 
-t_astree	*CMDLINE(t_token_list **curtok)
+t_astree	*CMDLINE(t_token_list **curtok, bool *nofile)
 {
-	return (JOB(curtok));
+	return (JOB(curtok, nofile));
 }
 
-t_astree	*JOB(t_token_list **curtok)
+t_astree	*JOB(t_token_list **curtok, bool *nofile)
 {
 	t_token_list		*save;
 	t_astree			*node;
 
 	save = *curtok;
 	*curtok = save;
-	node = JOB1(curtok);
+	node = JOB1(curtok, nofile);
 	if (node != NULL)
 		return (node);
 	*curtok = save;
-	node = JOB2(curtok);
+	node = JOB2(curtok, nofile);
 	if (node != NULL)
 		return (node);
 	return (NULL);
@@ -37,13 +37,13 @@ t_astree	*JOB(t_token_list **curtok)
 /**
 * <pipeline> '|' <newline_list> <pipeline>
 */
-t_astree	*JOB1(t_token_list **curtok)
+t_astree	*JOB1(t_token_list **curtok, bool *nofile)
 {
 	t_astree	*cmdNode;
 	t_astree	*jobNode;
 	t_astree	*result;
 
-	cmdNode = CMD(curtok);
+	cmdNode = CMD(curtok, nofile);
 	if (cmdNode == NULL)
 		return (NULL);
 	if (!term(CHAR_PIPE, NULL, curtok))
@@ -51,7 +51,7 @@ t_astree	*JOB1(t_token_list **curtok)
 		astree_delete(cmdNode);
 		return (NULL);
 	}
-	jobNode = JOB(curtok);
+	jobNode = JOB(curtok, nofile);
 	if (jobNode == NULL)
 	{
 		astree_delete(cmdNode);
@@ -71,9 +71,9 @@ t_astree	*JOB1(t_token_list **curtok)
  *
  * <command>
  */
-t_astree	*JOB2(t_token_list **curtok)
+t_astree	*JOB2(t_token_list **curtok, bool *nofile)
 {
-	return (CMD(curtok));
+	return (CMD(curtok, nofile));
 }
 
 /**
@@ -133,7 +133,9 @@ t_astree	*JOB2(t_token_list **curtok)
 int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 {
 	t_token_list	*curtok;
+	bool			nofile;
 
+	nofile = false;
 	if (lexbuf == NULL)
 	{
 		printf("error: lexbuf == NULL\n");
@@ -147,10 +149,10 @@ int	parse(t_lexer *lexbuf, t_astree **syntax_tree)
 		return (-1);
 	}
 	curtok = lexbuf->list;
-	*syntax_tree = CMDLINE(&curtok);
-	if (curtok != NULL && curtok->type != 0)
+	*syntax_tree = CMDLINE(&curtok, &nofile);
+	if ((curtok != NULL && curtok->type != 0) || nofile == true)
 	{
-		printf("Syntax Error near: %s\n", curtok->val);
+		ft_putstr_fd("syntax error\n", STDERR_FILENO);
 		g_minishell.exit_status = 258;
 		return (-1);
 	}
