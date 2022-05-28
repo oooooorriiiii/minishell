@@ -101,11 +101,6 @@ void	execute_builtin(char *cmd, char **arg_list)
 	}
 }
 
-//void	execute_builtin_cmd(char *cmd, char **arg_list)
-//{
-//	execute_command_struct();
-//}
-
 void	listprint(char **list) // D
 {
 	int	i;
