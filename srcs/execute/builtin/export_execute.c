@@ -117,5 +117,4 @@ void	execute_export(t_cmd_args *args)
 	else
 		status = store_env(args->cmdpath);
 	g_minishell.exit_status = status;
-	return ;
 }

@@ -89,7 +89,7 @@ void
 			if (*pid == 0)
 			{
 				execute_command(jobNode, args);
-				exit(0);
+				exit(g_minishell.exit_status);
 			}
 		}
 	}
@@ -146,15 +146,29 @@ void	execute_cmdline(t_astree *cmdline, t_cmd_args *args, int *status)
 	execute_job(cmdline, args, status);
 }
 
+int		get_status(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return (WTERMSIG(status) + 128);
+	else if (WIFSTOPPED(status))
+		return (WSTOPSIG(status));
+	return (1);
+}
+
 void	execute_syntax_tree(t_astree *tree)
 {
 	int			status;
 	t_cmd_args	*args;
 
 	args = NULL;
+	g_minishell.exit_status = 0;
+	status = 0;
 	args = (t_cmd_args *)malloc(sizeof(t_cmd_args));
 	malloc_error_exec(NULL, NULL, args);
 	init_struct(args);
 	execute_cmdline(tree, args, &status);
+	g_minishell.exit_status = get_status(status);
 	free(args);
 }

@@ -32,5 +32,4 @@ void	execute_unset(t_cmd_args *args)
 		i++;
 	}
 	g_minishell.exit_status = status;
-	return ;
 }

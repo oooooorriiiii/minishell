@@ -15,6 +15,18 @@
 #include "utils.h"
 #include "msh_error.h"
 
+/**
+ *
+ * @param path
+ * @return
+ */
+void	command_err_exit(char *path, t_cmd_args *args)
+{
+	ft_putstr_fd(path, STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	g_minishell.exit_status = 127;
+}
+
 void	execute_external_cmd(t_cmd_args *args)
 {
 	char	**env_strs;
@@ -30,7 +42,7 @@ void	execute_external_cmd(t_cmd_args *args)
 	path = add_path(args);
 	ret = execve(path, args->cmdpath, env_strs);
 	if (ret < 0)
-		msh_fatal("execve error: ");
+		command_err_exit(args->cmdpath[0], args);
 	free_str(&path);
 	free_str_arr(&env_strs);
 }
