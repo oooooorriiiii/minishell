@@ -75,10 +75,6 @@ void	execute_command_struct2(t_cmd_args *args)
 //printf("args->cmdpath[0]: %s\n", args->cmdpath[0]); // D
 void	execute_command_struct(t_cmd_args *args)
 {
-//	if (args->cmdpath_argc < 0)
-//		return ;
-//	else if (args->cmdpath[0] == NULL)
-//		execute_external_cmd(args);
 	if (ft_strcmp(args->cmdpath[0], "echo") == 0)
 	{
 		execute_echo(args);
