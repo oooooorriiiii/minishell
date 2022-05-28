@@ -60,6 +60,7 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/execute/expansion_utils2.c \
 				$(SRCS_DIR)/execute/expansion_utils3.c \
 				$(SRCS_DIR)/execute/expansion_utils4.c \
+				$(SRCS_DIR)/execute/get_exit_status.c \
 				$(SRCS_DIR)/execute/init_struct.c \
 				$(SRCS_DIR)/execute/parent.c \
 				$(SRCS_DIR)/execute/path_add.c \

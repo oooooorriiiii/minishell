@@ -136,6 +136,9 @@ bool			is_cmd_exist(const char *path, char **res);
 // -----------  path_get_elem.c
 char			**get_path_elem_in_envlist(const char *str);
 
+// -----------  get_exit_status.c
+int				get_exit_status(int status);
+
 bool	check_builtin_in_astree(t_astree *astree);
 
 #endif
