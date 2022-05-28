@@ -61,7 +61,7 @@ t_exec_result	execute_redirection(t_astree *cmdNode, t_cmd_args *args)
 
 	(void)args;
 	ret = e_success;
-	while (cmdNode && (cmdNode->type & NODE_REDIRECTION_LIST))
+	while (cmdNode && cmdNode->type & NODE_REDIRECTION_LIST)
 	{
 		if (cmdNode->left->type & NODE_REDIRECT_IN)
 			ret = redirection_in(cmdNode->left->szData);
