@@ -42,32 +42,38 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/parser/simplecmd_node.c \
 				$(SRCS_DIR)/parser/redirection.c \
 				$(SRCS_DIR)/parser/redirection_token.c \
-				$(SRCS_DIR)/execute/cd_execute.c \
+				$(SRCS_DIR)/expansion/expansion.c \
+				$(SRCS_DIR)/expansion/expansion_general.c \
+				$(SRCS_DIR)/expansion/expansion_utils.c \
 				$(SRCS_DIR)/execute/child.c \
 				$(SRCS_DIR)/execute/dupfor_redirection.c \
 				$(SRCS_DIR)/execute/dupfor_redirection_utils.c \
-				$(SRCS_DIR)/execute/echo_execute.c \
-				$(SRCS_DIR)/execute/env_execute.c \
 				$(SRCS_DIR)/execute/error_deal_execute.c \
 				$(SRCS_DIR)/execute/execute_command_struct.c \
+				$(SRCS_DIR)/execute/execute_job.c \
 				$(SRCS_DIR)/execute/execute_simple_command.c \
+				$(SRCS_DIR)/execute/execute_redirection.c \
 				$(SRCS_DIR)/execute/execute_utils.c \
 				$(SRCS_DIR)/execute/execute_utils2.c \
 				$(SRCS_DIR)/execute/execute.c \
-				$(SRCS_DIR)/execute/exit_execute.c \
 				$(SRCS_DIR)/execute/expansion.c \
 				$(SRCS_DIR)/execute/expansion_utils.c \
 				$(SRCS_DIR)/execute/expansion_utils2.c \
 				$(SRCS_DIR)/execute/expansion_utils3.c \
 				$(SRCS_DIR)/execute/expansion_utils4.c \
-				$(SRCS_DIR)/execute/export_execute.c \
+				$(SRCS_DIR)/execute/get_exit_status.c \
 				$(SRCS_DIR)/execute/init_struct.c \
 				$(SRCS_DIR)/execute/parent.c \
 				$(SRCS_DIR)/execute/path_add.c \
 				$(SRCS_DIR)/execute/path_get_elem.c \
 				$(SRCS_DIR)/execute/path_utils.c \
-				$(SRCS_DIR)/execute/pwd_execute.c \
-				$(SRCS_DIR)/execute/unset_execute.c
+				$(SRCS_DIR)/execute/builtin/echo_execute.c \
+				$(SRCS_DIR)/execute/builtin/env_execute.c \
+				$(SRCS_DIR)/execute/builtin/exit_execute.c \
+				$(SRCS_DIR)/execute/builtin/export_execute.c \
+				$(SRCS_DIR)/execute/builtin/cd_execute.c \
+				$(SRCS_DIR)/execute/builtin/pwd_execute.c \
+				$(SRCS_DIR)/execute/builtin/unset_execute.c
 
 OBJROOT		=	obj
 OBJS		=	$(addprefix $(OBJROOT)/, $(SRCS:.c=.o))

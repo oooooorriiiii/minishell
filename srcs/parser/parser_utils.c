@@ -40,3 +40,28 @@ bool	term(int toketype, char **bufferptr, t_token_list **curtok)
 	*curtok = (*curtok)->next;
 	return (false);
 }
+
+bool	trim_x(t_token_list **curtok, t_token_type type)
+{
+	if (*curtok == NULL)
+		return (false);
+	if ((*curtok)->type == type)
+	{
+		*curtok = (*curtok)->next;
+		return (true);
+	}
+	return (false);
+}
+
+bool	trim_alloc(t_token_list **curtok, char **bufptr)
+{
+	if (*curtok == NULL)
+		return (false);
+	if ((*curtok)->type == TOKEN)
+	{
+		*bufptr = ft_strdup((*curtok)->val);
+		*curtok = (*curtok)->next;
+		return (true);
+	}
+	return (false);
+}

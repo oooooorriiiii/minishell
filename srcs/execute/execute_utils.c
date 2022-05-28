@@ -34,8 +34,8 @@ int	is_need_expansion(t_astree *ast)
 	int	i;
 
 	i = 0;
-	while (ast != NULL && (ast->type == NODE_ARGUMENT
-			|| ast->type == NODE_CMDPATH))
+	while (ast != NULL && (ast->type & NODE_ARGUMENT
+			|| ast->type & NODE_CMDPATH))
 	{
 		while (ast->szData[i])
 		{
@@ -57,16 +57,16 @@ void	just_strcpy(t_cmd_args *args, t_astree *simplecmdNode)
 
 	i = 0;
 	argNode = simplecmdNode;
-	while (argNode != NULL && (argNode->type == NODE_ARGUMENT
-			|| argNode->type == NODE_CMDPATH))
+	while (argNode != NULL && (argNode->type & NODE_ARGUMENT
+			|| argNode->type & NODE_CMDPATH))
 	{
 		argNode = argNode->right;
 		i++;
 	}
 	args->cmdpath = functional_malloc(i);
 	i = 0;
-	while (simplecmdNode != NULL && (simplecmdNode->type == NODE_ARGUMENT
-			|| simplecmdNode->type == NODE_CMDPATH))
+	while (simplecmdNode != NULL && (simplecmdNode->type & NODE_ARGUMENT
+			|| simplecmdNode->type & NODE_CMDPATH))
 	{
 		args->cmdpath[i] = (char *)malloc(ft_strlen(simplecmdNode->szData) + 1);
 		malloc_error_exec(args->cmdpath[i], NULL, NULL);

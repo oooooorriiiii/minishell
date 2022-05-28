@@ -32,7 +32,7 @@ typedef enum e_node_type
 	NODE_REDIRECT_D_OUT		= (1 << 6),
 	NODE_CMDPATH			= (1 << 7),
 	NODE_ARGUMENT			= (1 << 8),
-	NODE_DATA				= (1 << 9),
+	ELIGIBLE_EXPANSION		= (1 << 9),
 }		t_node_type;
 
 typedef struct astree
@@ -43,28 +43,32 @@ typedef struct astree
 	struct astree	*right;
 }				t_astree;
 
-t_astree		*CMDLINE(t_token_list **curtok);
+t_astree		*CMDLINE(t_token_list **curtok, bool *nofile);
 
-t_astree		*JOB(t_token_list **curtok);
-t_astree		*JOB1(t_token_list **curtok);
-t_astree		*JOB2(t_token_list **curtok);
+t_astree		*JOB(t_token_list **curtok, bool *nofile);
+t_astree		*JOB1(t_token_list **curtok, bool *nofile);
+t_astree		*JOB2(t_token_list **curtok, bool *nofile);
 
-t_astree		*CMD(t_token_list **curtok);
+t_astree		*CMD(t_token_list **curtok, bool *nofile);
 
-t_astree		*REDIRECTION_LIST(t_token_list **curtok);
-t_astree		*REDIRECTION(t_token_list **curtok);
+t_astree		*REDIRECTION_LIST(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION(t_token_list **curtok, bool *nofile);
 
-t_astree		*REDIRECTION1(t_token_list **curtok);
-t_astree		*REDIRECTION2(t_token_list **curtok);
-t_astree		*REDIRECTION11(t_token_list **curtok);
-t_astree		*REDIRECTION22(t_token_list **curtok);
+t_astree		*REDIRECTION1(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION2(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION11(t_token_list **curtok, bool *nofile);
+t_astree		*REDIRECTION22(t_token_list **curtok, bool *nofile);
 
-t_astree		*TOKENLIST(t_token_list **curtok);
-t_astree		*TOKENLIST1(t_token_list **curtok);
+t_astree		*TOKENLIST(t_token_list **curtok, bool *nofile);
+t_astree		*TOKENLIST1(t_token_list **curtok, bool *nofile);
 t_astree		*TOKENLIST2(t_token_list **curtok);
 
 int				parse(t_lexer *lexbuf, t_astree **syntax_tree);
 bool			term(int toketype, char **bufferptr, t_token_list **curtok);
+
+bool			trim_x(t_token_list **curtok, t_token_type type);
+bool			trim_alloc(t_token_list **curtok, char **bufptr);
+
 void			astree_attach(t_astree	*root,
 					t_astree	*leftNode, t_astree	*rightNode);
 void			astreeset_type(t_astree	*node, t_node_type nodetype);
@@ -74,5 +78,7 @@ t_astree		*astree_right_node_last(t_astree *node);
 void			parse_malloc_errordeal(t_astree *buf1, char *buf2);
 
 void			print_syntax_tree(t_astree *tree);
+
+void			expansion(t_astree *astree);
 
 #endif

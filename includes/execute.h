@@ -27,6 +27,12 @@
 # define SINGLE_Q 1
 # define DOUBLE_Q 10
 
+typedef enum e_exec_result
+{
+	e_success,
+	e_failure,
+}			t_exec_result;
+
 typedef struct cmd_args
 {
 	bool		stdin_pipe;
@@ -43,9 +49,11 @@ typedef struct cmd_args
 
 // -----------  execute.c
 void			execute_syntax_tree(t_astree *tree);
-void			execute_cmdline(t_astree *cmdline, t_cmd_args *args);
-void			execute_job(t_astree *jobNode, t_cmd_args *args);
-void			execute_pipeline(t_astree *t, t_cmd_args *args);
+void			execute_cmdline(t_astree *cmdline, t_cmd_args *args, \
+								int *status);
+void			execute_job(t_astree *jobNode, t_cmd_args *args, int *status);
+//void			execute_pipeline(t_astree *t, t_cmd_args *args);
+pid_t			execute_pipe(t_astree *astree, t_cmd_args *args);
 
 // -----------  expansion.c
 int				quote_skip_strlen(char *arguments, int *quote);
@@ -108,16 +116,29 @@ void			connect_pipe(int pipefd[2], int fd);
 void			dupfor_redirection(t_cmd_args *args, int *backup);
 void			close_fdbackup(t_cmd_args *args, int *backup);
 
+// -----------  dupfor_redirection.c
+void			open_error_handle(int fd);
+t_exec_result	handle_heredoc(char *data);
+
+// -----------  execute_redirection.c
+t_exec_result	execute_redirection(t_astree *cmdNode, t_cmd_args *args);
+
 // -----------  error_execute.c
 void			malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3);
 
 // -----------  add_path.c
 char			*add_path(t_cmd_args *args);
+char			*search_cmd_path(const char *cmd);
 bool			is_directory(const char *path);
 bool			is_executable(const char *path);
 bool			is_cmd_exist(const char *path, char **res);
 
 // -----------  path_get_elem.c
 char			**get_path_elem_in_envlist(const char *str);
+
+// -----------  get_exit_status.c
+int				get_exit_status(int status);
+
+bool			check_builtin_in_astree(t_astree *astree);
 
 #endif

@@ -53,7 +53,10 @@ void	minishell_loop(char **input, t_lexer **lex_list, t_astree **ast)
 			continue ;
 		}
 		if (parse(*lex_list, ast) != -1)
+		{
+			expansion(*ast);
 			execute_syntax_tree(*ast);
+		}
 		lexer_free(lex_list);
 		astree_delete(*ast);
 	}
@@ -65,7 +68,6 @@ int	main(void)
 	t_astree	*ast;
 	char		*input;
 
-	rl_outstream = stderr;
 	init(&input, &lex_list, &ast);
 	minishell_loop(&input, &lex_list, &ast);
 	return (0);

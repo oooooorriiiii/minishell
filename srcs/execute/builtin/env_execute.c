@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/execute.h"
+#include "execute.h"
 
 static void	print_env(t_envlist *envlist)
 {
@@ -21,7 +21,6 @@ static void	print_env(t_envlist *envlist)
 	printf("%s=%s\n", envlist->key, envlist->value);
 }
 
-// TODO: return status ??
 //	printf(" execute_env \n"); // DEBUG
 //	print_envlist(envlist);
 void	execute_env(t_cmd_args *args)
@@ -35,5 +34,5 @@ void	execute_env(t_cmd_args *args)
 		print_env(envlist);
 		envlist = envlist->next;
 	}
-	return ;
+	g_minishell.exit_status = 0;
 }
