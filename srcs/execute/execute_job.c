@@ -25,7 +25,7 @@ pid_t	execute_pipe(t_astree *astree, t_cmd_args *args)
 }
 
 void
-job_processer(t_astree *jobNode, t_cmd_args *args, pid_t *pid, int *status)
+	job_processer(t_astree *jobNode, t_cmd_args *args, pid_t *pid, int *status)
 {
 	if (jobNode->type & NODE_PIPE)
 	{
