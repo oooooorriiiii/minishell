@@ -20,7 +20,7 @@
  * @param path
  * @return
  */
-void	command_err_exit(char *path, t_cmd_args *args)
+void	command_err_exit(char *path)
 {
 	ft_putstr_fd(path, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
@@ -42,7 +42,7 @@ void	execute_external_cmd(t_cmd_args *args)
 	path = add_path(args);
 	ret = execve(path, args->cmdpath, env_strs);
 	if (ret < 0)
-		command_err_exit(args->cmdpath[0], args);
+		command_err_exit(args->cmdpath[0]);
 	free_str(&path);
 	free_str_arr(&env_strs);
 }
