@@ -177,26 +177,4 @@ void	execute_command(t_astree *cmdNode, t_cmd_args *args)
 	}
 	else
 		execute_simplecmd(cmdNode, args);
-//	if (cmdNode->type == NODE_REDIRECT_IN)
-//	{
-//		args->redirect_in = cmdNode->szData;
-//		execute_simple_command(cmdNode->right, args);
-//	}
-//	if (cmdNode->type == NODE_REDIRECT_OUT)
-//	{
-//		args->redirect_out = cmdNode->szData;
-//		execute_simple_command(cmdNode->right, args);
-//	}
-//	if (cmdNode->type == NODE_REDIRECT_D_IN)
-//	{
-//		args->redirect_double_in = cmdNode->szData;
-//		execute_simple_command(cmdNode->right, args);
-//	}
-//	if (cmdNode->type == NODE_REDIRECT_D_OUT)
-//	{
-//		args->redirect_double_out = cmdNode->szData;
-//		execute_simple_command(cmdNode->right, args);
-//	}
-//	if (cmdNode->type == NODE_CMDPATH)
-//		execute_simple_command(cmdNode, args);
 }
