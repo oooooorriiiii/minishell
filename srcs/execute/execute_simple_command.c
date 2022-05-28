@@ -92,30 +92,6 @@ char	**get_arg_list(t_astree *astree, t_cmd_args *args)
 	return (ret);
 }
 
-void	execute_builtin(char *cmd, char **arg_list)
-{
-	(void)arg_list;
-	if (!ft_strcmp(cmd, "echo"))
-	{
-		puts("YA-----------------");
-	}
-}
-
-void	listprint(char **list) // D
-{
-	int	i;
-
-	puts("List Print");
-	if (list == NULL)
-		return ;
-	i = 0;
-	while (list[i] != NULL)
-	{
-		printf("[%d]: %s\n", i, list[i]);
-		i++;
-	}
-}
-
 //printf("astree->szData: %s\n", astree->szData); // D
 //listprint(args->cmdpath); // D
 //printf("args->cmdpath_argc: %d\n", args->cmdpath_argc); // D
@@ -138,27 +114,6 @@ void	execute_simplecmd(t_astree *astree, t_cmd_args *args)
 	free_str_arr(&args->cmdpath);
 }
 
-void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
-{
-	char	*path;
-
-	init_command_struct(simple_cmd_node, args);
-	if (!check_builtin(args->cmdpath[0]))
-	{
-		path = add_path(args);
-		if (access(path, X_OK) == -1)
-			g_minishell.exit_status = 126;
-		if (!path)
-			g_minishell.exit_status = 127;
-		free_str(&path);
-	}
-	if (joudge_process(args) == 1)
-		execute_in_parent(args);
-	else
-		execute_in_child(args);
-	destroy_command_struct(args);
-}
-
 /**
  *
  * @param cmdNode
@@ -178,3 +133,38 @@ void	execute_command(t_astree *cmdNode, t_cmd_args *args)
 	else
 		execute_simplecmd(cmdNode, args);
 }
+
+//void	execute_simple_command(t_astree *simple_cmd_node, t_cmd_args *args)
+//{
+//	char	*path;
+//
+//	init_command_struct(simple_cmd_node, args);
+//	if (!check_builtin(args->cmdpath[0]))
+//	{
+//		path = add_path(args);
+//		if (access(path, X_OK) == -1)
+//			g_minishell.exit_status = 126;
+//		if (!path)
+//			g_minishell.exit_status = 127;
+//		free_str(&path);
+//	}
+//	if (joudge_process(args) == 1)
+//		execute_in_parent(args);
+//	else
+//		execute_in_child(args);
+//	destroy_command_struct(args);
+//}
+//void	listprint(char **list) // D
+//{
+//	int	i;
+//
+//	puts("List Print");
+//	if (list == NULL)
+//		return ;
+//	i = 0;
+//	while (list[i] != NULL)
+//	{
+//		printf("[%d]: %s\n", i, list[i]);
+//		i++;
+//	}
+//}
