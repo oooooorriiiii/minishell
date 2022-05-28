@@ -69,14 +69,6 @@ void	execute_job(t_astree *jobNode, t_cmd_args *args, int *status)
 	job_processer(jobNode, args, &pid, status);
 	dup2(fd[0], STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
-//	if (jobNode == NULL)
-//		return ;
-//	if (jobNode->type == NODE_PIPE)
-//		execute_pipeline(jobNode, args);
-//	else if (jobNode->type == NODE_CMDPATH)
-//		execute_command(jobNode, args);
-//	else
-//		execute_command(jobNode, args);
 	while (wait_pid >= 0)
 	{
 		wait_pid = waitpid(-1, &child_status, 0);
