@@ -12,7 +12,7 @@
 
 #include "execute.h"
 #include "msh_signal.h"
-#include <wait.h>
+#include <sys/wait.h>
 #include <errno.h>
 
 pid_t	execute_pipe(t_astree *astree, t_cmd_args *args)
