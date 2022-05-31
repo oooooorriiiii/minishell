@@ -24,33 +24,6 @@ bool	check_option(char **cmdarg, int argc)
 	return (false);
 }
 
-//void	execute_echo(t_cmd_args *args)
-//{
-//	int	i;
-//	int	flag;
-//
-//	i = 1;
-//	flag = 0;
-//	printf("%s\n", args->cmdpath[i]); // D
-//	printf("%d\n", args->cmdpath_argc); // D
-//	while (i < args->cmdpath_argc)
-//	{
-//		while (flag == 0 && check_option(args->cmdpath, args->cmdpath_argc)
-//			&& !ft_strcmp(args->cmdpath[i], "-n"))
-//			i++;
-//		flag = 1;
-//		printf("%s", args->cmdpath[i]);
-//		if (i < args->cmdpath_argc - 1 && !(i == 1
-//				&& check_option(args->cmdpath, args->cmdpath_argc)))
-//			printf(" ");
-//		i++;
-//	}
-//	if (!check_option(args->cmdpath, args->cmdpath_argc))
-//		printf("\n");
-//	g_minishell.exit_status = 0;
-//};
-//
-
 /**
  *
  * @param args
@@ -62,22 +35,19 @@ void	execute_echo(t_cmd_args *args)
 	int		i;
 	bool	no_new_line;
 
+	g_minishell.exit_status = 0;
 	no_new_line = false;
 	i = 1;
 	if (args->cmdpath[1] == NULL)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		g_minishell.exit_status = 0;
 		return ;
 	}
 	while (!ft_strcmp(args->cmdpath[i], "-n"))
 	{
 		no_new_line = true;
 		if (args->cmdpath[++i] == NULL)
-		{
-			g_minishell.exit_status = 0;
-			return;
-		}
+			return ;
 	}
 	ft_putstr_fd(args->cmdpath[i++], STDOUT_FILENO);
 	while (args->cmdpath[i])
@@ -87,5 +57,4 @@ void	execute_echo(t_cmd_args *args)
 	}
 	if (no_new_line == false)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	g_minishell.exit_status = 0;
 }
