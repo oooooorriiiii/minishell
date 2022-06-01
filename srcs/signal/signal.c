@@ -29,14 +29,10 @@ void	signal_handler_heredoc(int sig)
 	g_minishell.heredoc_status = sig + 128;
 }
 
-/*
- * Set this function to not display "minishell$ " in a child process.
- * I think it needs a break, but for some reason it's fine without it.
- */
-//	printf("\n");
 void	signal_child_process(int sig)
 {
 	(void)sig;
+	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 }
