@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   expansion_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 12:43:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/05/15 00:05:41 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/05/14 11:20:08 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/05/14 11:20:28 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../includes/execute.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#include "../includes/lexer.h"
 
-void	execute_in_parent(t_cmd_args *args)
+bool	check_for_copy_expansion(int status, char *data)
 {
-	int	backup;
-
-	backup = 0;
-	dupfor_redirection(args, &backup);
-	execute_command_struct(args);
-	close_fdbackup(args, &backup);
+	if ((status != SINGLE_Q && status != SINGLE_Q * 2)
+		&& isenval(data))
+		return (true);
+	else
+		return (false);
 }

@@ -6,14 +6,13 @@
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:40:46 by ymori             #+#    #+#             */
-/*   Updated: 2022/04/30 14:40:49 by ymori            ###   ########.fr       */
+/*   Updated: 2022/05/14 22:42:54 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <stdlib.h>
 
-void 	free_str_arr(char ***str)
+void	free_str_arr(char ***str)
 {
 	size_t	i;
 

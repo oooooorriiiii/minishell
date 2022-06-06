@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_execute.c                                       :+:      :+:    :+:   */
+/*   dupfor_redirection_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 16:11:23 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/05 17:54:54 by sosugimo         ###   ########.fr       */
+/*   Created: 2022/05/15 09:18:01 by sosugimo          #+#    #+#             */
+/*   Updated: 2022/05/15 09:20:34 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execute.h"
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <pwd.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
-#include <stdio.h>
-#include <signal.h>
 
-void	execute_cd(t_cmd_args *args)
+int	simple_error_handle(int status, char *title)
 {
-	if (args->cmdpath_argc == 1)
+	if (status == -1)
 	{
-		chdir(getenv("HOME"));
-		g_minishell.exit_status = 0;
+		perror(title);
+		exit(1);
 	}
-	else
-	{
-		if (chdir(args->cmdpath[1]) != 0)
-		{
-			perror(args->cmdpath[1]);
-			// TODO: Exit Code of "No such file or directory" is "2"
-			g_minishell.exit_status = 1;
-		}
-		else
-			g_minishell.exit_status = 0;
-	}
+	return (status);
+}
+
+void	connect_pipe(int pipefd[2], int fd)
+{
+	simple_error_handle(dup2(pipefd[fd], fd), "dup2");
+	simple_error_handle(close(pipefd[0]), "close");
+	simple_error_handle(close(pipefd[1]), "close");
 }

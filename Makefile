@@ -1,21 +1,20 @@
 NAME	=	minishell
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g #-O0
+CFLAGS	=	-Wall -Werror -Wextra $(INCLUDES:%=-I%)
 
 SRCS_DIR		=	srcs
-INCLUDES_DIR	=	-Iincludes \
-					-Ilibft
+INCLUDES	=	./includes ./libft
 
 LIB_READLINE	:=	-lreadline
 ifeq ($(shell uname),Darwin)
-	INCLUDE_DIR		+=	-I$(shell brew --prefix readline)/include
+	INCLUDES		+=	$(shell brew --prefix readline)/include
 	LIB_READLINE	+=	-L$(shell brew --prefix readline)/lib
 endif
 
-INCLUDES	=	$(INCLUDES_DIR)
 SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/utils/free_str_arr.c \
 				$(SRCS_DIR)/utils/free_str.c \
+				$(SRCS_DIR)/utils/ft_xstrdup.c \
 				$(SRCS_DIR)/env/env_list.c \
 				$(SRCS_DIR)/env/env_list_clear.c \
 				$(SRCS_DIR)/env/env_list_utils.c \
@@ -36,36 +35,45 @@ SRCS		=	$(SRCS_DIR)/main.c \
 				$(SRCS_DIR)/lexer/helper.c \
 				$(SRCS_DIR)/lexer/is_utils.c \
 				$(SRCS_DIR)/lexer/heredoc.c \
-				$(SRCS_DIR)/parser/ast_visualizer.c \
 				$(SRCS_DIR)/parser/astree.c \
-				$(SRCS_DIR)/parser/cmd_node_utils.c \
 				$(SRCS_DIR)/parser/cmd_node.c \
 				$(SRCS_DIR)/parser/parser_utils.c \
 				$(SRCS_DIR)/parser/parser.c \
 				$(SRCS_DIR)/parser/simplecmd_node.c \
-				$(SRCS_DIR)/execute/cd_execute.c \
+				$(SRCS_DIR)/parser/redirection.c \
+				$(SRCS_DIR)/parser/redirection_token.c \
+				$(SRCS_DIR)/expansion/expansion.c \
+				$(SRCS_DIR)/expansion/expansion_general.c \
+				$(SRCS_DIR)/expansion/expansion_utils.c \
 				$(SRCS_DIR)/execute/child.c \
 				$(SRCS_DIR)/execute/dupfor_redirection.c \
-				$(SRCS_DIR)/execute/echo_execute.c \
-				$(SRCS_DIR)/execute/env_execute.c \
+				$(SRCS_DIR)/execute/dupfor_redirection_utils.c \
 				$(SRCS_DIR)/execute/error_deal_execute.c \
 				$(SRCS_DIR)/execute/execute_command_struct.c \
+				$(SRCS_DIR)/execute/execute_job.c \
 				$(SRCS_DIR)/execute/execute_simple_command.c \
+				$(SRCS_DIR)/execute/execute_redirection.c \
 				$(SRCS_DIR)/execute/execute_utils.c \
+				$(SRCS_DIR)/execute/execute_utils2.c \
 				$(SRCS_DIR)/execute/execute.c \
-				$(SRCS_DIR)/execute/exit_execute.c \
 				$(SRCS_DIR)/execute/expansion.c \
 				$(SRCS_DIR)/execute/expansion_utils.c \
 				$(SRCS_DIR)/execute/expansion_utils2.c \
 				$(SRCS_DIR)/execute/expansion_utils3.c \
-				$(SRCS_DIR)/execute/export_execute.c \
+				$(SRCS_DIR)/execute/expansion_utils4.c \
+				$(SRCS_DIR)/execute/get_exit_status.c \
 				$(SRCS_DIR)/execute/init_struct.c \
 				$(SRCS_DIR)/execute/parent.c \
 				$(SRCS_DIR)/execute/path_add.c \
 				$(SRCS_DIR)/execute/path_get_elem.c \
 				$(SRCS_DIR)/execute/path_utils.c \
-				$(SRCS_DIR)/execute/pwd_execute.c \
-				$(SRCS_DIR)/execute/unset_execute.c
+				$(SRCS_DIR)/execute/builtin/echo_execute.c \
+				$(SRCS_DIR)/execute/builtin/env_execute.c \
+				$(SRCS_DIR)/execute/builtin/exit_execute.c \
+				$(SRCS_DIR)/execute/builtin/export_execute.c \
+				$(SRCS_DIR)/execute/builtin/cd_execute.c \
+				$(SRCS_DIR)/execute/builtin/pwd_execute.c \
+				$(SRCS_DIR)/execute/builtin/unset_execute.c
 
 OBJROOT		=	obj
 OBJS		=	$(addprefix $(OBJROOT)/, $(SRCS:.c=.o))
@@ -75,13 +83,13 @@ LIBFT				=	$(LIBFT_DIR)/libft.a
 
 $(OBJROOT)/%.o: %.c
 	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft $(READLINE_DIR) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) -L$(LIBFT_DIR) -lft $(LIB_READLINE) -o $(NAME)
 
 .PHONY: clean
 clean:
@@ -110,7 +118,7 @@ libft_fclean:
 # SRCS		=	main.c $(TEST)
 
 .PHONY: debug
-debug: CFLAGS += -fsanitize=undefined -fsanitize=address -DDEBUG
+debug: CFLAGS +=  -g -O0 -fsanitize=undefined -fsanitize=address -DDEBUG
 debug: re
 
 ##########

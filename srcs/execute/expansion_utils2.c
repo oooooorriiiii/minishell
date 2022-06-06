@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 18:59:25 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 11:42:26 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,47 @@
 #include "../includes/parser.h"
 #include "../includes/execute.h"
 #include "../includes/lexer.h"
+
+int	judge_united_enval(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]) || str[i] == '?')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*first_enval(char *str, char *split)
+{
+	char	*res;
+
+	res = NULL;
+	if (str[0] == '$')
+	{
+		if (judge_united_enval(split))
+			res = expand_united_enval(split);
+		else
+		{
+			if (!ft_strcmp(split, "?"))
+				res = ft_itoa(g_minishell.exit_status);
+			else
+			{
+				res = get_env_value(split);
+				if (res)
+					res = ft_strdup(res);
+			}
+		}
+	}
+	else
+		res = ft_strdup(split);
+	free(split);
+	return (res);
+}
 
 int	quote_skip_strlen(char *arguments, int *quote)
 {
@@ -68,12 +109,10 @@ char	**split_non_alnum(char *str)
 {
 	char	**split;
 	int		enval_len;
-//	int		i; // ymori
 
 	split = (char **)malloc(sizeof(char *) * 3);
 	malloc_error_exec(NULL, split, NULL);
 	enval_len = 0;
-//	i = 0; // COMMENT OUT: ymori
 	while (str[enval_len])
 	{
 		if (!ft_isalnum(str[enval_len]))
@@ -84,9 +123,9 @@ char	**split_non_alnum(char *str)
 	malloc_error_exec(split[0], NULL, NULL);
 	ft_strlcpy(split[0], str, enval_len + 1);
 	str += enval_len;
-	split[1] = (char *)malloc(sizeof(char) * (strlen(str) + 1));
+	split[1] = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	malloc_error_exec(split[1], NULL, NULL);
-	ft_strlcpy(split[1], str, strlen(str) + 1);
+	ft_strlcpy(split[1], str, ft_strlen(str) + 1);
 	split[2] = NULL;
 	return (split);
 }

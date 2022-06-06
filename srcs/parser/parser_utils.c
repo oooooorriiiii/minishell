@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:35:40 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/03 16:23:46 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 11:44:57 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,39 @@ bool	term(int toketype, char **bufferptr, t_token_list **curtok)
 	{
 		if (bufferptr != NULL)
 		{
-			*bufferptr = malloc(strlen((*curtok)->val) + 1);
+			*bufferptr = malloc(ft_strlen((*curtok)->val) + 1);
 			parse_malloc_errordeal(NULL, *bufferptr);
-			strcpy(*bufferptr, (*curtok)->val);
+			ft_strlcpy(*bufferptr, (*curtok)->val,
+				ft_strlen((*curtok)->val) + 1);
 		}
 		*curtok = (*curtok)->next;
 		return (true);
 	}
 	*curtok = (*curtok)->next;
+	return (false);
+}
+
+bool	trim_x(t_token_list **curtok, t_token_type type)
+{
+	if (*curtok == NULL)
+		return (false);
+	if ((*curtok)->type == type)
+	{
+		*curtok = (*curtok)->next;
+		return (true);
+	}
+	return (false);
+}
+
+bool	trim_alloc(t_token_list **curtok, char **bufptr)
+{
+	if (*curtok == NULL)
+		return (false);
+	if ((*curtok)->type == TOKEN)
+	{
+		*bufptr = ft_strdup((*curtok)->val);
+		*curtok = (*curtok)->next;
+		return (true);
+	}
 	return (false);
 }

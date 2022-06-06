@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   ft_xstrdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymori <ymori@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 13:49:50 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/20 13:53:04 by ymori            ###   ########.fr       */
+/*   Created: 2022/05/14 22:43:32 by ymori             #+#    #+#             */
+/*   Updated: 2022/05/14 22:43:54 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "libft.h"
+#include "minishell.h"
 
-// lexer->len = ft_lstsize(token_list);
-t_lexer	*lexer_new(t_token_list *token_list)
+char	*ft_xstrdup(const char *s1)
 {
-	t_lexer	*lexer;
+	char	*str;
 
-	lexer = malloc(sizeof(t_lexer));
-	lexer->len = 4242;
-	lexer->list = token_list;
-	return (lexer);
-}
-
-void	lexer_free(t_lexer **lexer)
-{
-	token_list_clear(&((*lexer)->list));
-	free(*lexer);
-	*lexer = NULL;
+	str = ft_strdup(s1);
+	if (str == NULL)
+	{
+		perror("ft_strdup");
+		exit(1);
+	}
+	return (str);
 }

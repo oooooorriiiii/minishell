@@ -1,6 +1,14 @@
-//
-// Created by yuumo on 2022/04/30.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_merger.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/01 11:25:59 by marvin            #+#    #+#             */
+/*   Updated: 2022/05/01 11:26:01 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lexer.h"
 #include "msh_error.h"
@@ -53,16 +61,14 @@ void	merge_doutle_string(t_list **tokens)
 
 bool	exist_double_token(char *str, char token)
 {
-	char	*tmp;
-	char	*head;
-	char	*cmp_str;
-	bool	ret;
+	char		*tmp;
+	char		*head;
+	const char	cmp_str[2] = {token, '\0'};
+	bool		ret;
 
 	ret = false;
-	cmp_str = char_to_str(token);
 	if (ft_strchr(str, token) == NULL)
 	{
-		free_str(&cmp_str);
 		return (false);
 	}
 	else
@@ -76,13 +82,17 @@ bool	exist_double_token(char *str, char token)
 		ret = false;
 	else
 		ret = true;
-	free_str(&tmp), free_str(&cmp_str);
+	free_str(&tmp);
 	return (ret);
 }
 
-//		printf("content: %s\n", content);
-//		else if (ft_strcmp(content, "$") == 0 && status != STATUS_QUOTE && tokens->next != NULL)
-//			status = STATUS_ENV;
+/*
+ *printf("content: %s\n", content);
+ *		else if (ft_strcmp(content, "$") == 0 && \
+ *					status != STATUS_QUOTE \
+ *					&& tokens->next != NULL)
+ *			status = STATUS_ENV;
+*/
 t_status	merge_quote_list(t_list *tokens)
 {
 	t_status	status;
@@ -92,11 +102,14 @@ t_status	merge_quote_list(t_list *tokens)
 	while (tokens && tokens->next)
 	{
 		content = (char *)tokens->content;
-		if (ft_strcmp(content, "\'") == 0 && !exist_double_token(content, '\'') && status == STATUS_GENERAL)
+		if (ft_strcmp(content, "\'") == 0 && !exist_double_token(content, '\'') \
+			&& status == STATUS_GENERAL)
 			status = STATUS_QUOTE;
 		else if (exist_double_token(content, '\''))
 			status = STATUS_GENERAL;
-		else if (ft_strcmp(content, "\"") == 0 && !exist_double_token(content, '\"') && status == STATUS_GENERAL)
+		else if (ft_strcmp(content, "\"") == 0 && \
+					!exist_double_token(content, '\"') \
+					&& status == STATUS_GENERAL)
 			status = STATUS_DQUOTE;
 		else if (exist_double_token(content, '\"'))
 			status = STATUS_GENERAL;

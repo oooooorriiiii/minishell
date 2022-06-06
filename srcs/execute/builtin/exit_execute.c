@@ -6,11 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:12:53 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/01 22:09:13 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/07 19:51:59 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/execute.h"
+#include "execute.h"
 #include <errno.h>
 
 static bool	is_numeric_string(char *str)

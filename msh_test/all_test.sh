@@ -54,7 +54,8 @@ chmod 755 minishell
 
 function exec_test()
 {
-	TEST1=$(echo $@ | ./minishell 2>&-)
+#	TEST1=$(echo $@ | ./minishell | sed -e 's/minishell$ //g' | sed -e '1d' 2>&-)
+  TEST1=$(echo $@ | ./minishell 2>&-)
 	ES_1=$?
 	TEST2=$(echo $@ | bash 2>&-)
 	ES_2=$?
@@ -94,15 +95,15 @@ exec_test 'echo test      tout'
 exec_test 'echo -n test tout'
 exec_test 'echo -n -n -n test tout'
 exec_test 'echo ""'
-exec_test 'echo "'
-exec_test 'echo "'
+# exec_test 'echo "'
+# exec_test 'echo "'
 exec_test 'echo "   $?   "'
 exec_test 'echo $?$?$??'
 exec_test 'echo '-n $USER likes an apple''
 exec_test 'echo '$USER likes an apple''
 exec_test 'echo "$USER likes an apple"'
-exec_test 'echo aaaaaaaa$USER++++++++++;'
-exec_test 'echo ;;;;;;;;;;;;'
+# exec_test 'echo aaaaaaaa$USER++++++++++;'
+# exec_test 'echo ;;;;;;;;;;;;'
 exec_test 'echo ";;;;;;;;;;;;"'
 # exec_test 'echo echo echo cd > test.txt'
 

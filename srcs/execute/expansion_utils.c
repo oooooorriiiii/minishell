@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 14:49:49 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/05 03:10:39 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:39:49 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*expand_united_enval(char *str)
 		return (res);
 	}
 	split = split_non_alnum(str);
-	enval = getenv(split[0]);
+	enval = get_env_value(split[0]);
 	if (enval)
 		res = ft_strjoin(enval, split[1]);
 	else
@@ -42,60 +42,18 @@ char	*expand_united_enval(char *str)
 	return (res);
 }
 
-int	judge_united_enval(char *str)
-{
-	int	i;
-//	int	status; // COMMENT OUT: ymori
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isalnum(str[i]) || str[i] == '?')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*get_enval(char *split)
 {
 	char	*enval;
 
 	enval = NULL;
-	if (!strcmp(split, "?"))
+	if (!ft_strcmp(split, "?"))
 		enval = ft_itoa(g_minishell.exit_status);
 	else if (judge_united_enval(split))
 		enval = expand_united_enval(split);
 	else
-		enval = ft_strjoin("", getenv(split));
+		enval = ft_strjoin("", get_env_value(split));
 	return (enval);
-}
-
-char	*first_enval(char *str, char *split)
-{
-	char	*res;
-
-	res = NULL;
-	if (str[0] == '$')
-	{
-		if (judge_united_enval(split))
-			res = expand_united_enval(split);
-		else
-		{
-			if (!strcmp(split, "?"))
-				res = ft_itoa(g_minishell.exit_status);
-			else
-			{
-				res = getenv(split);
-				if (res)
-					res = strdup(res);
-			}
-		}
-	}
-	else
-		res = strdup(split);
-	free(split);
-	return (res);
 }
 
 bool	next_to_envalmark(char *str)
@@ -132,7 +90,7 @@ char	*expand_enval(char *str)
 
 	i = 1;
 	if (!next_to_envalmark(str))
-		return (strdup(str));
+		return (ft_strdup(str));
 	split = ft_split(str, '$');
 	res = first_enval(str, split[0]);
 	while (split[i])
@@ -141,7 +99,7 @@ char	*expand_enval(char *str)
 		if (res && enval)
 			join_splitted(&res, &enval);
 		else if (enval)
-			res = strdup(enval);
+			res = ft_strdup(enval);
 		free(split[i]);
 		i++;
 	}

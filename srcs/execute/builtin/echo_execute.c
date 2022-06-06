@@ -6,11 +6,11 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:09:29 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/09 15:05:14 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 11:41:31 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/execute.h"
+#include "execute.h"
 
 bool	check_option(char **cmdarg, int argc)
 {
@@ -24,30 +24,37 @@ bool	check_option(char **cmdarg, int argc)
 	return (false);
 }
 
+/**
+ *
+ * @param args
+ * cmdpath[0]: command name
+ * cmdpath[1..]: arguments
+ */
 void	execute_echo(t_cmd_args *args)
 {
-	int	i;
-//	int	j; // COMMENT OUT: ymori
-//	int	fd; // COMMENT OUT: ymori
-	int	flag;
+	int		i;
+	bool	no_new_line;
 
-	i = 1;
-//	j = 0; // COMMENT OUT: ymori
-	flag = 0;
-	while (i < args->cmdpath_argc)
-	{
-//		j = 0; // COMMENT OUT: ymori
-		while (flag == 0 && check_option(args->cmdpath, args->cmdpath_argc)
-			&& !strcmp(args->cmdpath[i], "-n"))
-			i++;
-		flag = 1;
-		printf("%s", args->cmdpath[i]);
-		if (i < args->cmdpath_argc - 1 && !(i == 1
-				&& check_option(args->cmdpath, args->cmdpath_argc)))
-			printf(" ");
-		i++;
-	}
-	if (!check_option(args->cmdpath, args->cmdpath_argc))
-		printf("\n");
 	g_minishell.exit_status = 0;
+	no_new_line = false;
+	i = 1;
+	if (args->cmdpath[1] == NULL)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return ;
+	}
+	while (!ft_strcmp(args->cmdpath[i], "-n"))
+	{
+		no_new_line = true;
+		if (args->cmdpath[++i] == NULL)
+			return ;
+	}
+	ft_putstr_fd(args->cmdpath[i++], STDOUT_FILENO);
+	while (args->cmdpath[i])
+	{
+		ft_putstr_fd(" ", STDOUT_FILENO);
+		ft_putstr_fd(args->cmdpath[i++], STDOUT_FILENO);
+	}
+	if (no_new_line == false)
+		ft_putstr_fd("\n", STDOUT_FILENO);
 }

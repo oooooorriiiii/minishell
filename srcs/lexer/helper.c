@@ -29,7 +29,7 @@ void	list_print(t_list *list)
 
 void	print_token_list(t_token_list *list)
 {
-	puts("ret list");
+	printf("********RET LIST********\n");
 	if (list == NULL)
 	{
 		printf("NULL\n");

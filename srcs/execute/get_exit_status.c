@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   get_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymori <ymori@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/30 03:40:43 by ymori             #+#    #+#             */
-/*   Updated: 2022/01/30 03:40:47 by ymori            ###   ########.fr       */
+/*   Created: 2022/05/28 22:07:38 by ymori             #+#    #+#             */
+/*   Updated: 2022/05/28 22:07:38 by ymori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "execute.h"
 
-void	free_str(char **str);
-void	free_str_arr(char ***str);
-char	*ft_xstrdup(const char *s1);
-
-#endif
+int	get_exit_status(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return (WTERMSIG(status) + 128);
+	else if (WIFSTOPPED(status))
+		return (WSTOPSIG(status));
+	return (1);
+}

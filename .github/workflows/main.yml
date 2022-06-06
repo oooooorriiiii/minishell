@@ -50,4 +50,4 @@ jobs:
 #           python3 -m pip install norminette==3.3.2
           
 #       - name: Run Norminette
-#         run: norminette .
+#         run: norminette srcs

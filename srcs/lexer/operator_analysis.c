@@ -15,13 +15,8 @@
 #include <errno.h>
 #include <signal.h>
 
-void	quote_process(t_list **token_list, char **token, \
-						t_token_list **ret_list)
+void	quote_process_loop(t_list **token_list, char **token, const char quote)
 {
-	const char	quote = *(char *)(*token_list)->content;
-
-	free_set((void **)token, \
-				ft_strjoin(*token, (char *)(*token_list)->content));
 	while (true)
 	{
 		*token_list = (*token_list)->next;
@@ -35,9 +30,19 @@ void	quote_process(t_list **token_list, char **token, \
 		if (*(char *)(*token_list)->content == quote)
 		{
 			*token_list = (*token_list)->next;
-			break ;
+			return ;
 		}
 	}
+}
+
+void	quote_process(t_list **token_list, char **token, \
+						t_token_list **ret_list)
+{
+	const char	quote = *(char *)(*token_list)->content;
+
+	free_set((void **)token, \
+				ft_strjoin(*token, (char *)(*token_list)->content));
+	quote_process_loop(token_list, token, quote);
 	if (*token_list == NULL || (*token_list != NULL && \
 		ft_strchr("\t\n\v\f\r <>|", *(char *)(*token_list)->content) != NULL))
 	{
@@ -61,14 +66,14 @@ void
 	}
 }
 
-t_status	operetor_analysis(t_list **token_list, char *token, \
+t_status	operator_analysis(t_list **token_list, char **token, \
 								t_token_list **ret_list, char *element)
 {
 	if (*element == '\'' || *element == '\"')
-		quote_process(token_list, &token, ret_list);
+		quote_process(token_list, token, ret_list);
 	else if (ft_strncmp(element, "<<", 2) == 0)
 	{
-//		heredoc_process(token_list, &token, ret_list);
+		heredoc_process(token_list, token, ret_list);
 	}
 	else if (ft_strncmp(element, ">>", 2) == 0)
 	{

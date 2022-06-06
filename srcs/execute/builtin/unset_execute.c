@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/execute.h"
+#include "execute.h"
 #include "msh_error.h"
 
 void	execute_unset(t_cmd_args *args)
@@ -32,5 +32,4 @@ void	execute_unset(t_cmd_args *args)
 		i++;
 	}
 	g_minishell.exit_status = status;
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:43:47 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/07 21:21:28 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/14 11:01:24 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ static void	handle_command_status(int status, bool catch_sigint)
 			if (signal == SIGQUIT)
 				ft_putendl_fd("Quit: 3", STDERR_FILENO);
 			g_minishell.exit_status = signal + 128;
-			printf("g_minishell.exit_status :  %d\n", g_minishell.exit_status);
 		}
 		if (catch_sigint)
 			ft_putendl_fd("", STDERR_FILENO);
 	}
 }
-/*
 
-void		wait_commands(t_command *command)
+/*
+void	wait_commands(t_command *command)
 {
 	extern int	g_status;
 	int			status;
@@ -68,7 +67,6 @@ void		wait_commands(t_command *command)
 void	execute_in_child(t_cmd_args *args)
 {
 	pid_t	pid;
-//	pid_t	wait_pid; // COMMENT OUT: ymori
 	int		backup;
 	int		status;
 

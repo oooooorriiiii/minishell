@@ -6,7 +6,7 @@
 /*   By: sosugimo <sosugimo@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:22:04 by sosugimo          #+#    #+#             */
-/*   Updated: 2022/02/04 15:53:40 by sosugimo         ###   ########.fr       */
+/*   Updated: 2022/05/15 09:18:45 by sosugimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # define SINGLE_Q 1
 # define DOUBLE_Q 10
 
+typedef enum e_exec_result
+{
+	e_success,
+	e_failure,
+}			t_exec_result;
+
 typedef struct cmd_args
 {
 	bool		stdin_pipe;
@@ -43,9 +49,11 @@ typedef struct cmd_args
 
 // -----------  execute.c
 void			execute_syntax_tree(t_astree *tree);
-void			execute_cmdline(t_astree *cmdline, t_cmd_args *args);
-void			execute_job(t_astree *jobNode, t_cmd_args *args);
-void			execute_pipeline(t_astree *t, t_cmd_args *args);
+void			execute_cmdline(t_astree *cmdline, t_cmd_args *args, \
+								int *status);
+void			execute_job(t_astree *jobNode, t_cmd_args *args, int *status);
+//void			execute_pipeline(t_astree *t, t_cmd_args *args);
+pid_t			execute_pipe(t_astree *astree, t_cmd_args *args);
 
 // -----------  expansion.c
 int				quote_skip_strlen(char *arguments, int *quote);
@@ -67,14 +75,18 @@ void			int_init(int *status, int *status2, int *len);
 void			copy_one_byone(t_cmd_args *args, t_astree *ast_node, int *i);
 void			extra_strcpy(t_cmd_args *args, t_astree *ast_node);
 
-
 // -----------  execute_utils.c
-void	print_allstruct(t_cmd_args *args);
+// void			print_allstruct(t_cmd_args *args);
 
 int				joudge_process(t_cmd_args *args);
 void			execute_simple_command(t_astree *t, t_cmd_args *args);
 void			execute_command(t_astree *t, t_cmd_args *args);
 void			destroy_command_struct(t_cmd_args *args);
+bool			check_componet(char *str);
+int				get_list_len(t_astree *argNode);
+char			**functional_malloc(int i);
+int				is_need_expansion(t_astree *ast);
+bool			check_for_copy_expansion(int status, char *data);
 
 // -----------  execute_command_struct.c
 void			execute_command_struct(t_cmd_args *args);
@@ -99,19 +111,34 @@ void			execute_env(t_cmd_args *args);
 void			execute_exit(t_cmd_args *args);
 
 // -----------  dupfor_redirection.c
+int				simple_error_handle(int status, char *title);
+void			connect_pipe(int pipefd[2], int fd);
 void			dupfor_redirection(t_cmd_args *args, int *backup);
 void			close_fdbackup(t_cmd_args *args, int *backup);
+
+// -----------  dupfor_redirection.c
+void			open_error_handle(int fd);
+t_exec_result	handle_heredoc(char *data);
+
+// -----------  execute_redirection.c
+t_exec_result	execute_redirection(t_astree *cmdNode, t_cmd_args *args);
 
 // -----------  error_execute.c
 void			malloc_error_exec(char *buf1, char **buf2, t_cmd_args *buf3);
 
 // -----------  add_path.c
 char			*add_path(t_cmd_args *args);
+char			*search_cmd_path(const char *cmd);
 bool			is_directory(const char *path);
 bool			is_executable(const char *path);
 bool			is_cmd_exist(const char *path, char **res);
 
 // -----------  path_get_elem.c
 char			**get_path_elem_in_envlist(const char *str);
+
+// -----------  get_exit_status.c
+int				get_exit_status(int status);
+
+bool			check_builtin_in_astree(t_astree *astree);
 
 #endif
